@@ -18,10 +18,10 @@ const LITEAPI_BASE = 'https://api.liteapi.travel/v3.0';
 // Allowlist — only forward requests to these endpoints
 const ALLOWED_ENDPOINTS = new Set([
   'hotels/rates',
-  'hotels/prebook',
-  'hotels/book',
+  'rates/prebook',  // LiteAPI v3 prebook uses rates/ prefix
+  'rates/book',     // LiteAPI v3 book uses rates/ prefix
   'hotels/cancel',
-  'data/hotel',   // hotel photos / details (GET)
+  'data/hotel',     // hotel photos / details (GET)
 ]);
 
 exports.handler = async function (event) {

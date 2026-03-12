@@ -45,3 +45,11 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           POSTHOG_PROJECT_KEY: ${{ secrets.POSTHOG_PROJECT_KEY }}
         run: node deploy-all.js
+
+      - name: Weekly funnel digest (schedule runs only)
+        if: github.event_name == 'schedule'
+        env:
+          POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: node autoresearch/weekly-digest.js || echo "Digest failed (non-fatal)"

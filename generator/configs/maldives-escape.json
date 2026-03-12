@@ -57,6 +57,32 @@
       "angle":   "German and European travellers are among the most consistent high-spending visitors to the Maldives. Maldives Escape member rates give European guests access to the finest overwater resorts at prices 10–25% below Booking.com and Expedia."
     }
   ],
+  "seo_amenity_pages": [
+    {
+      "slug":        "maldives-overwater-villa-resorts",
+      "city":        "North Male Atoll",
+      "amenity":     "overwater villa",
+      "displayName": "Maldives Overwater Villa Resorts"
+    },
+    {
+      "slug":        "maldives-spa-resorts-member-rates",
+      "city":        "South Male Atoll",
+      "amenity":     "spa",
+      "displayName": "Maldives Luxury Spa Resorts"
+    },
+    {
+      "slug":        "maldives-diving-resorts",
+      "city":        "Baa Atoll",
+      "amenity":     "diving",
+      "displayName": "Maldives Diving Resorts"
+    },
+    {
+      "slug":        "maldives-adults-only-resorts",
+      "city":        "Baa Atoll",
+      "amenity":     "adults only",
+      "displayName": "Maldives Adults-Only Resorts"
+    }
+  ],
   "trust_items": [
     "Live rates from resort API",
     "No minimum stay",

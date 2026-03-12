@@ -243,6 +243,52 @@ async function buildRegionPage(cfg, region, hotels, siteUrl) {
   }, hotels, siteUrl);
 }
 
+// ── Editorial: amenity page ────────────────────────────────────
+async function getAmenityEditorial(brand, city, amenity, hotels) {
+  const hotelNames = hotels.map(h => h.name).join(', ');
+  const keyword = `${city} hotel with ${amenity} member rates`;
+  const ai = await callClaude(
+    `Write 3 short paragraphs (4-5 sentences each) of SEO-friendly editorial for a luxury hotel booking page targeting the keyword "${keyword}".
+Brand: ${brand}
+Hotels: ${hotelNames}
+Focus: guests looking specifically for a ${amenity} at a luxury ${city} hotel. Position the member rate angle (10-30% below Booking.com) with the ${amenity} as the deciding filter.
+Plain HTML <p> tags only — no headings, no markdown.`
+  );
+  if (ai) return ai;
+
+  const h0 = hotels[0]?.name || 'top hotels';
+  return `<p>Finding a luxury ${city} hotel with ${amenity} at a fair price is harder than it sounds. The properties with the best ${amenity} tend to command the highest rack rates. ${brand} members access these same hotels — including ${h0} — at prices 10–30% below what Booking.com, Expedia and Hotels.com publicly advertise.</p>
+<p>These below-retail rates come through ${brand}'s Closed User Group (CUG) channel, which gives free members access to hotel inventory released at net rates. The ${amenity} you're looking for doesn't disappear — you just pay significantly less to enjoy it.</p>
+<p>All rates on ${brand} update in real time from the hotel API. Rates are typically sharpest on Wednesday through Friday as hotels release unsold rooms ahead of the weekend — especially for rooms with premium amenities like ${amenity}.</p>`;
+}
+
+// ── Build an amenity combination page ─────────────────────────
+async function buildAmenityPage(cfg, amenityDef, siteUrl) {
+  const { slug, city, amenity, displayName } = amenityDef;
+  const hotels  = (cfg.hotels?.[city] || []).filter(h =>
+    h.tags?.some(t => t.toLowerCase().includes(amenity.toLowerCase())) ||
+    h.desc?.toLowerCase().includes(amenity.toLowerCase())
+  );
+  // Fall back to all city hotels if filter is too aggressive
+  const useHotels = hotels.length >= 2 ? hotels : (cfg.hotels?.[city] || []);
+  if (!useHotels.length) return null;
+
+  const brand     = cfg.BRAND_NAME;
+  const editorial = await getAmenityEditorial(brand, city, amenity, useHotels);
+  const name      = displayName || `${city} Hotels with ${amenity.charAt(0).toUpperCase() + amenity.slice(1)}`;
+
+  return buildPageHtml(cfg, {
+    slug,
+    metaTitle: `${name} — Member Rates | ${brand}`,
+    metaDesc:  `${city} luxury hotels with ${amenity} at member-only rates. Save 10–30% on ${useHotels.slice(0,3).map(h=>h.name).join(', ')}. Live rates, no minimum stay.`,
+    h1:        `${name} — Member Rates`,
+    heroSub:   `${useHotels.length} ${city} luxury hotels with ${amenity} available at ${brand} member pricing. Save 10–30% vs Booking.com. Live rates.`,
+    editorial,
+    ctaCity:   city,
+    breadcrumb: name
+  }, useHotels, siteUrl);
+}
+
 // ── Build sitemap ──────────────────────────────────────────────
 function buildSitemap(siteUrl, pages) {
   const today = new Date().toISOString().slice(0, 10);
@@ -265,9 +311,10 @@ async function main() {
   const siteUrl  = cfg.SCHEMA_URL || `https://${SITE}.netlify.app`;
   const allPages = [];
 
-  const cityCount   = cfg.cities?.length || 0;
-  const regionCount = cfg.seo_regions?.length || 0;
-  console.log(`\n📄  Generating SEO pages for ${SITE} (${cityCount} cities + ${regionCount} regions)\n`);
+  const cityCount    = cfg.cities?.length || 0;
+  const regionCount  = cfg.seo_regions?.length || 0;
+  const amenityCount = cfg.seo_amenity_pages?.length || 0;
+  console.log(`\n📄  Generating SEO pages for ${SITE} (${cityCount} cities + ${regionCount} regions + ${amenityCount} amenity pages)\n`);
 
   // ── City pages ─────────────────────────────────────────────
   for (const cityObj of (cfg.cities || [])) {
@@ -292,6 +339,21 @@ async function main() {
     console.log(`  [region] ${region.name} → ${city} (${hotels.length} hotels)...`);
     const html     = await buildRegionPage(cfg, region, hotels, siteUrl);
     const filename = `${region.slug}.html`;
+    fs.writeFileSync(path.join(outDir, filename), html, 'utf8');
+    allPages.push(filename);
+    console.log(`  ✓ ${filename}`);
+  }
+
+  // ── Amenity pages ──────────────────────────────────────────
+  for (const amenityDef of (cfg.seo_amenity_pages || [])) {
+    const city = amenityDef.city;
+    const available = cfg.hotels?.[city] || [];
+    if (!available.length) { console.log(`  ⏭  amenity ${amenityDef.slug} — no hotels for "${city}", skipping`); continue; }
+
+    console.log(`  [amenity] ${amenityDef.displayName || amenityDef.slug} → ${city}...`);
+    const html = await buildAmenityPage(cfg, amenityDef, siteUrl);
+    if (!html) { console.log(`  ⏭  ${amenityDef.slug} — skipped (buildAmenityPage returned null)`); continue; }
+    const filename = `${amenityDef.slug}.html`;
     fs.writeFileSync(path.join(outDir, filename), html, 'utf8');
     allPages.push(filename);
     console.log(`  ✓ ${filename}`);

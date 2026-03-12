@@ -59,6 +59,38 @@
       "angle":   "Visitors from the UAE, Saudi Arabia and the wider Gulf region know London's luxury hotel market well. LuxStay member rates give GCC travellers access to the same five-star London properties at materially lower prices than any public platform."
     }
   ],
+  "seo_amenity_pages": [
+    {
+      "slug":        "london-spa-hotels-member-rates",
+      "city":        "London",
+      "amenity":     "spa",
+      "displayName": "London Luxury Spa Hotels"
+    },
+    {
+      "slug":        "london-rooftop-bar-hotels",
+      "city":        "London",
+      "amenity":     "rooftop bar",
+      "displayName": "London Hotels with Rooftop Bar"
+    },
+    {
+      "slug":        "dubai-private-beach-hotels",
+      "city":        "Dubai",
+      "amenity":     "private beach",
+      "displayName": "Dubai Private Beach Hotels"
+    },
+    {
+      "slug":        "dubai-infinity-pool-hotels",
+      "city":        "Dubai",
+      "amenity":     "infinity pool",
+      "displayName": "Dubai Infinity Pool Hotels"
+    },
+    {
+      "slug":        "bangkok-rooftop-pool-hotels",
+      "city":        "Bangkok",
+      "amenity":     "rooftop pool",
+      "displayName": "Bangkok Rooftop Pool Hotels"
+    }
+  ],
   "trust_items": [
     "Live rates from LiteAPI",
     "No minimum stay",

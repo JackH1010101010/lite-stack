@@ -57,6 +57,32 @@
       "angle":   "Australians increasingly choose Dubai as their Northern Hemisphere luxury escape. Dubai Ultra members from Sydney and Melbourne unlock ultra-luxury hotel rates 10–30% below Booking.com, Expedia and Luxury Escapes — with the same five-star properties, just at member pricing."
     }
   ],
+  "seo_amenity_pages": [
+    {
+      "slug":        "dubai-palm-spa-hotels",
+      "city":        "Palm Jumeirah",
+      "amenity":     "spa",
+      "displayName": "Palm Jumeirah Luxury Spa Hotels"
+    },
+    {
+      "slug":        "dubai-private-beach-ultra",
+      "city":        "Palm Jumeirah",
+      "amenity":     "private beach",
+      "displayName": "Dubai Ultra-Luxury Private Beach Hotels"
+    },
+    {
+      "slug":        "dubai-marina-rooftop-hotels",
+      "city":        "Dubai Marina",
+      "amenity":     "rooftop",
+      "displayName": "Dubai Marina Rooftop Hotels"
+    },
+    {
+      "slug":        "dubai-downtown-rooftop-pool",
+      "city":        "Downtown Dubai",
+      "amenity":     "rooftop pool",
+      "displayName": "Downtown Dubai Rooftop Pool Hotels"
+    }
+  ],
   "trust_items": [
     "Live rates from hotel API",
     "No minimum stay",

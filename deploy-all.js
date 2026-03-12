@@ -12,6 +12,7 @@
  * Required env vars:
  *   NETLIFY_AUTH_TOKEN  — Netlify personal access token
  *   POSTHOG_PROJECT_KEY — PostHog project API key
+ *   LITEAPI_KEY         — LiteAPI production key (set as Netlify env var on each site)
  */
 
 const fs    = require('fs');
@@ -20,6 +21,7 @@ const { execSync } = require('child_process');
 
 const AUTH_TOKEN      = process.env.NETLIFY_AUTH_TOKEN;
 const POSTHOG_KEY     = process.env.POSTHOG_PROJECT_KEY || '';
+const LITEAPI_KEY     = process.env.LITEAPI_KEY || '';
 const CONFIGS_DIR     = path.join(__dirname, 'generator', 'configs');
 const SITES_DIR       = path.join(__dirname, 'sites');
 const NETLIFY_API     = 'https://api.netlify.com/api/v1';
@@ -121,16 +123,16 @@ async function main() {
     // 3. Get or create Netlify site
     const site = await getOrCreateSite(name);
 
-    // 4. Set LITEAPI_KEY as server-side env var (never in HTML)
-    if (cfg.LITEAPI_KEY) {
+    // 4. Set LITEAPI_KEY as server-side env var on the Netlify site (never in HTML)
+    if (LITEAPI_KEY) {
       try {
-        await setEnvVar(site.id, 'LITEAPI_KEY', cfg.LITEAPI_KEY);
+        await setEnvVar(site.id, 'LITEAPI_KEY', LITEAPI_KEY);
         console.log(`  ✓ LITEAPI_KEY set as env var on ${name}`);
       } catch (e) {
         console.warn(`  ⚠  Could not set LITEAPI_KEY env var: ${e.message}`);
       }
     } else {
-      console.warn(`  ⚠  No LITEAPI_KEY in config for ${name} — function will return 500`);
+      console.warn(`  ⚠  LITEAPI_KEY env var not set — Netlify function will return 500`);
     }
 
     // 5. Deploy (Netlify CLI — no build step needed, files already generated)

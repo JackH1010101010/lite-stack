@@ -44,6 +44,7 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           POSTHOG_PROJECT_KEY: ${{ secrets.POSTHOG_PROJECT_KEY }}
+          LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
         run: node deploy-all.js
 
       - name: Weekly funnel digest (schedule runs only)

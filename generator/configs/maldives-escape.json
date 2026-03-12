@@ -3,6 +3,7 @@
   "META_DESCRIPTION": "Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay.",
   "SCHEMA_NAME": "Maldives Escape",
   "SCHEMA_URL": "https://maldives-escape.netlify.app",
+  "SITE_URL": "https://maldives.lux-stay-members.com",
   "SCHEMA_DESCRIPTION": "Member-only pricing on Maldives overwater villas and private island resorts. Below-retail rates gated behind a free membership.",
   "COLOR_PRIMARY": "#0b4f6c",
   "COLOR_ACCENT": "#00b4d8",

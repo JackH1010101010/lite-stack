@@ -3,6 +3,7 @@ name: Generate & Deploy Sites
 on:
   push:
     branches: [main]
+  workflow_dispatch:
   schedule:
     # Weekly rebuild every Sunday at 03:00 UTC — keeps SEO content fresh
     # and re-deploys with any new hotel inventory from LiteAPI

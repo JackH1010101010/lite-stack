@@ -5,6 +5,7 @@
   "META_DESCRIPTION": "5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing.",
   "SCHEMA_NAME": "LuxStay",
   "SCHEMA_URL": "https://luxstay.netlify.app",
+  "SITE_URL": "https://luxury.lux-stay-members.com",
   "SCHEMA_DESCRIPTION": "Member-only luxury hotel rates. 5-star hotels at below-retail prices, gated behind a free membership.",
   "COLOR_PRIMARY": "#1a2744",
   "COLOR_ACCENT": "#c9a84c",

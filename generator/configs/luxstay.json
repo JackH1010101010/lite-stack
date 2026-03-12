@@ -1,4 +1,6 @@
 {
+  "_note": "LuxStay is deployed via its own repo (JackH1010101010/luxstay). skip_deploy=true keeps deploy-all.js from duplicating it.",
+  "skip_deploy": true,
   "META_TITLE": "LuxStay — Member-Only Luxury Hotel Rates",
   "META_DESCRIPTION": "5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing.",
   "SCHEMA_NAME": "LuxStay",

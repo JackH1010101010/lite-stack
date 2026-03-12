@@ -56,31 +56,55 @@ async function apiPost(endpoint, body) {
   return res.json();
 }
 
-// ── Get or create a Netlify site by name ──────────────────────
-async function getOrCreateSite(name) {
+// ── Get or create a Netlify site ──────────────────────────────
+// Looks up by netlify_site_id first (fast), then netlify_site_name, then config name.
+async function getOrCreateSite(name, cfg) {
+  // Fast path: site ID hardcoded in config → skip listing all sites
+  if (cfg.netlify_site_id) {
+    try {
+      const site = await apiGet(`/sites/${cfg.netlify_site_id}`);
+      console.log(`  ✓ Site (by ID): ${site.name} (${site.id})`);
+      return site;
+    } catch (e) {
+      console.warn(`  ⚠  Could not fetch site by netlify_site_id (${cfg.netlify_site_id}): ${e.message}`);
+    }
+  }
+
+  // Look up by explicit netlify_site_name override, or fall back to config name
+  const lookupName = cfg.netlify_site_name || name;
   const sites = await apiGet('/sites');
-  const existing = sites.find(s => s.name === name);
+  const existing = sites.find(s => s.name === lookupName);
   if (existing) {
-    console.log(`  ✓ Site exists: ${name} (${existing.id})`);
+    console.log(`  ✓ Site exists: ${lookupName} (${existing.id})`);
     return existing;
   }
 
-  console.log(`  + Creating site: ${name}`);
-  const site = await apiPost('/sites', { name });
-  console.log(`  ✓ Created: ${name} → ${site.ssl_url || site.url}`);
+  console.log(`  + Creating site: ${lookupName}`);
+  const site = await apiPost('/sites', { name: lookupName });
+  console.log(`  ✓ Created: ${lookupName} → ${site.ssl_url || site.url}`);
   return site;
 }
 
 // ── Set an env var on a site ──────────────────────────────────
+// Uses PATCH to update a single env var without wiping others.
 async function setEnvVar(siteId, key, value) {
-  await fetch(`${NETLIFY_API}/sites/${siteId}/env`, {
-    method: 'PUT',
+  // Netlify env var upsert: POST creates or updates a single variable
+  const res = await fetch(`${NETLIFY_API}/sites/${siteId}/env`, {
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${AUTH_TOKEN}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ [key]: value })
+    body: JSON.stringify([{ key, values: [{ value, context: 'all' }] }])
   });
+  if (!res.ok) {
+    // Fall back to PUT for older Netlify accounts
+    await fetch(`${NETLIFY_API}/sites/${siteId}/env/${key}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${AUTH_TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ value, context: 'all' })
+    });
+  }
 }
 
 // ── Main ──────────────────────────────────────────────────────
@@ -121,7 +145,7 @@ async function main() {
     }
 
     // 3. Get or create Netlify site
-    const site = await getOrCreateSite(name);
+    const site = await getOrCreateSite(name, cfg);
 
     // 4. Set LITEAPI_KEY as server-side env var on the Netlify site (never in HTML)
     if (LITEAPI_KEY) {

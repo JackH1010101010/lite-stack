@@ -1,0 +1,90 @@
+{
+  "META_TITLE": "Dubai Ultra — Member Rates on Ultra-Luxury Dubai Hotels",
+  "META_DESCRIPTION": "Ultra-luxury Dubai hotels at member-only rates. Save 10–30% on 7-star resorts and penthouse suites. Live pricing for serious travellers.",
+  "SCHEMA_NAME": "Dubai Ultra",
+  "SCHEMA_URL": "https://dubai-ultra.netlify.app",
+  "SCHEMA_DESCRIPTION": "Member-only pricing on ultra-luxury Dubai hotels and resorts. Below-retail rates on Burj Al Arab, Atlantis The Royal, and more.",
+  "COLOR_PRIMARY": "#1a0a2e",
+  "COLOR_ACCENT": "#d4af37",
+  "COLOR_ACCENT_LT": "#fdf6dc",
+  "BRAND_NAME": "Dubai Ultra",
+  "HERO_EYEBROW": "Ultra-Luxury Dubai · Members Save 10–30%",
+  "HERO_H1": "Dubai's finest hotels at rates reserved for members only",
+  "HERO_SUB": "Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — member pricing 10–30% below public rates. No minimum stay.",
+  "FOOTER_TAGLINE": "Member-only ultra-luxury Dubai hotel rates",
+  "CONTACT_EMAIL": "jackthughes99@gmail.com",
+  "GOOGLE_CLIENT_ID": "57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com",
+  "LITEAPI_KEY": "prod_31e2c9c7-1465-451b-9e81-34f00279a235",
+  "MARKUP": "0.15",
+  "MIN_SAVING": "0.08",
+  "DEFAULT_CITY": "Palm Jumeirah",
+  "NETLIFY_FORM_NAME": "dubai-ultra-members",
+  "MODAL_HEADLINE": "Join Dubai Ultra — it's free",
+  "MODAL_SUB": "Unlock member rates on Dubai's ultra-luxury hotels — 10–30% below Booking.com. Takes 10 seconds.",
+  "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. You're seeing prices not available on any public booking site.",
+  "cities": [
+    { "value": "Palm Jumeirah",  "label": "Palm Jumeirah" },
+    { "value": "Downtown Dubai", "label": "Downtown Dubai" },
+    { "value": "Dubai Marina",   "label": "Dubai Marina & JBR" }
+  ],
+  "trust_items": [
+    "Live rates from hotel API",
+    "No minimum stay",
+    "Members save AED 500–2,000/night on suites",
+    "Ultra-luxury 5★ and 7★ only"
+  ],
+  "editorial": {
+    "title": "About Dubai Ultra member pricing",
+    "paragraphs": [
+      "Dubai's ultra-luxury hotels — the Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — release a share of their inventory at <strong>net rates</strong> through closed distribution channels. These rates are legally restricted from public display and are only accessible to verified members of gated platforms.",
+      "Dubai Ultra is a member-only platform. When you join (free, 30 seconds), you unlock net rates on Dubai's most exclusive hotels at <strong>10–30% below what Booking.com and direct booking sites publish</strong>. Same suite, same check-in date, same hotel — just a materially better price.",
+      "Seasonal note: <strong>October to April</strong> is peak Dubai season when rates are highest but availability is also lowest. The best member rates appear <strong>7–14 days out</strong> as hotels fill gaps. Summer (June–August) has the deepest discounts — rates can drop 40–50% and hotels are significantly less crowded."
+    ]
+  },
+  "faq_items": [
+    {
+      "q": "Can I really get below-retail rates on the Burj Al Arab?",
+      "a": "Yes. The Burj Al Arab — like all major Dubai luxury hotels — distributes a portion of its inventory through closed user group (CUG) channels at net rates. These rates are 10–30% below what Booking.com and the hotel's own website publish. As a Dubai Ultra member you access those rates directly."
+    },
+    {
+      "q": "How much do members save in AED?",
+      "a": "On a typical AED 3,000/night suite, members save AED 300–900 per night. On higher-category rooms the savings are larger in absolute terms. Peak season savings are typically 10–15%; last-minute off-peak savings can reach 25–30%."
+    },
+    {
+      "q": "Is there a minimum stay?",
+      "a": "No minimum stay is imposed by Dubai Ultra. Some hotels have their own minimum stay requirements during peak events (New Year's Eve, Dubai Shopping Festival) — we show these clearly on each hotel's listing."
+    },
+    {
+      "q": "Is membership really free?",
+      "a": "Yes. No subscription, no service fees layered on top of the rate. You pay the member rate directly — that's the total cost."
+    },
+    {
+      "q": "Which areas does Dubai Ultra cover?",
+      "a": "Palm Jumeirah, Downtown Dubai, and Dubai Marina & JBR are live now. Business Bay, DIFC, and Jumeirah Beach are being added. If there's a specific property you want to see, let us know when you join."
+    }
+  ],
+  "modal_perks": [
+    { "icon": "🏙️", "text": "Access Dubai's finest hotels 10–30% below retail" },
+    { "icon": "💰", "text": "Save AED 500–2,000 per night on suites" },
+    { "icon": "🚫", "text": "No subscription, no booking fees" },
+    { "icon": "🌟", "text": "Palm, Downtown & Marina — more areas coming" }
+  ],
+  "hotels": {
+    "Palm Jumeirah": [
+      { "id": "lp6557454e", "name": "Hilton Dubai Palm Jumeirah",    "emoji": "🌴", "area": "Palm Jumeirah",         "dist": "Private beach",          "desc": "5★ on the Palm with private beach access. Multiple pools, 8 restaurants, spa.",          "tags": ["Private beach","Pool","Palm Jumeirah"],       "badge": "Best value" },
+      { "id": "lp65574f8a", "name": "Atlantis, The Palm",            "emoji": "🐬", "area": "Palm Jumeirah tip",     "dist": "Aquaventure Waterpark",  "desc": "Iconic 5★ mega-resort. 23 restaurants, Aquaventure Waterpark, private beach.",           "tags": ["Iconic","Waterpark","Private beach"],         "badge": null },
+      { "id": "lp655750cc", "name": "One&Only The Palm",             "emoji": "✨", "area": "Palm Jumeirah",         "dist": "Private beach",          "desc": "Adults-only ultra-luxury boutique. 60 villas, private marina, 3 restaurants.",           "tags": ["Adults only","Boutique","Private beach"],     "badge": null },
+      { "id": "lp32a09",    "name": "The Ritz-Carlton Dubai",        "emoji": "💎", "area": "JBR Beach",             "dist": "Beachfront",             "desc": "Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.",                  "tags": ["Beachfront","Spa","Pool"],                    "badge": null }
+    ],
+    "Downtown Dubai": [
+      { "id": "lp6ce87",    "name": "Sofitel Dubai Downtown",        "emoji": "🏙️", "area": "Downtown Dubai",       "dist": "5 min Burj Khalifa",     "desc": "French-inspired luxury tower in Downtown. Rooftop pool, spa, Burj views.",              "tags": ["Burj views","Pool","Spa"],                    "badge": "Best value" },
+      { "id": "lp65575180", "name": "Address Downtown Dubai",        "emoji": "🌟", "area": "Downtown, Burj area",  "dist": "Burj Khalifa adjacent",  "desc": "5★ tower with some of Dubai's best Burj Khalifa views. Rooftop pool, spa.",             "tags": ["Burj views","Rooftop pool","Central"],        "badge": null },
+      { "id": "lp65575301", "name": "Vida Downtown Dubai",           "emoji": "🌆", "area": "Downtown Dubai",       "dist": "Dubai Mall 5 min",       "desc": "Lifestyle 5★ hotel in the heart of Downtown. Stylish rooftop, vibrant F&B.",             "tags": ["Lifestyle","Rooftop","Central"],              "badge": null }
+    ],
+    "Dubai Marina": [
+      { "id": "lp769d6",    "name": "InterContinental Dubai Marina", "emoji": "⛵", "area": "Dubai Marina",         "dist": "Marina Walk",            "desc": "5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.",                   "tags": ["Marina views","Pool","Rooftop"],              "badge": "Best value" },
+      { "id": "lp6557539e", "name": "Jumeirah Beach Hotel",          "emoji": "🌊", "area": "Jumeirah Beach",       "dist": "Beachfront",             "desc": "Wave-shaped iconic 5★ on Jumeirah Beach. 600m private beach, Sinbad Waterpark.",        "tags": ["Beachfront","Waterpark","Iconic"],            "badge": null },
+      { "id": "lp655754c5", "name": "W Dubai — The Palm",            "emoji": "🎭", "area": "Palm Jumeirah",        "dist": "Private beach",          "desc": "Ultra-cool 5★ W hotel on the Palm. WET® deck pool, SoBe dining, panoramic views.",     "tags": ["Design hotel","Pool","Vibrant"],              "badge": null }
+    ]
+  }
+}

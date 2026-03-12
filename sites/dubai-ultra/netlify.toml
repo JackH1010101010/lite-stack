@@ -1,0 +1,20 @@
+# Netlify config for dubai-ultra (monorepo)
+# Netlify project settings: base dir = repo root, publish = sites/dubai-ultra
+[build]
+  publish = "sites/dubai-ultra"
+  command = "node generator/generate.js dubai-ultra && sed -i \"s/YOUR_POSTHOG_KEY/${POSTHOG_PROJECT_KEY}/g\" sites/dubai-ultra/index.html"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

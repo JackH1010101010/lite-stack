@@ -1,0 +1,90 @@
+{
+  "META_TITLE": "Maldives Escape — Member Rates on Overwater Villas",
+  "META_DESCRIPTION": "Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay.",
+  "SCHEMA_NAME": "Maldives Escape",
+  "SCHEMA_URL": "https://maldives-escape.netlify.app",
+  "SCHEMA_DESCRIPTION": "Member-only pricing on Maldives overwater villas and private island resorts. Below-retail rates gated behind a free membership.",
+  "COLOR_PRIMARY": "#0b4f6c",
+  "COLOR_ACCENT": "#00b4d8",
+  "COLOR_ACCENT_LT": "#caf0f8",
+  "BRAND_NAME": "Maldives Escape",
+  "HERO_EYEBROW": "Overwater Villas · Members Save 10–25%",
+  "HERO_H1": "Private island resort rates you won't find on Booking.com",
+  "HERO_SUB": "Member-only pricing on Maldives overwater villas and private island resorts. No minimum stay. Rates updated live.",
+  "FOOTER_TAGLINE": "Member-only Maldives resort rates",
+  "CONTACT_EMAIL": "jackthughes99@gmail.com",
+  "GOOGLE_CLIENT_ID": "57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com",
+  "LITEAPI_KEY": "prod_31e2c9c7-1465-451b-9e81-34f00279a235",
+  "MARKUP": "0.15",
+  "MIN_SAVING": "0.08",
+  "DEFAULT_CITY": "North Male Atoll",
+  "NETLIFY_FORM_NAME": "maldives-escape-members",
+  "MODAL_HEADLINE": "Join Maldives Escape — it's free",
+  "MODAL_SUB": "Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.",
+  "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. Refresh prices to see your savings on Maldives resorts.",
+  "cities": [
+    { "value": "North Male Atoll",  "label": "North Malé Atoll" },
+    { "value": "South Male Atoll",  "label": "South Malé Atoll" },
+    { "value": "Baa Atoll",         "label": "Baa Atoll (UNESCO)" }
+  ],
+  "trust_items": [
+    "Live rates from resort API",
+    "No minimum stay",
+    "Members save $150–$400/night on overwater villas",
+    "Top-rated resorts, hand-verified"
+  ],
+  "editorial": {
+    "title": "About Maldives Escape member pricing",
+    "paragraphs": [
+      "Maldives resorts sell a portion of their unsold overwater villas and beach villas at <strong>net rates</strong> — well below their public retail price — through Closed User Group (CUG) channels. These rates are legally protected: they can only be shown to verified members of private platforms.",
+      "Maldives Escape operates as a CUG platform. When you join, you access villa rates on top-rated Maldives resorts <strong>10–25% below Booking.com public prices</strong>. Same resort, same villa, same dates — just a better price because you're booking through a member channel.",
+      "The best availability windows are <strong>60–90 days out</strong> for peak season (November–April) and <strong>7–14 days out</strong> for last-minute green season deals. Green season (May–October) has the deepest discounts."
+    ]
+  },
+  "faq_items": [
+    {
+      "q": "How much do members actually save on Maldives resorts?",
+      "a": "Members typically save 10–25% compared to Booking.com or direct booking prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity."
+    },
+    {
+      "q": "Do I need a minimum stay?",
+      "a": "No minimum stay is required for any resort listed on Maldives Escape. Many resorts do have their own policies — we show those clearly before you book — but we don't impose any additional minimum stay requirement."
+    },
+    {
+      "q": "Is membership free?",
+      "a": "Yes, completely free. No subscription fees, no booking fees on top of the rate. You pay the member villa rate — that's it."
+    },
+    {
+      "q": "Which atolls are covered?",
+      "a": "North and South Malé Atolls (closest to the airport, best for short trips) and Baa Atoll (UNESCO Biosphere Reserve, world-class snorkelling) are live now. More atolls coming soon."
+    },
+    {
+      "q": "What about seaplane transfers?",
+      "a": "Seaplane transfers are typically booked separately directly with the resort or through their recommended partner. We show transfer information for each resort so you can plan your full budget before booking."
+    }
+  ],
+  "modal_perks": [
+    { "icon": "🏝️", "text": "Access overwater villa rates 10–25% below retail" },
+    { "icon": "💎", "text": "Save $150–$400 per night on top resorts" },
+    { "icon": "🚫", "text": "No subscription, no booking fees" },
+    { "icon": "🌊", "text": "3 atolls covered — more coming" }
+  ],
+  "hotels": {
+    "North Male Atoll": [
+      { "id": "lp655762c1", "name": "Velassaru Maldives",        "emoji": "🌴", "area": "North Malé Atoll",     "dist": "25 min speedboat",        "desc": "Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.",        "tags": ["Overwater villa","Pool","Spa"],              "badge": "Best value" },
+      { "id": "lp65574e0c", "name": "Cocoon Maldives",           "emoji": "🥥", "area": "Ookolhufinolhu Island", "dist": "35 min speedboat",        "desc": "Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.",         "tags": ["Boutique","Snorkelling","Beach bar"],        "badge": null },
+      { "id": "lp655769b2", "name": "Meeru Maldives Resort",     "emoji": "🐠", "area": "Meerufenfushi Island",  "dist": "45 min speedboat",        "desc": "One of the Maldives' largest resorts. Diverse marine life, water sports, spa.",         "tags": ["Marine life","Water sports","Spa"],          "badge": null },
+      { "id": "lp65574cc3", "name": "Bandos Maldives",           "emoji": "🌺", "area": "Bandos Island",         "dist": "20 min speedboat",        "desc": "Classic Maldives resort. Dive centre, water sports, panoramic restaurant.",             "tags": ["Diving","Water sports","Classic"],           "badge": null }
+    ],
+    "South Male Atoll": [
+      { "id": "lp6557621e", "name": "Anantara Dhigu Maldives",   "emoji": "✨", "area": "South Malé Atoll",     "dist": "30 min speedboat",        "desc": "Luxury 5★ resort with overwater bungalows. 2 pools, 3 restaurants, spa.",              "tags": ["Overwater bungalow","Pool","Spa"],           "badge": "Best value" },
+      { "id": "lp65576388", "name": "Centara Grand Maldives",    "emoji": "🌅", "area": "Olhuveli Island",       "dist": "45 min speedboat",        "desc": "5★ with the longest overwater bar in the Maldives. Waterslides, snorkelling.",          "tags": ["Overwater bar","Waterslides","Snorkelling"], "badge": null },
+      { "id": "lp6557618c", "name": "Cinnamon Hakuraa Huraa",   "emoji": "🌊", "area": "Meemu Atoll",           "dist": "25 min seaplane",         "desc": "Remote 5★ resort. Crystal-clear lagoon, dolphin spotting, sunset cruises.",             "tags": ["Remote","Dolphins","Sunset cruises"],        "badge": null }
+    ],
+    "Baa Atoll": [
+      { "id": "lp655768a4", "name": "Four Seasons Landaa Giraavaru","emoji": "🐋","area": "Baa Atoll UNESCO",   "dist": "30 min seaplane",         "desc": "World-class 5★ in UNESCO Biosphere Reserve. Manta rays, marine biology centre.",       "tags": ["Manta rays","UNESCO","Marine biology"],      "badge": "Best value" },
+      { "id": "lp65576a12", "name": "Amilla Maldives",            "emoji": "🦈", "area": "Baa Atoll",            "dist": "35 min seaplane",         "desc": "Adults-first sanctuary. Private pool villas, whale sharks, organic garden.",            "tags": ["Adults only","Whale sharks","Pool villa"],   "badge": null },
+      { "id": "lp65576b88", "name": "Milaidhoo Island Maldives",  "emoji": "🌸", "area": "Baa Atoll UNESCO",    "dist": "30 min seaplane",         "desc": "Intimate 5★ boutique resort. Only 50 villas. House reef, Baa Atoll diving.",            "tags": ["Boutique","House reef","Diving"],            "badge": null }
+    ]
+  }
+}

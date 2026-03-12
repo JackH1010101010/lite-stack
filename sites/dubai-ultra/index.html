@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dubai Ultra — Member Rates on Ultra-Luxury Dubai Hotels</title>
+  <meta name="description" content="Ultra-luxury Dubai hotels at member-only rates. Save 10–30% on 7-star resorts and penthouse suites. Live pricing for serious travellers." />
+
+  <!-- PostHog Analytics — key injected at build time via POSTHOG_PROJECT_KEY env var -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture alias identify people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
+  </script>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Schema: WebSite -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"Dubai Ultra","url":"https://dubai-ultra.netlify.app","description":"Member-only pricing on ultra-luxury Dubai hotels and resorts. Below-retail rates on Burj Al Arab, Atlantis The Royal, and more.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://dubai-ultra.netlify.app/?city={city}"},"query-input":"required name=city"}}
+  </script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#1a0a2e;--gold:#d4af37;--gold-lt:#fdf6dc;
+      --grey-bg:#f7f7f5;--grey-mid:#e5e3de;--grey-text:#6b6b6b;
+      --black:#1a1a1a;--white:#fff;
+      --green:#1a7a3c;--green-lt:#e8f5ee;--red:#b91c1c;--red-lt:#fef2f2;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--grey-bg);color:var(--black);line-height:1.5}
+
+    /* NAV */
+    nav{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .logo{font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.04em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:16px}
+    .nav-link{color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;cursor:pointer}
+    .nav-link:hover{color:#fff}
+    .btn-join-nav{background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;padding:7px 16px;border-radius:4px;text-decoration:none;border:none;cursor:pointer}
+    #member-nav{display:none;align-items:center;gap:8px;color:var(--gold);font-size:13px;font-weight:600}
+
+    /* HERO */
+    .hero{background:var(--navy);padding:48px 24px 40px;text-align:center}
+    .hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+    .hero h1{font-size:clamp(22px,4vw,38px);font-weight:700;color:#fff;line-height:1.2;max-width:640px;margin:0 auto 16px}
+    .hero-sub{color:rgba(255,255,255,.65);font-size:16px;max-width:520px;margin:0 auto 28px}
+
+    /* SEARCH */
+    .search-bar{background:#fff;border-radius:8px;padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;max-width:720px;margin:0 auto;align-items:flex-end;box-shadow:0 4px 24px rgba(0,0,0,.18)}
+    .sf{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px}
+    .sf label{font-size:11px;font-weight:600;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em}
+    .sf input,.sf select{border:1px solid var(--grey-mid);border-radius:4px;padding:8px 10px;font-size:14px;color:var(--black);outline:none}
+    .sf input:focus,.sf select:focus{border-color:var(--navy)}
+    .btn-search{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap}
+    .btn-search:hover{opacity:.88}
+    .btn-search:disabled{background:#aaa;cursor:not-allowed}
+
+    /* MAIN */
+    .main{max-width:860px;margin:0 auto;padding:0 16px 64px}
+
+    /* MEMBER BANNER */
+    .cug-banner{background:var(--gold-lt);border:1px solid var(--gold);border-radius:6px;padding:12px 16px;margin:24px auto;display:flex;align-items:center;gap:12px;font-size:14px}
+    .cug-banner.is-member{background:var(--green-lt);border-color:var(--green)}
+    .cug-icon{font-size:20px;flex-shrink:0}
+    .cug-text{color:#5a4a20}
+    .cug-text.is-member{color:var(--green)}
+    .cug-cta{margin-left:auto;background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:7px 14px;border-radius:4px;text-decoration:none;white-space:nowrap;flex-shrink:0;border:none;cursor:pointer}
+
+    /* TRUST */
+    .trust-strip{display:flex;gap:24px;background:#fff;border:1px solid var(--grey-mid);border-radius:6px;padding:16px 20px;margin-bottom:24px;flex-wrap:wrap}
+    .ti{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--grey-text)}
+
+    /* FILTER */
+    .filter-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+    .filter-label{font-size:13px;color:var(--grey-text);margin-right:4px}
+    .chip{font-size:13px;padding:5px 12px;border-radius:20px;border:1px solid var(--grey-mid);background:#fff;cursor:pointer;color:var(--black)}
+    .chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .result-count{margin-left:auto;font-size:13px;color:var(--grey-text)}
+
+    /* LOADING */
+    .loading-state{text-align:center;padding:48px;color:var(--grey-text)}
+    .spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--grey-mid);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* HOTEL CARD */
+    .hotel-grid{display:flex;flex-direction:column;gap:16px}
+    .hotel-card{background:#fff;border-radius:8px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;border:1px solid var(--grey-mid);box-shadow:0 1px 4px rgba(0,0,0,.07);transition:box-shadow .15s}
+    .hotel-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
+    .hotel-img{position:relative;background:linear-gradient(135deg,var(--navy),#2a3a5c);display:flex;align-items:center;justify-content:center;font-size:40px;min-height:160px}
+    .hotel-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
+    .hotel-body{padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+    .hotel-name{font-size:17px;font-weight:700;color:var(--navy);line-height:1.25}
+    .hotel-stars{color:var(--gold);font-size:13px}
+    .hotel-loc{font-size:13px;color:var(--grey-text)}
+    .hotel-desc{font-size:13px;color:var(--grey-text);line-height:1.5}
+    .hotel-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:11px;padding:3px 8px;border-radius:3px;background:var(--grey-bg);border:1px solid var(--grey-mid);color:var(--grey-text)}
+    .hotel-footer{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:8px;border-top:1px solid var(--grey-mid)}
+    .price-block{}
+    .price-label{font-size:11px;color:var(--grey-text);margin-bottom:2px}
+    .price-was{font-size:12px;color:var(--grey-text);text-decoration:line-through}
+    .price-main{font-size:22px;font-weight:700}
+    .price-main.member{color:var(--green)}
+    .price-main.public{color:var(--navy)}
+    .price-per{font-size:12px;color:var(--grey-text)}
+    .saving-badge{display:inline-block;background:var(--green-lt);color:var(--green);font-size:11px;font-weight:600;padding:3px 7px;border-radius:3px;margin-top:4px}
+    .lock-badge{display:inline-block;background:#f3f4f6;color:var(--grey-text);font-size:11px;padding:3px 7px;border-radius:3px;margin-top:4px}
+    .btn-book{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:10px 20px;border-radius:4px;border:none;cursor:pointer}
+    .btn-book:hover{opacity:.88}
+    .btn-unlock{background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;padding:10px 16px;border-radius:4px;border:none;cursor:pointer}
+    .btn-unlock:hover{opacity:.88}
+
+    /* RATE LOADING */
+    .rate-loading{color:var(--grey-text);font-size:13px;font-style:italic}
+
+    /* ERROR */
+    .error-card{background:var(--red-lt);border:1px solid #fca5a5;border-radius:6px;padding:16px;margin:16px 0;font-size:14px;color:var(--red)}
+
+    /* EDITORIAL */
+    .editorial{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;padding:24px;margin:32px 0}
+    .editorial h2{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .editorial p{font-size:14px;color:var(--grey-text);line-height:1.7;margin-bottom:12px}
+    .editorial p:last-child{margin-bottom:0}
+    .editorial strong{color:var(--black)}
+
+    /* FAQ */
+    .section-heading{font-size:20px;font-weight:700;color:var(--navy);margin:40px 0 16px}
+    .section-sub{font-size:14px;color:var(--grey-text);margin-top:-10px;margin-bottom:16px}
+    .faq-item{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;overflow:hidden;margin-bottom:8px}
+    .faq-q{padding:16px 20px;font-size:15px;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q:hover{background:var(--grey-bg)}
+    .chevron{font-size:12px;color:var(--grey-text);transition:transform .2s}
+    .faq-a{padding:0 20px 16px;font-size:14px;color:var(--grey-text);line-height:1.6;display:none}
+    .faq-item.open .faq-a{display:block}
+    .faq-item.open .chevron{transform:rotate(180deg)}
+
+    /* JOIN MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:12px;padding:32px;max-width:440px;width:100%;position:relative}
+    .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey-text)}
+    .modal h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px}
+    .modal-sub{font-size:14px;color:var(--grey-text);margin-bottom:24px;line-height:1.5}
+    .modal-perks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+    .perk{display:flex;align-items:center;gap:10px;font-size:14px}
+    .perk-icon{font-size:16px;flex-shrink:0}
+    .modal input[type=email]{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:12px 14px;font-size:15px;outline:none;margin-bottom:12px}
+    .modal input[type=email]:focus{border-color:var(--navy)}
+    .btn-join-modal{width:100%;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px;border-radius:6px;border:none;cursor:pointer}
+    .btn-join-modal:hover{opacity:.88}
+    .modal-terms{font-size:11px;color:var(--grey-text);margin-top:10px;text-align:center}
+    .modal-success{display:none;text-align:center;padding:16px 0}
+    .modal-success .tick{font-size:48px;margin-bottom:12px}
+    .modal-success h3{font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px}
+    .modal-success p{font-size:14px;color:var(--grey-text);line-height:1.6}
+
+    /* COOKIE BANNER */
+    #cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:9999;flex-wrap:wrap;font-size:13px;box-shadow:0 -4px 16px rgba(0,0,0,.25)}
+    #cookie-banner p{flex:1;min-width:220px;line-height:1.5}
+    #cookie-banner a{color:var(--gold);text-decoration:underline;cursor:pointer}
+    .cookie-btns{display:flex;gap:8px;flex-shrink:0}
+    .btn-cookie-accept{background:var(--gold);color:var(--navy);border:none;padding:8px 18px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer}
+    .btn-cookie-decline{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.25);padding:8px 14px;border-radius:4px;font-size:13px;cursor:pointer}
+
+    /* PRIVACY MODAL */
+    #privacy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;overflow-y:auto;padding:40px 16px}
+    #privacy-overlay.open{display:block}
+    .privacy-box{background:#fff;border-radius:10px;max-width:680px;margin:0 auto;padding:32px;position:relative}
+    .privacy-box h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .privacy-box .pp-date{font-size:12px;color:var(--grey-text);margin-bottom:20px}
+    .privacy-box h3{font-size:15px;font-weight:600;color:var(--navy);margin:20px 0 6px}
+    .privacy-box p,.privacy-box li{font-size:14px;color:#333;line-height:1.7}
+    .privacy-box ul{padding-left:20px;margin-top:4px}
+    .privacy-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--grey-text)}
+
+    footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px}
+    footer p+p{margin-top:6px}
+
+    /* BOOKING MODAL */
+    .bk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
+    .bk-overlay.open{display:flex}
+    .bk-modal{background:#fff;border-radius:12px;max-width:520px;width:100%;position:relative;margin:auto}
+    .bk-header{padding:20px 24px 0;display:flex;align-items:flex-start;justify-content:space-between}
+    .bk-header h2{font-size:20px;font-weight:700;color:var(--navy)}
+    .bk-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--grey-text);padding:0;line-height:1}
+    .bk-steps{display:flex;border-bottom:1px solid var(--grey-mid);padding:0 24px;margin-top:12px}
+    .bk-step{font-size:12px;padding:10px 12px;color:var(--grey-text);border-bottom:2px solid transparent;font-weight:500;white-space:nowrap}
+    .bk-step.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:700}
+    .bk-step.done{color:var(--green)}
+    .bk-body{padding:20px 24px 24px}
+    .bk-hotel-nm{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .bk-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--grey-mid)}
+    .bk-row:last-child{border-bottom:none}
+    .bk-lbl{color:var(--grey-text)}
+    .bk-val{font-weight:600;text-align:right}
+    .bk-total{display:flex;justify-content:space-between;align-items:center;background:var(--green-lt);border-radius:6px;padding:12px 16px;margin:16px 0}
+    .bk-total-lbl{font-size:14px;color:var(--green);font-weight:600}
+    .bk-total-amt{font-size:22px;font-weight:700;color:var(--green)}
+    .bk-policy{background:#fffbf0;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;color:#92400e;margin:12px 0;line-height:1.5}
+    .bk-form-row{margin-bottom:14px}
+    .bk-form-row label{display:block;font-size:12px;font-weight:600;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+    .bk-form-row input{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:11px 13px;font-size:14px;outline:none}
+    .bk-form-row input:focus{border-color:var(--navy)}
+    .bk-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .btn-bk{width:100%;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:14px;border-radius:6px;border:none;cursor:pointer;margin-top:8px}
+    .btn-bk:hover{opacity:.88}
+    .btn-bk:disabled{background:#aaa;cursor:not-allowed}
+    .btn-bk.green{background:var(--green)}
+    .bk-spinner{text-align:center;padding:32px;color:var(--grey-text)}
+    .bk-err{background:var(--red-lt);border:1px solid #fca5a5;border-radius:6px;padding:12px;font-size:13px;color:var(--red);margin:10px 0}
+    #bk-pay-container{min-height:180px}
+    .bk-confirm-icon{font-size:52px;text-align:center;margin-bottom:12px}
+    .bk-ref-box{background:var(--green-lt);border:1px solid var(--green);border-radius:6px;padding:12px 16px;text-align:center;margin:16px 0}
+    .bk-ref-lbl{font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+    .bk-ref-id{font-size:20px;font-weight:700;color:var(--navy);font-family:monospace;margin-top:4px;word-break:break-all}
+
+    @media(max-width:600px){
+      .hotel-card{grid-template-columns:1fr}
+      .hotel-img{min-height:160px}
+      .search-bar{flex-direction:column}
+      .trust-strip{flex-direction:column;gap:12px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TEST MODE BANNER (hidden in production) -->
+<div id="test-banner" style="display:none;background:#b45309;color:#fff;text-align:center;font-size:12px;font-weight:600;padding:6px;letter-spacing:.05em">
+  ⚠ TEST MODE — No real bookings or charges will be made
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">Dubai Ultra</a>
+  <div class="nav-right">
+    <span id="member-nav">✓ Member</span>
+    <span class="nav-link" onclick="openModal()">How it works</span>
+    <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Join free</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Ultra-Luxury Dubai · Members Save 10–30%</p>
+  <h1>Dubai's finest hotels at rates reserved for members only</h1>
+  <p class="hero-sub">Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — member pricing 10–30% below public rates. No minimum stay.</p>
+  <div class="search-bar">
+    <div class="sf">
+      <label>Destination</label>
+      <select id="city-select">
+        <option value="Palm Jumeirah">Palm Jumeirah</option>
+        <option value="Downtown Dubai">Downtown Dubai</option>
+        <option value="Dubai Marina">Dubai Marina & JBR</option>
+      </select>
+    </div>
+    <div class="sf">
+      <label>Check-in</label>
+      <input type="date" id="checkin" />
+    </div>
+    <div class="sf">
+      <label>Check-out</label>
+      <input type="date" id="checkout" />
+    </div>
+    <div class="sf" style="max-width:80px">
+      <label>Guests</label>
+      <select id="guests">
+        <option>1</option>
+        <option selected>2</option>
+        <option>3</option>
+      </select>
+    </div>
+    <button class="btn-search" id="search-btn" onclick="doSearch()">Search</button>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- MEMBER BANNER -->
+  <div class="cug-banner" id="cug-banner">
+    <span class="cug-icon">🔒</span>
+    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock rates 10–30% below Booking.com.</span>
+    <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust-strip">
+    <div class="ti"><span>✓</span> Live rates from hotel API</div>
+    <div class="ti"><span>✓</span> No minimum stay</div>
+    <div class="ti"><span>✓</span> Members save AED 500–2,000/night on suites</div>
+    <div class="ti"><span>✓</span> Ultra-luxury 5★ and 7★ only</div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-row">
+    <span class="filter-label">Filter:</span>
+    <button class="chip active" onclick="setFilter('all',this)">All</button>
+    <button class="chip" onclick="setFilter('pool',this)">Pool</button>
+    <button class="chip" onclick="setFilter('spa',this)">Spa</button>
+    <button class="chip" onclick="setFilter('views',this)">Views</button>
+    <span class="result-count" id="result-count"></span>
+  </div>
+
+  <!-- HOTEL GRID -->
+  <div id="hotel-grid" class="hotel-grid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading live rates…</p>
+    </div>
+  </div>
+
+  <!-- EDITORIAL -->
+  <div class="editorial">
+    <h2>About Dubai Ultra member pricing</h2>
+    <p>Dubai's ultra-luxury hotels — the Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — release a share of their inventory at <strong>net rates</strong> through closed distribution channels. These rates are legally restricted from public display and are only accessible to verified members of gated platforms.</p>
+    <p>Dubai Ultra is a member-only platform. When you join (free, 30 seconds), you unlock net rates on Dubai's most exclusive hotels at <strong>10–30% below what Booking.com and direct booking sites publish</strong>. Same suite, same check-in date, same hotel — just a materially better price.</p>
+    <p>Seasonal note: <strong>October to April</strong> is peak Dubai season when rates are highest but availability is also lowest. The best member rates appear <strong>7–14 days out</strong> as hotels fill gaps. Summer (June–August) has the deepest discounts — rates can drop 40–50% and hotels are significantly less crowded.</p>
+  </div>
+
+  <!-- FAQ -->
+  <h2 class="section-heading">Frequently asked questions</h2>
+  <p class="section-sub">About member pricing and how Dubai Ultra works</p>
+
+  <div id="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Can I really get below-retail rates on the Burj Al Arab? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Yes. The Burj Al Arab — like all major Dubai luxury hotels — distributes a portion of its inventory through closed user group (CUG) channels at net rates. These rates are 10–30% below what Booking.com and the hotel's own website publish. As a Dubai Ultra member you access those rates directly.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        How much do members save in AED? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">On a typical AED 3,000/night suite, members save AED 300–900 per night. On higher-category rooms the savings are larger in absolute terms. Peak season savings are typically 10–15%; last-minute off-peak savings can reach 25–30%.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Is there a minimum stay? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">No minimum stay is imposed by Dubai Ultra. Some hotels have their own minimum stay requirements during peak events (New Year's Eve, Dubai Shopping Festival) — we show these clearly on each hotel's listing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Is membership really free? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Yes. No subscription, no service fees layered on top of the rate. You pay the member rate directly — that's the total cost.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Which areas does Dubai Ultra cover? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Palm Jumeirah, Downtown Dubai, and Dubai Marina & JBR are live now. Business Bay, DIFC, and Jumeirah Beach are being added. If there's a specific property you want to see, let us know when you join.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 Dubai Ultra · Member-only ultra-luxury Dubai hotel rates</p>
+  <p style="font-size:11px">Rates sourced via live hotel API · Member prices visible to logged-in members only · Public prices shown to non-members</p>
+  <p style="margin-top:10px">
+    <a href="#" onclick="openPrivacy();return false;" style="color:rgba(255,255,255,.45);font-size:12px;text-decoration:underline">Privacy Policy</a>
+    &nbsp;·&nbsp;
+    <a href="#" onclick="openPrivacy();return false;" style="color:rgba(255,255,255,.45);font-size:12px;text-decoration:underline">Cookie Policy</a>
+  </p>
+</footer>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookie-banner" style="display:none">
+  <p>We use analytics cookies to understand how you use Dubai Ultra and improve your experience. <a onclick="openPrivacy()">Learn more</a>.</p>
+  <div class="cookie-btns">
+    <button class="btn-cookie-decline" onclick="cookieChoice(false)">Decline</button>
+    <button class="btn-cookie-accept" onclick="cookieChoice(true)">Accept</button>
+  </div>
+</div>
+
+<!-- PRIVACY POLICY MODAL -->
+<div id="privacy-overlay" onclick="closePrivacyOutside(event)">
+  <div class="privacy-box">
+    <button class="privacy-close" onclick="closePrivacy()">✕</button>
+    <h2>Privacy &amp; Cookie Policy</h2>
+    <p class="pp-date">Last updated: 2026</p>
+
+    <h3>Who we are</h3>
+    <p>Dubai Ultra is a member-only hotel rate platform. Contact: <a href="mailto:jackthughes99@gmail.com">jackthughes99@gmail.com</a></p>
+
+    <h3>What data we collect</h3>
+    <ul>
+      <li><strong>Account data:</strong> email address and name when you join (via Google Sign-In or email form). Used only to gate member rates.</li>
+      <li><strong>Analytics data (with consent):</strong> pages visited, searches performed, hotels viewed, booking funnel steps. Collected via PostHog. No personally identifiable data is sent to PostHog — events are anonymous.</li>
+      <li><strong>Booking data:</strong> guest name, email and dates passed to LiteAPI to complete a hotel booking. We do not store payment card details — payments are handled by Stripe.</li>
+    </ul>
+
+    <h3>Cookies</h3>
+    <p>We use two types of cookies:</p>
+    <ul>
+      <li><strong>Essential:</strong> stored in localStorage to remember your login. These cannot be declined without breaking the site.</li>
+      <li><strong>Analytics (optional):</strong> PostHog session cookies to measure feature usage. Only set if you click "Accept" on the cookie banner.</li>
+    </ul>
+
+    <h3>Your rights</h3>
+    <p>Under UK GDPR you have the right to access, correct or delete your data. Email us to request deletion of your account. You can withdraw analytics consent at any time by clearing your browser cookies.</p>
+
+    <h3>Third parties</h3>
+    <ul>
+      <li><strong>LiteAPI</strong> — hotel inventory and booking API (liteapi.travel)</li>
+      <li><strong>Google Identity Services</strong> — optional OAuth login</li>
+      <li><strong>PostHog</strong> — anonymous analytics (posthog.com) — only active with your consent</li>
+      <li><strong>Stripe</strong> — payment processing (stripe.com)</li>
+    </ul>
+
+    <h3>Data retention</h3>
+    <p>Analytics data is retained for 12 months. Account data is retained until you request deletion.</p>
+  </div>
+</div>
+
+<!-- JOIN MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div id="modal-form-view">
+      <h2>Join Dubai Ultra — it's free</h2>
+      <p class="modal-sub">Unlock member rates on Dubai's ultra-luxury hotels — 10–30% below Booking.com. Takes 10 seconds.</p>
+      <div class="modal-perks">
+        <div class="perk"><span class="perk-icon">🏙️</span><span>Access Dubai's finest hotels 10–30% below retail</span></div>
+        <div class="perk"><span class="perk-icon">💰</span><span>Save AED 500–2,000 per night on suites</span></div>
+        <div class="perk"><span class="perk-icon">🚫</span><span>No subscription, no booking fees</span></div>
+        <div class="perk"><span class="perk-icon">🌟</span><span>Palm, Downtown & Marina — more areas coming</span></div>
+      </div>
+
+      <!-- Google One Tap sign-in -->
+      <div id="g_id_onload"
+           data-client_id="57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com"
+           data-callback="handleGoogleSignIn"
+           data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="continue_with"
+           data-shape="rectangular"
+           data-logo_alignment="left"
+           data-width="380"
+           style="margin-bottom:12px">
+      </div>
+
+      <!-- Divider -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="flex:1;height:1px;background:var(--grey-mid)"></div>
+        <span style="font-size:12px;color:var(--grey-text)">or continue with email</span>
+        <div style="flex:1;height:1px;background:var(--grey-mid)"></div>
+      </div>
+
+      <!-- Email fallback (also Netlify Form) -->
+      <form name="dubai-ultra-members" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleJoin(event)">
+        <input type="hidden" name="form-name" value="dubai-ultra-members" />
+        <input type="hidden" name="bot-field" />
+        <input type="email" name="email" id="join-email" placeholder="your@email.com" required autocomplete="email" />
+        <button type="submit" class="btn-join-modal">Unlock member rates →</button>
+        <p class="modal-terms">By joining you agree to our <a href="#" style="color:var(--grey-text)">terms</a>. No spam, unsubscribe any time.</p>
+      </form>
+    </div>
+
+    <div class="modal-success" id="modal-success">
+      <div class="tick">✅</div>
+      <h3>You're in!</h3>
+      <p>Member rates are now unlocked. You're seeing prices not available on any public booking site.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div id="bk-overlay" class="bk-overlay" onclick="closeBkOutside(event)">
+  <div class="bk-modal">
+    <div class="bk-header">
+      <h2 id="bk-title">Book Hotel</h2>
+      <button class="bk-close" onclick="closeBkModal()">✕</button>
+    </div>
+    <div class="bk-steps" id="bk-steps">
+      <span class="bk-step active" id="bk-s1">1. Summary</span>
+      <span class="bk-step" id="bk-s2">2. Guest details</span>
+      <span class="bk-step" id="bk-s3">3. Payment</span>
+    </div>
+    <div class="bk-body">
+      <!-- Step 1: Summary + pre-book -->
+      <div id="bk-p1">
+        <div id="bk-summary-content"><div class="bk-spinner"><div class="spinner"></div><p>Confirming availability…</p></div></div>
+      </div>
+      <!-- Step 2: Guest details -->
+      <div id="bk-p2" style="display:none">
+        <form id="bk-guest-form" onsubmit="submitGuestDetails(event)">
+          <div class="bk-cols">
+            <div class="bk-form-row"><label>First name *</label><input type="text" id="bk-first" required placeholder="First"/></div>
+            <div class="bk-form-row"><label>Last name *</label><input type="text" id="bk-last" required placeholder="Last"/></div>
+          </div>
+          <div class="bk-form-row"><label>Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
+          <div class="bk-form-row"><label>Phone (with country code)</label><input type="tel" id="bk-phone" placeholder="+44 7700 900000"/></div>
+          <div id="bk-guest-err"></div>
+          <button type="submit" class="btn-bk">Continue to payment →</button>
+        </form>
+      </div>
+      <!-- Step 3: Payment (LiteAPI Payment SDK) -->
+      <div id="bk-p3" style="display:none">
+        <div id="bk-pay-container"><div class="bk-spinner"><div class="spinner"></div><p>Loading secure payment form…</p></div></div>
+        <div id="bk-pay-err"></div>
+      </div>
+      <!-- Step 4: Confirmation -->
+      <div id="bk-p4" style="display:none">
+        <div class="bk-confirm-icon">🎉</div>
+        <h3 style="text-align:center;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px">Booking confirmed!</h3>
+        <p style="text-align:center;font-size:14px;color:var(--grey-text);margin-bottom:4px">Check your email for full details.</p>
+        <div class="bk-ref-box">
+          <div class="bk-ref-lbl">Booking reference</div>
+          <div class="bk-ref-id" id="bk-ref-id">—</div>
+        </div>
+        <div id="bk-confirm-det" style="font-size:14px;color:var(--grey-text);line-height:1.9;margin-top:4px"></div>
+        <button class="btn-bk green" onclick="closeBkModal()" style="margin-top:16px">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────
+const API_KEY  = 'prod_31e2c9c7-1465-451b-9e81-34f00279a235';
+const API_BASE = 'https://api.liteapi.travel/v3.0';
+const MARKUP      = 0.15;       // target markup above net cost
+const MIN_SAVING  = 0.08;   // members always save at least this % vs Booking.com
+// ── TEST MODE ─────────────────────────────────────────────────
+const TEST_MODE = false;
+// memberPrice = min(net × (1+MARKUP),  ssp × (1-MIN_SAVING))
+function calcMemberPrice(netCost, ssp) {
+  if (!netCost) return null;
+  const atMarkup = netCost * (1 + MARKUP);
+  const atCap    = ssp ? ssp * (1 - MIN_SAVING) : atMarkup;
+  return Math.min(atMarkup, atCap);
+}
+
+// ── HOTEL DATA ────────────────────────────────────────────────
+const HOTELS = {
+  Palm Jumeirah: [
+    {id:'lp6557454e', name:'Hilton Dubai Palm Jumeirah', emoji:'🌴', area:'Palm Jumeirah', dist:'Private beach', desc:'5★ on the Palm with private beach access. Multiple pools, 8 restaurants, spa.', tags:["Private beach","Pool","Palm Jumeirah"], badge:'Best value'},
+    {id:'lp65574f8a', name:'Atlantis, The Palm', emoji:'🐬', area:'Palm Jumeirah tip', dist:'Aquaventure Waterpark', desc:'Iconic 5★ mega-resort. 23 restaurants, Aquaventure Waterpark, private beach.', tags:["Iconic","Waterpark","Private beach"], badge:null},
+    {id:'lp655750cc', name:'One&Only The Palm', emoji:'✨', area:'Palm Jumeirah', dist:'Private beach', desc:'Adults-only ultra-luxury boutique. 60 villas, private marina, 3 restaurants.', tags:["Adults only","Boutique","Private beach"], badge:null},
+    {id:'lp32a09', name:'The Ritz-Carlton Dubai', emoji:'💎', area:'JBR Beach', dist:'Beachfront', desc:'Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.', tags:["Beachfront","Spa","Pool"], badge:null},
+  ],
+  Downtown Dubai: [
+    {id:'lp6ce87', name:'Sofitel Dubai Downtown', emoji:'🏙️', area:'Downtown Dubai', dist:'5 min Burj Khalifa', desc:'French-inspired luxury tower in Downtown. Rooftop pool, spa, Burj views.', tags:["Burj views","Pool","Spa"], badge:'Best value'},
+    {id:'lp65575180', name:'Address Downtown Dubai', emoji:'🌟', area:'Downtown, Burj area', dist:'Burj Khalifa adjacent', desc:'5★ tower with some of Dubai\'s best Burj Khalifa views. Rooftop pool, spa.', tags:["Burj views","Rooftop pool","Central"], badge:null},
+    {id:'lp65575301', name:'Vida Downtown Dubai', emoji:'🌆', area:'Downtown Dubai', dist:'Dubai Mall 5 min', desc:'Lifestyle 5★ hotel in the heart of Downtown. Stylish rooftop, vibrant F&B.', tags:["Lifestyle","Rooftop","Central"], badge:null},
+  ],
+  Dubai Marina: [
+    {id:'lp769d6', name:'InterContinental Dubai Marina', emoji:'⛵', area:'Dubai Marina', dist:'Marina Walk', desc:'5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.', tags:["Marina views","Pool","Rooftop"], badge:'Best value'},
+    {id:'lp6557539e', name:'Jumeirah Beach Hotel', emoji:'🌊', area:'Jumeirah Beach', dist:'Beachfront', desc:'Wave-shaped iconic 5★ on Jumeirah Beach. 600m private beach, Sinbad Waterpark.', tags:["Beachfront","Waterpark","Iconic"], badge:null},
+    {id:'lp655754c5', name:'W Dubai — The Palm', emoji:'🎭', area:'Palm Jumeirah', dist:'Private beach', desc:'Ultra-cool 5★ W hotel on the Palm. WET® deck pool, SoBe dining, panoramic views.', tags:["Design hotel","Pool","Vibrant"], badge:null},
+  ],
+};
+
+// ── STATE ─────────────────────────────────────────────────────
+let isMember = localStorage.getItem('luxstay_member') === '1';
+let currentCity = 'Palm Jumeirah';
+let ratesCache = {};
+if (TEST_MODE) document.getElementById('test-banner').style.display = 'block';
+let activeFilter = 'all';
+
+// ── DATES — default to next Fri–Sat ──────────────────────────
+function nextFriSat() {
+  const today = new Date();
+  const day = today.getDay();
+  const daysToFri = (5 - day + 7) % 7 || 7;
+  const fri = new Date(today); fri.setDate(today.getDate() + daysToFri);
+  const sat = new Date(fri); sat.setDate(fri.getDate() + 1);
+  return [fri.toISOString().slice(0,10), sat.toISOString().slice(0,10)];
+}
+const [defaultIn, defaultOut] = nextFriSat();
+document.getElementById('checkin').value = defaultIn;
+document.getElementById('checkout').value = defaultOut;
+
+// ── MEMBER STATE ──────────────────────────────────────────────
+function updateMemberUI() {
+  const banner = document.getElementById('cug-banner');
+  const bannerText = document.getElementById('cug-text');
+  const bannerBtn = document.getElementById('cug-btn');
+  const joinBtn = document.getElementById('nav-join-btn');
+  const memberNav = document.getElementById('member-nav');
+
+  if (isMember) {
+    banner.classList.add('is-member');
+    bannerText.classList.add('is-member');
+    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing below-retail prices not visible on Booking.com.';
+    bannerBtn.textContent = '✓ Active';
+    bannerBtn.style.background = 'var(--green)';
+    bannerBtn.style.cursor = 'default';
+    bannerBtn.onclick = null;
+    joinBtn.style.display = 'none';
+    memberNav.style.display = 'flex';
+  }
+}
+
+// ── SEARCH ───────────────────────────────────────────────────
+function _origDoSearch() {
+  const city = document.getElementById('city-select').value;
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  currentCity = city;
+  ratesCache = {};
+  renderHotels(city, checkin, checkout);
+}
+
+// ── FILTER ───────────────────────────────────────────────────
+function setFilter(f, el) {
+  activeFilter = f;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  renderHotels(currentCity, checkin, checkout);
+}
+
+// ── RENDER HOTELS ─────────────────────────────────────────────
+function renderHotels(city, checkin, checkout) {
+  const grid = document.getElementById('hotel-grid');
+  let hotels = HOTELS[city] || [];
+
+  if (activeFilter !== 'all') {
+    const map = {pool:'pool',spa:'spa',views:'views'};
+    hotels = hotels.filter(h =>
+      h.tags.some(t => t.toLowerCase().includes(map[activeFilter]))
+    );
+  }
+
+  document.getElementById('result-count').textContent = `${hotels.length} hotel${hotels.length !== 1 ? 's' : ''}`;
+
+  grid.innerHTML = hotels.map(h => buildCard(h)).join('');
+  hotels.forEach(h => fetchRate(h, checkin, checkout));
+}
+
+// ── BUILD CARD ────────────────────────────────────────────────
+function buildCard(h) {
+  return `
+  <article class="hotel-card" id="card-${h.id}">
+    <div class="hotel-img">
+      <span>${h.emoji}</span>
+      ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
+    </div>
+    <div class="hotel-body">
+      <div>
+        <div class="hotel-name">${h.name}</div>
+        <div class="hotel-stars">★★★★★</div>
+      </div>
+      <div class="hotel-loc">📍 ${h.area} · ${h.dist}</div>
+      <div class="hotel-desc">${h.desc}</div>
+      <div class="hotel-tags">${h.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="hotel-footer">
+        <div class="price-block" id="price-${h.id}">
+          <span class="rate-loading">Loading live rate…</span>
+        </div>
+        <div id="btn-${h.id}"></div>
+      </div>
+    </div>
+  </article>`;
+}
+
+// ── FETCH RATE ────────────────────────────────────────────────
+async function fetchRate(h, checkin, checkout) {
+  const cacheKey = `${h.id}-${checkin}-${checkout}`;
+  if (ratesCache[cacheKey]) {
+    updateCardPrice(h, ratesCache[cacheKey]);
+    return;
+  }
+
+  try {
+    const resp = await fetch(`${API_BASE}/hotels/rates`, {
+      method: 'POST',
+      headers: { 'X-API-Key': API_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' },
+      body: JSON.stringify({
+        hotelIds: [h.id],
+        occupancies: [{ adults: parseInt(document.getElementById('guests').value) }],
+        currency: 'GBP',
+        guestNationality: 'GB',
+        checkin, checkout
+      })
+    });
+
+    if (!resp.ok) throw new Error(`API ${resp.status}`);
+    const data = await resp.json();
+
+    const hotel = data?.data?.[0];
+    const room = hotel?.roomTypes?.[0];
+    const rate = room?.rates?.[0]?.retailRate;
+
+    if (!rate) { updateCardPrice(h, null); return; }
+
+    const netCost  = rate.total?.[0]?.amount;
+    const ssp      = rate.suggestedSellingPrice?.[0]?.amount;
+    const rateId   = hotel?.roomTypes?.[0]?.rates?.[0]?.rateId;
+    const roomName = hotel?.roomTypes?.[0]?.name || 'Standard Room';
+    const result   = { netCost, ssp, rateId, roomName };
+    ratesCache[cacheKey] = result;
+    updateCardPrice(h, result);
+    track('hotel_viewed', { hotel_id: h.id, hotel_name: h.name, ssp, member_price: calcMemberPrice(netCost, ssp) });
+
+  } catch(e) {
+    updateCardPrice(h, { error: e.message });
+  }
+}
+
+// ── UPDATE CARD PRICE ─────────────────────────────────────────
+function updateCardPrice(h, data) {
+  const priceEl = document.getElementById(`price-${h.id}`);
+  const btnEl   = document.getElementById(`btn-${h.id}`);
+  if (!priceEl) return;
+
+  if (!data || data.error) {
+    priceEl.innerHTML = `<span class="rate-loading">${data?.error?.includes('No rooms') ? 'No availability' : 'Unavailable'}</span>`;
+    btnEl.innerHTML = '';
+    return;
+  }
+
+  const { netCost, ssp } = data;
+  const displaySsp  = ssp || netCost;
+  const memberPrice = calcMemberPrice(netCost, ssp);
+  const saving      = ssp && memberPrice ? Math.round((1 - memberPrice/ssp)*100) : 0;
+  const fmt = n => '£' + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
+
+  if (isMember && memberPrice) {
+    priceEl.innerHTML = `
+      <div class="price-label">Member rate / night</div>
+      ${ssp ? `<div class="price-was">Booking.com: ${fmt(ssp)}</div>` : ''}
+      <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
+      ${saving > 0 ? `<span class="saving-badge">Save ${saving}% vs Booking.com</span>` : ''}
+    `;
+    btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
+  } else {
+    priceEl.innerHTML = `
+      <div class="price-label">Public rate / night</div>
+      <div class="price-main public">${fmt(displaySsp)} <span class="price-per">/ night</span></div>
+      ${saving > 0 ? `<span class="lock-badge">🔒 Member rate available</span>` : ''}
+    `;
+    btnEl.innerHTML = `<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>`;
+  }
+}
+
+// ── BOOKING FLOW ──────────────────────────────────────────────
+let bkSess = {};
+
+function openBkModal()  { document.getElementById('bk-overlay').classList.add('open'); }
+function closeBkModal() { document.getElementById('bk-overlay').classList.remove('open'); bkSess = {}; }
+function closeBkOutside(e) { if (e.target.id === 'bk-overlay') closeBkModal(); }
+
+function setBkStep(n) {
+  [1,2,3,4].forEach(i => {
+    const p = document.getElementById(`bk-p${i}`);
+    if (p) p.style.display = 'none';
+  });
+  const target = document.getElementById(`bk-p${n}`);
+  if (target) target.style.display = 'block';
+  const stepsEl = document.getElementById('bk-steps');
+  if (stepsEl) stepsEl.style.display = n === 4 ? 'none' : 'flex';
+  [1,2,3].forEach(i => {
+    const s = document.getElementById(`bk-s${i}`);
+    if (!s) return;
+    s.classList.remove('active','done');
+    if (i < n)  s.classList.add('done');
+    if (i === n) s.classList.add('active');
+  });
+}
+
+async function bookHotel(id, name) {
+  const checkin  = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const cacheKey = `${id}-${checkin}-${checkout}`;
+  const rate     = ratesCache[cacheKey];
+
+  if (!rate?.rateId) {
+    alert('Rate data has expired — please search again to refresh prices.');
+    return;
+  }
+
+  bkSess = { hotelId: id, hotelName: name, checkin, checkout, ...rate,
+             memberPrice: calcMemberPrice(rate.netCost, rate.ssp) };
+  track('booking_started', { hotel_id: id, hotel_name: name, checkin, checkout,
+    member_price: calcMemberPrice(rate.netCost, rate.ssp) });
+  document.getElementById('bk-title').textContent = name;
+  document.getElementById('bk-summary-content').innerHTML =
+    '<div class="bk-spinner"><div class="spinner"></div><p>Confirming availability…</p></div>';
+
+  setBkStep(1);
+  openBkModal();
+  await doPrebook();
+}
+
+async function doPrebook() {
+  if (TEST_MODE) {
+    await new Promise(r => setTimeout(r, 800));
+    bkSess.prebookId      = 'TEST-PREBOOK-' + Math.random().toString(36).slice(2,9).toUpperCase();
+    bkSess.confirmedPrice = bkSess.memberPrice;
+    bkSess.currency       = 'GBP';
+    bkSess.cancelPolicy   = 'Free cancellation before 18:00 on day of arrival';
+    renderBkSummary();
+    return;
+  }
+  try {
+    const resp = await fetch(`${API_BASE}/hotels/prebook`, {
+      method: 'POST',
+      headers: { 'X-API-Key': API_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' },
+      body: JSON.stringify({ rateId: bkSess.rateId })
+    });
+    if (!resp.ok) throw new Error(`Status ${resp.status}`);
+    const data = await resp.json();
+    const pb   = data?.data;
+    if (!pb?.prebookId) throw new Error('No prebookId in response');
+
+    bkSess.prebookId      = pb.prebookId;
+    bkSess.confirmedPrice = pb.totalPayable?.amount
+                          ? calcMemberPrice(pb.totalPayable.amount, bkSess.ssp)
+                          : bkSess.memberPrice;
+    bkSess.currency       = pb.totalPayable?.currency || 'GBP';
+    bkSess.cancelPolicy   = pb.cancellationPolicies?.[0]?.description
+                         || (pb.cancellationPolicies?.length ? 'See cancellation terms' : 'Free cancellation');
+    renderBkSummary();
+
+  } catch(e) {
+    document.getElementById('bk-summary-content').innerHTML = `
+      <div class="bk-err">Could not confirm this rate: ${e.message}.<br>The offer may have expired — please go back and search again.</div>
+      <button class="btn-bk" style="background:var(--grey-text)" onclick="closeBkModal()">← Back to hotels</button>`;
+  }
+}
+
+function renderBkSummary() {
+  const { hotelName, checkin, checkout, confirmedPrice, currency, cancelPolicy, roomName } = bkSess;
+  const nights = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
+  const sym    = currency === 'GBP' ? '£' : currency === 'USD' ? '$' : '€';
+  const fmt    = n => sym + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0,maximumFractionDigits:0});
+
+  document.getElementById('bk-summary-content').innerHTML = `
+    <div class="bk-hotel-nm">${hotelName}</div>
+    <div style="margin:12px 0">
+      <div class="bk-row"><span class="bk-lbl">Room</span><span class="bk-val">${roomName}</span></div>
+      <div class="bk-row"><span class="bk-lbl">Check-in</span><span class="bk-val">${checkin}</span></div>
+      <div class="bk-row"><span class="bk-lbl">Check-out</span><span class="bk-val">${checkout}</span></div>
+      <div class="bk-row"><span class="bk-lbl">Nights</span><span class="bk-val">${nights}</span></div>
+    </div>
+    <div class="bk-total">
+      <span class="bk-total-lbl">Member total</span>
+      <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
+    </div>
+    <div class="bk-policy">📋 <strong>Cancellation:</strong> ${cancelPolicy}</div>
+    <button class="btn-bk" onclick="setBkStep(2)">Continue to guest details →</button>`;
+}
+
+function submitGuestDetails(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('bk-guest-err');
+  errEl.innerHTML = '';
+
+  const firstName = document.getElementById('bk-first').value.trim();
+  const lastName  = document.getElementById('bk-last').value.trim();
+  const email     = document.getElementById('bk-email').value.trim();
+  const phone     = document.getElementById('bk-phone').value.trim() || '+440000000000';
+
+  if (!firstName || !lastName || !email) {
+    errEl.innerHTML = '<div class="bk-err">Please complete all required fields.</div>';
+    return;
+  }
+
+  bkSess.holder = { firstName, lastName, email, phone };
+  setBkStep(3);
+  loadPaymentSDK();
+}
+
+function loadPaymentSDK() {
+  if (TEST_MODE) {
+    const sym = bkSess.currency === 'GBP' ? '£' : bkSess.currency === 'USD' ? '$' : '€';
+    const amt = sym + parseFloat(bkSess.confirmedPrice).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});
+    document.getElementById('bk-pay-container').innerHTML = `
+      <div style="border:2px dashed var(--gold);border-radius:8px;padding:20px;background:var(--gold-lt);text-align:center;margin-bottom:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">⚠ TEST MODE — No real payment</div>
+        <div style="font-size:13px;color:var(--grey-text);margin-bottom:16px">Simulating payment of <strong>${amt}</strong></div>
+        <button class="btn-bk" id="mock-pay-btn" onclick="mockPayment()">Simulate Payment →</button>
+      </div>`;
+    return;
+  }
+  if (window.LiteAPIPayment) { initPayWidget(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://sdk.liteapi.travel/payment/v1/liteapi-payment.js';
+  s.onload  = initPayWidget;
+  s.onerror = () => {
+    document.getElementById('bk-pay-container').innerHTML =
+      `<div class="bk-err">Secure payment form could not load. Please check your connection and try again.<br><small>Reference: ${bkSess.prebookId}</small></div>`;
+  };
+  document.head.appendChild(s);
+}
+
+async function mockPayment() {
+  document.getElementById('mock-pay-btn').disabled = true;
+  document.getElementById('mock-pay-btn').textContent = 'Processing…';
+  await new Promise(r => setTimeout(r, 1200));
+  bkSess.transactionId = 'TEST-TXN-' + Math.random().toString(36).slice(2,9).toUpperCase();
+  confirmBooking();
+}
+
+function initPayWidget() {
+  try {
+    document.getElementById('bk-pay-container').innerHTML = '';
+    LiteAPIPayment.init({
+      token:     bkSess.prebookId,
+      container: '#bk-pay-container',
+      onSuccess: (res) => { bkSess.transactionId = res.transactionId; confirmBooking(); },
+      onError:   (err) => {
+        document.getElementById('bk-pay-err').innerHTML =
+          `<div class="bk-err">Payment failed: ${err.message || 'Unknown error'}. Please try again.</div>`;
+      }
+    });
+  } catch(err) {
+    document.getElementById('bk-pay-container').innerHTML =
+      `<div class="bk-err">Payment widget error: ${err.message}</div>`;
+  }
+}
+
+async function confirmBooking() {
+  document.getElementById('bk-pay-container').innerHTML =
+    '<div class="bk-spinner"><div class="spinner"></div><p>Confirming your booking…</p></div>';
+
+  if (TEST_MODE) {
+    await new Promise(r => setTimeout(r, 1000));
+    const { prebookId, hotelName, checkin, checkout, holder } = bkSess;
+    document.getElementById('bk-ref-id').textContent = 'TEST-BKG-' + prebookId.slice(-6);
+    document.getElementById('bk-confirm-det').innerHTML =
+      `<p><strong>${hotelName}</strong></p>
+       <p>Check-in: ${checkin} · Check-out: ${checkout}</p>
+       <p>Confirmation sent to: ${holder.email}</p>
+       <p style="margin-top:8px;font-size:12px;color:var(--grey-text)">(Test mode — no real booking made)</p>`;
+    setBkStep(4);
+    return;
+  }
+  try {
+    const { prebookId, holder, transactionId, hotelName, checkin, checkout } = bkSess;
+    const adults = parseInt(document.getElementById('guests').value) || 2;
+
+    const resp = await fetch(`${API_BASE}/hotels/book`, {
+      method: 'POST',
+      headers: { 'X-API-Key': API_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' },
+      body: JSON.stringify({
+        prebookId,
+        holder:  { firstName: holder.firstName, lastName: holder.lastName, email: holder.email, phone: holder.phone },
+        guests:  [{ occupancy: { adults }, firstName: holder.firstName, lastName: holder.lastName }],
+        payment: { method: 'CREDIT_CARD', transactionId }
+      })
+    });
+    if (!resp.ok) throw new Error(`Status ${resp.status}`);
+    const data    = await resp.json();
+    const booking = data?.data;
+
+    const bookingRef = booking?.bookingId || booking?.id || prebookId;
+    document.getElementById('bk-ref-id').textContent = bookingRef;
+    document.getElementById('bk-confirm-det').innerHTML =
+      `<p><strong>${hotelName}</strong></p>
+       <p>Check-in: ${checkin} · Check-out: ${checkout}</p>
+       <p>Confirmation sent to: ${holder.email}</p>`;
+    track('booking_completed', { hotel_name: hotelName, checkin, checkout,
+      booking_ref: bookingRef, revenue: bkSess.confirmedPrice, currency: bkSess.currency });
+    setBkStep(4);
+
+  } catch(err) {
+    document.getElementById('bk-pay-err').innerHTML =
+      `<div class="bk-err">Booking confirmation failed: ${err.message}.<br>
+       Your payment may have been processed — email support with ref: <strong>${bkSess.prebookId}</strong></div>`;
+  }
+}
+
+// ── GOOGLE SIGN-IN CALLBACK ───────────────────────────────────
+function handleGoogleSignIn(response) {
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  const email = payload.email;
+  const name  = payload.given_name || payload.name || '';
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ 'form-name': 'dubai-ultra-members', email, name, source: 'google' })
+  }).catch(() => {});
+
+  activateMember(email, name);
+}
+
+// ── JOIN MODAL ────────────────────────────────────────────────
+function openModal()  { document.getElementById('modal-overlay').classList.add('open'); }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeModalOutside(e) { if (e.target.id === 'modal-overlay') closeModal(); }
+
+async function handleJoin(e) {
+  e.preventDefault();
+  const email = document.getElementById('join-email').value;
+  if (!email) return;
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'dubai-ultra-members', email, source: 'email' })
+    });
+  } catch(err) {}
+  activateMember(email, '');
+}
+
+function activateMember(email, name) {
+  localStorage.setItem('luxstay_member', '1');
+  localStorage.setItem('luxstay_email', email);
+  if (name) localStorage.setItem('luxstay_name', name);
+  isMember = true;
+  if (window.posthog) posthog.identify(email, { name: name || undefined });
+  track('member_joined', { method: name ? 'google' : 'email' });
+
+  document.getElementById('modal-form-view').style.display = 'none';
+  document.getElementById('modal-success').style.display = 'block';
+
+  updateMemberUI();
+  setTimeout(() => {
+    closeModal();
+    document.getElementById('modal-form-view').style.display = 'block';
+    document.getElementById('modal-success').style.display = 'none';
+    ratesCache = {};
+    renderHotels(currentCity,
+      document.getElementById('checkin').value,
+      document.getElementById('checkout').value);
+  }, 2500);
+}
+
+// ── POSTHOG TRACKING HELPERS ──────────────────────────────────
+function track(event, props) {
+  if (window.posthog && typeof posthog.capture === 'function') {
+    posthog.capture(event, props || {});
+  }
+}
+
+// ── COOKIE CONSENT ────────────────────────────────────────────
+(function initCookieConsent() {
+  var consent = localStorage.getItem('luxstay_cookie_consent');
+  if (consent === null) {
+    setTimeout(function() {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }, 1200);
+    if (window.posthog) posthog.opt_out_capturing();
+  } else if (consent === 'true') {
+    if (window.posthog) posthog.opt_in_capturing();
+  } else {
+    if (window.posthog) posthog.opt_out_capturing();
+  }
+})();
+
+function cookieChoice(accepted) {
+  localStorage.setItem('luxstay_cookie_consent', accepted ? 'true' : 'false');
+  document.getElementById('cookie-banner').style.display = 'none';
+  if (accepted) {
+    if (window.posthog) posthog.opt_in_capturing();
+    track('cookie_consent_accepted');
+  } else {
+    if (window.posthog) posthog.opt_out_capturing();
+  }
+}
+
+// ── PRIVACY MODAL ─────────────────────────────────────────────
+function openPrivacy()  { document.getElementById('privacy-overlay').classList.add('open'); }
+function closePrivacy() { document.getElementById('privacy-overlay').classList.remove('open'); }
+function closePrivacyOutside(e) { if (e.target.id === 'privacy-overlay') closePrivacy(); }
+
+// ── ANALYTICS INSTRUMENTATION ─────────────────────────────────
+function doSearch() {
+  track('hotel_search', {
+    city: document.getElementById('city-select').value,
+    checkin: document.getElementById('checkin').value,
+    checkout: document.getElementById('checkout').value,
+    guests: document.getElementById('guests').value
+  });
+  _origDoSearch();
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+updateMemberUI();
+renderHotels('Palm Jumeirah', defaultIn, defaultOut);
+track('page_view', { page: 'home', site: 'Dubai Ultra' });
+</script>
+
+</body>
+</html>

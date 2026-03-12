@@ -1,0 +1,98 @@
+{
+  "META_TITLE": "LuxStay — Member-Only Luxury Hotel Rates",
+  "META_DESCRIPTION": "5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing.",
+  "SCHEMA_NAME": "LuxStay",
+  "SCHEMA_URL": "https://luxstay.netlify.app",
+  "SCHEMA_DESCRIPTION": "Member-only luxury hotel rates. 5-star hotels at below-retail prices, gated behind a free membership.",
+  "COLOR_PRIMARY": "#1a2744",
+  "COLOR_ACCENT": "#c9a84c",
+  "COLOR_ACCENT_LT": "#f5e9c8",
+  "BRAND_NAME": "LuxStay",
+  "HERO_EYEBROW": "5-Star Hotels · Members Save 10–30%",
+  "HERO_H1": "Luxury hotel rates you won't find on Booking.com",
+  "HERO_SUB": "Member-only pricing on 5-star hotels in London, Dubai and Bangkok. No minimum stay. Rates updated live.",
+  "FOOTER_TAGLINE": "Member-only luxury hotel rates",
+  "CONTACT_EMAIL": "jackthughes99@gmail.com",
+  "GOOGLE_CLIENT_ID": "57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com",
+  "LITEAPI_KEY": "prod_31e2c9c7-1465-451b-9e81-34f00279a235",
+  "MARKUP": "0.15",
+  "MIN_SAVING": "0.08",
+  "DEFAULT_CITY": "London",
+  "NETLIFY_FORM_NAME": "luxstay-members",
+  "MODAL_HEADLINE": "Join LuxStay — it's free",
+  "MODAL_SUB": "Unlock member-only hotel rates 10–30% below Booking.com. Takes 10 seconds.",
+  "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. Refresh prices to see your savings vs Booking.com.",
+  "cities": [
+    { "value": "London",   "label": "London, UK" },
+    { "value": "Dubai",    "label": "Dubai, UAE" },
+    { "value": "Bangkok",  "label": "Bangkok, Thailand" }
+  ],
+  "trust_items": [
+    "Live rates from LiteAPI",
+    "No minimum stay",
+    "Members save £20–£90/night on average",
+    "5-star only, hand-verified"
+  ],
+  "editorial": {
+    "title": "About LuxStay member pricing",
+    "paragraphs": [
+      "Hotels release a portion of their unsold inventory at <strong>net rates</strong> — below their public retail price — through Closed User Group (CUG) channels. These rates are legally restricted: they cannot be shown on public pages. They are only available to verified members of gated platforms.",
+      "LuxStay operates as a CUG platform. When you join, you gain access to net rates on 5-star hotels that are <strong>10–30% below what Booking.com, Expedia, and Hotels.com show publicly</strong>. The same hotel, same room, same dates — just a better price because you're accessing it through a member channel.",
+      "Last-minute availability is highest from <strong>Wednesday onwards</strong> as hotels release unsold rooms for the upcoming weekend. This is when the deepest discounts appear."
+    ]
+  },
+  "faq_items": [
+    {
+      "q": "How much do members actually save?",
+      "a": "Members save between 10% and 30% compared to Booking.com public prices on the same hotels and dates. On a £300/night room that's £30–£90 back in your pocket. Savings vary by hotel, date, and availability — the best deals appear last-minute (Wednesday–Thursday for the weekend)."
+    },
+    {
+      "q": "Why can't I see the member price without joining?",
+      "a": "Hotel rate parity rules require that below-retail prices are only shown to verified members of closed platforms. Displaying them publicly would breach the hotel's distribution agreement. Joining LuxStay (free, takes 30 seconds) makes you a verified member and unlocks the below-retail rates."
+    },
+    {
+      "q": "Is membership free? Are there any hidden fees?",
+      "a": "Yes, membership is completely free. There are no subscription fees, no booking fees added on top of the rate, and no minimum spend. You pay the member rate for the room — that's it."
+    },
+    {
+      "q": "Which cities are available?",
+      "a": "London, Dubai and Bangkok are live now, with all three showing strong member savings. More cities are being added — if there's a destination you'd like to see, let us know when you join."
+    },
+    {
+      "q": "Is there a minimum stay?",
+      "a": "No. All hotels on LuxStay accept single-night bookings, including Friday-only or Saturday-only check-ins. This is specifically designed for last-minute weekend travellers who want flexibility."
+    }
+  ],
+  "modal_perks": [
+    { "icon": "🔓", "text": "Instant access to below-retail rates" },
+    { "icon": "💰", "text": "Save £20–£90 per night on 5-star hotels" },
+    { "icon": "🚫", "text": "No subscription, no booking fees" },
+    { "icon": "🌍", "text": "London, Dubai & Bangkok — more coming" }
+  ],
+  "hotels": {
+    "London": [
+      { "id": "lp19e0b", "name": "Royal Lancaster London",    "emoji": "🏰", "area": "Hyde Park, W2",          "dist": "5 min Paddington",       "desc": "416-room 5★ overlooking Hyde Park. Rooftop bar, two restaurants.",                       "tags": ["Hyde Park views","Rooftop bar","Couples"],    "badge": "Best value" },
+      { "id": "lp6f715", "name": "Shangri-La The Shard",      "emoji": "🌆", "area": "London Bridge, SE1",     "dist": "2 min London Bridge",    "desc": "Floors 34–52 of The Shard. Panoramic city views. Infinity pool, CHI Spa.",              "tags": ["Panoramic views","Pool","Spa"],               "badge": null },
+      { "id": "lp73eb3", "name": "Sea Containers London",     "emoji": "🌊", "area": "South Bank, SE1",        "dist": "Thames-facing",          "desc": "Design-led 5★ on the South Bank. Thames views, Lyaness rooftop bar.",                  "tags": ["Thames views","Rooftop bar","Design hotel"],  "badge": null },
+      { "id": "lp19e07", "name": "Royal Garden Hotel",        "emoji": "🌿", "area": "Kensington, W8",         "dist": "1 min Kensington Palace","desc": "396-room 5★ overlooking Kensington Gardens. Spa, two restaurants.",                    "tags": ["Kensington Gardens","Spa","Family"],          "badge": null },
+      { "id": "lp2a32f", "name": "The Savoy",                 "emoji": "✨", "area": "Strand, WC2",            "dist": "Covent Garden",          "desc": "Iconic 5★ on the Strand. River Suites, Thames Foyer afternoon tea, Kaspar's.",          "tags": ["Iconic","River views","Historic"],            "badge": null },
+      { "id": "lp20554", "name": "Hyatt Regency Churchill",   "emoji": "🎩", "area": "Marylebone, W1",         "dist": "2 min Baker St",         "desc": "5★ in the heart of the West End. 446 rooms, Montagu Kitchen & Bar.",                   "tags": ["West End","Business","Classic"],              "badge": null }
+    ],
+    "Dubai": [
+      { "id": "lp6557454e", "name": "Hilton Dubai Palm Jumeirah","emoji": "🌴", "area": "Palm Jumeirah",       "dist": "Private beach",          "desc": "5★ on the Palm with private beach access. Multiple pools and restaurants.",             "tags": ["Private beach","Pool","Palm Jumeirah"],       "badge": "Best value" },
+      { "id": "lp6ce87",    "name": "Sofitel Dubai Downtown",   "emoji": "🏙️", "area": "Downtown Dubai",      "dist": "5 min Burj Khalifa",     "desc": "French-inspired luxury tower in Downtown. Rooftop pool, spa, city views.",             "tags": ["Burj views","Pool","Spa"],                    "badge": null },
+      { "id": "lp32a09",    "name": "The Ritz-Carlton Dubai",   "emoji": "💎", "area": "JBR Beach",           "dist": "Beachfront",             "desc": "Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.",                  "tags": ["Beachfront","Spa","Pool"],                    "badge": null },
+      { "id": "lp2a294",    "name": "Jumeirah Emirates Towers", "emoji": "🗼", "area": "Sheikh Zayed Rd",     "dist": "Business district",      "desc": "Twin-tower 5★ landmark. Dining, spa, direct mall access.",                              "tags": ["Iconic","Business","Spa"],                    "badge": null },
+      { "id": "lp374f5",    "name": "Bab Al Shams Desert Resort","emoji": "🌅","area": "Dubai Desert",         "dist": "45 min from city",       "desc": "Award-winning desert retreat. Traditional architecture, camel rides, infinity pool.",    "tags": ["Desert","Infinity pool","Unique"],            "badge": null },
+      { "id": "lp769d6",    "name": "InterContinental Dubai Marina","emoji": "⛵","area": "Dubai Marina",      "dist": "Marina Walk",            "desc": "5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.",                   "tags": ["Marina views","Pool","Rooftop"],              "badge": null }
+    ],
+    "Bangkok": [
+      { "id": "lp1c0bc",    "name": "Shangri-La Bangkok",       "emoji": "🛕", "area": "Riverside, Sathorn",  "dist": "Chao Phraya views",      "desc": "Legendary 5★ on the Chao Phraya. Two towers, tropical gardens, river views.",           "tags": ["River views","Pool","Gardens"],               "badge": "Best value" },
+      { "id": "lp35d80",    "name": "lebua at State Tower",     "emoji": "🌃", "area": "Silom, Bangkok",      "dist": "Sirocco Sky Bar",        "desc": "Iconic 5★ tower — home of the world's highest alfresco restaurant, Sirocco.",           "tags": ["Sky bar","Views","Iconic"],                   "badge": null },
+      { "id": "lp6557c001", "name": "Grand Hyatt Erawan Bangkok","emoji": "🌺","area": "Ratchaprasong",        "dist": "Erawan Shrine",          "desc": "Grand 5★ in the heart of Bangkok's luxury shopping district.",                          "tags": ["Central","Spa","Pool"],                       "badge": null },
+      { "id": "lp3964e",    "name": "Millennium Hilton Bangkok", "emoji": "🌙", "area": "Riverside, Charoennakorn","dist": "Chao Phraya ferry", "desc": "Sleek 5★ tower with panoramic river views and rooftop pool.",                           "tags": ["River views","Rooftop pool","Modern"],        "badge": null },
+      { "id": "lp96a62",    "name": "SKYVIEW Hotel Bangkok",    "emoji": "☁️", "area": "Sukhumvit",           "dist": "BTS connected",          "desc": "Contemporary 5★ with Bangkok skyline views. Infinity pool, sky bar.",                   "tags": ["Skyline views","Pool","Modern"],              "badge": null },
+      { "id": "lp6557c003", "name": "Carlton Hotel Sukhumvit",  "emoji": "🏨", "area": "Sukhumvit 16",        "dist": "BTS Asok 5 min",         "desc": "Modern 5★ in Sukhumvit. Rooftop pool, award-winning restaurant.",                       "tags": ["Sukhumvit","Pool","Rooftop"],                 "badge": null }
+    ]
+  }
+}

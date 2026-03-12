@@ -23,6 +23,19 @@ jobs:
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
+      - name: Generate SEO pages for all sites
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          for cfg in generator/configs/*.json; do
+            name=$(basename "$cfg" .json)
+            # Skip configs marked skip_deploy
+            skip=$(node -e "const c=require('./$cfg');process.stdout.write(String(!!c.skip_deploy))")
+            if [ "$skip" = "true" ]; then continue; fi
+            echo "Generating SEO pages for $name..."
+            node autoresearch/seo-pages.js --site "$name"
+          done
+
       - name: Generate & deploy all sites
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

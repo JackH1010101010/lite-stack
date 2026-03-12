@@ -151,6 +151,7 @@ const toml = `# Netlify config for ${configName} (monorepo)
 
 [build.environment]
   NODE_VERSION = "18"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
 
 [functions]
   directory = "netlify/functions"

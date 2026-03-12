@@ -1,0 +1,36 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    # Only run on automated monitoring issues
+    if: |
+      contains(github.event.issue.labels.*.name, 'weekly-digest') ||
+      contains(github.event.issue.labels.*.name, 'reconciliation') ||
+      contains(github.event.issue.labels.*.name, 'hotel-refresh') ||
+      contains(github.event.issue.labels.*.name, 'opportunity')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Triage issue
+        env:
+          ISSUE_NUMBER:    ${{ github.event.issue.number }}
+          ISSUE_TITLE:     ${{ github.event.issue.title }}
+          ISSUE_BODY:      ${{ github.event.issue.body }}
+          ISSUE_LABELS:    ${{ join(github.event.issue.labels.*.name, ',') }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN:        ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node autoresearch/triage.js

@@ -7,6 +7,8 @@ on:
     # Weekly rebuild every Sunday at 03:00 UTC — keeps SEO content fresh
     # and re-deploys with any new hotel inventory from LiteAPI
     - cron: '0 3 * * 0'
+    # Monthly jobs — hotel refresh + exploration loop (1st of each month at 04:00 UTC)
+    - cron: '0 4 1 * *'
 
 permissions:
   contents: read
@@ -47,16 +49,18 @@ jobs:
           LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
         run: node deploy-all.js
 
-      - name: Weekly funnel digest (schedule runs only)
-        if: github.event_name == 'schedule'
+      - name: Weekly funnel digest + GSC (Sundays only)
+        if: github.event.schedule == '0 3 * * 0'
         env:
           POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
           POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
           GH_TOKEN: ${{ github.token }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URLS: ${{ secrets.GSC_SITE_URLS }}
         run: node autoresearch/weekly-digest.js || echo "Digest failed (non-fatal)"
 
-      - name: Booking reconciliation (schedule runs only)
-        if: github.event_name == 'schedule'
+      - name: Booking reconciliation (Sundays only)
+        if: github.event.schedule == '0 3 * * 0'
         env:
           LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
           POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
@@ -64,3 +68,30 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPO: ${{ github.repository }}
         run: node autoresearch/reconcile.js --days=7 || echo "Reconcile found anomalies (issue created)"
+
+  # ── Monthly jobs (1st of each month at 04:00 UTC) ──────────
+  monthly:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 4 1 * *'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Hotel inventory refresh
+        env:
+          LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node autoresearch/hotel-refresh.js || echo "Hotel refresh failed (non-fatal)"
+
+      - name: Market exploration loop
+        env:
+          LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URLS: ${{ secrets.GSC_SITE_URLS }}
+        run: node autoresearch/explore.js || echo "Explore failed (non-fatal)"

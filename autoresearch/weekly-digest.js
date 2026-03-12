@@ -21,11 +21,20 @@
  *   POSTHOG_PERSONAL_KEY=phx_xxx POSTHOG_PROJECT_ID=12345 node autoresearch/weekly-digest.js
  */
 
+const crypto        = require('crypto');
 const POSTHOG_API   = 'https://us.posthog.com/api';
 const PERSONAL_KEY  = process.env.POSTHOG_PERSONAL_KEY;
 const PROJECT_ID    = process.env.POSTHOG_PROJECT_ID;
 const GH_TOKEN      = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
 const GH_REPO       = process.env.GITHUB_REPOSITORY || 'JackH1010101010/lite-stack';
+
+// ── GSC config ─────────────────────────────────────────────────
+// GOOGLE_SERVICE_ACCOUNT_JSON — full JSON key file content as GitHub secret
+// GSC_SITE_URLS — comma-separated list, e.g. "https://luxstay.netlify.app/,https://dubai-ultra.netlify.app/"
+const GSC_SA        = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
+  ? (() => { try { return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON); } catch { return null; } })()
+  : null;
+const GSC_SITES     = (process.env.GSC_SITE_URLS || '').split(',').map(s => s.trim()).filter(Boolean);
 
 // Funnel steps in order
 const FUNNEL = [
@@ -75,6 +84,50 @@ async function getTopPages(dateFrom, dateTo) {
       .slice(0, 10)
       .map(r => ({ url: r.breakdown_value, views: r.aggregated_value || 0 }));
   } catch { return []; }
+}
+
+// ── GSC helpers (no npm deps — pure Node crypto + fetch) ──────
+async function gscAccessToken() {
+  if (!GSC_SA) return null;
+  try {
+    const now = Math.floor(Date.now() / 1000);
+    const hdr = Buffer.from(JSON.stringify({ alg: 'RS256', typ: 'JWT' })).toString('base64url');
+    const pay = Buffer.from(JSON.stringify({
+      iss: GSC_SA.client_email, scope: 'https://www.googleapis.com/auth/webmasters.readonly',
+      aud: 'https://oauth2.googleapis.com/token', iat: now, exp: now + 3600,
+    })).toString('base64url');
+    const sign = crypto.createSign('RSA-SHA256');
+    sign.update(`${hdr}.${pay}`);
+    const jwt = `${hdr}.${pay}.${sign.sign(GSC_SA.private_key, 'base64url')}`;
+    const res = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
+    });
+    return (await res.json()).access_token || null;
+  } catch (e) { console.warn('GSC token error:', e.message); return null; }
+}
+
+async function getGscData(dateFrom, dateTo) {
+  if (!GSC_SA || !GSC_SITES.length) return null;
+  try {
+    const token = await gscAccessToken();
+    if (!token) return null;
+    const results = [];
+    for (const site of GSC_SITES) {
+      const url = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`;
+      // Top pages by clicks
+      const [pageRes, queryRes] = await Promise.all([
+        fetch(url, { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ startDate: dateFrom, endDate: dateTo, dimensions: ['page'], rowLimit: 10 }) }),
+        fetch(url, { method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ startDate: dateFrom, endDate: dateTo, dimensions: ['query'], rowLimit: 10 }) }),
+      ]);
+      const pages   = pageRes.ok  ? (await pageRes.json()).rows  || [] : [];
+      const queries = queryRes.ok ? (await queryRes.json()).rows || [] : [];
+      results.push({ site, pages, queries });
+    }
+    return results;
+  } catch (e) { console.warn('GSC fetch error:', e.message); return null; }
 }
 
 // ── GitHub helpers ─────────────────────────────────────────────
@@ -213,11 +266,12 @@ async function main() {
     console.error('   Get project ID: PostHog → Project Settings → Project ID\n');
   }
 
-  // Fetch all funnel metrics in parallel
-  const funnelCounts = await Promise.all(
-    FUNNEL.map(f => getEventCount(f.event, dateFrom, dateTo))
-  );
-  const topPages = await getTopPages(dateFrom, dateTo);
+  // Fetch all funnel metrics + GSC in parallel
+  const [funnelCounts, topPages, gscData] = await Promise.all([
+    Promise.all(FUNNEL.map(f => getEventCount(f.event, dateFrom, dateTo))),
+    getTopPages(dateFrom, dateTo),
+    getGscData(dateFrom, dateTo),
+  ]);
 
   // Build funnel table
   const funnelRows = FUNNEL.map((f, i) => {
@@ -232,6 +286,26 @@ async function main() {
   const topPagesTable = topPages.length
     ? topPages.slice(0, 8).map(p => `| ${(p.url || '').slice(-60).padEnd(62)} | ${String(p.views).padStart(6)} |`).join('\n')
     : '| (no data) | – |';
+
+  // Build GSC section
+  let gscSection = '';
+  if (gscData && gscData.length) {
+    const gscLines = gscData.map(({ site, pages, queries }) => {
+      const pageRows = pages.slice(0, 8).map(r =>
+        `| ${(r.keys[0] || '').replace(/^https?:\/\/[^/]+/, '').slice(0, 50).padEnd(52)} | ${String(Math.round(r.clicks)).padStart(6)} | ${String(Math.round(r.impressions)).padStart(11)} | ${(r.position || 0).toFixed(1).padStart(8)} |`
+      ).join('\n');
+      const queryRows = queries.slice(0, 8).map(r =>
+        `| ${(r.keys[0] || '').slice(0, 40).padEnd(42)} | ${String(Math.round(r.clicks)).padStart(6)} | ${(r.position || 0).toFixed(1).padStart(8)} |`
+      ).join('\n');
+      const siteName = site.replace(/^https?:\/\//, '').replace(/\/$/, '');
+      return `#### ${siteName}\n\n**Top pages**\n\n| Page | Clicks | Impressions | Avg Pos |\n|------|--------|-------------|----------|\n${pageRows || '| (no data) | – | – | – |'}\n\n**Top queries**\n\n| Query | Clicks | Avg Pos |\n|-------|--------|----------|\n${queryRows || '| (no data) | – | – |'}`;
+    }).join('\n\n');
+    gscSection = `\n\n### Google Search Console\n\n${gscLines}`;
+  } else if (GSC_SA) {
+    gscSection = '\n\n### Google Search Console\n\n_No GSC data returned — check site URL format and service account permissions._';
+  } else {
+    gscSection = '\n\n### Google Search Console\n\n_Not configured — add `GOOGLE_SERVICE_ACCOUNT_JSON` and `GSC_SITE_URLS` secrets to enable._';
+  }
 
   const issueBody = `## Lite-Stack Weekly Digest — ${dateFrom} to ${dateTo}
 
@@ -254,6 +328,8 @@ ${observations.map(o => `- ${o}`).join('\n')}
 ### Suggested Experiments
 
 ${suggestions.length ? suggestions.map(s => `- [ ] ${s}`).join('\n') : '- ✅ No urgent suggestions this week'}
+
+${gscSection}
 
 ---
 _Generated by autoresearch/weekly-digest.js · ${new Date().toISOString()}_

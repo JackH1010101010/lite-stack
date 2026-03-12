@@ -27,6 +27,36 @@
     { "value": "Downtown Dubai", "label": "Downtown Dubai" },
     { "value": "Dubai Marina",   "label": "Dubai Marina & JBR" }
   ],
+  "seo_regions": [
+    {
+      "slug":    "dubai-luxury-hotels-india",
+      "name":    "Indian Travellers to Dubai",
+      "keyword": "Dubai ultra-luxury hotels India member rates Burj Al Arab",
+      "city":    "Downtown Dubai",
+      "angle":   "India is Dubai's largest source market — and Indian HNW travellers are booking ultra-luxury properties at a record pace. Dubai Ultra members from Delhi, Mumbai and Bangalore access Burj Al Arab, Atlantis The Royal and more at 10–30% below any public booking platform."
+    },
+    {
+      "slug":    "dubai-ultra-luxury-uk-travellers",
+      "name":    "UK Travellers to Dubai",
+      "keyword": "UK Dubai ultra-luxury hotels member rates Manchester Birmingham",
+      "city":    "Palm Jumeirah",
+      "angle":   "British travellers are Dubai's second-largest source market. Whether flying from Heathrow, Manchester or Birmingham, Dubai Ultra members access the city's finest hotels — Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — at prices 10–30% below what any public site shows."
+    },
+    {
+      "slug":    "dubai-ultra-luxury-gcc-residents",
+      "name":    "GCC Residents — Dubai Weekend Escape",
+      "keyword": "Dubai ultra-luxury hotels UAE Saudi Kuwait residents member rates",
+      "city":    "Palm Jumeirah",
+      "angle":   "For UAE, Saudi and Kuwait residents, Dubai is the ultimate ultra-luxury weekend destination. Dubai Ultra member rates give GCC travellers access to the Palm Jumeirah's finest properties at below-retail pricing — a significant advantage when booking the suites and penthouses that matter."
+    },
+    {
+      "slug":    "dubai-ultra-luxury-australia",
+      "name":    "Australian Travellers to Dubai",
+      "keyword": "Dubai ultra-luxury hotels Australia winter escape member rates",
+      "city":    "Downtown Dubai",
+      "angle":   "Australians increasingly choose Dubai as their Northern Hemisphere luxury escape. Dubai Ultra members from Sydney and Melbourne unlock ultra-luxury hotel rates 10–30% below Booking.com, Expedia and Luxury Escapes — with the same five-star properties, just at member pricing."
+    }
+  ],
   "trust_items": [
     "Live rates from hotel API",
     "No minimum stay",

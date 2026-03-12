@@ -1,0 +1,107 @@
+name: Daily Health Check
+
+on:
+  schedule:
+    # Runs every day at 08:00 UTC
+    - cron: '0 8 * * *'
+  # Also allow manual runs from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ github.token }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Run health check
+        id: health
+        # Capture output (JSON report) and exit code separately
+        # Continue-on-error so we can create an issue even when check fails
+        continue-on-error: true
+        run: |
+          node autoresearch/health-check.js > /tmp/health-report.json 2>/tmp/health-log.txt
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+          cat /tmp/health-log.txt
+
+      - name: Print health report
+        run: cat /tmp/health-report.json || echo "(no report generated)"
+
+      - name: Open GitHub issue on failure
+        if: steps.health.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Build a readable issue body from the JSON report
+          TIMESTAMP=$(node -e "const r=require('/tmp/health-report.json');console.log(r.timestamp)" 2>/dev/null || echo "unknown")
+          FAILURES=$(node -e "
+            const r=require('/tmp/health-report.json');
+            console.log(r.failures.map(f=>'- ' + f).join('\n') || '(none)');
+          " 2>/dev/null || cat /tmp/health-report.json)
+          WARNINGS=$(node -e "
+            const r=require('/tmp/health-report.json');
+            console.log(r.warnings.map(w=>'- ' + w).join('\n') || '(none)');
+          " 2>/dev/null || echo "(none)")
+
+          # Check if there's already an open health-check issue to avoid duplicates
+          EXISTING=$(gh issue list --label "health-check" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing issue #$EXISTING"
+            gh issue comment "$EXISTING" --body "## Health check failed again — $TIMESTAMP
+
+**Failures:**
+$FAILURES
+
+**Warnings:**
+$WARNINGS
+
+[View workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          else
+            echo "Creating new health-check issue"
+            gh issue create \
+              --title "🚨 Site health check failed — $TIMESTAMP" \
+              --label "health-check,bug" \
+              --body "## Lite-Stack health check failure
+
+**Time:** $TIMESTAMP
+**Run:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+## Failures
+$FAILURES
+
+## Warnings
+$WARNINGS
+
+## What to do
+1. Click the workflow run link above to see full logs
+2. For site outages: check Netlify dashboard for deploy errors
+3. For LiteAPI failures: check https://liteapi.travel status page
+4. For PostHog issues: check https://app.posthog.com
+
+_This issue was opened automatically by the daily health check. Close it once resolved._" \
+              || echo "Could not create issue (label may not exist — will still show in logs)"
+          fi
+
+      - name: Close health-check issue if now healthy
+        if: steps.health.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --label "health-check" --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            gh issue close "$EXISTING" --comment "✅ Health check passed — all systems healthy. Closing automatically."
+            echo "Closed issue #$EXISTING"
+          else
+            echo "All healthy, no open health-check issues to close"
+          fi

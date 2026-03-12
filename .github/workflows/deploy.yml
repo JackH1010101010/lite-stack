@@ -3,6 +3,10 @@ name: Generate & Deploy Sites
 on:
   push:
     branches: [main]
+  schedule:
+    # Weekly rebuild every Sunday at 03:00 UTC — keeps SEO content fresh
+    # and re-deploys with any new hotel inventory from LiteAPI
+    - cron: '0 3 * * 0'
 
 permissions:
   contents: read

@@ -27,6 +27,36 @@
     { "value": "South Male Atoll",  "label": "South Malé Atoll" },
     { "value": "Baa Atoll",         "label": "Baa Atoll (UNESCO)" }
   ],
+  "seo_regions": [
+    {
+      "slug":    "maldives-honeymoon-resorts-uk",
+      "name":    "UK Honeymoon & Couples",
+      "keyword": "Maldives honeymoon luxury resorts UK member rates",
+      "city":    "North Male Atoll",
+      "angle":   "The Maldives is the world's top honeymoon destination, and UK couples represent one of the largest source markets. Maldives Escape members access overwater villa rates 10–25% below Booking.com — same resorts, dramatically better price."
+    },
+    {
+      "slug":    "maldives-luxury-resorts-gcc",
+      "name":    "GCC & Middle East Travellers",
+      "keyword": "Maldives luxury resorts UAE Saudi Gulf member rates",
+      "city":    "Baa Atoll",
+      "angle":   "GCC residents choose the Maldives for a private, ultra-luxury escape within the region. Maldives Escape members from the UAE, Saudi Arabia and Kuwait unlock below-retail resort rates — making the world's most exclusive overwater villas genuinely accessible."
+    },
+    {
+      "slug":    "maldives-luxury-resorts-usa",
+      "name":    "US Travellers to the Maldives",
+      "keyword": "Maldives luxury resorts USA member rates overwater bungalow",
+      "city":    "South Male Atoll",
+      "angle":   "American travellers are increasingly choosing the Maldives over the Caribbean for ultra-luxury escapes. Maldives Escape member rates — routed conveniently via Doha or Dubai — deliver overwater villa pricing 10–25% below any US-facing booking platform."
+    },
+    {
+      "slug":    "maldives-luxus-resorts-deutschland",
+      "name":    "German & European Travellers",
+      "keyword": "Maldives Luxus Resorts Europa Mitglied Preise",
+      "city":    "Baa Atoll",
+      "angle":   "German and European travellers are among the most consistent high-spending visitors to the Maldives. Maldives Escape member rates give European guests access to the finest overwater resorts at prices 10–25% below Booking.com and Expedia."
+    }
+  ],
   "trust_items": [
     "Live rates from resort API",
     "No minimum stay",

@@ -29,6 +29,36 @@
     { "value": "Dubai",    "label": "Dubai, UAE" },
     { "value": "Bangkok",  "label": "Bangkok, Thailand" }
   ],
+  "seo_regions": [
+    {
+      "slug":    "heathrow-luxury-hotels",
+      "name":    "Heathrow Airport",
+      "keyword": "luxury hotels near Heathrow member rates",
+      "city":    "London",
+      "angle":   "Travelling through Heathrow Terminal 5? LuxStay members skip the rack rate and book the same London luxury hotels at 10–30% below Booking.com — before or after their flight."
+    },
+    {
+      "slug":    "manchester-london-luxury-hotels",
+      "name":    "Manchester & North of England",
+      "keyword": "Manchester residents London luxury hotels member rates",
+      "city":    "London",
+      "angle":   "Manchester, Leeds and Birmingham residents travelling to London consistently find better rates through LuxStay's member channel — the same 5-star hotels at prices the public booking platforms simply don't show."
+    },
+    {
+      "slug":    "dubai-luxury-hotels-from-uk",
+      "name":    "UK Travellers to Dubai",
+      "keyword": "UK travellers Dubai luxury hotels member rates",
+      "city":    "Dubai",
+      "angle":   "UK travellers heading to Dubai find LuxStay member rates cut 10–30% off the cost of 5-star hotels in Downtown Dubai and the Marina — without changing their itinerary at all."
+    },
+    {
+      "slug":    "gcc-visitors-london-luxury-hotels",
+      "name":    "GCC Visitors to London",
+      "keyword": "Abu Dhabi Riyadh visitors London luxury hotels member rates",
+      "city":    "London",
+      "angle":   "Visitors from the UAE, Saudi Arabia and the wider Gulf region know London's luxury hotel market well. LuxStay member rates give GCC travellers access to the same five-star London properties at materially lower prices than any public platform."
+    }
+  ],
   "trust_items": [
     "Live rates from LiteAPI",
     "No minimum stay",

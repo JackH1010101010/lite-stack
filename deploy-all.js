@@ -101,6 +101,7 @@ async function main() {
 
   for (const name of configs) {
     console.log(`\n── ${name} ──────────────────────────`);
+    const cfg = JSON.parse(fs.readFileSync(path.join(CONFIGS_DIR, `${name}.json`), 'utf8'));
 
     // 1. Generate
     console.log(`  Generating...`);
@@ -120,7 +121,19 @@ async function main() {
     // 3. Get or create Netlify site
     const site = await getOrCreateSite(name);
 
-    // 4. Deploy (Netlify CLI — no build step needed, files already generated)
+    // 4. Set LITEAPI_KEY as server-side env var (never in HTML)
+    if (cfg.LITEAPI_KEY) {
+      try {
+        await setEnvVar(site.id, 'LITEAPI_KEY', cfg.LITEAPI_KEY);
+        console.log(`  ✓ LITEAPI_KEY set as env var on ${name}`);
+      } catch (e) {
+        console.warn(`  ⚠  Could not set LITEAPI_KEY env var: ${e.message}`);
+      }
+    } else {
+      console.warn(`  ⚠  No LITEAPI_KEY in config for ${name} — function will return 500`);
+    }
+
+    // 5. Deploy (Netlify CLI — no build step needed, files already generated)
     console.log(`  Deploying to Netlify...`);
     execSync(
       `netlify deploy --dir=sites/${name} --prod --site=${site.id} --auth=${AUTH_TOKEN}`,

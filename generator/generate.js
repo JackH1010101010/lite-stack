@@ -126,6 +126,21 @@ const outDir = path.join(__dirname, '..', 'sites', configName);
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 
+// ── Copy serverless functions ─────────────────────────────────
+// The functions/ dir contains the LiteAPI proxy — must be deployed with each site
+const functionsSource = path.join(__dirname, 'functions');
+const functionsDest   = path.join(outDir, 'netlify', 'functions');
+if (fs.existsSync(functionsSource)) {
+  fs.mkdirSync(functionsDest, { recursive: true });
+  for (const file of fs.readdirSync(functionsSource)) {
+    fs.copyFileSync(
+      path.join(functionsSource, file),
+      path.join(functionsDest, file)
+    );
+  }
+  console.log(`✓  Copied ${fs.readdirSync(functionsSource).length} function(s) to netlify/functions/`);
+}
+
 // netlify.toml — monorepo build: generate from config then inject PostHog key
 const envVar = cfg.POSTHOG_ENV_VAR || 'POSTHOG_PROJECT_KEY';
 const toml = `# Netlify config for ${configName} (monorepo)
@@ -136,6 +151,9 @@ const toml = `# Netlify config for ${configName} (monorepo)
 
 [build.environment]
   NODE_VERSION = "18"
+
+[functions]
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/*"

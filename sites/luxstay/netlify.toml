@@ -1,9 +1,14 @@
+# Netlify config for luxstay (monorepo)
+# Netlify project settings: base dir = repo root, publish = sites/luxstay
 [build]
-  publish = "."
-  command = "sed -i \"s/YOUR_POSTHOG_KEY/POSTHOG_PROJECT_KEY/g\" index.html"
+  publish = "sites/luxstay"
+  command = "node generator/generate.js luxstay && sed -i \"s/YOUR_POSTHOG_KEY/${POSTHOG_PROJECT_KEY}/g\" sites/luxstay/index.html"
 
 [build.environment]
   NODE_VERSION = "18"
+
+[functions]
+  directory = "netlify/functions"
 
 [[headers]]
   for = "/*"

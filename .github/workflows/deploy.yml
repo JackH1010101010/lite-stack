@@ -53,3 +53,13 @@ jobs:
           POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
           GH_TOKEN: ${{ github.token }}
         run: node autoresearch/weekly-digest.js || echo "Digest failed (non-fatal)"
+
+      - name: Booking reconciliation (schedule runs only)
+        if: github.event_name == 'schedule'
+        env:
+          LITEAPI_KEY: ${{ secrets.LITEAPI_KEY }}
+          POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+        run: node autoresearch/reconcile.js --days=7 || echo "Reconcile found anomalies (issue created)"

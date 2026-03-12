@@ -124,23 +124,89 @@ Plain HTML <p> tags only — no headings, no markdown.`
 <p>All rates on ${brand} are live and sourced directly from the hotel inventory API. You're seeing real prices, in real time, updated as availability changes. The closer to check-in, the deeper the typical member discount.</p>`;
 }
 
-// ── HTML page builder (shared for city + region pages) ────────
+// ── FAQ schema builder ─────────────────────────────────────────
+function buildFaqSchema(faqs) {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  });
+}
+
+// ── BreadcrumbList schema ──────────────────────────────────────
+function buildBreadcrumbSchema(siteUrl, brand, label) {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl + '/' },
+      { '@type': 'ListItem', position: 2, name: label }
+    ]
+  });
+}
+
+// ── HTML page builder (shared for city + region + amenity pages)
 function buildPageHtml(cfg, opts, hotels, siteUrl) {
   const { slug, metaTitle, metaDesc, h1, heroSub, editorial, ctaCity } = opts;
-  const primary   = cfg.COLOR_PRIMARY;
-  const accent    = cfg.COLOR_ACCENT;
-  const brand     = cfg.BRAND_NAME;
-  const schemaJSON = buildHotelSchema(hotels, siteUrl, slug);
+  const primary    = cfg.COLOR_PRIMARY;
+  const accent     = cfg.COLOR_ACCENT;
+  const accentLt   = cfg.COLOR_ACCENT_LT || '#f5e9c8';
+  const brand      = cfg.BRAND_NAME;
+  const year       = new Date().getFullYear();
+  const breadcrumbLabel = opts.breadcrumb || h1;
 
-  const hotelCards = hotels.map(h => `
-    <div style="background:#fff;border:1px solid #e5e3de;border-radius:8px;padding:16px 20px;margin-bottom:12px">
-      <div style="font-size:17px;font-weight:700;color:${primary};margin-bottom:4px">${h.emoji || '🏨'} ${h.name}</div>
-      <div style="font-size:13px;color:#6b6b6b;margin-bottom:6px">📍 ${h.area} · ${h.dist}</div>
-      <div style="font-size:13px;color:#6b6b6b;line-height:1.5;margin-bottom:8px">${h.desc}</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">${(h.tags||[]).map(t => `<span style="font-size:11px;padding:3px 8px;border-radius:3px;background:#f7f7f5;border:1px solid #e5e3de;color:#6b6b6b">${t}</span>`).join('')}</div>
+  const schemaJSON      = buildHotelSchema(hotels, siteUrl, slug);
+  const breadcrumbJSON  = buildBreadcrumbSchema(siteUrl, brand, breadcrumbLabel);
+
+  // ── FAQ: standard set + city-specific ─────────────────────
+  const faqs = [
+    { q: `Are these ${ctaCity} hotel rates really cheaper than Booking.com?`,
+      a: `Yes. ${brand} is a Closed User Group (CUG) platform. Hotels release unsold inventory to CUG channels at net rates — typically 10–30% below the public retail prices shown on Booking.com, Expedia, and Hotels.com. These rates are legally restricted to verified members and cannot be shown on public pages.` },
+    { q: `How do I access member rates?`,
+      a: `Membership is free and takes under 10 seconds. Click "Join free", sign in with Google, and your member rates unlock immediately — no credit card, no subscription, no minimum stay.` },
+    { q: `Are the rates live?`,
+      a: `All rates are sourced in real time from the hotel inventory API. You see live availability and pricing, not cached or historical data. Rates update as rooms are booked or released.` },
+    { q: `Is there a minimum stay requirement?`,
+      a: `No minimum stay. Book one night or ten — member rates apply regardless of trip length.` },
+    { q: `When are the best member rates available?`,
+      a: `The deepest discounts typically appear from Wednesday onwards as hotels release unsold rooms ahead of the weekend. Last-minute travellers consistently see the largest savings, sometimes 25–35% below public prices.` }
+  ];
+  const faqSchema = buildFaqSchema(faqs);
+
+  const faqHtml = faqs.map((f, i) => `
+    <div class="faq-item reveal" style="--d:${i * 0.06}s">
+      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+        ${f.q}
+        <span class="faq-icon">＋</span>
+      </button>
+      <div class="faq-a" hidden>${f.a}</div>
     </div>`).join('');
 
-  const breadcrumbLabel = opts.breadcrumb || h1;
+  // ── Hotel cards ────────────────────────────────────────────
+  const hotelCards = hotels.map((h, i) => {
+    const tags = (h.tags || []).slice(0, 5).map(t =>
+      `<span class="tag">${t}</span>`).join('');
+    return `
+    <div class="hotel-card reveal" style="--d:${i * 0.07}s">
+      <div class="hotel-img-wrap">
+        <div class="hotel-img-bg" style="background:linear-gradient(135deg,${primary}cc,${primary}88)">
+          <span class="hotel-emoji">${h.emoji || '🏨'}</span>
+        </div>
+        <div class="save-badge">Save up to 30%</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">${h.name}</div>
+        <div class="hotel-loc">📍 ${h.area}${h.dist ? ' · ' + h.dist : ''}</div>
+        <div class="hotel-desc">${h.desc}</div>
+        <div class="hotel-tags">${tags}</div>
+        <a href="/?city=${encodeURIComponent(ctaCity)}" class="hotel-cta">See member rate →</a>
+      </div>
+    </div>`;
+  }).join('');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -150,61 +216,314 @@ function buildPageHtml(cfg, opts, hotels, siteUrl) {
   <title>${metaTitle}</title>
   <meta name="description" content="${metaDesc}" />
   <link rel="canonical" href="${siteUrl}/${slug}.html" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="${metaTitle}" />
+  <meta property="og:description" content="${metaDesc}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="${siteUrl}/${slug}.html" />
   <script type="application/ld+json">${schemaJSON}</script>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f7f5;color:#1a1a1a;line-height:1.5}
-    nav{background:${primary};padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
-    .logo{font-size:20px;font-weight:700;color:${accent};letter-spacing:.04em;text-decoration:none}
-    .main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
-    h1{font-size:clamp(22px,4vw,34px);font-weight:700;color:${primary};line-height:1.2;margin-bottom:12px}
-    .hero-sub{font-size:16px;color:#6b6b6b;margin-bottom:32px;line-height:1.6}
-    h2{font-size:20px;font-weight:700;color:${primary};margin:32px 0 16px}
-    .editorial{background:#fff;border:1px solid #e5e3de;border-radius:6px;padding:24px;margin-bottom:32px}
-    .editorial p{font-size:14px;color:#6b6b6b;line-height:1.7;margin-bottom:12px}
-    .editorial p:last-child{margin-bottom:0}
-    .cta-box{background:${primary};border-radius:8px;padding:32px;text-align:center;margin:32px 0}
-    .cta-box h3{color:#fff;font-size:20px;font-weight:700;margin-bottom:8px}
-    .cta-box p{color:rgba(255,255,255,.7);font-size:14px;margin-bottom:20px}
-    .btn-cta{background:${accent};color:${primary};font-size:15px;font-weight:700;padding:13px 28px;border-radius:6px;text-decoration:none;display:inline-block}
-    footer{background:${primary};color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px}
-    .breadcrumb{font-size:13px;color:#6b6b6b;margin-bottom:20px}
-    .breadcrumb a{color:${primary};text-decoration:none}
-  </style>
+  <script type="application/ld+json">${faqSchema}</script>
+  <script type="application/ld+json">${breadcrumbJSON}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:${primary};--gold:${accent};--gold-lt:${accentLt};
+  --grey-bg:#f7f7f5;--grey-mid:#e5e3de;--grey-text:#6b6b6b;
+  --black:#1a1a1a;--white:#fff;--green:#1a7a3c;--green-lt:#e8f5ee;
+  --radius:10px;--shadow:0 2px 16px rgba(0,0,0,.09);
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:var(--grey-bg);color:var(--black);line-height:1.55}
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav{background:var(--navy);padding:0 24px;height:58px;display:flex;
+  align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.logo{font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.04em;text-decoration:none}
+.nav-cta{background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;
+  padding:7px 16px;border-radius:5px;text-decoration:none;white-space:nowrap}
+.nav-back{color:rgba(255,255,255,.65);font-size:13px;text-decoration:none}
+.nav-back:hover{color:#fff}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero{background:var(--navy);padding:60px 24px 56px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,.12),transparent);
+  pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:14px;opacity:.9}
+.hero h1{font-size:clamp(24px,4.5vw,42px);font-weight:800;color:#fff;line-height:1.18;
+  max-width:680px;margin:0 auto 18px;letter-spacing:-.02em}
+.hero-sub{color:rgba(255,255,255,.62);font-size:16px;max-width:560px;margin:0 auto 36px;line-height:1.65}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--gold);color:var(--navy);font-size:15px;font-weight:700;
+  padding:14px 32px;border-radius:6px;text-decoration:none;
+  transition:transform .15s,box-shadow .15s;display:inline-block}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.4)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.75);font-size:14px;
+  padding:14px 24px;border-radius:6px;text-decoration:none;
+  border:1px solid rgba(255,255,255,.2);display:inline-block}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ── TRUST STRIP ─────────────────────────────────────────── */
+.trust-strip{background:#fff;border-bottom:1px solid var(--grey-mid);padding:18px 24px;
+  display:flex;gap:0;justify-content:center;overflow-x:auto}
+.ti{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--grey-text);
+  padding:0 20px;border-right:1px solid var(--grey-mid);white-space:nowrap}
+.ti:last-child{border-right:none}
+.ti-icon{font-size:16px}
+.ti strong{color:var(--black)}
+
+/* ── COMPARISON BAR ──────────────────────────────────────── */
+.compare-section{max-width:780px;margin:48px auto 0;padding:0 20px}
+.compare-title{font-size:19px;font-weight:700;color:var(--navy);text-align:center;margin-bottom:20px}
+.compare-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow)}
+.compare-table th{background:var(--navy);color:#fff;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.07em;padding:12px 16px;text-align:center}
+.compare-table th:first-child{text-align:left}
+.compare-table td{padding:13px 16px;border-bottom:1px solid var(--grey-mid);font-size:14px;text-align:center}
+.compare-table td:first-child{text-align:left;font-weight:600;color:var(--black)}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .hl{background:rgba(201,168,76,.08)}
+.check{color:var(--green);font-weight:700}
+.cross{color:#b91c1c}
+
+/* ── MAIN CONTENT ────────────────────────────────────────── */
+.main{max-width:900px;margin:0 auto;padding:48px 20px 80px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px}
+.section-title{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.section-sub{font-size:15px;color:var(--grey-text);margin-bottom:32px;line-height:1.6}
+
+/* editorial */
+.editorial-wrap{background:#fff;border-radius:var(--radius);border:1px solid var(--grey-mid);
+  padding:28px 32px;margin-bottom:40px;box-shadow:var(--shadow)}
+.editorial-wrap p{font-size:15px;color:#444;line-height:1.75;margin-bottom:14px}
+.editorial-wrap p:last-child{margin-bottom:0}
+
+/* hotel cards */
+.hotels-grid{display:grid;gap:16px;margin-bottom:48px}
+.hotel-card{background:#fff;border-radius:var(--radius);border:1px solid var(--grey-mid);
+  display:grid;grid-template-columns:160px 1fr;overflow:hidden;
+  box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s}
+.hotel-card:hover{box-shadow:0 6px 28px rgba(0,0,0,.13);transform:translateY(-2px)}
+.hotel-img-wrap{position:relative}
+.hotel-img-bg{width:100%;height:100%;min-height:150px;display:flex;align-items:center;
+  justify-content:center;font-size:44px}
+.save-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy);
+  font-size:10px;font-weight:700;padding:4px 8px;border-radius:3px;text-transform:uppercase;
+  letter-spacing:.06em}
+.hotel-body{padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.hotel-name{font-size:16px;font-weight:700;color:var(--navy);line-height:1.25}
+.hotel-loc{font-size:12px;color:var(--grey-text)}
+.hotel-desc{font-size:13px;color:#555;line-height:1.55;flex:1}
+.hotel-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.tag{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--grey-bg);
+  border:1px solid var(--grey-mid);color:var(--grey-text)}
+.hotel-cta{display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  background:var(--navy);color:#fff;font-size:12px;font-weight:700;
+  padding:8px 14px;border-radius:5px;text-decoration:none;align-self:flex-start;
+  transition:background .15s}
+.hotel-cta:hover{background:#253259}
+
+/* mid-page CTA band */
+.cta-band{background:var(--navy);border-radius:var(--radius);padding:36px 32px;
+  text-align:center;margin:48px 0;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% 120%,rgba(201,168,76,.15),transparent);
+  pointer-events:none}
+.cta-band h2{color:#fff;font-size:22px;font-weight:700;margin-bottom:8px}
+.cta-band p{color:rgba(255,255,255,.62);font-size:14px;margin-bottom:22px}
+
+/* FAQ */
+.faq-wrap{margin-bottom:48px}
+.faq-item{background:#fff;border:1px solid var(--grey-mid);border-radius:8px;
+  margin-bottom:8px;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:16px 20px;
+  font-size:15px;font-weight:600;color:var(--navy);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;line-height:1.4}
+.faq-q:hover{background:var(--grey-bg)}
+.faq-icon{font-size:18px;color:var(--gold);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{padding:0 20px 16px;font-size:14px;color:#555;line-height:1.7}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s var(--d,0s),transform .55s var(--d,0s)}
+.reveal.visible{opacity:1;transform:none}
+
+/* sticky bottom CTA (mobile) */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:var(--navy);
+  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 -4px 20px rgba(0,0,0,.25);z-index:150;transform:translateY(100%);
+  transition:transform .3s}
+.sticky-cta.show{transform:none}
+.sticky-cta-text{color:rgba(255,255,255,.75);font-size:13px}
+.sticky-cta-text strong{color:#fff;display:block;font-size:14px}
+
+/* breadcrumb */
+.breadcrumb{font-size:13px;color:var(--grey-text);margin-bottom:28px}
+.breadcrumb a{color:var(--navy);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb span{margin:0 6px;color:var(--grey-mid)}
+
+/* footer */
+footer{background:var(--navy);color:rgba(255,255,255,.45);text-align:center;
+  padding:32px 24px;font-size:13px;line-height:1.7}
+footer a{color:rgba(255,255,255,.55);text-decoration:none}
+footer a:hover{color:#fff}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+
+@media(max-width:600px){
+  .hero{padding:44px 20px 40px}
+  .ti{padding:0 14px;font-size:12px}
+  .hotel-card{grid-template-columns:1fr}
+  .hotel-img-bg{min-height:110px}
+  .cta-band{padding:28px 20px}
+  .main{padding:36px 16px 72px}
+  .editorial-wrap{padding:20px}
+  .compare-section{padding:0 16px}
+}
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="/" class="logo">${brand}</a>
-  <a href="/" style="color:rgba(255,255,255,.7);font-size:13px;text-decoration:none">← All destinations</a>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a href="/" class="nav-back">← Hotels</a>
+    <a href="/?city=${encodeURIComponent(ctaCity)}" class="nav-cta">See rates</a>
+  </div>
 </nav>
 
-<main class="main">
-
-  <p class="breadcrumb"><a href="/">Home</a> › ${breadcrumbLabel}</p>
-
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Member Rates · Closed User Group</div>
   <h1>${h1}</h1>
   <p class="hero-sub">${heroSub}</p>
+  <div class="hero-btns">
+    <a href="/?city=${encodeURIComponent(ctaCity)}" class="btn-primary">See live member rates →</a>
+    <a href="#hotels" class="btn-ghost">View ${hotels.length} hotels ↓</a>
+  </div>
+</header>
 
-  <div class="editorial">
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="ti"><span class="ti-icon">🔒</span><span>Free membership, instant access</span></div>
+  <div class="ti"><span class="ti-icon">💷</span><span><strong>10–30%</strong> below Booking.com</span></div>
+  <div class="ti"><span class="ti-icon">⚡</span><span>Live rates — no cached prices</span></div>
+  <div class="ti"><span class="ti-icon">📅</span><span>No minimum stay</span></div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-section reveal">
+  <div class="compare-title">How ${brand} compares</div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th class="hl">${brand} (Members)</th>
+        <th>Booking.com</th>
+        <th>Expedia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Net/CUG rates</td><td class="hl check">✓ Yes</td><td class="cross">✗ No</td><td class="cross">✗ No</td></tr>
+      <tr><td>Typical saving vs retail</td><td class="hl"><strong>10–30%</strong></td><td>0%</td><td>0–5%</td></tr>
+      <tr><td>Membership cost</td><td class="hl"><strong>Free</strong></td><td>Free</td><td>Free</td></tr>
+      <tr><td>Live inventory API</td><td class="hl check">✓ Yes</td><td class="check">✓ Yes</td><td class="check">✓ Yes</td></tr>
+      <tr><td>No minimum stay</td><td class="hl check">✓ Yes</td><td class="check">✓ Yes</td><td class="check">✓ Yes</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/?city=${encodeURIComponent(ctaCity)}">${ctaCity}</a><span>›</span>
+    ${breadcrumbLabel}
+  </nav>
+
+  <!-- Editorial -->
+  <div class="section-label">About this page</div>
+  <div class="editorial-wrap reveal">
     ${editorial}
   </div>
 
-  <h2>${hotels.length} hotels available on ${brand}</h2>
-  ${hotelCards}
+  <!-- Hotels -->
+  <div id="hotels">
+    <div class="section-label">Available properties</div>
+    <div class="section-title">${hotels.length} hotels on ${brand}</div>
+    <div class="section-sub">All properties below are bookable at member rates. Click any hotel to see live pricing.</div>
+    <div class="hotels-grid">
+      ${hotelCards}
+    </div>
+  </div>
 
-  <div class="cta-box">
-    <h3>Unlock member rates — it's free</h3>
-    <p>Join ${brand} in 10 seconds and see prices 10–30% below Booking.com.</p>
-    <a href="/?city=${encodeURIComponent(ctaCity)}" class="btn-cta">See member rates →</a>
+  <!-- Mid-page CTA -->
+  <div class="cta-band reveal">
+    <h2>Unlock member rates — it's free</h2>
+    <p>Join ${brand} in 10 seconds and see prices 10–30% below Booking.com. No credit card. No subscription.</p>
+    <a href="/?city=${encodeURIComponent(ctaCity)}" class="btn-primary">Join free and see rates →</a>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-wrap">
+    <div class="section-label">Frequently asked</div>
+    <div class="section-title">Common questions</div>
+    <div style="height:20px"></div>
+    ${faqHtml}
   </div>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
-  <p>© ${new Date().getFullYear()} ${brand} · ${cfg.FOOTER_TAGLINE}</p>
-  <p style="margin-top:6px;font-size:11px">Member prices only shown to verified members · Rates sourced live via hotel API</p>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/?city=${encodeURIComponent(ctaCity)}">Browse ${ctaCity} hotels</a>
+    <a href="/partners.html">Partner programme</a>
+  </div>
+  <p>© ${year} ${brand} · ${cfg.FOOTER_TAGLINE}</p>
+  <p style="margin-top:6px;font-size:11px;opacity:.6">Member prices visible to verified members only · Rates sourced live via hotel API · Not affiliated with Booking.com</p>
 </footer>
+
+<!-- STICKY BOTTOM CTA (appears after scroll) -->
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-text">
+    <strong>See ${ctaCity} member rates</strong>
+    Save 10–30% vs Booking.com
+  </div>
+  <a href="/?city=${encodeURIComponent(ctaCity)}" class="btn-primary" style="font-size:13px;padding:10px 20px">Join free →</a>
+</div>
+
+<script>
+// ── Scroll reveal ───────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Sticky CTA (show after 60% scroll depth) ───────────────
+const stickyCta = document.getElementById('sticky-cta');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  stickyCta.classList.toggle('show', scrolled > 0.3);
+}, { passive: true });
+
+// ── FAQ accordion ───────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const ans  = item.querySelector('.faq-a');
+  const open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  open ? ans.removeAttribute('hidden') : ans.setAttribute('hidden', '');
+}
+</script>
 
 </body>
 </html>`;

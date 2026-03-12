@@ -108,6 +108,11 @@ if (!cfg.PRIVACY_OPERATOR) cfg.PRIVACY_OPERATOR = cfg.BRAND_NAME || 'this site';
 // FOOTER_YEAR
 if (!cfg.FOOTER_YEAR) cfg.FOOTER_YEAR = new Date().getFullYear().toString();
 
+// GSC_VERIFICATION_META — renders the meta tag only if a token is set in config
+cfg.GSC_VERIFICATION_META = cfg.GSC_VERIFICATION
+  ? `<meta name="google-site-verification" content="${cfg.GSC_VERIFICATION}" />`
+  : '';
+
 // ── Replace all {{TOKEN}} placeholders ────────────────────────
 for (const [key, value] of Object.entries(cfg)) {
   if (typeof value === 'string') {

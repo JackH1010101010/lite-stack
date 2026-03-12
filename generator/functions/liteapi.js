@@ -21,6 +21,7 @@ const ALLOWED_ENDPOINTS = new Set([
   'hotels/prebook',
   'hotels/book',
   'hotels/cancel',
+  'data/hotel',   // hotel photos / details (GET)
 ]);
 
 exports.handler = async function (event) {

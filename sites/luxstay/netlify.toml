@@ -18,7 +18,12 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Serve static HTML pages and guides directly (Netlify checks for files
+# before applying redirects only when force=false, which is the default
+# for status 200 rewrites). Setting force = false explicitly ensures
+# existing files like /guides/*/index.html are served as-is.
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false

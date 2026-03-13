@@ -4,8 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LuxStay — Member-Only Luxury Hotel Rates</title>
-  <meta name="google-site-verification" content="w1CNob_6FpyZqs14nLJK6e7Dar14Uo4nfgC6PaRUzCM" />
+  <meta name="google-site-verification" content="VhXv54H1_KHd1v8J3vQU6Z-Ouz-rcG1J7Cm-7pVBjQQ" />
   <meta name="description" content="5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing." />
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LuxStay — Member-Only Luxury Hotel Rates" />
+  <meta property="og:description" content="5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing." />
+  <meta property="og:url" content="https://luxury.lux-stay-members.com" />
+  <meta property="og:image" content="https://luxury.lux-stay-members.com/og-image.jpg" />
+  <meta property="og:site_name" content="LuxStay" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LuxStay — Member-Only Luxury Hotel Rates" />
+  <meta name="twitter:description" content="5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing." />
+  <meta name="twitter:image" content="https://luxury.lux-stay-members.com/og-image.jpg" />
+
+  <!-- DNS Prefetch — resolve external domains early -->
+  <link rel="dns-prefetch" href="https://api.liteapi.travel" />
+  <link rel="dns-prefetch" href="https://us.i.posthog.com" />
+  <link rel="dns-prefetch" href="https://accounts.google.com" />
+  <link rel="dns-prefetch" href="https://photos.hotelbeds.com" />
 
   <!-- PostHog Analytics — key injected at build time via POSTHOG_PROJECT_KEY env var -->
   <script>
@@ -13,12 +34,28 @@
     posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
   </script>
 
+  <!-- EmailJS — booking confirmation emails -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Schema: WebSite -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"LuxStay","url":"https://luxstay.netlify.app","description":"Member-only luxury hotel rates. 5-star hotels at below-retail prices, gated behind a free membership.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://luxstay.netlify.app/?city={city}"},"query-input":"required name=city"}}
+  {"@context":"https://schema.org","@type":"WebSite","name":"LuxStay","url":"https://luxury.lux-stay-members.com","description":"Member-only luxury hotel rates. 5-star hotels at below-retail prices, gated behind a free membership.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://luxury.lux-stay-members.com/?city={city}"},"query-input":"required name=city"}}
+  </script>
+
+  <!-- Schema: Hotel ItemList + AggregateOffer — enables rich snippets + AI citation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "LuxStay — Luxury Hotels",
+    "description": "5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing.",
+    "url": "https://luxury.lux-stay-members.com",
+    "numberOfItems": "18",
+    "itemListElement": [{"@type":"ListItem","position":1,"item":{"@type":"Hotel","name":"Royal Lancaster London","identifier":"lp19e0b","description":"416-room 5★ overlooking Hyde Park. Rooftop bar, two restaurants.","address":{"@type":"PostalAddress","addressLocality":"Hyde Park, W2"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":2,"item":{"@type":"Hotel","name":"Shangri-La The Shard","identifier":"lp6f715","description":"Floors 34–52 of The Shard. Panoramic city views. Infinity pool, CHI Spa.","address":{"@type":"PostalAddress","addressLocality":"London Bridge, SE1"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":3,"item":{"@type":"Hotel","name":"Sea Containers London","identifier":"lp73eb3","description":"Design-led 5★ on the South Bank. Thames views, Lyaness rooftop bar.","address":{"@type":"PostalAddress","addressLocality":"South Bank, SE1"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":4,"item":{"@type":"Hotel","name":"Royal Garden Hotel","identifier":"lp19e07","description":"396-room 5★ overlooking Kensington Gardens. Spa, two restaurants.","address":{"@type":"PostalAddress","addressLocality":"Kensington, W8"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":5,"item":{"@type":"Hotel","name":"The Savoy","identifier":"lp2a32f","description":"Iconic 5★ on the Strand. River Suites, Thames Foyer afternoon tea, Kaspar's.","address":{"@type":"PostalAddress","addressLocality":"Strand, WC2"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":6,"item":{"@type":"Hotel","name":"Hyatt Regency Churchill","identifier":"lp20554","description":"5★ in the heart of the West End. 446 rooms, Montagu Kitchen & Bar.","address":{"@type":"PostalAddress","addressLocality":"Marylebone, W1"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":7,"item":{"@type":"Hotel","name":"Hilton Dubai Palm Jumeirah","identifier":"lp6557454e","description":"5★ on the Palm with private beach access. Multiple pools and restaurants.","address":{"@type":"PostalAddress","addressLocality":"Palm Jumeirah"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":8,"item":{"@type":"Hotel","name":"Sofitel Dubai Downtown","identifier":"lp6ce87","description":"French-inspired luxury tower in Downtown. Rooftop pool, spa, city views.","address":{"@type":"PostalAddress","addressLocality":"Downtown Dubai"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":9,"item":{"@type":"Hotel","name":"The Ritz-Carlton Dubai","identifier":"lp32a09","description":"Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.","address":{"@type":"PostalAddress","addressLocality":"JBR Beach"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":10,"item":{"@type":"Hotel","name":"Jumeirah Emirates Towers","identifier":"lp2a294","description":"Twin-tower 5★ landmark. Dining, spa, direct mall access.","address":{"@type":"PostalAddress","addressLocality":"Sheikh Zayed Rd"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":11,"item":{"@type":"Hotel","name":"Bab Al Shams Desert Resort","identifier":"lp374f5","description":"Award-winning desert retreat. Traditional architecture, camel rides, infinity pool.","address":{"@type":"PostalAddress","addressLocality":"Dubai Desert"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":12,"item":{"@type":"Hotel","name":"InterContinental Dubai Marina","identifier":"lp769d6","description":"5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.","address":{"@type":"PostalAddress","addressLocality":"Dubai Marina"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":13,"item":{"@type":"Hotel","name":"Shangri-La Bangkok","identifier":"lp1c0bc","description":"Legendary 5★ on the Chao Phraya. Two towers, tropical gardens, river views.","address":{"@type":"PostalAddress","addressLocality":"Riverside, Sathorn"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":14,"item":{"@type":"Hotel","name":"lebua at State Tower","identifier":"lp35d80","description":"Iconic 5★ tower — home of the world's highest alfresco restaurant, Sirocco.","address":{"@type":"PostalAddress","addressLocality":"Silom, Bangkok"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":15,"item":{"@type":"Hotel","name":"Grand Hyatt Erawan Bangkok","identifier":"lp6557c001","description":"Grand 5★ in the heart of Bangkok's luxury shopping district.","address":{"@type":"PostalAddress","addressLocality":"Ratchaprasong"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":16,"item":{"@type":"Hotel","name":"Millennium Hilton Bangkok","identifier":"lp3964e","description":"Sleek 5★ tower with panoramic river views and rooftop pool.","address":{"@type":"PostalAddress","addressLocality":"Riverside, Charoennakorn"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":17,"item":{"@type":"Hotel","name":"SKYVIEW Hotel Bangkok","identifier":"lp96a62","description":"Contemporary 5★ with Bangkok skyline views. Infinity pool, sky bar.","address":{"@type":"PostalAddress","addressLocality":"Sukhumvit"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":18,"item":{"@type":"Hotel","name":"Carlton Hotel Sukhumvit","identifier":"lp6557c003","description":"Modern 5★ in Sukhumvit. Rooftop pool, award-winning restaurant.","address":{"@type":"PostalAddress","addressLocality":"Sukhumvit 16"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}}]
+  }
   </script>
 
   <style>
@@ -87,7 +124,11 @@
     .hotel-grid{display:flex;flex-direction:column;gap:16px}
     .hotel-card{background:#fff;border-radius:8px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;border:1px solid var(--grey-mid);box-shadow:0 1px 4px rgba(0,0,0,.07);transition:box-shadow .15s}
     .hotel-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
-    .hotel-img{position:relative;background:linear-gradient(135deg,var(--navy),#2a3a5c);display:flex;align-items:center;justify-content:center;font-size:40px;min-height:160px}
+    .hotel-img{position:relative;background:linear-gradient(135deg,var(--navy),#2a3a5c);display:flex;align-items:center;justify-content:center;font-size:40px;min-height:160px;overflow:hidden}
+    .hotel-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+    .hotel-img img.loaded{opacity:1}
+    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none}
+    .hotel-card.unavailable{opacity:.45;order:99}
     .hotel-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
     .hotel-body{padding:16px 20px;display:flex;flex-direction:column;gap:8px}
     .hotel-name{font-size:17px;font-weight:700;color:var(--navy);line-height:1.25}
@@ -243,7 +284,7 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">5-Star Hotels · Members Save 10–30%</p>
-  <h1>Luxury hotel Exclusive member rates on luxury hotels</h1>
+  <h1>Luxury hotel rates you won't find on Booking.com</h1>
   <p class="hero-sub">Member-only pricing on 5-star hotels in London, Dubai and Bangkok. No minimum stay. Rates updated live.</p>
   <div class="search-bar">
     <div class="sf">
@@ -286,7 +327,7 @@
 
   <!-- TRUST -->
   <div class="trust-strip">
-    <div class="ti"><span>✓</span> Live rates from LiteAPI</div>
+    <div class="ti"><span>✓</span> Live rates, updated hourly</div>
     <div class="ti"><span>✓</span> No minimum stay</div>
     <div class="ti"><span>✓</span> Members save £20–£90/night on average</div>
     <div class="ti"><span>✓</span> 5-star only, hand-verified</div>
@@ -314,7 +355,7 @@
   <div class="editorial">
     <h2>About LuxStay member pricing</h2>
     <p>Hotels release a portion of their unsold inventory at <strong>net rates</strong> — below their public retail price — through Closed User Group (CUG) channels. These rates are legally restricted: they cannot be shown on public pages. They are only available to verified members of gated platforms.</p>
-    <p>LuxStay operates as a CUG platform. When you join, you gain access to net rates on 5-star hotels that are <strong>below the public retail price</strong>. The same hotel, same room, same dates — just a better price because you're accessing it through a member channel.</p>
+    <p>LuxStay operates as a CUG platform. When you join, you gain access to net rates on 5-star hotels that are <strong>10–30% below what Booking.com, Expedia, and Hotels.com show publicly</strong>. The same hotel, same room, same dates — just a better price because you're accessing it through a member channel.</p>
     <p>Last-minute availability is highest from <strong>Wednesday onwards</strong> as hotels release unsold rooms for the upcoming weekend. This is when the deepest discounts appear.</p>
   </div>
 
@@ -327,7 +368,7 @@
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
         How much do members actually save? <span class="chevron">▼</span>
       </div>
-      <div class="faq-a">Members save between 10% and 30% compared to public retail prices on the same hotels and dates. On a £300/night room that's £30–£90 back in your pocket. Savings vary by hotel, date, and availability — the best deals appear last-minute (Wednesday–Thursday for the weekend).</div>
+      <div class="faq-a">Members save between 10% and 30% compared to Booking.com public prices on the same hotels and dates. On a £300/night room that's £30–£90 back in your pocket. Savings vary by hotel, date, and availability — the best deals appear last-minute (Wednesday–Thursday for the weekend).</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -423,7 +464,7 @@
 
     <div id="modal-form-view">
       <h2>Join LuxStay — it's free</h2>
-      <p class="modal-sub">Unlock member-only hotel rates below retail. Takes 10 seconds.</p>
+      <p class="modal-sub">Unlock member-only hotel rates 10–30% below Booking.com. Takes 10 seconds.</p>
       <div class="modal-perks">
         <div class="perk"><span class="perk-icon">🔓</span><span>Instant access to below-retail rates</span></div>
         <div class="perk"><span class="perk-icon">💰</span><span>Save £20–£90 per night on 5-star hotels</span></div>
@@ -529,6 +570,29 @@
 const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
 const MARKUP      = 0.15;       // fallback static markup (used by calcMemberPrice default)
 const MIN_SAVING  = 0.08;   // members always save at least this % vs retail
+// ── EmailJS — booking confirmation emails ─────────────────────
+const EMAILJS_PUBLIC_KEY  = 'sG-pM-78GQr4Crt0K';
+const EMAILJS_SERVICE_ID  = 'service_eu4zfle';
+const EMAILJS_TEMPLATE_ID = 'template_xklcka7';
+if (EMAILJS_PUBLIC_KEY) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+async function sendBookingConfirmation(bk) {
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) return;
+  var nights = bk.checkin && bk.checkout
+    ? Math.max(1, Math.round((new Date(bk.checkout) - new Date(bk.checkin)) / 86400000))
+    : 1;
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_name: bk.firstName, to_email: bk.email, hotel_name: bk.hotelName,
+      checkin: bk.checkin, checkout: bk.checkout, nights: nights,
+      booking_ref: bk.ref, total_price: '\u00a3' + parseFloat(bk.price).toLocaleString('en-GB', {minimumFractionDigits: 0}),
+      support_email: 'jackthughes99@gmail.com'
+    });
+    console.log('Confirmation email sent to', bk.email);
+  } catch (e) { console.warn('Email confirmation failed (non-fatal):', e?.text || e); }
+}
+// ── Referral attribution (disabled — programme paused) ──────────
+function getReferralCode() { return null; }
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = false;
 
@@ -657,7 +721,11 @@ function renderHotels(city, checkin, checkout) {
   document.getElementById('result-count').textContent = `${hotels.length} hotel${hotels.length !== 1 ? 's' : ''}`;
 
   grid.innerHTML = hotels.map(h => buildCard(h)).join('');
-  hotels.forEach(h => fetchRate(h, checkin, checkout));
+  // Fetch live rates and hotel photos in parallel
+  hotels.forEach(h => {
+    fetchRate(h, checkin, checkout);
+    loadHotelPhoto(h.id);
+  });
 }
 
 // ── BUILD CARD ────────────────────────────────────────────────
@@ -665,7 +733,8 @@ function buildCard(h) {
   return `
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
-      <span>${h.emoji}</span>
+      <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" width="180" height="160" />
+      <span class="img-fallback">${h.emoji}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
     <div class="hotel-body">
@@ -684,6 +753,32 @@ function buildCard(h) {
       </div>
     </div>
   </article>`;
+}
+
+// ── HOTEL PHOTO ───────────────────────────────────────────────
+const photoCache = {};
+async function loadHotelPhoto(hotelId) {
+  const imgEl = document.getElementById(`photo-${hotelId}`);
+  if (!imgEl) return;
+  if (photoCache[hotelId]) {
+    imgEl.src = photoCache[hotelId];
+    imgEl.onload = () => imgEl.classList.add('loaded');
+    return;
+  }
+  try {
+    const resp = await fetch(`${API_BASE}?ep=data/hotel&hotelId=${hotelId}`, {
+      headers: { 'accept': 'application/json' }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const images = data?.data?.hotelImages;
+    const img = images?.find(i => /room|exterior|lobby|pool/i.test(i.caption || '')) || images?.[0];
+    if (img?.url) {
+      photoCache[hotelId] = img.url;
+      imgEl.src = img.url;
+      imgEl.onload = () => imgEl.classList.add('loaded');
+    }
+  } catch { /* silently ignore — emoji fallback remains visible */ }
 }
 
 // ── FETCH RATE ────────────────────────────────────────────────
@@ -719,9 +814,10 @@ async function fetchRate(h, checkin, checkout) {
     const netCost  = rate.total?.[0]?.amount;
     const ssp      = rate.suggestedSellingPrice?.[0]?.amount;
     const rateId   = hotel?.roomTypes?.[0]?.rates?.[0]?.rateId;
+    const offerId  = hotel?.roomTypes?.[0]?.offerId;
     const roomName = hotel?.roomTypes?.[0]?.name || 'Standard Room';
     const mu       = getDynamicMarkup(checkin);
-    const result   = { netCost, ssp, rateId, roomName, markup: mu };
+    const result   = { netCost, ssp, rateId, offerId, roomName, markup: mu };
     ratesCache[cacheKey] = result;
     updateCardPrice(h, result);
     track('hotel_viewed', { hotel_id: h.id, hotel_name: h.name, ssp,
@@ -739,10 +835,17 @@ function updateCardPrice(h, data) {
   if (!priceEl) return;
 
   if (!data || data.error) {
-    priceEl.innerHTML = `<span class="rate-loading">${data?.error?.includes('No rooms') ? 'No availability' : 'Unavailable'}</span>`;
+    priceEl.innerHTML = `<span class="rate-loading">No availability for these dates</span>`;
     btnEl.innerHTML = '';
+    // Sink unavailable cards to the bottom of the grid
+    const card = document.getElementById(`card-${h.id}`);
+    if (card) card.classList.add('unavailable');
     return;
   }
+
+  // Available — make sure card is visible (e.g. after a date change)
+  const card = document.getElementById(`card-${h.id}`);
+  if (card) card.classList.remove('unavailable');
 
   const { netCost, ssp } = data;
   const displaySsp  = ssp || netCost;
@@ -758,6 +861,12 @@ function updateCardPrice(h, data) {
       ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
     btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
+    // Track: member sees their exclusive rate
+    track('rate_revealed', { hotel_id: h.id, hotel_name: h.name, member_price: memberPrice, ssp: displaySsp });
+    // Track: savings comparison displayed
+    if (saving > 0) {
+      track('price_comparison_viewed', { hotel_id: h.id, hotel_name: h.name, saving_pct: saving, member_price: memberPrice, ota_price: displaySsp });
+    }
   } else {
     priceEl.innerHTML = `
       <div class="price-label">Public rate / night</div>
@@ -799,7 +908,7 @@ async function bookHotel(id, name) {
   const cacheKey = `${id}-${checkin}-${checkout}`;
   const rate     = ratesCache[cacheKey];
 
-  if (!rate?.rateId) {
+  if (!rate?.offerId) {
     alert('Rate data has expired — please search again to refresh prices.');
     return;
   }
@@ -829,13 +938,15 @@ async function doPrebook() {
     return;
   }
   try {
-    const resp = await fetch(`${API_BASE}?ep=hotels/prebook`, {
+    const resp = await fetch(`${API_BASE}?ep=rates/prebook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
-      body: JSON.stringify({ rateId: bkSess.rateId })
+      body: JSON.stringify({ offerId: bkSess.offerId, usePaymentSdk: true })
     });
     if (!resp.ok) throw new Error(`Status ${resp.status}`);
-    const data = await resp.json();
+    const raw = await resp.text();
+    if (!raw) throw new Error('Empty prebook response');
+    const data = JSON.parse(raw);
     const pb   = data?.data;
     if (!pb?.prebookId) throw new Error('No prebookId in response');
 
@@ -966,14 +1077,14 @@ async function confirmBooking() {
     const { prebookId, holder, transactionId, hotelName, checkin, checkout } = bkSess;
     const adults = parseInt(document.getElementById('guests').value) || 2;
 
-    const resp = await fetch(`${API_BASE}?ep=hotels/book`, {
+    const resp = await fetch(`${API_BASE}?ep=rates/book`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
       body: JSON.stringify({
         prebookId,
         holder:  { firstName: holder.firstName, lastName: holder.lastName, email: holder.email, phone: holder.phone },
         guests:  [{ occupancy: { adults }, firstName: holder.firstName, lastName: holder.lastName }],
-        payment: { method: 'CREDIT_CARD', transactionId }
+        payment: { method: 'TRANSACTION_ID', transactionId }
       })
     });
     if (!resp.ok) throw new Error(`Status ${resp.status}`);
@@ -988,6 +1099,13 @@ async function confirmBooking() {
        <p>Confirmation sent to: ${holder.email}</p>`;
     track('booking_completed', { hotel_name: hotelName, checkin, checkout,
       booking_ref: bookingRef, revenue: bkSess.confirmedPrice, currency: bkSess.currency });
+    try {
+      sendBookingConfirmation({
+        firstName: bkSess.holder.firstName, email: bkSess.holder.email,
+        hotelName: bkSess.hotelName, checkin: bkSess.checkin, checkout: bkSess.checkout,
+        ref: bookingRef, price: bkSess.confirmedPrice
+      });
+    } catch(e) { console.warn('Email send failed:', e); }
     setBkStep(4);
 
   } catch(err) {
@@ -1093,6 +1211,20 @@ function closePrivacy() { document.getElementById('privacy-overlay').classList.r
 function closePrivacyOutside(e) { if (e.target.id === 'privacy-overlay') closePrivacy(); }
 
 // ── ANALYTICS INSTRUMENTATION ─────────────────────────────────
+
+// Editorial CTA click tracking — captures any link/button click inside .editorial sections
+// This fires for comparison guide CTAs, "see member rates" links, etc.
+document.addEventListener('click', function(e) {
+  var target = e.target.closest('.editorial a, .editorial button, [data-editorial-cta]');
+  if (target) {
+    track('editorial_cta_clicked', {
+      cta_text: (target.textContent || '').trim().slice(0, 100),
+      cta_href: target.href || '',
+      section: (target.closest('.editorial')?.querySelector('h2')?.textContent || '').trim()
+    });
+  }
+});
+
 function doSearch() {
   track('hotel_search', {
     city: document.getElementById('city-select').value,

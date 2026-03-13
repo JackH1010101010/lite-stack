@@ -1,11 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{META_TITLE}}</title>
   {{GSC_VERIFICATION_META}}
   <meta name="description" content="{{META_DESCRIPTION}}" />
+  {{HREFLANG_TAGS}}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{META_TITLE}}" />
+  <meta property="og:description" content="{{META_DESCRIPTION}}" />
+  <meta property="og:url" content="{{SCHEMA_URL}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:site_name" content="{{BRAND_NAME}}" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{META_TITLE}}" />
+  <meta name="twitter:description" content="{{META_DESCRIPTION}}" />
+  <meta name="twitter:image" content="{{OG_IMAGE}}" />
+
+  <!-- DNS Prefetch — resolve external domains early -->
+  <link rel="dns-prefetch" href="https://api.liteapi.travel" />
+  <link rel="dns-prefetch" href="https://us.i.posthog.com" />
+  <link rel="dns-prefetch" href="https://accounts.google.com" />
+  <link rel="dns-prefetch" href="https://photos.hotelbeds.com" />
 
   <!-- PostHog Analytics — key injected at build time via POSTHOG_PROJECT_KEY env var -->
   <script>
@@ -13,12 +34,27 @@
     posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
   </script>
 
+  {{EMAILJS_SCRIPT}}
+
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Schema: WebSite -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebSite","name":"{{SCHEMA_NAME}}","url":"{{SCHEMA_URL}}","description":"{{SCHEMA_DESCRIPTION}}","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"{{SCHEMA_URL}}/?city={city}"},"query-input":"required name=city"}}
+  </script>
+
+  <!-- Schema: Hotel ItemList + AggregateOffer — enables rich snippets + AI citation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "{{BRAND_NAME}} — Luxury Hotels",
+    "description": "{{META_DESCRIPTION}}",
+    "url": "{{SCHEMA_URL}}",
+    "numberOfItems": "{{HOTEL_COUNT}}",
+    "itemListElement": [{{HOTEL_SCHEMA_ITEMS}}]
+  }
   </script>
 
   <style>
@@ -239,6 +275,7 @@
   <a href="/" class="logo">{{BRAND_NAME}}</a>
   <div class="nav-right">
     <span id="member-nav">✓ Member</span>
+    {{AFFILIATE_NAV_HTML}}
     <span class="nav-link" onclick="openModal()">How it works</span>
     <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Join free</button>
   </div>
@@ -493,6 +530,8 @@
 const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
 const MARKUP      = {{MARKUP}};       // fallback static markup (used by calcMemberPrice default)
 const MIN_SAVING  = {{MIN_SAVING}};   // members always save at least this % vs retail
+{{EMAILJS_CONFIG_JS}}
+{{REFERRAL_JS}}
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = false;
 
@@ -608,7 +647,7 @@ function buildCard(h) {
   return `
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
-      <img id="photo-${h.id}" alt="${h.name}" loading="lazy" />
+      <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" width="180" height="160" />
       <span class="img-fallback">${h.emoji}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
@@ -736,6 +775,12 @@ function updateCardPrice(h, data) {
       ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
     btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
+    // Track: member sees their exclusive rate
+    track('rate_revealed', { hotel_id: h.id, hotel_name: h.name, member_price: memberPrice, ssp: displaySsp });
+    // Track: savings comparison displayed
+    if (saving > 0) {
+      track('price_comparison_viewed', { hotel_id: h.id, hotel_name: h.name, saving_pct: saving, member_price: memberPrice, ota_price: displaySsp });
+    }
   } else {
     priceEl.innerHTML = `
       <div class="price-label">Public rate / night</div>
@@ -968,6 +1013,7 @@ async function confirmBooking() {
        <p>Confirmation sent to: ${holder.email}</p>`;
     track('booking_completed', { hotel_name: hotelName, checkin, checkout,
       booking_ref: bookingRef, revenue: bkSess.confirmedPrice, currency: bkSess.currency });
+    {{EMAILJS_SEND_JS}}
     setBkStep(4);
 
   } catch(err) {
@@ -1073,6 +1119,20 @@ function closePrivacy() { document.getElementById('privacy-overlay').classList.r
 function closePrivacyOutside(e) { if (e.target.id === 'privacy-overlay') closePrivacy(); }
 
 // ── ANALYTICS INSTRUMENTATION ─────────────────────────────────
+
+// Editorial CTA click tracking — captures any link/button click inside .editorial sections
+// This fires for comparison guide CTAs, "see member rates" links, etc.
+document.addEventListener('click', function(e) {
+  var target = e.target.closest('.editorial a, .editorial button, [data-editorial-cta]');
+  if (target) {
+    track('editorial_cta_clicked', {
+      cta_text: (target.textContent || '').trim().slice(0, 100),
+      cta_href: target.href || '',
+      section: (target.closest('.editorial')?.querySelector('h2')?.textContent || '').trim()
+    });
+  }
+});
+
 function doSearch() {
   track('hotel_search', {
     city: document.getElementById('city-select').value,

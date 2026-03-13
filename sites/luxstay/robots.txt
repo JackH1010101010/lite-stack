@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://luxstay.netlify.app/sitemap.xml
+Sitemap: https://luxury.lux-stay-members.com/sitemap.xml

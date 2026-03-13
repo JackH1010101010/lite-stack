@@ -1,6 +1,6 @@
 {
-  "_note": "LuxStay is deployed via its own repo (JackH1010101010/luxstay). skip_deploy=true keeps deploy-all.js from duplicating it.",
-  "skip_deploy": true,
+  "_note": "LuxStay authority hub — now generated via the template pipeline. Deployed to Netlify site 5936d2df.",
+  "skip_deploy": false,
   "META_TITLE": "LuxStay — Member-Only Luxury Hotel Rates",
   "META_DESCRIPTION": "5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing.",
   "SCHEMA_NAME": "LuxStay",
@@ -26,6 +26,12 @@
   "MODAL_HEADLINE": "Join LuxStay — it's free",
   "MODAL_SUB": "Unlock member-only hotel rates 10–30% below Booking.com. Takes 10 seconds.",
   "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. Refresh prices to see your savings vs Booking.com.",
+  "EMAILJS_PUBLIC_KEY": "sG-pM-78GQr4Crt0K",
+  "EMAILJS_SERVICE_ID": "service_eu4zfle",
+  "EMAILJS_TEMPLATE_ID": "template_xklcka7",
+  "AFFILIATE_NAV_LINK": "",
+  "AFFILIATE_NAV_TEXT": "",
+  "ENABLE_REFERRALS": "false",
   "cities": [
     {
       "value": "London",
@@ -103,7 +109,7 @@
     }
   ],
   "trust_items": [
-    "Live rates from LiteAPI",
+    "Live rates, updated hourly",
     "No minimum stay",
     "Members save £20–£90/night on average",
     "5-star only, hand-verified"

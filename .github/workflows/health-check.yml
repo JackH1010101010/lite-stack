@@ -85,7 +85,7 @@ $WARNINGS
 
 ## What to do
 1. Click the workflow run link above to see full logs
-2. For site outages: check Netlify dashboard for deploy errors
+2. For site outages: check Cloudflare Workers dashboard for deploy errors
 3. For LiteAPI failures: check https://liteapi.travel status page
 4. For PostHog issues: check https://app.posthog.com
 

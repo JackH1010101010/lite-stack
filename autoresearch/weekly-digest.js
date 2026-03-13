@@ -30,7 +30,7 @@ const GH_REPO       = process.env.GITHUB_REPOSITORY || 'JackH1010101010/lite-sta
 
 // ── GSC config ─────────────────────────────────────────────────
 // GOOGLE_SERVICE_ACCOUNT_JSON — full JSON key file content as GitHub secret
-// GSC_SITE_URLS — comma-separated list, e.g. "https://luxstay.netlify.app/,https://dubai-ultra.netlify.app/"
+// GSC_SITE_URLS — comma-separated list, e.g. "https://luxury.lux-stay-members.com/"
 const GSC_SA        = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
   ? (() => { try { return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON); } catch { return null; } })()
   : null;
@@ -128,6 +128,139 @@ async function getGscData(dateFrom, dateTo) {
     }
     return results;
   } catch (e) { console.warn('GSC fetch error:', e.message); return null; }
+}
+
+// ── GSC keyword gap analysis ──────────────────────────────────
+// Identifies:
+//   1. High-impression, low-CTR queries → SEO title experiment candidates
+//   2. Queries with impressions but no landing page → auto-generate candidates
+async function gscKeywordGap(dateFrom, dateTo) {
+  if (!GSC_SA || !GSC_SITES.length) return null;
+
+  try {
+    const token = await gscAccessToken();
+    if (!token) return null;
+
+    const allGaps = [];
+    const allMissing = [];
+    const fs = require('fs');
+    const path = require('path');
+    const SITES_DIR = path.join(__dirname, '..', 'sites');
+
+    for (const site of GSC_SITES) {
+      const url = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`;
+      const siteName = site.replace(/^https?:\/\//, '').replace(/\.netlify\.app\/?$/, '').replace(/\.workers\.dev\/?$/, '').replace(/\.\w+\.\w+\/?$/, '');
+
+      // Fetch queries with page dimension — gives us which page ranks for which query
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          startDate: dateFrom, endDate: dateTo,
+          dimensions: ['query', 'page'],
+          rowLimit: 100
+        })
+      });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const rows = data.rows || [];
+
+      // Build a set of existing SEO page slugs for this site
+      const siteDir = path.join(SITES_DIR, siteName);
+      const existingPages = new Set();
+      try {
+        const files = fs.readdirSync(siteDir).filter(f => f.endsWith('.html'));
+        files.forEach(f => existingPages.add(f.replace('.html', '')));
+      } catch { /* site dir may not exist */ }
+
+      for (const row of rows) {
+        const query = row.keys[0];
+        const page  = row.keys[1];
+        const { clicks, impressions, ctr, position } = row;
+
+        // Gap 1: High impressions, low CTR → title/meta test candidate
+        if (impressions >= 50 && ctr < 0.03 && position <= 20) {
+          allGaps.push({
+            site: siteName, query, page,
+            impressions, ctr: Math.round(ctr * 1000) / 1000,
+            position: Math.round(position * 10) / 10,
+            type: 'low_ctr'
+          });
+        }
+
+        // Gap 2: Query has impressions but no dedicated page
+        // Extract city/topic from query and check if a page exists
+        const slug = query.toLowerCase()
+          .replace(/luxury|hotels?|member|rates?|best|cheap/gi, '')
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/^-|-$/g, '');
+        if (slug.length >= 3 && impressions >= 20 && !existingPages.has(slug)) {
+          allMissing.push({
+            site: siteName, query, slug_candidate: slug,
+            impressions, position: Math.round(position * 10) / 10,
+            type: 'no_landing_page'
+          });
+        }
+      }
+    }
+
+    // Deduplicate and sort by impact (impressions × opportunity)
+    allGaps.sort((a, b) => b.impressions * (1 - b.ctr) - a.impressions * (1 - a.ctr));
+    allMissing.sort((a, b) => b.impressions - a.impressions);
+
+    // Deduplicate missing by slug
+    const seenSlugs = new Set();
+    const uniqueMissing = allMissing.filter(m => {
+      if (seenSlugs.has(`${m.site}:${m.slug_candidate}`)) return false;
+      seenSlugs.add(`${m.site}:${m.slug_candidate}`);
+      return true;
+    });
+
+    return {
+      seo_test_candidates: allGaps.slice(0, 10),
+      landing_page_gaps: uniqueMissing.slice(0, 10),
+      total_queries_analysed: allGaps.length + allMissing.length
+    };
+  } catch (e) {
+    console.warn('GSC keyword gap error:', e.message);
+    return null;
+  }
+}
+
+// ── Keyword gap section builder ───────────────────────────────
+function buildKeywordGapSection(gaps) {
+  if (!gaps) return '\n\n### Keyword Gap Analysis\n\n_Not available — GSC credentials not configured._';
+  if (!gaps.seo_test_candidates.length && !gaps.landing_page_gaps.length) {
+    return '\n\n### Keyword Gap Analysis\n\n_No significant gaps found this week. ✅_';
+  }
+
+  let section = '\n\n### Keyword Gap Analysis\n';
+
+  if (gaps.seo_test_candidates.length) {
+    const rows = gaps.seo_test_candidates.slice(0, 5).map(g =>
+      `| ${g.site} | ${g.query.slice(0, 40)} | ${g.impressions} | ${(g.ctr * 100).toFixed(1)}% | ${g.position} |`
+    ).join('\n');
+    section += `\n**SEO Title Test Candidates** (high impressions, low CTR)\n\n| Site | Query | Impressions | CTR | Avg Pos |\n|------|-------|-------------|-----|----------|\n${rows}\n`;
+    section += `\n> These queries get visibility but poor click-through. Run \`seo-experiment.js\` to test better title/meta variants.\n`;
+  }
+
+  if (gaps.landing_page_gaps.length) {
+    const rows = gaps.landing_page_gaps.slice(0, 5).map(g =>
+      `| ${g.site} | ${g.query.slice(0, 40)} | ${g.slug_candidate} | ${g.impressions} |`
+    ).join('\n');
+    section += `\n**Missing Landing Pages** (queries with impressions but no dedicated page)\n\n| Site | Query | Suggested Slug | Impressions |\n|------|-------|----------------|-------------|\n${rows}\n`;
+    section += `\n> These queries rank but point to generic pages. Run \`seo-pages.js\` or add to config cities.\n`;
+  }
+
+  // Machine-readable block for orchestrator
+  section += `\n<!-- machine: ${JSON.stringify({
+    seo_test_candidates: gaps.seo_test_candidates.length,
+    landing_page_gaps: gaps.landing_page_gaps.length,
+    top_candidate: gaps.seo_test_candidates[0] || null
+  })} -->`;
+
+  return section;
 }
 
 // ── GitHub helpers ─────────────────────────────────────────────
@@ -267,10 +400,11 @@ async function main() {
   }
 
   // Fetch all funnel metrics + GSC in parallel
-  const [funnelCounts, topPages, gscData] = await Promise.all([
+  const [funnelCounts, topPages, gscData, keywordGaps] = await Promise.all([
     Promise.all(FUNNEL.map(f => getEventCount(f.event, dateFrom, dateTo))),
     getTopPages(dateFrom, dateTo),
     getGscData(dateFrom, dateTo),
+    gscKeywordGap(dateFrom, dateTo),
   ]);
 
   // Build funnel table
@@ -330,6 +464,7 @@ ${observations.map(o => `- ${o}`).join('\n')}
 ${suggestions.length ? suggestions.map(s => `- [ ] ${s}`).join('\n') : '- ✅ No urgent suggestions this week'}
 
 ${gscSection}
+${buildKeywordGapSection(keywordGaps)}
 
 ---
 _Generated by autoresearch/weekly-digest.js · ${new Date().toISOString()}_

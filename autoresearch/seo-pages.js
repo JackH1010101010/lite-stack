@@ -627,7 +627,7 @@ async function main() {
   const outDir = path.join(SITES_DIR, SITE);
   fs.mkdirSync(outDir, { recursive: true });
 
-  const siteUrl  = cfg.SCHEMA_URL || `https://${SITE}.netlify.app`;
+  const siteUrl  = cfg.SCHEMA_URL || cfg.SITE_URL || `https://${SITE}.workers.dev`;
   const allPages = [];
 
   const cityCount    = cfg.cities?.length || 0;

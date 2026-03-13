@@ -4,7 +4,8 @@
  * Usage: node generate.js <config-name>
  *
  * Reads generator/configs/<config-name>.json
- * Outputs sites/<config-name>/index.html + netlify.toml
+ * Outputs sites/<config-name>/index.html
+ * Deployment handled by deploy-all.js (Cloudflare Workers)
  *
  * Config fields:
  *   Scalar strings  → direct {{TOKEN}} replacement in template
@@ -264,50 +265,8 @@ const outDir = path.join(__dirname, '..', 'sites', configName);
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 
-// ── Copy serverless functions ─────────────────────────────────
-// The functions/ dir contains the LiteAPI proxy — must be deployed with each site
-const functionsSource = path.join(__dirname, 'functions');
-const functionsDest   = path.join(outDir, 'netlify', 'functions');
-if (fs.existsSync(functionsSource)) {
-  fs.mkdirSync(functionsDest, { recursive: true });
-  for (const file of fs.readdirSync(functionsSource)) {
-    fs.copyFileSync(
-      path.join(functionsSource, file),
-      path.join(functionsDest, file)
-    );
-  }
-  console.log(`✓  Copied ${fs.readdirSync(functionsSource).length} function(s) to netlify/functions/`);
-}
-
-// netlify.toml — monorepo build: generate from config then inject PostHog key
-const envVar = cfg.POSTHOG_ENV_VAR || 'POSTHOG_PROJECT_KEY';
-const toml = `# Netlify config for ${configName} (monorepo)
-# Netlify project settings: base dir = repo root, publish = sites/${configName}
-[build]
-  publish = "sites/${configName}"
-  command = "node generator/generate.js ${configName} && sed -i \\"s/YOUR_POSTHOG_KEY/$\{${envVar}\}/g\\" sites/${configName}/index.html"
-
-[build.environment]
-  NODE_VERSION = "18"
-  AWS_LAMBDA_JS_RUNTIME = "nodejs18.x"
-
-[functions]
-  directory = "netlify/functions"
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-`;
-fs.writeFileSync(path.join(outDir, 'netlify.toml'), toml, 'utf8');
+// Note: LiteAPI proxy is handled by worker.js (Cloudflare Workers).
+// No per-site function copying needed — deploy-all.js handles deployment.
 
 console.log(`✓  Generated: sites/${configName}/index.html`);
-console.log(`✓  Generated: sites/${configName}/netlify.toml`);
-console.log(`   Deploy:    netlify deploy --dir=sites/${configName} --prod`);
+console.log(`   Deploy:    node deploy-all.js  (or: npx wrangler deploy)`);

@@ -69,7 +69,7 @@ function loadConfigs() {
 
 // ── check a single site ────────────────────────────────────────
 async function checkSite({ name, cfg }) {
-  const siteUrl   = cfg.SCHEMA_URL || `https://${name}.netlify.app`;
+  const siteUrl   = cfg.SCHEMA_URL || `https://${name}.jackthughes99.workers.dev`;
   const brand     = cfg.BRAND_NAME || name;
   const siteResult = { site: name, url: siteUrl, checks: [] };
 

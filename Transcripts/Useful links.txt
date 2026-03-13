@@ -1,2 +1,23 @@
 https://github.com/AllAboutAI-YT/
 https://github.com/stephengpope/thepopebot
+
+Agency Agents (likely Agency AI) - AI agent consulting + agent marketplace:
+https://www.agen.cy/
+
+PropmtFoo (Promptfoo) - LLM eval/red-team toolkit for AI app testing:
+https://www.promptfoo.dev/
+
+MicroFish (MiroFish) - open-source AI prediction engine using multi-agent swarm intelligence:
+https://github.com/666ghj/MiroFish
+
+NanoChat (Karpathy) - lightweight AI chat interface/demo:
+https://nanochat.karpathy.ai/
+
+Impeccable - design skill/commands for stronger AI frontend output:
+https://impeccable.style/
+
+Heretic - open-source LLM censorship-removal tool:
+https://www.heretics.fun/
+
+OpenViking - context file system/database for AI agents:
+https://www.openviking.ai/

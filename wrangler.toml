@@ -1,14 +1,20 @@
-# Cloudflare Worker configuration for LuxStay
+# Cloudflare Worker configuration for LuxStay (default)
+# deploy-all.js overwrites this per-site during multi-site deploys,
+# then restores it to luxstay afterward.
+#
 # worker.js handles /api/liteapi proxy + static asset passthrough
 # Static assets are served from sites/luxstay/ after build
 
 name = "luxstay"
 main = "worker.js"
 compatibility_date = "2024-09-23"
+account_id = "d81e228672f996763c1dc7dfad31cbdf"
 
 [assets]
 directory = "sites/luxstay"
 
-# LITEAPI_KEY must be set as a secret via:
-#   npx wrangler secret put LITEAPI_KEY
+# LITEAPI_KEY must be set as a secret on each Worker via:
+#   npx wrangler secret put LITEAPI_KEY --name luxstay
+#   npx wrangler secret put LITEAPI_KEY --name dubai-ultra
+#   npx wrangler secret put LITEAPI_KEY --name maldives-escape
 # or in the Cloudflare dashboard under Settings → Variables and Secrets

@@ -503,11 +503,9 @@
         <div style="flex:1;height:1px;background:var(--grey-mid)"></div>
       </div>
 
-      <!-- Email fallback (also Netlify Form) -->
-      <form name="luxstay-members" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleJoin(event)">
-        <input type="hidden" name="form-name" value="luxstay-members" />
-        <input type="hidden" name="bot-field" />
-        <input type="email" name="email" id="join-email" placeholder="your@email.com" required autocomplete="email" />
+      <!-- Email signup -->
+      <form onsubmit="handleJoin(event)">
+        <input type="email" id="join-email" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit" class="btn-join-modal">Unlock member rates →</button>
         <p class="modal-terms">By joining you agree to our <a href="#" style="color:var(--grey-text)">terms</a>. No spam, unsubscribe any time.</p>
       </form>
@@ -1132,12 +1130,6 @@ function handleGoogleSignIn(response) {
   const email = payload.email;
   const name  = payload.given_name || payload.name || '';
 
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ 'form-name': 'luxstay-members', email, name, source: 'google' })
-  }).catch(() => {});
-
   activateMember(email, name);
 }
 
@@ -1150,13 +1142,6 @@ async function handleJoin(e) {
   e.preventDefault();
   const email = document.getElementById('join-email').value;
   if (!email) return;
-  try {
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'luxstay-members', email, source: 'email' })
-    });
-  } catch(err) {}
   activateMember(email, '');
 }
 
@@ -1167,6 +1152,8 @@ function activateMember(email, name) {
   isMember = true;
   if (window.posthog) posthog.identify(email, { name: name || undefined });
   track('member_joined', { method: name ? 'google' : 'email' });
+  // Capture signup server-side (fire-and-forget)
+  try { fetch('/api/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, source: name ? 'google' : 'email' }) }).catch(() => {}); } catch(e) {}
 
   document.getElementById('modal-form-view').style.display = 'none';
   document.getElementById('modal-success').style.display = 'block';

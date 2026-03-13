@@ -6,6 +6,32 @@
   <title>Maldives Escape — Member Rates on Overwater Villas</title>
   <meta name="google-site-verification" content="w1CNob_6FpyZqs14nLJK6e7Dar14Uo4nfgC6PaRUzCM" />
   <meta name="description" content="Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay." />
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Maldives Escape — Member Rates on Overwater Villas" />
+  <meta property="og:description" content="Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay." />
+  <meta property="og:url" content="https://maldives.lux-stay-members.com" />
+  <meta property="og:image" content="https://maldives.lux-stay-members.com/og-image.jpg" />
+  <meta property="og:site_name" content="Maldives Escape" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Maldives Escape — Member Rates on Overwater Villas" />
+  <meta name="twitter:description" content="Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay." />
+  <meta name="twitter:image" content="https://maldives.lux-stay-members.com/og-image.jpg" />
+
+  <!-- DNS Prefetch — resolve external domains early -->
+  <link rel="dns-prefetch" href="https://api.liteapi.travel" />
+  <link rel="dns-prefetch" href="https://us.i.posthog.com" />
+  <link rel="dns-prefetch" href="https://accounts.google.com" />
+  <link rel="dns-prefetch" href="https://photos.hotelbeds.com" />
+
+  <!-- Typography: Inter + Instrument Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
 
   <!-- PostHog Analytics — key injected at build time via POSTHOG_PROJECT_KEY env var -->
   <script>
@@ -13,103 +39,123 @@
     posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
   </script>
 
+  
+
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Schema: WebSite -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"Maldives Escape","url":"https://maldives-escape.netlify.app","description":"Member-only pricing on Maldives overwater villas and private island resorts. Below-retail rates gated behind a free membership.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://maldives-escape.netlify.app/?city={city}"},"query-input":"required name=city"}}
+  {"@context":"https://schema.org","@type":"WebSite","name":"Maldives Escape","url":"https://maldives.lux-stay-members.com","description":"Member-only pricing on Maldives overwater villas and private island resorts. Below-retail rates gated behind a free membership.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://maldives.lux-stay-members.com/?city={city}"},"query-input":"required name=city"}}
+  </script>
+
+  <!-- Schema: Hotel ItemList + AggregateOffer — enables rich snippets + AI citation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Maldives Escape — Luxury Hotels",
+    "description": "Overwater villas and private island resorts at member-only rates. Save 10–25% on top Maldives resorts. Live pricing, no minimum stay.",
+    "url": "https://maldives.lux-stay-members.com",
+    "numberOfItems": "10",
+    "itemListElement": [{"@type":"ListItem","position":1,"item":{"@type":"Hotel","name":"Velassaru Maldives","identifier":"lp655762c1","description":"Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.","address":{"@type":"PostalAddress","addressLocality":"North Malé Atoll"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":2,"item":{"@type":"Hotel","name":"Cocoon Maldives","identifier":"lp65574e0c","description":"Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.","address":{"@type":"PostalAddress","addressLocality":"Ookolhufinolhu Island"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":3,"item":{"@type":"Hotel","name":"Meeru Maldives Resort","identifier":"lp655769b2","description":"One of the Maldives' largest resorts. Diverse marine life, water sports, spa.","address":{"@type":"PostalAddress","addressLocality":"Meerufenfushi Island"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":4,"item":{"@type":"Hotel","name":"Bandos Maldives","identifier":"lp65574cc3","description":"Classic Maldives resort. Dive centre, water sports, panoramic restaurant.","address":{"@type":"PostalAddress","addressLocality":"Bandos Island"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":5,"item":{"@type":"Hotel","name":"Anantara Dhigu Maldives","identifier":"lp6557621e","description":"Luxury 5★ resort with overwater bungalows. 2 pools, 3 restaurants, spa.","address":{"@type":"PostalAddress","addressLocality":"South Malé Atoll"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":6,"item":{"@type":"Hotel","name":"Centara Grand Maldives","identifier":"lp65576388","description":"5★ with the longest overwater bar in the Maldives. Waterslides, snorkelling.","address":{"@type":"PostalAddress","addressLocality":"Olhuveli Island"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":7,"item":{"@type":"Hotel","name":"Cinnamon Hakuraa Huraa","identifier":"lp6557618c","description":"Remote 5★ resort. Crystal-clear lagoon, dolphin spotting, sunset cruises.","address":{"@type":"PostalAddress","addressLocality":"Meemu Atoll"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":8,"item":{"@type":"Hotel","name":"Four Seasons Landaa Giraavaru","identifier":"lp655768a4","description":"World-class 5★ in UNESCO Biosphere Reserve. Manta rays, marine biology centre.","address":{"@type":"PostalAddress","addressLocality":"Baa Atoll UNESCO"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":9,"item":{"@type":"Hotel","name":"Amilla Maldives","identifier":"lp65576a12","description":"Adults-first sanctuary. Private pool villas, whale sharks, organic garden.","address":{"@type":"PostalAddress","addressLocality":"Baa Atoll"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}},{"@type":"ListItem","position":10,"item":{"@type":"Hotel","name":"Milaidhoo Island Maldives","identifier":"lp65576b88","description":"Intimate 5★ boutique resort. Only 50 villas. House reef, Baa Atoll diving.","address":{"@type":"PostalAddress","addressLocality":"Baa Atoll UNESCO"},"starRating":{"@type":"Rating","ratingValue":"5"},"offers":{"@type":"AggregateOffer","priceCurrency":"GBP","availability":"https://schema.org/InStock","offerCount":"1"}}}]
+  }
   </script>
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
       --navy:#0b4f6c;--gold:#00b4d8;--gold-lt:#caf0f8;
-      --grey-bg:#f7f7f5;--grey-mid:#e5e3de;--grey-text:#6b6b6b;
-      --black:#1a1a1a;--white:#fff;
+      --grey-bg:#f9f7f4;--grey-mid:#e8e5e0;--grey-text:#a39e8d;
+      --black:#2a2a2a;--white:#fff;
       --green:#1a7a3c;--green-lt:#e8f5ee;--red:#b91c1c;--red-lt:#fef2f2;
+      --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      --font-serif:'Instrument Serif',Georgia,serif;
     }
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--grey-bg);color:var(--black);line-height:1.5}
+    body{font-family:var(--font-sans);background:var(--grey-bg);color:var(--black);line-height:1.5}
 
     /* NAV */
-    nav{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-    .logo{font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.04em;text-decoration:none}
-    .nav-right{display:flex;align-items:center;gap:16px}
-    .nav-link{color:rgba(255,255,255,.7);font-size:14px;text-decoration:none;cursor:pointer}
-    .nav-link:hover{color:#fff}
-    .btn-join-nav{background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;padding:7px 16px;border-radius:4px;text-decoration:none;border:none;cursor:pointer}
-    #member-nav{display:none;align-items:center;gap:8px;color:var(--gold);font-size:13px;font-weight:600}
+    nav{background:var(--white);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--grey-mid)}
+    .logo{font-size:20px;font-weight:600;color:var(--black);letter-spacing:.06em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:24px}
+    .nav-link{color:var(--black);font-size:14px;font-weight:400;text-decoration:none;cursor:pointer;opacity:.6;transition:opacity .2s}
+    .nav-link:hover{opacity:1}
+    .btn-join-nav{background:var(--black);color:var(--white);font-size:13px;font-weight:500;padding:8px 20px;border-radius:4px;text-decoration:none;border:none;cursor:pointer;letter-spacing:.02em}
+    #member-nav{display:none;align-items:center;gap:8px;color:var(--gold);font-size:13px;font-weight:500}
 
     /* HERO */
-    .hero{background:var(--navy);padding:48px 24px 40px;text-align:center}
-    .hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
-    .hero h1{font-size:clamp(22px,4vw,38px);font-weight:700;color:#fff;line-height:1.2;max-width:640px;margin:0 auto 16px}
-    .hero-sub{color:rgba(255,255,255,.65);font-size:16px;max-width:520px;margin:0 auto 28px}
+    .hero{background:var(--grey-bg);padding:64px 24px 48px;text-align:center}
+    .hero-eyebrow{display:none}
+    .hero h1{font-family:var(--font-serif);font-size:clamp(28px,5vw,48px);font-weight:400;color:var(--black);line-height:1.15;max-width:640px;margin:0 auto 12px}
+    .hero-sub{color:var(--grey-text);font-size:16px;max-width:520px;margin:0 auto 32px;font-weight:400}
 
     /* SEARCH */
-    .search-bar{background:#fff;border-radius:8px;padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;max-width:720px;margin:0 auto;align-items:flex-end;box-shadow:0 4px 24px rgba(0,0,0,.18)}
+    .search-bar{background:#fff;border-radius:8px;padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;max-width:720px;margin:0 auto;align-items:flex-end;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--grey-mid)}
     .sf{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px}
-    .sf label{font-size:11px;font-weight:600;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em}
-    .sf input,.sf select{border:1px solid var(--grey-mid);border-radius:4px;padding:8px 10px;font-size:14px;color:var(--black);outline:none}
-    .sf input:focus,.sf select:focus{border-color:var(--navy)}
-    .btn-search{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap}
-    .btn-search:hover{opacity:.88}
-    .btn-search:disabled{background:#aaa;cursor:not-allowed}
+    .sf label{font-size:11px;font-weight:500;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em}
+    .sf input,.sf select{border:1px solid var(--grey-mid);border-radius:4px;padding:8px 10px;font-size:14px;color:var(--black);outline:none;font-family:var(--font-sans)}
+    .sf input:focus,.sf select:focus{border-color:var(--black)}
+    .btn-search{background:var(--black);color:#fff;font-size:14px;font-weight:500;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;white-space:nowrap;letter-spacing:.02em;font-family:var(--font-sans)}
+    .btn-search:hover{opacity:.85}
+    .btn-search:disabled{background:#ccc;cursor:not-allowed}
 
     /* MAIN */
-    .main{max-width:860px;margin:0 auto;padding:0 16px 64px}
+    .main{max-width:960px;margin:0 auto;padding:0 16px 64px}
 
-    /* MEMBER BANNER */
-    .cug-banner{background:var(--gold-lt);border:1px solid var(--gold);border-radius:6px;padding:12px 16px;margin:24px auto;display:flex;align-items:center;gap:12px;font-size:14px}
-    .cug-banner.is-member{background:var(--green-lt);border-color:var(--green)}
-    .cug-icon{font-size:20px;flex-shrink:0}
-    .cug-text{color:#5a4a20}
-    .cug-text.is-member{color:var(--green)}
-    .cug-cta{margin-left:auto;background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:7px 14px;border-radius:4px;text-decoration:none;white-space:nowrap;flex-shrink:0;border:none;cursor:pointer}
+    /* MEMBER BANNER — hidden in redesign */
+    .cug-banner{display:none}
+    .cug-banner.is-member{display:none}
+    .cug-icon{display:none}
+    .cug-text{display:none}
+    .cug-cta{display:none}
 
-    /* TRUST */
-    .trust-strip{display:flex;gap:24px;background:#fff;border:1px solid var(--grey-mid);border-radius:6px;padding:16px 20px;margin-bottom:24px;flex-wrap:wrap}
-    .ti{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--grey-text)}
+    /* TRUST — hidden in redesign */
+    .trust-strip{display:none}
+    .ti{display:none}
 
-    /* FILTER */
-    .filter-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-    .filter-label{font-size:13px;color:var(--grey-text);margin-right:4px}
-    .chip{font-size:13px;padding:5px 12px;border-radius:20px;border:1px solid var(--grey-mid);background:#fff;cursor:pointer;color:var(--black)}
-    .chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-    .result-count{margin-left:auto;font-size:13px;color:var(--grey-text)}
+    /* FILTER — hidden in redesign */
+    .filter-row{display:none}
+    .filter-label{display:none}
+    .chip{display:none}
+    .result-count{display:none}
 
     /* LOADING */
     .loading-state{text-align:center;padding:48px;color:var(--grey-text)}
     .spinner{display:inline-block;width:28px;height:28px;border:3px solid var(--grey-mid);border-top-color:var(--navy);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* HOTEL CARD */
-    .hotel-grid{display:flex;flex-direction:column;gap:16px}
-    .hotel-card{background:#fff;border-radius:8px;overflow:hidden;display:grid;grid-template-columns:180px 1fr;border:1px solid var(--grey-mid);box-shadow:0 1px 4px rgba(0,0,0,.07);transition:box-shadow .15s}
-    .hotel-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
-    .hotel-img{position:relative;background:linear-gradient(135deg,var(--navy),#2a3a5c);display:flex;align-items:center;justify-content:center;font-size:40px;min-height:160px}
-    .hotel-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
-    .hotel-body{padding:16px 20px;display:flex;flex-direction:column;gap:8px}
-    .hotel-name{font-size:17px;font-weight:700;color:var(--navy);line-height:1.25}
-    .hotel-stars{color:var(--gold);font-size:13px}
-    .hotel-loc{font-size:13px;color:var(--grey-text)}
-    .hotel-desc{font-size:13px;color:var(--grey-text);line-height:1.5}
-    .hotel-tags{display:flex;gap:6px;flex-wrap:wrap}
-    .tag{font-size:11px;padding:3px 8px;border-radius:3px;background:var(--grey-bg);border:1px solid var(--grey-mid);color:var(--grey-text)}
-    .hotel-footer{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:8px;border-top:1px solid var(--grey-mid)}
+    /* HOTEL CARD — vertical, image-dominant */
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;margin-top:32px}
+    .hotel-card{background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--grey-mid);box-shadow:none;transition:box-shadow .3s}
+    .hotel-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
+    .hotel-img{position:relative;background:linear-gradient(135deg,#e8e5e0,#d5d0c8);display:flex;align-items:center;justify-content:center;font-size:40px;aspect-ratio:3/2;overflow:hidden}
+    .hotel-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
+    .hotel-img img.loaded{opacity:1}
+    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none}
+    .hotel-card.unavailable{opacity:.45;order:99}
+    .hotel-badge{display:none}
+    .hotel-body{padding:20px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
+    .hotel-name{font-size:18px;font-weight:500;color:var(--black);line-height:1.3}
+    .hotel-stars{display:none}
+    .hotel-loc{font-size:14px;color:var(--grey-text);font-weight:400}
+    .hotel-desc{display:none}
+    .hotel-tags{display:none}
+    .tag{display:none}
+    .hotel-footer{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:16px;border-top:none}
     .price-block{}
-    .price-label{font-size:11px;color:var(--grey-text);margin-bottom:2px}
-    .price-was{font-size:12px;color:var(--grey-text);text-decoration:line-through}
-    .price-main{font-size:22px;font-weight:700}
-    .price-main.member{color:var(--green)}
-    .price-main.public{color:var(--navy)}
-    .price-per{font-size:12px;color:var(--grey-text)}
-    .saving-badge{display:inline-block;background:var(--green-lt);color:var(--green);font-size:11px;font-weight:600;padding:3px 7px;border-radius:3px;margin-top:4px}
-    .lock-badge{display:inline-block;background:#f3f4f6;color:var(--grey-text);font-size:11px;padding:3px 7px;border-radius:3px;margin-top:4px}
-    .btn-book{background:var(--navy);color:#fff;font-size:14px;font-weight:600;padding:10px 20px;border-radius:4px;border:none;cursor:pointer}
-    .btn-book:hover{opacity:.88}
-    .btn-unlock{background:var(--gold);color:var(--navy);font-size:13px;font-weight:600;padding:10px 16px;border-radius:4px;border:none;cursor:pointer}
-    .btn-unlock:hover{opacity:.88}
+    .price-label{font-size:12px;color:var(--grey-text);margin-bottom:2px}
+    .price-was{display:none}
+    .price-main{font-size:20px;font-weight:500;color:var(--black)}
+    .price-main.member{color:var(--black)}
+    .price-main.public{color:var(--black)}
+    .price-per{font-size:13px;color:var(--grey-text)}
+    .saving-badge{display:none}
+    .lock-badge{display:none}
+    .btn-book{background:transparent;color:var(--gold);font-size:14px;font-weight:500;padding:0;border-radius:0;border:none;cursor:pointer;letter-spacing:.02em;text-decoration:none}
+    .btn-book::after{content:' \2192';transition:transform .2s}
+    .btn-book:hover{text-decoration:underline}
+    .btn-unlock{background:transparent;color:var(--gold);font-size:14px;font-weight:500;padding:0;border-radius:0;border:none;cursor:pointer;letter-spacing:.02em}
+    .btn-unlock:hover{text-decoration:underline}
 
     /* RATE LOADING */
     .rate-loading{color:var(--grey-text);font-size:13px;font-style:italic}
@@ -118,20 +164,20 @@
     .error-card{background:var(--red-lt);border:1px solid #fca5a5;border-radius:6px;padding:16px;margin:16px 0;font-size:14px;color:var(--red)}
 
     /* EDITORIAL */
-    .editorial{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;padding:24px;margin:32px 0}
-    .editorial h2{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:12px}
-    .editorial p{font-size:14px;color:var(--grey-text);line-height:1.7;margin-bottom:12px}
+    .editorial{background:#fff;border:1px solid var(--grey-mid);border-radius:8px;padding:32px;margin:48px 0}
+    .editorial h2{font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--black);margin-bottom:16px}
+    .editorial p{font-size:15px;color:#666;line-height:1.7;margin-bottom:14px}
     .editorial p:last-child{margin-bottom:0}
-    .editorial strong{color:var(--black)}
+    .editorial strong{color:var(--black);font-weight:500}
 
     /* FAQ */
-    .section-heading{font-size:20px;font-weight:700;color:var(--navy);margin:40px 0 16px}
+    .section-heading{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--black);margin:48px 0 16px}
     .section-sub{font-size:14px;color:var(--grey-text);margin-top:-10px;margin-bottom:16px}
-    .faq-item{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;overflow:hidden;margin-bottom:8px}
-    .faq-q{padding:16px 20px;font-size:15px;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-item{background:#fff;border:1px solid var(--grey-mid);border-radius:8px;overflow:hidden;margin-bottom:8px}
+    .faq-q{padding:16px 20px;font-size:15px;font-weight:500;color:var(--black);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
     .faq-q:hover{background:var(--grey-bg)}
     .chevron{font-size:12px;color:var(--grey-text);transition:transform .2s}
-    .faq-a{padding:0 20px 16px;font-size:14px;color:var(--grey-text);line-height:1.6;display:none}
+    .faq-a{padding:0 20px 16px;font-size:14px;color:#666;line-height:1.7;display:none}
     .faq-item.open .faq-a{display:block}
     .faq-item.open .chevron{transform:rotate(180deg)}
 
@@ -140,41 +186,41 @@
     .modal-overlay.open{display:flex}
     .modal{background:#fff;border-radius:12px;padding:32px;max-width:440px;width:100%;position:relative}
     .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--grey-text)}
-    .modal h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px}
-    .modal-sub{font-size:14px;color:var(--grey-text);margin-bottom:24px;line-height:1.5}
+    .modal h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--black);margin-bottom:8px}
+    .modal-sub{font-size:14px;color:#666;margin-bottom:24px;line-height:1.5}
     .modal-perks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
     .perk{display:flex;align-items:center;gap:10px;font-size:14px}
     .perk-icon{font-size:16px;flex-shrink:0}
-    .modal input[type=email]{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:12px 14px;font-size:15px;outline:none;margin-bottom:12px}
-    .modal input[type=email]:focus{border-color:var(--navy)}
-    .btn-join-modal{width:100%;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:13px;border-radius:6px;border:none;cursor:pointer}
-    .btn-join-modal:hover{opacity:.88}
+    .modal input[type=email]{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:12px 14px;font-size:15px;outline:none;margin-bottom:12px;font-family:var(--font-sans)}
+    .modal input[type=email]:focus{border-color:var(--black)}
+    .btn-join-modal{width:100%;background:var(--black);color:#fff;font-size:15px;font-weight:500;padding:13px;border-radius:6px;border:none;cursor:pointer;font-family:var(--font-sans);letter-spacing:.02em}
+    .btn-join-modal:hover{opacity:.85}
     .modal-terms{font-size:11px;color:var(--grey-text);margin-top:10px;text-align:center}
     .modal-success{display:none;text-align:center;padding:16px 0}
     .modal-success .tick{font-size:48px;margin-bottom:12px}
-    .modal-success h3{font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px}
-    .modal-success p{font-size:14px;color:var(--grey-text);line-height:1.6}
+    .modal-success h3{font-size:20px;font-weight:500;color:var(--green);margin-bottom:8px}
+    .modal-success p{font-size:14px;color:#666;line-height:1.6}
 
     /* COOKIE BANNER */
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:9999;flex-wrap:wrap;font-size:13px;box-shadow:0 -4px 16px rgba(0,0,0,.25)}
     #cookie-banner p{flex:1;min-width:220px;line-height:1.5}
     #cookie-banner a{color:var(--gold);text-decoration:underline;cursor:pointer}
     .cookie-btns{display:flex;gap:8px;flex-shrink:0}
-    .btn-cookie-accept{background:var(--gold);color:var(--navy);border:none;padding:8px 18px;border-radius:4px;font-size:13px;font-weight:600;cursor:pointer}
+    .btn-cookie-accept{background:#fff;color:var(--black);border:none;padding:8px 18px;border-radius:4px;font-size:13px;font-weight:500;cursor:pointer}
     .btn-cookie-decline{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.25);padding:8px 14px;border-radius:4px;font-size:13px;cursor:pointer}
 
     /* PRIVACY MODAL */
     #privacy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;overflow-y:auto;padding:40px 16px}
     #privacy-overlay.open{display:block}
     .privacy-box{background:#fff;border-radius:10px;max-width:680px;margin:0 auto;padding:32px;position:relative}
-    .privacy-box h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .privacy-box h2{font-family:var(--font-serif);font-size:24px;font-weight:400;color:var(--black);margin-bottom:4px}
     .privacy-box .pp-date{font-size:12px;color:var(--grey-text);margin-bottom:20px}
-    .privacy-box h3{font-size:15px;font-weight:600;color:var(--navy);margin:20px 0 6px}
+    .privacy-box h3{font-size:15px;font-weight:500;color:var(--black);margin:20px 0 6px}
     .privacy-box p,.privacy-box li{font-size:14px;color:#333;line-height:1.7}
     .privacy-box ul{padding-left:20px;margin-top:4px}
     .privacy-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--grey-text)}
 
-    footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px}
+    footer{background:var(--black);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:13px}
     footer p+p{margin-top:6px}
 
     /* BOOKING MODAL */
@@ -182,44 +228,43 @@
     .bk-overlay.open{display:flex}
     .bk-modal{background:#fff;border-radius:12px;max-width:520px;width:100%;position:relative;margin:auto}
     .bk-header{padding:20px 24px 0;display:flex;align-items:flex-start;justify-content:space-between}
-    .bk-header h2{font-size:20px;font-weight:700;color:var(--navy)}
+    .bk-header h2{font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--black)}
     .bk-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--grey-text);padding:0;line-height:1}
     .bk-steps{display:flex;border-bottom:1px solid var(--grey-mid);padding:0 24px;margin-top:12px}
     .bk-step{font-size:12px;padding:10px 12px;color:var(--grey-text);border-bottom:2px solid transparent;font-weight:500;white-space:nowrap}
-    .bk-step.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:700}
+    .bk-step.active{color:var(--black);border-bottom-color:var(--black);font-weight:600}
     .bk-step.done{color:var(--green)}
     .bk-body{padding:20px 24px 24px}
-    .bk-hotel-nm{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px}
+    .bk-hotel-nm{font-size:16px;font-weight:500;color:var(--black);margin-bottom:12px}
     .bk-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--grey-mid)}
     .bk-row:last-child{border-bottom:none}
     .bk-lbl{color:var(--grey-text)}
-    .bk-val{font-weight:600;text-align:right}
+    .bk-val{font-weight:500;text-align:right}
     .bk-total{display:flex;justify-content:space-between;align-items:center;background:var(--green-lt);border-radius:6px;padding:12px 16px;margin:16px 0}
-    .bk-total-lbl{font-size:14px;color:var(--green);font-weight:600}
-    .bk-total-amt{font-size:22px;font-weight:700;color:var(--green)}
+    .bk-total-lbl{font-size:14px;color:var(--green);font-weight:500}
+    .bk-total-amt{font-size:22px;font-weight:500;color:var(--green)}
     .bk-policy{background:#fffbf0;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;color:#92400e;margin:12px 0;line-height:1.5}
     .bk-form-row{margin-bottom:14px}
-    .bk-form-row label{display:block;font-size:12px;font-weight:600;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-    .bk-form-row input{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:11px 13px;font-size:14px;outline:none}
-    .bk-form-row input:focus{border-color:var(--navy)}
+    .bk-form-row label{display:block;font-size:12px;font-weight:500;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+    .bk-form-row input{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:11px 13px;font-size:14px;outline:none;font-family:var(--font-sans)}
+    .bk-form-row input:focus{border-color:var(--black)}
     .bk-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .btn-bk{width:100%;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:14px;border-radius:6px;border:none;cursor:pointer;margin-top:8px}
-    .btn-bk:hover{opacity:.88}
-    .btn-bk:disabled{background:#aaa;cursor:not-allowed}
+    .btn-bk{width:100%;background:var(--black);color:#fff;font-size:15px;font-weight:500;padding:14px;border-radius:6px;border:none;cursor:pointer;margin-top:8px;font-family:var(--font-sans);letter-spacing:.02em}
+    .btn-bk:hover{opacity:.85}
+    .btn-bk:disabled{background:#ccc;cursor:not-allowed}
     .btn-bk.green{background:var(--green)}
     .bk-spinner{text-align:center;padding:32px;color:var(--grey-text)}
     .bk-err{background:var(--red-lt);border:1px solid #fca5a5;border-radius:6px;padding:12px;font-size:13px;color:var(--red);margin:10px 0}
     #bk-pay-container{min-height:180px}
     .bk-confirm-icon{font-size:52px;text-align:center;margin-bottom:12px}
     .bk-ref-box{background:var(--green-lt);border:1px solid var(--green);border-radius:6px;padding:12px 16px;text-align:center;margin:16px 0}
-    .bk-ref-lbl{font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-    .bk-ref-id{font-size:20px;font-weight:700;color:var(--navy);font-family:monospace;margin-top:4px;word-break:break-all}
+    .bk-ref-lbl{font-size:11px;color:var(--green);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
+    .bk-ref-id{font-size:20px;font-weight:500;color:var(--black);font-family:monospace;margin-top:4px;word-break:break-all}
 
     @media(max-width:600px){
-      .hotel-card{grid-template-columns:1fr}
-      .hotel-img{min-height:160px}
+      .hotel-grid{grid-template-columns:1fr;gap:24px}
       .search-bar{flex-direction:column}
-      .trust-strip{flex-direction:column;gap:12px}
+      .hero h1{font-size:28px}
     }
   </style>
 </head>
@@ -234,20 +279,22 @@
 <nav>
   <a href="/" class="logo">Maldives Escape</a>
   <div class="nav-right">
-    <span id="member-nav">✓ Member</span>
-    <span class="nav-link" onclick="openModal()">How it works</span>
-    <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Join free</button>
+      <a class="nav-link" href="/north male atoll.html">North Male Atoll</a>
+      <a class="nav-link" href="/south male atoll.html">South Male Atoll</a>
+      <a class="nav-link" href="/baa atoll.html">Baa Atoll</a>
+    <span id="member-nav">Member</span>
+    <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Sign in</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Overwater Villas · Members Save 10–25%</p>
-  <h1>Private island resort Exclusive member rates on luxury hotels</h1>
+  <h1>Private island resort rates you won't find on Booking.com</h1>
   <p class="hero-sub">Member-only pricing on Maldives overwater villas and private island resorts. No minimum stay. Rates updated live.</p>
   <div class="search-bar">
     <div class="sf">
-      <label>Destination</label>
+      <label for="city-select">Destination</label>
       <select id="city-select">
         <option value="North Male Atoll">North Malé Atoll</option>
         <option value="South Male Atoll">South Malé Atoll</option>
@@ -255,15 +302,15 @@
       </select>
     </div>
     <div class="sf">
-      <label>Check-in</label>
+      <label for="checkin">Check-in</label>
       <input type="date" id="checkin" />
     </div>
     <div class="sf">
-      <label>Check-out</label>
+      <label for="checkout">Check-out</label>
       <input type="date" id="checkout" />
     </div>
     <div class="sf" style="max-width:80px">
-      <label>Guests</label>
+      <label for="guests">Guests</label>
       <select id="guests">
         <option>1</option>
         <option selected>2</option>
@@ -314,7 +361,7 @@
   <div class="editorial">
     <h2>About Maldives Escape member pricing</h2>
     <p>Maldives resorts sell a portion of their unsold overwater villas and beach villas at <strong>net rates</strong> — well below their public retail price — through Closed User Group (CUG) channels. These rates are legally protected: they can only be shown to verified members of private platforms.</p>
-    <p>Maldives Escape operates as a CUG platform. When you join, you access villa rates on top-rated Maldives resorts <strong>below the public retail price</strong>. Same resort, same villa, same dates — just a better price because you're booking through a member channel.</p>
+    <p>Maldives Escape operates as a CUG platform. When you join, you access villa rates on top-rated Maldives resorts <strong>10–25% below Booking.com public prices</strong>. Same resort, same villa, same dates — just a better price because you're booking through a member channel.</p>
     <p>The best availability windows are <strong>60–90 days out</strong> for peak season (November–April) and <strong>7–14 days out</strong> for last-minute green season deals. Green season (May–October) has the deepest discounts.</p>
   </div>
 
@@ -327,7 +374,7 @@
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
         How much do members actually save on Maldives resorts? <span class="chevron">▼</span>
       </div>
-      <div class="faq-a">Members typically save 10–25% compared to public retail prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity.</div>
+      <div class="faq-a">Members typically save 10–25% compared to Booking.com or direct booking prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -379,7 +426,7 @@
 <!-- PRIVACY POLICY MODAL -->
 <div id="privacy-overlay" onclick="closePrivacyOutside(event)">
   <div class="privacy-box">
-    <button class="privacy-close" onclick="closePrivacy()">✕</button>
+    <button class="privacy-close" onclick="closePrivacy()" aria-label="Close">✕</button>
     <h2>Privacy &amp; Cookie Policy</h2>
     <p class="pp-date">Last updated: 2026</p>
 
@@ -419,11 +466,11 @@
 <!-- JOIN MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
 
     <div id="modal-form-view">
       <h2>Join Maldives Escape — it's free</h2>
-      <p class="modal-sub">Unlock member-only villa rates below retail. Takes 10 seconds.</p>
+      <p class="modal-sub">Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.</p>
       <div class="modal-perks">
         <div class="perk"><span class="perk-icon">🏝️</span><span>Access overwater villa rates 10–25% below retail</span></div>
         <div class="perk"><span class="perk-icon">💎</span><span>Save $150–$400 per night on top resorts</span></div>
@@ -455,11 +502,9 @@
         <div style="flex:1;height:1px;background:var(--grey-mid)"></div>
       </div>
 
-      <!-- Email fallback (also Netlify Form) -->
-      <form name="maldives-escape-members" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="handleJoin(event)">
-        <input type="hidden" name="form-name" value="maldives-escape-members" />
-        <input type="hidden" name="bot-field" />
-        <input type="email" name="email" id="join-email" placeholder="your@email.com" required autocomplete="email" />
+      <!-- Email signup -->
+      <form onsubmit="handleJoin(event)">
+        <input type="email" id="join-email" placeholder="your@email.com" required autocomplete="email" />
         <button type="submit" class="btn-join-modal">Unlock member rates →</button>
         <p class="modal-terms">By joining you agree to our <a href="#" style="color:var(--grey-text)">terms</a>. No spam, unsubscribe any time.</p>
       </form>
@@ -478,7 +523,7 @@
   <div class="bk-modal">
     <div class="bk-header">
       <h2 id="bk-title">Book Hotel</h2>
-      <button class="bk-close" onclick="closeBkModal()">✕</button>
+      <button class="bk-close" onclick="closeBkModal()" aria-label="Close">✕</button>
     </div>
     <div class="bk-steps" id="bk-steps">
       <span class="bk-step active" id="bk-s1">1. Summary</span>
@@ -494,11 +539,11 @@
       <div id="bk-p2" style="display:none">
         <form id="bk-guest-form" onsubmit="submitGuestDetails(event)">
           <div class="bk-cols">
-            <div class="bk-form-row"><label>First name *</label><input type="text" id="bk-first" required placeholder="First"/></div>
-            <div class="bk-form-row"><label>Last name *</label><input type="text" id="bk-last" required placeholder="Last"/></div>
+            <div class="bk-form-row"><label for="bk-first">First name *</label><input type="text" id="bk-first" required placeholder="First"/></div>
+            <div class="bk-form-row"><label for="bk-last">Last name *</label><input type="text" id="bk-last" required placeholder="Last"/></div>
           </div>
-          <div class="bk-form-row"><label>Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
-          <div class="bk-form-row"><label>Phone (with country code)</label><input type="tel" id="bk-phone" placeholder="+44 7700 900000"/></div>
+          <div class="bk-form-row"><label for="bk-email">Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
+          <div class="bk-form-row"><label for="bk-phone">Phone (with country code) *</label><input type="tel" id="bk-phone" required placeholder="+44 7700 900000"/></div>
           <div id="bk-guest-err"></div>
           <button type="submit" class="btn-bk">Continue to payment →</button>
         </form>
@@ -526,11 +571,13 @@
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────
-const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
+const API_BASE    = '/api/liteapi'; // server-side proxy — key never in browser (Cloudflare Pages Function)
 const MARKUP      = 0.15;       // fallback static markup (used by calcMemberPrice default)
 const MIN_SAVING  = 0.08;   // members always save at least this % vs retail
+
+
 // ── TEST MODE ─────────────────────────────────────────────────
-const TEST_MODE = true;
+const TEST_MODE = false;
 
 // ── DYNAMIC MARKUP — urgency tiers ───────────────────────────
 // Same-day/next-day bookers pay more (higher urgency = higher willingness to pay)
@@ -649,7 +696,11 @@ function renderHotels(city, checkin, checkout) {
   document.getElementById('result-count').textContent = `${hotels.length} hotel${hotels.length !== 1 ? 's' : ''}`;
 
   grid.innerHTML = hotels.map(h => buildCard(h)).join('');
-  hotels.forEach(h => fetchRate(h, checkin, checkout));
+  // Fetch live rates and hotel photos in parallel
+  hotels.forEach(h => {
+    fetchRate(h, checkin, checkout);
+    loadHotelPhoto(h.id);
+  });
 }
 
 // ── BUILD CARD ────────────────────────────────────────────────
@@ -657,7 +708,8 @@ function buildCard(h) {
   return `
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
-      <span>${h.emoji}</span>
+      <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" />
+      <span class="img-fallback">${h.emoji}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
     <div class="hotel-body">
@@ -665,7 +717,7 @@ function buildCard(h) {
         <div class="hotel-name">${h.name}</div>
         <div class="hotel-stars">★★★★★</div>
       </div>
-      <div class="hotel-loc">📍 ${h.area} · ${h.dist}</div>
+      <div class="hotel-loc">${h.area}</div>
       <div class="hotel-desc">${h.desc}</div>
       <div class="hotel-tags">${h.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
       <div class="hotel-footer">
@@ -678,6 +730,32 @@ function buildCard(h) {
   </article>`;
 }
 
+// ── HOTEL PHOTO ───────────────────────────────────────────────
+const photoCache = {};
+async function loadHotelPhoto(hotelId) {
+  const imgEl = document.getElementById(`photo-${hotelId}`);
+  if (!imgEl) return;
+  if (photoCache[hotelId]) {
+    imgEl.src = photoCache[hotelId];
+    imgEl.onload = () => imgEl.classList.add('loaded');
+    return;
+  }
+  try {
+    const resp = await fetch(`${API_BASE}?ep=data/hotel&hotelId=${hotelId}`, {
+      headers: { 'accept': 'application/json' }
+    });
+    if (!resp.ok) return;
+    const data = await resp.json();
+    const images = data?.data?.hotelImages;
+    const img = images?.find(i => /room|exterior|lobby|pool/i.test(i.caption || '')) || images?.[0];
+    if (img?.url) {
+      photoCache[hotelId] = img.url;
+      imgEl.src = img.url;
+      imgEl.onload = () => imgEl.classList.add('loaded');
+    }
+  } catch { /* silently ignore — emoji fallback remains visible */ }
+}
+
 // ── FETCH RATE ────────────────────────────────────────────────
 async function fetchRate(h, checkin, checkout) {
   const cacheKey = `${h.id}-${checkin}-${checkout}`;
@@ -687,9 +765,12 @@ async function fetchRate(h, checkin, checkout) {
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     const resp = await fetch(`${API_BASE}?ep=hotels/rates`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         hotelIds: [h.id],
         occupancies: [{ adults: parseInt(document.getElementById('guests').value) }],
@@ -698,6 +779,7 @@ async function fetchRate(h, checkin, checkout) {
         checkin, checkout
       })
     });
+    clearTimeout(timeout);
 
     if (!resp.ok) throw new Error(`API ${resp.status}`);
     const data = await resp.json();
@@ -711,16 +793,17 @@ async function fetchRate(h, checkin, checkout) {
     const netCost  = rate.total?.[0]?.amount;
     const ssp      = rate.suggestedSellingPrice?.[0]?.amount;
     const rateId   = hotel?.roomTypes?.[0]?.rates?.[0]?.rateId;
+    const offerId  = hotel?.roomTypes?.[0]?.offerId;
     const roomName = hotel?.roomTypes?.[0]?.name || 'Standard Room';
     const mu       = getDynamicMarkup(checkin);
-    const result   = { netCost, ssp, rateId, roomName, markup: mu };
+    const result   = { netCost, ssp, rateId, offerId, roomName, markup: mu };
     ratesCache[cacheKey] = result;
     updateCardPrice(h, result);
     track('hotel_viewed', { hotel_id: h.id, hotel_name: h.name, ssp,
       member_price: calcMemberPrice(netCost, ssp, mu), markup_pct: Math.round(mu * 100) });
 
   } catch(e) {
-    updateCardPrice(h, { error: e.message });
+    updateCardPrice(h, { error: e.name === 'AbortError' ? 'Request timed out' : e.message });
   }
 }
 
@@ -731,10 +814,17 @@ function updateCardPrice(h, data) {
   if (!priceEl) return;
 
   if (!data || data.error) {
-    priceEl.innerHTML = `<span class="rate-loading">${data?.error?.includes('No rooms') ? 'No availability' : 'Unavailable'}</span>`;
+    priceEl.innerHTML = `<span style="color:var(--grey-text);font-size:13px">No availability for these dates</span>`;
     btnEl.innerHTML = '';
+    // Sink unavailable cards to the bottom of the grid
+    const card = document.getElementById(`card-${h.id}`);
+    if (card) card.classList.add('unavailable');
     return;
   }
+
+  // Available — make sure card is visible (e.g. after a date change)
+  const card = document.getElementById(`card-${h.id}`);
+  if (card) card.classList.remove('unavailable');
 
   const { netCost, ssp } = data;
   const displaySsp  = ssp || netCost;
@@ -744,19 +834,22 @@ function updateCardPrice(h, data) {
 
   if (isMember && memberPrice) {
     priceEl.innerHTML = `
-      <div class="price-label">Member rate / night</div>
-      ${ssp ? `<div class="price-was">Retail: ${fmt(ssp)}</div>` : ''}
+      <div class="price-label">From</div>
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
-      ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
-    btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
+    btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">View details</button>`;
+    // Track: member sees their exclusive rate
+    track('rate_revealed', { hotel_id: h.id, hotel_name: h.name, member_price: memberPrice, ssp: displaySsp });
+    // Track: savings comparison displayed
+    if (saving > 0) {
+      track('price_comparison_viewed', { hotel_id: h.id, hotel_name: h.name, saving_pct: saving, member_price: memberPrice, ota_price: displaySsp });
+    }
   } else {
     priceEl.innerHTML = `
-      <div class="price-label">Public rate / night</div>
+      <div class="price-label">From</div>
       <div class="price-main public">${fmt(displaySsp)} <span class="price-per">/ night</span></div>
-      ${saving > 0 ? `<span class="lock-badge">🔒 Member rate available</span>` : ''}
     `;
-    btnEl.innerHTML = `<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>`;
+    btnEl.innerHTML = `<button class="btn-unlock" onclick="openModal()">Sign in for member rate</button>`;
   }
 }
 
@@ -791,7 +884,7 @@ async function bookHotel(id, name) {
   const cacheKey = `${id}-${checkin}-${checkout}`;
   const rate     = ratesCache[cacheKey];
 
-  if (!rate?.rateId) {
+  if (!rate?.offerId) {
     alert('Rate data has expired — please search again to refresh prices.');
     return;
   }
@@ -821,13 +914,15 @@ async function doPrebook() {
     return;
   }
   try {
-    const resp = await fetch(`${API_BASE}?ep=hotels/prebook`, {
+    const resp = await fetch(`${API_BASE}?ep=rates/prebook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
-      body: JSON.stringify({ rateId: bkSess.rateId })
+      body: JSON.stringify({ offerId: bkSess.offerId, usePaymentSdk: true })
     });
     if (!resp.ok) throw new Error(`Status ${resp.status}`);
-    const data = await resp.json();
+    const raw = await resp.text();
+    if (!raw) throw new Error('Empty prebook response');
+    const data = JSON.parse(raw);
     const pb   = data?.data;
     if (!pb?.prebookId) throw new Error('No prebookId in response');
 
@@ -849,7 +944,7 @@ async function doPrebook() {
 
 function renderBkSummary() {
   const { hotelName, checkin, checkout, confirmedPrice, currency, cancelPolicy, roomName } = bkSess;
-  const nights = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
+  const nights = Math.max(1, Math.round((new Date(checkout) - new Date(checkin)) / 86400000));
   const sym    = currency === 'GBP' ? '£' : currency === 'USD' ? '$' : '€';
   const fmt    = n => sym + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0,maximumFractionDigits:0});
 
@@ -877,7 +972,11 @@ function submitGuestDetails(e) {
   const firstName = document.getElementById('bk-first').value.trim();
   const lastName  = document.getElementById('bk-last').value.trim();
   const email     = document.getElementById('bk-email').value.trim();
-  const phone     = document.getElementById('bk-phone').value.trim() || '+440000000000';
+  const phone     = document.getElementById('bk-phone').value.trim();
+  if (!phone) {
+    errEl.innerHTML = '<div class="bk-err">Please enter your phone number with country code.</div>';
+    return;
+  }
 
   if (!firstName || !lastName || !email) {
     errEl.innerHTML = '<div class="bk-err">Please complete all required fields.</div>';
@@ -958,14 +1057,14 @@ async function confirmBooking() {
     const { prebookId, holder, transactionId, hotelName, checkin, checkout } = bkSess;
     const adults = parseInt(document.getElementById('guests').value) || 2;
 
-    const resp = await fetch(`${API_BASE}?ep=hotels/book`, {
+    const resp = await fetch(`${API_BASE}?ep=rates/book`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
       body: JSON.stringify({
         prebookId,
         holder:  { firstName: holder.firstName, lastName: holder.lastName, email: holder.email, phone: holder.phone },
         guests:  [{ occupancy: { adults }, firstName: holder.firstName, lastName: holder.lastName }],
-        payment: { method: 'CREDIT_CARD', transactionId }
+        payment: { method: 'TRANSACTION_ID', transactionId }
       })
     });
     if (!resp.ok) throw new Error(`Status ${resp.status}`);
@@ -980,6 +1079,7 @@ async function confirmBooking() {
        <p>Confirmation sent to: ${holder.email}</p>`;
     track('booking_completed', { hotel_name: hotelName, checkin, checkout,
       booking_ref: bookingRef, revenue: bkSess.confirmedPrice, currency: bkSess.currency });
+    
     setBkStep(4);
 
   } catch(err) {
@@ -1013,13 +1113,6 @@ async function handleJoin(e) {
   e.preventDefault();
   const email = document.getElementById('join-email').value;
   if (!email) return;
-  try {
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'maldives-escape-members', email, source: 'email' })
-    });
-  } catch(err) {}
   activateMember(email, '');
 }
 
@@ -1030,6 +1123,8 @@ function activateMember(email, name) {
   isMember = true;
   if (window.posthog) posthog.identify(email, { name: name || undefined });
   track('member_joined', { method: name ? 'google' : 'email' });
+  // Capture signup server-side (fire-and-forget)
+  try { fetch('/api/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, source: name ? 'google' : 'email' }) }).catch(() => {}); } catch(e) {}
 
   document.getElementById('modal-form-view').style.display = 'none';
   document.getElementById('modal-success').style.display = 'block';
@@ -1085,7 +1180,26 @@ function closePrivacy() { document.getElementById('privacy-overlay').classList.r
 function closePrivacyOutside(e) { if (e.target.id === 'privacy-overlay') closePrivacy(); }
 
 // ── ANALYTICS INSTRUMENTATION ─────────────────────────────────
+
+// Editorial CTA click tracking — captures any link/button click inside .editorial sections
+// This fires for comparison guide CTAs, "see member rates" links, etc.
+document.addEventListener('click', function(e) {
+  var target = e.target.closest('.editorial a, .editorial button, [data-editorial-cta]');
+  if (target) {
+    track('editorial_cta_clicked', {
+      cta_text: (target.textContent || '').trim().slice(0, 100),
+      cta_href: target.href || '',
+      section: (target.closest('.editorial')?.querySelector('h2')?.textContent || '').trim()
+    });
+  }
+});
+
+var _searchLock = false;
 function doSearch() {
+  if (_searchLock) return;
+  _searchLock = true;
+  var btn = document.getElementById('search-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Searching...'; }
   track('hotel_search', {
     city: document.getElementById('city-select').value,
     checkin: document.getElementById('checkin').value,
@@ -1093,6 +1207,7 @@ function doSearch() {
     guests: document.getElementById('guests').value
   });
   _origDoSearch();
+  setTimeout(function(){ _searchLock = false; if (btn) { btn.disabled = false; btn.textContent = 'Search'; } }, 3000);
 }
 
 // ── INIT ──────────────────────────────────────────────────────

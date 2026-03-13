@@ -1,0 +1,56 @@
+name: Orchestrator — Weekly Autonomous Loop
+
+on:
+  schedule:
+    # Wednesday 05:00 UTC — 2 days after Sunday digest, giving time for triage
+    - cron: '0 5 * * 3'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - dry-run
+          - signals-only
+
+permissions:
+  contents: write
+  actions: write
+  issues: read
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Run orchestrator
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          POSTHOG_PROJECT_KEY: ${{ secrets.POSTHOG_PROJECT_KEY }}
+          POSTHOG_PERSONAL_KEY: ${{ secrets.POSTHOG_PERSONAL_KEY }}
+          POSTHOG_PROJECT_ID: ${{ secrets.POSTHOG_PROJECT_ID }}
+          CI: true
+        run: |
+          MODE_FLAG=""
+          if [ "${{ github.event.inputs.mode }}" = "dry-run" ]; then
+            MODE_FLAG="--dry-run"
+          elif [ "${{ github.event.inputs.mode }}" = "signals-only" ]; then
+            MODE_FLAG="--signals-only"
+          fi
+          node autoresearch/orchestrate.js $MODE_FLAG

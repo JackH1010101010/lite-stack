@@ -1,11 +1,14 @@
-# Cloudflare Pages configuration for LuxStay
-# Functions in /functions/ are auto-deployed as Pages Functions
-# Static assets are served from pages_build_output_dir after build
+# Cloudflare Worker configuration for LuxStay
+# worker.js handles /api/liteapi proxy + static asset passthrough
+# Static assets are served from sites/luxstay/ after build
 
 name = "luxstay"
-pages_build_output_dir = "sites/luxstay"
+main = "worker.js"
 compatibility_date = "2024-09-23"
 
-[vars]
-# Non-secret env vars can go here
-# LITEAPI_KEY must be set as a secret via the dashboard
+[assets]
+directory = "sites/luxstay"
+
+# LITEAPI_KEY must be set as a secret via:
+#   npx wrangler secret put LITEAPI_KEY
+# or in the Cloudflare dashboard under Settings → Variables and Secrets

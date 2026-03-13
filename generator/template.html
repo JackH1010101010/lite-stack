@@ -531,7 +531,7 @@
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────
-const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
+const API_BASE    = '/api/liteapi'; // server-side proxy — key never in browser (Cloudflare Pages Function)
 const MARKUP      = {{MARKUP}};       // fallback static markup (used by calcMemberPrice default)
 const MIN_SAVING  = {{MIN_SAVING}};   // members always save at least this % vs retail
 {{EMAILJS_CONFIG_JS}}

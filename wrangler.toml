@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration for LuxStay
+# Functions in /functions/ are auto-deployed as Pages Functions
+# Static assets are served from pages_build_output_dir after build
+
+name = "luxstay"
+pages_build_output_dir = "sites/luxstay"
+compatibility_date = "2024-09-23"
+
+[vars]
+# Non-secret env vars can go here
+# LITEAPI_KEY must be set as a secret via the dashboard

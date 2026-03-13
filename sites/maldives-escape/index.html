@@ -130,8 +130,8 @@
     .hotel-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
     .hotel-img{position:relative;background:linear-gradient(135deg,#e8e5e0,#d5d0c8);display:flex;align-items:center;justify-content:center;font-size:40px;aspect-ratio:3/2;overflow:hidden}
     .hotel-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
-    .hotel-img img.loaded{opacity:1}
-    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none}
+    .hotel-img img.loaded{opacity:1;z-index:2}
+    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none;font-family:var(--font);font-weight:600;color:var(--grey-text);opacity:.4;font-size:32px;letter-spacing:.02em}
     .hotel-card.unavailable{opacity:.45;order:99}
     .hotel-badge{display:none}
     .hotel-body{padding:20px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
@@ -272,16 +272,16 @@
 
 <!-- TEST MODE BANNER (hidden in production) -->
 <div id="test-banner" style="display:none;background:#b45309;color:#fff;text-align:center;font-size:12px;font-weight:600;padding:6px;letter-spacing:.05em">
-  ⚠ TEST MODE — No real bookings or charges will be made
+  TEST MODE — No real bookings or charges will be made
 </div>
 
 <!-- NAV -->
 <nav>
   <a href="/" class="logo">Maldives Escape</a>
   <div class="nav-right">
-      <a class="nav-link" href="/north male atoll.html">North Male Atoll</a>
-      <a class="nav-link" href="/south male atoll.html">South Male Atoll</a>
-      <a class="nav-link" href="/baa atoll.html">Baa Atoll</a>
+      <a class="nav-link" href="/north-male-atoll.html">North Male Atoll</a>
+      <a class="nav-link" href="/south-male-atoll.html">South Male Atoll</a>
+      <a class="nav-link" href="/baa-atoll.html">Baa Atoll</a>
     <span id="member-nav">Member</span>
     <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Sign in</button>
   </div>
@@ -326,7 +326,7 @@
 
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
-    <span class="cug-icon">🔒</span>
+    <span class="cug-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
     <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
@@ -472,10 +472,10 @@
       <h2>Join Maldives Escape — it's free</h2>
       <p class="modal-sub">Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.</p>
       <div class="modal-perks">
-        <div class="perk"><span class="perk-icon">🏝️</span><span>Access overwater villa rates 10–25% below retail</span></div>
-        <div class="perk"><span class="perk-icon">💎</span><span>Save $150–$400 per night on top resorts</span></div>
-        <div class="perk"><span class="perk-icon">🚫</span><span>No subscription, no booking fees</span></div>
-        <div class="perk"><span class="perk-icon">🌊</span><span>3 atolls covered — more coming</span></div>
+        <div class="perk"><span class="perk-icon">✦</span><span>Access overwater villa rates 10–25% below retail</span></div>
+        <div class="perk"><span class="perk-icon">★</span><span>Save $150–$400 per night on top resorts</span></div>
+        <div class="perk"><span class="perk-icon">✕</span><span>No subscription, no booking fees</span></div>
+        <div class="perk"><span class="perk-icon">~</span><span>3 atolls covered — more coming</span></div>
       </div>
 
       <!-- Google One Tap sign-in -->
@@ -511,7 +511,7 @@
     </div>
 
     <div class="modal-success" id="modal-success">
-      <div class="tick">✅</div>
+      <div class="tick"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
       <h3>You're in!</h3>
       <p>Member rates are now unlocked. Refresh prices to see your savings on Maldives resorts.</p>
     </div>
@@ -555,7 +555,7 @@
       </div>
       <!-- Step 4: Confirmation -->
       <div id="bk-p4" style="display:none">
-        <div class="bk-confirm-icon">🎉</div>
+        <div class="bk-confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 style="text-align:center;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px">Booking confirmed!</h3>
         <p style="text-align:center;font-size:14px;color:var(--grey-text);margin-bottom:4px">Check your email for full details.</p>
         <div class="bk-ref-box">
@@ -603,25 +603,25 @@ function calcMemberPrice(netCost, ssp, markup) {
 // ── HOTEL DATA ────────────────────────────────────────────────
 const HOTELS = {
   North Male Atoll: [
-    {id:'lp655762c1', name:'Velassaru Maldives', emoji:'🌴', area:'North Malé Atoll', dist:'25 min speedboat', desc:'Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.', tags:["Overwater villa","Pool","Spa"], badge:'Best value'},
-    {id:'lp65574e0c', name:'Cocoon Maldives', emoji:'🥥', area:'Ookolhufinolhu Island', dist:'35 min speedboat', desc:'Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.', tags:["Boutique","Snorkelling","Beach bar"], badge:null},
-    {id:'lp655769b2', name:'Meeru Maldives Resort', emoji:'🐠', area:'Meerufenfushi Island', dist:'45 min speedboat', desc:'One of the Maldives\' largest resorts. Diverse marine life, water sports, spa.', tags:["Marine life","Water sports","Spa"], badge:null},
-    {id:'lp65574cc3', name:'Bandos Maldives', emoji:'🌺', area:'Bandos Island', dist:'20 min speedboat', desc:'Classic Maldives resort. Dive centre, water sports, panoramic restaurant.', tags:["Diving","Water sports","Classic"], badge:null},
+    {id:'lp655762c1', name:'Velassaru Maldives', area:'North Malé Atoll', dist:'25 min speedboat', desc:'Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.', tags:["Overwater villa","Pool","Spa"], badge:'Best value'},
+    {id:'lp65574e0c', name:'Cocoon Maldives', area:'Ookolhufinolhu Island', dist:'35 min speedboat', desc:'Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.', tags:["Boutique","Snorkelling","Beach bar"], badge:null},
+    {id:'lp655769b2', name:'Meeru Maldives Resort', area:'Meerufenfushi Island', dist:'45 min speedboat', desc:'One of the Maldives\' largest resorts. Diverse marine life, water sports, spa.', tags:["Marine life","Water sports","Spa"], badge:null},
+    {id:'lp65574cc3', name:'Bandos Maldives', area:'Bandos Island', dist:'20 min speedboat', desc:'Classic Maldives resort. Dive centre, water sports, panoramic restaurant.', tags:["Diving","Water sports","Classic"], badge:null},
   ],
   South Male Atoll: [
-    {id:'lp6557621e', name:'Anantara Dhigu Maldives', emoji:'✨', area:'South Malé Atoll', dist:'30 min speedboat', desc:'Luxury 5★ resort with overwater bungalows. 2 pools, 3 restaurants, spa.', tags:["Overwater bungalow","Pool","Spa"], badge:'Best value'},
-    {id:'lp65576388', name:'Centara Grand Maldives', emoji:'🌅', area:'Olhuveli Island', dist:'45 min speedboat', desc:'5★ with the longest overwater bar in the Maldives. Waterslides, snorkelling.', tags:["Overwater bar","Waterslides","Snorkelling"], badge:null},
-    {id:'lp6557618c', name:'Cinnamon Hakuraa Huraa', emoji:'🌊', area:'Meemu Atoll', dist:'25 min seaplane', desc:'Remote 5★ resort. Crystal-clear lagoon, dolphin spotting, sunset cruises.', tags:["Remote","Dolphins","Sunset cruises"], badge:null},
+    {id:'lp6557621e', name:'Anantara Dhigu Maldives', area:'South Malé Atoll', dist:'30 min speedboat', desc:'Luxury 5★ resort with overwater bungalows. 2 pools, 3 restaurants, spa.', tags:["Overwater bungalow","Pool","Spa"], badge:'Best value'},
+    {id:'lp65576388', name:'Centara Grand Maldives', area:'Olhuveli Island', dist:'45 min speedboat', desc:'5★ with the longest overwater bar in the Maldives. Waterslides, snorkelling.', tags:["Overwater bar","Waterslides","Snorkelling"], badge:null},
+    {id:'lp6557618c', name:'Cinnamon Hakuraa Huraa', area:'Meemu Atoll', dist:'25 min seaplane', desc:'Remote 5★ resort. Crystal-clear lagoon, dolphin spotting, sunset cruises.', tags:["Remote","Dolphins","Sunset cruises"], badge:null},
   ],
   Baa Atoll: [
-    {id:'lp655768a4', name:'Four Seasons Landaa Giraavaru', emoji:'🐋', area:'Baa Atoll UNESCO', dist:'30 min seaplane', desc:'World-class 5★ in UNESCO Biosphere Reserve. Manta rays, marine biology centre.', tags:["Manta rays","UNESCO","Marine biology"], badge:'Best value'},
-    {id:'lp65576a12', name:'Amilla Maldives', emoji:'🦈', area:'Baa Atoll', dist:'35 min seaplane', desc:'Adults-first sanctuary. Private pool villas, whale sharks, organic garden.', tags:["Adults only","Whale sharks","Pool villa"], badge:null},
-    {id:'lp65576b88', name:'Milaidhoo Island Maldives', emoji:'🌸', area:'Baa Atoll UNESCO', dist:'30 min seaplane', desc:'Intimate 5★ boutique resort. Only 50 villas. House reef, Baa Atoll diving.', tags:["Boutique","House reef","Diving"], badge:null},
+    {id:'lp655768a4', name:'Four Seasons Landaa Giraavaru', area:'Baa Atoll UNESCO', dist:'30 min seaplane', desc:'World-class 5★ in UNESCO Biosphere Reserve. Manta rays, marine biology centre.', tags:["Manta rays","UNESCO","Marine biology"], badge:'Best value'},
+    {id:'lp65576a12', name:'Amilla Maldives', area:'Baa Atoll', dist:'35 min seaplane', desc:'Adults-first sanctuary. Private pool villas, whale sharks, organic garden.', tags:["Adults only","Whale sharks","Pool villa"], badge:null},
+    {id:'lp65576b88', name:'Milaidhoo Island Maldives', area:'Baa Atoll UNESCO', dist:'30 min seaplane', desc:'Intimate 5★ boutique resort. Only 50 villas. House reef, Baa Atoll diving.', tags:["Boutique","House reef","Diving"], badge:null},
   ],
 };
 
 // ── STATE ─────────────────────────────────────────────────────
-let isMember = localStorage.getItem('luxstay_member') === '1';
+let isMember = localStorage.getItem('maldives_escape_member') === '1';
 let currentCity = 'North Male Atoll';
 let ratesCache = {};
 if (TEST_MODE) document.getElementById('test-banner').style.display = 'block';
@@ -709,7 +709,7 @@ function buildCard(h) {
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
       <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" />
-      <span class="img-fallback">${h.emoji}</span>
+      <span class="img-fallback">${h.name.charAt(0)}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
     <div class="hotel-body">
@@ -753,7 +753,7 @@ async function loadHotelPhoto(hotelId) {
       imgEl.src = img.url;
       imgEl.onload = () => imgEl.classList.add('loaded');
     }
-  } catch { /* silently ignore — emoji fallback remains visible */ }
+  } catch { /* silently ignore — letter fallback remains visible */ }
 }
 
 // ── FETCH RATE ────────────────────────────────────────────────
@@ -960,7 +960,7 @@ function renderBkSummary() {
       <span class="bk-total-lbl">Member total</span>
       <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
     </div>
-    <div class="bk-policy">📋 <strong>Cancellation:</strong> ${cancelPolicy}</div>
+    <div class="bk-policy"><strong>Cancellation:</strong> ${cancelPolicy}</div>
     <button class="btn-bk" onclick="setBkStep(2)">Continue to guest details →</button>`;
 }
 
@@ -994,7 +994,7 @@ function loadPaymentSDK() {
     const amt = sym + parseFloat(bkSess.confirmedPrice).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});
     document.getElementById('bk-pay-container').innerHTML = `
       <div style="border:2px dashed var(--gold);border-radius:8px;padding:20px;background:var(--gold-lt);text-align:center;margin-bottom:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">⚠ TEST MODE — No real payment</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">TEST MODE — No real payment</div>
         <div style="font-size:13px;color:var(--grey-text);margin-bottom:16px">Simulating payment of <strong>${amt}</strong></div>
         <button class="btn-bk" id="mock-pay-btn" onclick="mockPayment()">Simulate Payment →</button>
       </div>`;
@@ -1111,9 +1111,9 @@ async function handleJoin(e) {
 }
 
 function activateMember(email, name) {
-  localStorage.setItem('luxstay_member', '1');
-  localStorage.setItem('luxstay_email', email);
-  if (name) localStorage.setItem('luxstay_name', name);
+  localStorage.setItem('maldives_escape_member', '1');
+  localStorage.setItem('maldives_escape_email', email);
+  if (name) localStorage.setItem('maldives_escape_name', name);
   isMember = true;
   if (window.posthog) posthog.identify(email, { name: name || undefined });
   track('member_joined', { method: name ? 'google' : 'email' });
@@ -1144,7 +1144,7 @@ function track(event, props) {
 
 // ── COOKIE CONSENT ────────────────────────────────────────────
 (function initCookieConsent() {
-  var consent = localStorage.getItem('luxstay_cookie_consent');
+  var consent = localStorage.getItem('maldives_escape_cookie_consent');
   if (consent === null) {
     setTimeout(function() {
       document.getElementById('cookie-banner').style.display = 'flex';
@@ -1158,7 +1158,7 @@ function track(event, props) {
 })();
 
 function cookieChoice(accepted) {
-  localStorage.setItem('luxstay_cookie_consent', accepted ? 'true' : 'false');
+  localStorage.setItem('maldives_escape_cookie_consent', accepted ? 'true' : 'false');
   document.getElementById('cookie-banner').style.display = 'none';
   if (accepted) {
     if (window.posthog) posthog.opt_in_capturing();

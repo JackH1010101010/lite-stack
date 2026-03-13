@@ -51,7 +51,7 @@ if (cfg.cities) {
   ).join('\n');
 
   cfg.CITY_NAV_LINKS = cfg.cities.map(c =>
-    `<a class="nav-link" href="/${c.value.toLowerCase()}.html">${c.value}</a>`
+    `<a class="nav-link" href="/${c.value.toLowerCase().replace(/\s+/g, '-')}.html">${c.value}</a>`
   ).join('\n      ');
 } else {
   cfg.CITIES_OPTIONS_HTML = '';
@@ -64,7 +64,7 @@ if (cfg.hotels) {
     const hotelLines = hotels.map(h => {
       const tags = JSON.stringify(h.tags || []);
       const badge = h.badge ? `'${h.badge}'` : 'null';
-      return `    {id:'${h.id}', name:'${h.name.replace(/'/g,"\\'")}', emoji:'${h.emoji}', area:'${h.area.replace(/'/g,"\\'")}', dist:'${h.dist.replace(/'/g,"\\'")}', desc:'${h.desc.replace(/'/g,"\\'")}', tags:${tags}, badge:${badge}}`;
+      return `    {id:'${h.id}', name:'${h.name.replace(/'/g,"\\'")}', area:'${h.area.replace(/'/g,"\\'")}', dist:'${h.dist.replace(/'/g,"\\'")}', desc:'${h.desc.replace(/'/g,"\\'")}', tags:${tags}, badge:${badge}}`;
     }).join(',\n');
     return `  ${city}: [\n${hotelLines},\n  ]`;
   }).join(',\n');
@@ -204,6 +204,9 @@ if (cfg.AFFILIATE_NAV_LINK && cfg.AFFILIATE_NAV_TEXT) {
 } else {
   cfg.AFFILIATE_NAV_HTML = '';
 }
+
+// STORAGE_PREFIX — brand-specific localStorage key prefix
+if (!cfg.STORAGE_PREFIX) cfg.STORAGE_PREFIX = (cfg.BRAND_NAME || 'site').toLowerCase().replace(/[^a-z0-9]+/g, '_');
 
 // COOKIE_BANNER_BRAND (defaults to BRAND_NAME)
 if (!cfg.COOKIE_BANNER_BRAND) cfg.COOKIE_BANNER_BRAND = cfg.BRAND_NAME || 'this site';

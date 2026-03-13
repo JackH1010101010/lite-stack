@@ -1,0 +1,17 @@
+{
+  "name": "lite-stack-mcp-agent",
+  "version": "1.0.0",
+  "description": "Lite-Stack CUG luxury hotel booking agent — MCP server with wholesale rate framing, quality scores, and PostHog tracking",
+  "main": "src/index.mjs",
+  "bin": {
+    "lite-stack-mcp": "src/index.mjs"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "test": "node src/test.mjs"
+  },
+  "keywords": ["mcp", "hotel", "booking", "liteapi", "cug", "luxury-travel"],
+  "author": "Lite-Stack",
+  "license": "MIT"
+}

@@ -130,19 +130,19 @@
   ],
   "modal_perks": [
     {
-      "icon": "🏙️",
+      "icon": "✦",
       "text": "Access Dubai's finest hotels 10–30% below retail"
     },
     {
-      "icon": "💰",
+      "icon": "%",
       "text": "Save AED 500–2,000 per night on suites"
     },
     {
-      "icon": "🚫",
+      "icon": "✕",
       "text": "No subscription, no booking fees"
     },
     {
-      "icon": "🌟",
+      "icon": "★",
       "text": "Palm, Downtown & Marina — more areas coming"
     }
   ],
@@ -151,7 +151,6 @@
       {
         "id": "lp6557454e",
         "name": "Hilton Dubai Palm Jumeirah",
-        "emoji": "🌴",
         "area": "Palm Jumeirah",
         "dist": "Private beach",
         "desc": "5★ on the Palm with private beach access. Multiple pools, 8 restaurants, spa.",
@@ -165,7 +164,6 @@
       {
         "id": "lp65574f8a",
         "name": "Atlantis, The Palm",
-        "emoji": "🐬",
         "area": "Palm Jumeirah tip",
         "dist": "Aquaventure Waterpark",
         "desc": "Iconic 5★ mega-resort. 23 restaurants, Aquaventure Waterpark, private beach.",
@@ -179,7 +177,6 @@
       {
         "id": "lp655750cc",
         "name": "One&Only The Palm",
-        "emoji": "✨",
         "area": "Palm Jumeirah",
         "dist": "Private beach",
         "desc": "Adults-only ultra-luxury boutique. 60 villas, private marina, 3 restaurants.",
@@ -193,7 +190,6 @@
       {
         "id": "lp32a09",
         "name": "The Ritz-Carlton Dubai",
-        "emoji": "💎",
         "area": "JBR Beach",
         "dist": "Beachfront",
         "desc": "Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.",
@@ -209,7 +205,6 @@
       {
         "id": "lp6ce87",
         "name": "Sofitel Dubai Downtown",
-        "emoji": "🏙️",
         "area": "Downtown Dubai",
         "dist": "5 min Burj Khalifa",
         "desc": "French-inspired luxury tower in Downtown. Rooftop pool, spa, Burj views.",
@@ -223,7 +218,6 @@
       {
         "id": "lp65575180",
         "name": "Address Downtown Dubai",
-        "emoji": "🌟",
         "area": "Downtown, Burj area",
         "dist": "Burj Khalifa adjacent",
         "desc": "5★ tower with some of Dubai's best Burj Khalifa views. Rooftop pool, spa.",
@@ -237,7 +231,6 @@
       {
         "id": "lp65575301",
         "name": "Vida Downtown Dubai",
-        "emoji": "🌆",
         "area": "Downtown Dubai",
         "dist": "Dubai Mall 5 min",
         "desc": "Lifestyle 5★ hotel in the heart of Downtown. Stylish rooftop, vibrant F&B.",
@@ -253,7 +246,6 @@
       {
         "id": "lp769d6",
         "name": "InterContinental Dubai Marina",
-        "emoji": "⛵",
         "area": "Dubai Marina",
         "dist": "Marina Walk",
         "desc": "5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.",
@@ -267,7 +259,6 @@
       {
         "id": "lp6557539e",
         "name": "Jumeirah Beach Hotel",
-        "emoji": "🌊",
         "area": "Jumeirah Beach",
         "dist": "Beachfront",
         "desc": "Wave-shaped iconic 5★ on Jumeirah Beach. 600m private beach, Sinbad Waterpark.",
@@ -281,7 +272,6 @@
       {
         "id": "lp655754c5",
         "name": "W Dubai — The Palm",
-        "emoji": "🎭",
         "area": "Palm Jumeirah",
         "dist": "Private beach",
         "desc": "Ultra-cool 5★ W hotel on the Palm. WET® deck pool, SoBe dining, panoramic views.",

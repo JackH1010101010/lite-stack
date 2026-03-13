@@ -1,0 +1,711 @@
+{
+  "timestamp": "2026-03-13T06:44:34.340Z",
+  "threshold": 0.4,
+  "mode": "simulate",
+  "total_processed": 20,
+  "improved": 20,
+  "now_passing": 7,
+  "average_lift": 0.242,
+  "results": [
+    {
+      "slug": "luxstay/dubai-infinity-pool-hotels",
+      "site": "luxstay",
+      "type": "amenity",
+      "most_similar_to": "luxstay/dubai-private-beach-hotels",
+      "before": 0.05,
+      "after": 0.345,
+      "lift": 0.295,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 517,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 140,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/dubai-private-beach-hotels",
+      "site": "luxstay",
+      "type": "amenity",
+      "most_similar_to": "luxstay/dubai-infinity-pool-hotels",
+      "before": 0.05,
+      "after": 0.343,
+      "lift": 0.29300000000000004,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 517,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 140,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "maldives-escape/maldives-adults-only-resorts",
+      "site": "maldives-escape",
+      "type": "amenity",
+      "most_similar_to": "maldives-escape/maldives-diving-resorts",
+      "before": 0.052,
+      "after": 0.35,
+      "lift": 0.298,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 416,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 95,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "maldives-escape/maldives-diving-resorts",
+      "site": "maldives-escape",
+      "type": "amenity",
+      "most_similar_to": "maldives-escape/maldives-adults-only-resorts",
+      "before": 0.052,
+      "after": 0.346,
+      "lift": 0.294,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 416,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 95,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/heathrow-luxury-hotels",
+      "site": "luxstay",
+      "type": "region",
+      "most_similar_to": "luxstay/manchester-london-luxury-hotels",
+      "before": 0.117,
+      "after": 0.348,
+      "lift": 0.23099999999999998,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 437,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/manchester-london-luxury-hotels",
+      "site": "luxstay",
+      "type": "region",
+      "most_similar_to": "luxstay/heathrow-luxury-hotels",
+      "before": 0.117,
+      "after": 0.343,
+      "lift": 0.22600000000000003,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 437,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/gcc-visitors-london-luxury-hotels",
+      "site": "luxstay",
+      "type": "region",
+      "most_similar_to": "luxstay/heathrow-luxury-hotels",
+      "before": 0.129,
+      "after": 0.351,
+      "lift": 0.22199999999999998,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 437,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-luxury-hotels-india",
+      "site": "dubai-ultra",
+      "type": "region",
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-australia",
+      "before": 0.145,
+      "after": 0.38,
+      "lift": 0.23500000000000001,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 381,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-ultra-luxury-australia",
+      "site": "dubai-ultra",
+      "type": "region",
+      "most_similar_to": "dubai-ultra/dubai-luxury-hotels-india",
+      "before": 0.145,
+      "after": 0.381,
+      "lift": 0.23600000000000002,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 381,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "maldives-escape/maldives-luxury-resorts-gcc",
+      "site": "maldives-escape",
+      "type": "region",
+      "most_similar_to": "maldives-escape/maldives-luxus-resorts-deutschland",
+      "before": 0.149,
+      "after": 0.381,
+      "lift": 0.232,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 381,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "maldives-escape/maldives-luxus-resorts-deutschland",
+      "site": "maldives-escape",
+      "type": "region",
+      "most_similar_to": "maldives-escape/maldives-luxury-resorts-gcc",
+      "before": 0.149,
+      "after": 0.384,
+      "lift": 0.23500000000000001,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 381,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "site": "dubai-ultra",
+      "type": "amenity",
+      "most_similar_to": "dubai-ultra/dubai-private-beach-ultra",
+      "before": 0.15,
+      "after": 0.402,
+      "lift": 0.252,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 463,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 88,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 110,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-private-beach-ultra",
+      "site": "dubai-ultra",
+      "type": "amenity",
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels",
+      "before": 0.15,
+      "after": 0.413,
+      "lift": 0.263,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 463,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 88,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 110,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-ultra-luxury-gcc-residents",
+      "site": "dubai-ultra",
+      "type": "region",
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-uk-travellers",
+      "before": 0.173,
+      "after": 0.39,
+      "lift": 0.21700000000000003,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 413,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 88,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-ultra-luxury-uk-travellers",
+      "site": "dubai-ultra",
+      "type": "region",
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-gcc-residents",
+      "before": 0.173,
+      "after": 0.388,
+      "lift": 0.21500000000000002,
+      "passes_threshold": false,
+      "blocks_injected": 4,
+      "words_added": 413,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 88,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "origin-market",
+          "words": 60,
+          "uniqueness": "medium"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "site": "dubai-ultra",
+      "type": "amenity",
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels",
+      "before": 0.257,
+      "after": 0.474,
+      "lift": 0.21699999999999997,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 416,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 95,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "site": "dubai-ultra",
+      "type": "amenity",
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels",
+      "before": 0.258,
+      "after": 0.479,
+      "lift": 0.22099999999999997,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 416,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 76,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 140,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 95,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/london-rooftop-bar-hotels",
+      "site": "luxstay",
+      "type": "amenity",
+      "most_similar_to": "luxstay/london-spa-hotels-member-rates",
+      "before": 0.265,
+      "after": 0.479,
+      "lift": 0.21399999999999997,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 517,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 140,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/london-spa-hotels-member-rates",
+      "site": "luxstay",
+      "type": "amenity",
+      "most_similar_to": "luxstay/london-rooftop-bar-hotels",
+      "before": 0.265,
+      "after": 0.474,
+      "lift": 0.20899999999999996,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 517,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 140,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    },
+    {
+      "slug": "luxstay/bangkok-rooftop-pool-hotels",
+      "site": "luxstay",
+      "type": "amenity",
+      "most_similar_to": "luxstay/london-rooftop-bar-hotels",
+      "before": 0.271,
+      "after": 0.512,
+      "lift": 0.241,
+      "passes_threshold": true,
+      "blocks_injected": 4,
+      "words_added": 517,
+      "blocks": [
+        {
+          "id": "rate-insights",
+          "words": 112,
+          "uniqueness": "high"
+        },
+        {
+          "id": "seasonal-patterns",
+          "words": 160,
+          "uniqueness": "high"
+        },
+        {
+          "id": "local-intel",
+          "words": 105,
+          "uniqueness": "medium"
+        },
+        {
+          "id": "amenity-deep-dive",
+          "words": 140,
+          "uniqueness": "high"
+        }
+      ],
+      "deployed": false
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxStay Design Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#2a2a2a;--gold:#8c7851;--gold-lt:#f3efe8;
+      --grey-bg:#f9f7f4;--grey-mid:#e8e5e0;--grey-text:#a39e8d;
+      --black:#2a2a2a;--white:#fff;
+      --font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      --font-serif:'Instrument Serif',Georgia,serif;
+    }
+    body{font-family:var(--font-sans);background:var(--grey-bg);color:var(--black);line-height:1.5}
+
+    nav{background:var(--white);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--grey-mid)}
+    .logo{font-size:20px;font-weight:600;color:var(--black);letter-spacing:.06em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:24px}
+    .nav-link{color:var(--black);font-size:14px;font-weight:400;text-decoration:none;opacity:.6}
+    .btn-join-nav{background:var(--black);color:var(--white);font-size:13px;font-weight:500;padding:8px 20px;border-radius:4px;border:none;cursor:pointer;letter-spacing:.02em}
+
+    .hero{background:var(--grey-bg);padding:64px 24px 48px;text-align:center}
+    .hero h1{font-family:var(--font-serif);font-size:48px;font-weight:400;color:var(--black);line-height:1.15;max-width:640px;margin:0 auto 12px}
+    .hero-sub{color:var(--grey-text);font-size:16px;max-width:520px;margin:0 auto 32px;font-weight:400}
+
+    .search-bar{background:#fff;border-radius:8px;padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;max-width:720px;margin:0 auto;align-items:flex-end;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--grey-mid)}
+    .sf{display:flex;flex-direction:column;gap:4px;flex:1;min-width:110px}
+    .sf label{font-size:11px;font-weight:500;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em}
+    .sf input,.sf select{border:1px solid var(--grey-mid);border-radius:4px;padding:8px 10px;font-size:14px;color:var(--black);outline:none;font-family:var(--font-sans)}
+    .btn-search{background:var(--black);color:#fff;font-size:14px;font-weight:500;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;letter-spacing:.02em;font-family:var(--font-sans)}
+
+    .main{max-width:960px;margin:0 auto;padding:32px 16px 64px}
+
+    .hotel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px}
+    .hotel-card{background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--grey-mid);transition:box-shadow .3s}
+    .hotel-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
+    .hotel-img{aspect-ratio:3/2;overflow:hidden}
+    .hotel-img img{width:100%;height:100%;object-fit:cover}
+    .hotel-body{padding:20px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
+    .hotel-name{font-size:18px;font-weight:500;color:var(--black);line-height:1.3}
+    .hotel-loc{font-size:14px;color:var(--grey-text);font-weight:400}
+    .hotel-footer{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:16px}
+    .price-label{font-size:12px;color:var(--grey-text);margin-bottom:2px}
+    .price-main{font-size:20px;font-weight:500;color:var(--black)}
+    .price-per{font-size:13px;color:var(--grey-text)}
+    .btn-book{background:transparent;color:var(--gold);font-size:14px;font-weight:500;padding:0;border:none;cursor:pointer;letter-spacing:.02em}
+
+    .editorial{background:#fff;border:1px solid var(--grey-mid);border-radius:8px;padding:32px;margin:48px 0}
+    .editorial h2{font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--black);margin-bottom:16px}
+    .editorial p{font-size:15px;color:#666;line-height:1.7;margin-bottom:14px}
+    .editorial strong{color:var(--black);font-weight:500}
+
+    footer{background:var(--black);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:13px}
+    footer p+p{margin-top:6px}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">LuxStay</a>
+  <div class="nav-right">
+    <a class="nav-link" href="#">London</a>
+    <a class="nav-link" href="#">Dubai</a>
+    <a class="nav-link" href="#">Bangkok</a>
+    <button class="btn-join-nav">Sign in</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Curated luxury hotels at member-only rates</h1>
+  <p class="hero-sub">Five-star hotels in London, Dubai and Bangkok — at prices only members can see.</p>
+  <div class="search-bar">
+    <div class="sf">
+      <label>Destination</label>
+      <select><option>London, UK</option><option>Dubai, UAE</option><option>Bangkok, Thailand</option></select>
+    </div>
+    <div class="sf">
+      <label>Check-in</label>
+      <input type="date" />
+    </div>
+    <div class="sf">
+      <label>Check-out</label>
+      <input type="date" />
+    </div>
+    <div class="sf" style="max-width:80px">
+      <label>Guests</label>
+      <select><option>1</option><option selected>2</option></select>
+    </div>
+    <button class="btn-search">Search</button>
+  </div>
+</section>
+
+<main class="main">
+  <div class="hotel-grid">
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop" alt="Hotel" />
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">The Savoy</div>
+        <div class="hotel-loc">Strand, WC2</div>
+        <div class="hotel-footer">
+          <div>
+            <div class="price-label">From</div>
+            <div class="price-main">£389 <span class="price-per">/ night</span></div>
+          </div>
+          <button class="btn-book">View details →</button>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=400&fit=crop" alt="Hotel" />
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">Shangri-La The Shard</div>
+        <div class="hotel-loc">London Bridge, SE1</div>
+        <div class="hotel-footer">
+          <div>
+            <div class="price-label">From</div>
+            <div class="price-main">£442 <span class="price-per">/ night</span></div>
+          </div>
+          <button class="btn-book">View details →</button>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop" alt="Hotel" />
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">Royal Lancaster London</div>
+        <div class="hotel-loc">Hyde Park, W2</div>
+        <div class="hotel-footer">
+          <div>
+            <div class="price-label">From</div>
+            <div class="price-main">£278 <span class="price-per">/ night</span></div>
+          </div>
+          <button class="btn-book">View details →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="editorial">
+    <h2>About LuxStay member pricing</h2>
+    <p>Hotels release a portion of their unsold inventory at <strong>net rates</strong> — below their public retail price — through Closed User Group channels. These rates are legally restricted: they cannot be shown on public pages.</p>
+    <p>When you join LuxStay, you gain access to these rates on five-star hotels that are <strong>10–30% below what public platforms show</strong>. The same hotel, same room, same dates — just a better price.</p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 LuxStay · Member-only luxury hotel rates</p>
+  <p style="font-size:11px">Rates sourced via live hotel API · Member prices visible to logged-in members only</p>
+</footer>
+
+</body>
+</html>

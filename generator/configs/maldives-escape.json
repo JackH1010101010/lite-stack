@@ -130,19 +130,19 @@
   ],
   "modal_perks": [
     {
-      "icon": "🏝️",
+      "icon": "✦",
       "text": "Access overwater villa rates 10–25% below retail"
     },
     {
-      "icon": "💎",
+      "icon": "★",
       "text": "Save $150–$400 per night on top resorts"
     },
     {
-      "icon": "🚫",
+      "icon": "✕",
       "text": "No subscription, no booking fees"
     },
     {
-      "icon": "🌊",
+      "icon": "~",
       "text": "3 atolls covered — more coming"
     }
   ],
@@ -151,7 +151,6 @@
       {
         "id": "lp655762c1",
         "name": "Velassaru Maldives",
-        "emoji": "🌴",
         "area": "North Malé Atoll",
         "dist": "25 min speedboat",
         "desc": "Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.",
@@ -165,7 +164,6 @@
       {
         "id": "lp65574e0c",
         "name": "Cocoon Maldives",
-        "emoji": "🥥",
         "area": "Ookolhufinolhu Island",
         "dist": "35 min speedboat",
         "desc": "Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.",
@@ -179,7 +177,6 @@
       {
         "id": "lp655769b2",
         "name": "Meeru Maldives Resort",
-        "emoji": "🐠",
         "area": "Meerufenfushi Island",
         "dist": "45 min speedboat",
         "desc": "One of the Maldives' largest resorts. Diverse marine life, water sports, spa.",
@@ -193,7 +190,6 @@
       {
         "id": "lp65574cc3",
         "name": "Bandos Maldives",
-        "emoji": "🌺",
         "area": "Bandos Island",
         "dist": "20 min speedboat",
         "desc": "Classic Maldives resort. Dive centre, water sports, panoramic restaurant.",
@@ -209,7 +205,6 @@
       {
         "id": "lp6557621e",
         "name": "Anantara Dhigu Maldives",
-        "emoji": "✨",
         "area": "South Malé Atoll",
         "dist": "30 min speedboat",
         "desc": "Luxury 5★ resort with overwater bungalows. 2 pools, 3 restaurants, spa.",
@@ -223,7 +218,6 @@
       {
         "id": "lp65576388",
         "name": "Centara Grand Maldives",
-        "emoji": "🌅",
         "area": "Olhuveli Island",
         "dist": "45 min speedboat",
         "desc": "5★ with the longest overwater bar in the Maldives. Waterslides, snorkelling.",
@@ -237,7 +231,6 @@
       {
         "id": "lp6557618c",
         "name": "Cinnamon Hakuraa Huraa",
-        "emoji": "🌊",
         "area": "Meemu Atoll",
         "dist": "25 min seaplane",
         "desc": "Remote 5★ resort. Crystal-clear lagoon, dolphin spotting, sunset cruises.",
@@ -253,7 +246,6 @@
       {
         "id": "lp655768a4",
         "name": "Four Seasons Landaa Giraavaru",
-        "emoji": "🐋",
         "area": "Baa Atoll UNESCO",
         "dist": "30 min seaplane",
         "desc": "World-class 5★ in UNESCO Biosphere Reserve. Manta rays, marine biology centre.",
@@ -267,7 +259,6 @@
       {
         "id": "lp65576a12",
         "name": "Amilla Maldives",
-        "emoji": "🦈",
         "area": "Baa Atoll",
         "dist": "35 min seaplane",
         "desc": "Adults-first sanctuary. Private pool villas, whale sharks, organic garden.",
@@ -281,7 +272,6 @@
       {
         "id": "lp65576b88",
         "name": "Milaidhoo Island Maldives",
-        "emoji": "🌸",
         "area": "Baa Atoll UNESCO",
         "dist": "30 min seaplane",
         "desc": "Intimate 5★ boutique resort. Only 50 villas. House reef, Baa Atoll diving.",

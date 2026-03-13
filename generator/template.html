@@ -130,8 +130,8 @@
     .hotel-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
     .hotel-img{position:relative;background:linear-gradient(135deg,#e8e5e0,#d5d0c8);display:flex;align-items:center;justify-content:center;font-size:40px;aspect-ratio:3/2;overflow:hidden}
     .hotel-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
-    .hotel-img img.loaded{opacity:1}
-    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none}
+    .hotel-img img.loaded{opacity:1;z-index:2}
+    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none;font-family:var(--font);font-weight:600;color:var(--grey-text);opacity:.4;font-size:32px;letter-spacing:.02em}
     .hotel-card.unavailable{opacity:.45;order:99}
     .hotel-badge{display:none}
     .hotel-body{padding:20px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
@@ -272,7 +272,7 @@
 
 <!-- TEST MODE BANNER (hidden in production) -->
 <div id="test-banner" style="display:none;background:#b45309;color:#fff;text-align:center;font-size:12px;font-weight:600;padding:6px;letter-spacing:.05em">
-  ⚠ TEST MODE — No real bookings or charges will be made
+  TEST MODE — No real bookings or charges will be made
 </div>
 
 <!-- NAV -->
@@ -322,7 +322,7 @@
 
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
-    <span class="cug-icon">🔒</span>
+    <span class="cug-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
     <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
@@ -469,7 +469,7 @@
     </div>
 
     <div class="modal-success" id="modal-success">
-      <div class="tick">✅</div>
+      <div class="tick"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
       <h3>You're in!</h3>
       <p>{{MODAL_SUCCESS_TEXT}}</p>
     </div>
@@ -513,7 +513,7 @@
       </div>
       <!-- Step 4: Confirmation -->
       <div id="bk-p4" style="display:none">
-        <div class="bk-confirm-icon">🎉</div>
+        <div class="bk-confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 style="text-align:center;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px">Booking confirmed!</h3>
         <p style="text-align:center;font-size:14px;color:var(--grey-text);margin-bottom:4px">Check your email for full details.</p>
         <div class="bk-ref-box">
@@ -562,7 +562,7 @@ function calcMemberPrice(netCost, ssp, markup) {
 const HOTELS = {{HOTELS_JS}};
 
 // ── STATE ─────────────────────────────────────────────────────
-let isMember = localStorage.getItem('luxstay_member') === '1';
+let isMember = localStorage.getItem('{{STORAGE_PREFIX}}_member') === '1';
 let currentCity = '{{DEFAULT_CITY}}';
 let ratesCache = {};
 if (TEST_MODE) document.getElementById('test-banner').style.display = 'block';
@@ -650,7 +650,7 @@ function buildCard(h) {
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
       <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" />
-      <span class="img-fallback">${h.emoji}</span>
+      <span class="img-fallback">${h.name.charAt(0)}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
     <div class="hotel-body">
@@ -694,7 +694,7 @@ async function loadHotelPhoto(hotelId) {
       imgEl.src = img.url;
       imgEl.onload = () => imgEl.classList.add('loaded');
     }
-  } catch { /* silently ignore — emoji fallback remains visible */ }
+  } catch { /* silently ignore — letter fallback remains visible */ }
 }
 
 // ── FETCH RATE ────────────────────────────────────────────────
@@ -901,7 +901,7 @@ function renderBkSummary() {
       <span class="bk-total-lbl">Member total</span>
       <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
     </div>
-    <div class="bk-policy">📋 <strong>Cancellation:</strong> ${cancelPolicy}</div>
+    <div class="bk-policy"><strong>Cancellation:</strong> ${cancelPolicy}</div>
     <button class="btn-bk" onclick="setBkStep(2)">Continue to guest details →</button>`;
 }
 
@@ -935,7 +935,7 @@ function loadPaymentSDK() {
     const amt = sym + parseFloat(bkSess.confirmedPrice).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});
     document.getElementById('bk-pay-container').innerHTML = `
       <div style="border:2px dashed var(--gold);border-radius:8px;padding:20px;background:var(--gold-lt);text-align:center;margin-bottom:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">⚠ TEST MODE — No real payment</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">TEST MODE — No real payment</div>
         <div style="font-size:13px;color:var(--grey-text);margin-bottom:16px">Simulating payment of <strong>${amt}</strong></div>
         <button class="btn-bk" id="mock-pay-btn" onclick="mockPayment()">Simulate Payment →</button>
       </div>`;
@@ -1052,9 +1052,9 @@ async function handleJoin(e) {
 }
 
 function activateMember(email, name) {
-  localStorage.setItem('luxstay_member', '1');
-  localStorage.setItem('luxstay_email', email);
-  if (name) localStorage.setItem('luxstay_name', name);
+  localStorage.setItem('{{STORAGE_PREFIX}}_member', '1');
+  localStorage.setItem('{{STORAGE_PREFIX}}_email', email);
+  if (name) localStorage.setItem('{{STORAGE_PREFIX}}_name', name);
   isMember = true;
   if (window.posthog) posthog.identify(email, { name: name || undefined });
   track('member_joined', { method: name ? 'google' : 'email' });
@@ -1085,7 +1085,7 @@ function track(event, props) {
 
 // ── COOKIE CONSENT ────────────────────────────────────────────
 (function initCookieConsent() {
-  var consent = localStorage.getItem('luxstay_cookie_consent');
+  var consent = localStorage.getItem('{{STORAGE_PREFIX}}_cookie_consent');
   if (consent === null) {
     setTimeout(function() {
       document.getElementById('cookie-banner').style.display = 'flex';
@@ -1099,7 +1099,7 @@ function track(event, props) {
 })();
 
 function cookieChoice(accepted) {
-  localStorage.setItem('luxstay_cookie_consent', accepted ? 'true' : 'false');
+  localStorage.setItem('{{STORAGE_PREFIX}}_cookie_consent', accepted ? 'true' : 'false');
   document.getElementById('cookie-banner').style.display = 'none';
   if (accepted) {
     if (window.posthog) posthog.opt_in_capturing();

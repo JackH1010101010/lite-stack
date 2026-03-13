@@ -1,0 +1,719 @@
+{
+  "timestamp": "2026-03-13T07:00:08.933Z",
+  "threshold": 0.4,
+  "total_pages": 44,
+  "total_pairs": 946,
+  "violations": 129,
+  "page_scores": [
+    {
+      "site": "luxstay",
+      "slug": "luxstay/dubai-infinity-pool-hotels",
+      "wordCount": 575,
+      "min_differentiation": 0.05,
+      "most_similar_to": "luxstay/dubai-private-beach-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/dubai-private-beach-hotels",
+      "wordCount": 575,
+      "min_differentiation": 0.05,
+      "most_similar_to": "luxstay/dubai-infinity-pool-hotels"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-adults-only-resorts",
+      "wordCount": 525,
+      "min_differentiation": 0.052,
+      "most_similar_to": "maldives-escape/maldives-diving-resorts"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-diving-resorts",
+      "wordCount": 520,
+      "min_differentiation": 0.052,
+      "most_similar_to": "maldives-escape/maldives-adults-only-resorts"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/heathrow-luxury-hotels",
+      "wordCount": 599,
+      "min_differentiation": 0.117,
+      "most_similar_to": "luxstay/manchester-london-luxury-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/manchester-london-luxury-hotels",
+      "wordCount": 609,
+      "min_differentiation": 0.117,
+      "most_similar_to": "luxstay/heathrow-luxury-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/gcc-visitors-london-luxury-hotels",
+      "wordCount": 627,
+      "min_differentiation": 0.129,
+      "most_similar_to": "luxstay/heathrow-luxury-hotels"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-luxury-hotels-india",
+      "wordCount": 572,
+      "min_differentiation": 0.145,
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-australia"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-ultra-luxury-australia",
+      "wordCount": 566,
+      "min_differentiation": 0.145,
+      "most_similar_to": "dubai-ultra/dubai-luxury-hotels-india"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-luxury-resorts-gcc",
+      "wordCount": 570,
+      "min_differentiation": 0.149,
+      "most_similar_to": "maldives-escape/maldives-luxus-resorts-deutschland"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-luxus-resorts-deutschland",
+      "wordCount": 558,
+      "min_differentiation": 0.149,
+      "most_similar_to": "maldives-escape/maldives-luxury-resorts-gcc"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "wordCount": 495,
+      "min_differentiation": 0.15,
+      "most_similar_to": "dubai-ultra/dubai-private-beach-ultra"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-private-beach-ultra",
+      "wordCount": 525,
+      "min_differentiation": 0.15,
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-ultra-luxury-gcc-residents",
+      "wordCount": 594,
+      "min_differentiation": 0.173,
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-uk-travellers"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-ultra-luxury-uk-travellers",
+      "wordCount": 588,
+      "min_differentiation": 0.173,
+      "most_similar_to": "dubai-ultra/dubai-ultra-luxury-gcc-residents"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "wordCount": 515,
+      "min_differentiation": 0.257,
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "wordCount": 505,
+      "min_differentiation": 0.258,
+      "most_similar_to": "dubai-ultra/dubai-palm-spa-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/london-rooftop-bar-hotels",
+      "wordCount": 484,
+      "min_differentiation": 0.265,
+      "most_similar_to": "luxstay/london-spa-hotels-member-rates"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/london-spa-hotels-member-rates",
+      "wordCount": 500,
+      "min_differentiation": 0.265,
+      "most_similar_to": "luxstay/london-rooftop-bar-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/bangkok-rooftop-pool-hotels",
+      "wordCount": 477,
+      "min_differentiation": 0.271,
+      "most_similar_to": "luxstay/london-rooftop-bar-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/london",
+      "wordCount": 574,
+      "min_differentiation": 0.273,
+      "most_similar_to": "luxstay/heathrow-luxury-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/dubai",
+      "wordCount": 569,
+      "min_differentiation": 0.276,
+      "most_similar_to": "luxstay/dubai-private-beach-hotels"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/dubai-luxury-hotels-from-uk",
+      "wordCount": 596,
+      "min_differentiation": 0.277,
+      "most_similar_to": "luxstay/dubai"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/dubai-marina",
+      "wordCount": 517,
+      "min_differentiation": 0.28,
+      "most_similar_to": "dubai-ultra/palm-jumeirah"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/palm-jumeirah",
+      "wordCount": 541,
+      "min_differentiation": 0.28,
+      "most_similar_to": "dubai-ultra/dubai-marina"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra/downtown-dubai",
+      "wordCount": 523,
+      "min_differentiation": 0.284,
+      "most_similar_to": "dubai-ultra/dubai-marina"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/north-male-atoll",
+      "wordCount": 550,
+      "min_differentiation": 0.286,
+      "most_similar_to": "maldives-escape/south-male-atoll"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/south-male-atoll",
+      "wordCount": 525,
+      "min_differentiation": 0.286,
+      "most_similar_to": "maldives-escape/north-male-atoll"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-honeymoon-resorts-uk",
+      "wordCount": 576,
+      "min_differentiation": 0.294,
+      "most_similar_to": "maldives-escape/north-male-atoll"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-overwater-villa-resorts",
+      "wordCount": 551,
+      "min_differentiation": 0.298,
+      "most_similar_to": "maldives-escape/north-male-atoll"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-spa-resorts-member-rates",
+      "wordCount": 520,
+      "min_differentiation": 0.301,
+      "most_similar_to": "maldives-escape/maldives-overwater-villa-resorts"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/baa-atoll",
+      "wordCount": 523,
+      "min_differentiation": 0.304,
+      "most_similar_to": "maldives-escape/maldives-diving-resorts"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/maldives-luxury-resorts-usa",
+      "wordCount": 559,
+      "min_differentiation": 0.322,
+      "most_similar_to": "maldives-escape/south-male-atoll"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/bangkok",
+      "wordCount": 564,
+      "min_differentiation": 0.405,
+      "most_similar_to": "luxstay/dubai"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay",
+      "wordCount": 690,
+      "min_differentiation": 0.532,
+      "most_similar_to": "maldives-escape"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape",
+      "wordCount": 685,
+      "min_differentiation": 0.532,
+      "most_similar_to": "luxstay"
+    },
+    {
+      "site": "dubai-ultra",
+      "slug": "dubai-ultra",
+      "wordCount": 732,
+      "min_differentiation": 0.56,
+      "most_similar_to": "luxstay"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/dubai-downtown-vs-jbr",
+      "wordCount": 1271,
+      "min_differentiation": 0.818,
+      "most_similar_to": "luxstay/guides/dubai-marina-vs-palm-jumeirah"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/dubai-marina-vs-palm-jumeirah",
+      "wordCount": 1278,
+      "min_differentiation": 0.818,
+      "most_similar_to": "luxstay/guides/dubai-downtown-vs-jbr"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/maldives-vs-seychelles-honeymoon",
+      "wordCount": 1253,
+      "min_differentiation": 0.841,
+      "most_similar_to": "luxstay/guides/maldives-water-villa-vs-beach-villa"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/maldives-water-villa-vs-beach-villa",
+      "wordCount": 1286,
+      "min_differentiation": 0.841,
+      "most_similar_to": "luxstay/guides/maldives-vs-seychelles-honeymoon"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/bali-seminyak-vs-ubud",
+      "wordCount": 1320,
+      "min_differentiation": 0.854,
+      "most_similar_to": "luxstay/guides/dubai-downtown-vs-jbr"
+    },
+    {
+      "site": "luxstay",
+      "slug": "luxstay/guides/maldives-all-inclusive-vs-room-only",
+      "wordCount": 1303,
+      "min_differentiation": 0.876,
+      "most_similar_to": "luxstay/guides/maldives-water-villa-vs-beach-villa"
+    },
+    {
+      "site": "maldives-escape",
+      "slug": "maldives-escape/google3c9c4a06c57abcd1",
+      "wordCount": 2,
+      "min_differentiation": 1,
+      "most_similar_to": "dubai-ultra/downtown-dubai"
+    }
+  ],
+  "pairs": [
+    {
+      "page_a": "luxstay/dubai-infinity-pool-hotels.html",
+      "page_a_slug": "luxstay/dubai-infinity-pool-hotels",
+      "page_b": "luxstay/dubai-private-beach-hotels.html",
+      "page_b_slug": "luxstay/dubai-private-beach-hotels",
+      "similarity": 0.95,
+      "differentiation": 0.05
+    },
+    {
+      "page_a": "maldives-escape/maldives-adults-only-resorts.html",
+      "page_a_slug": "maldives-escape/maldives-adults-only-resorts",
+      "page_b": "maldives-escape/maldives-diving-resorts.html",
+      "page_b_slug": "maldives-escape/maldives-diving-resorts",
+      "similarity": 0.948,
+      "differentiation": 0.052
+    },
+    {
+      "page_a": "luxstay/heathrow-luxury-hotels.html",
+      "page_a_slug": "luxstay/heathrow-luxury-hotels",
+      "page_b": "luxstay/manchester-london-luxury-hotels.html",
+      "page_b_slug": "luxstay/manchester-london-luxury-hotels",
+      "similarity": 0.883,
+      "differentiation": 0.117
+    },
+    {
+      "page_a": "luxstay/gcc-visitors-london-luxury-hotels.html",
+      "page_a_slug": "luxstay/gcc-visitors-london-luxury-hotels",
+      "page_b": "luxstay/heathrow-luxury-hotels.html",
+      "page_b_slug": "luxstay/heathrow-luxury-hotels",
+      "similarity": 0.871,
+      "differentiation": 0.129
+    },
+    {
+      "page_a": "luxstay/gcc-visitors-london-luxury-hotels.html",
+      "page_a_slug": "luxstay/gcc-visitors-london-luxury-hotels",
+      "page_b": "luxstay/manchester-london-luxury-hotels.html",
+      "page_b_slug": "luxstay/manchester-london-luxury-hotels",
+      "similarity": 0.859,
+      "differentiation": 0.141
+    },
+    {
+      "page_a": "dubai-ultra/dubai-luxury-hotels-india.html",
+      "page_a_slug": "dubai-ultra/dubai-luxury-hotels-india",
+      "page_b": "dubai-ultra/dubai-ultra-luxury-australia.html",
+      "page_b_slug": "dubai-ultra/dubai-ultra-luxury-australia",
+      "similarity": 0.855,
+      "differentiation": 0.145
+    },
+    {
+      "page_a": "maldives-escape/maldives-luxury-resorts-gcc.html",
+      "page_a_slug": "maldives-escape/maldives-luxury-resorts-gcc",
+      "page_b": "maldives-escape/maldives-luxus-resorts-deutschland.html",
+      "page_b_slug": "maldives-escape/maldives-luxus-resorts-deutschland",
+      "similarity": 0.851,
+      "differentiation": 0.149
+    },
+    {
+      "page_a": "dubai-ultra/dubai-palm-spa-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "page_b": "dubai-ultra/dubai-private-beach-ultra.html",
+      "page_b_slug": "dubai-ultra/dubai-private-beach-ultra",
+      "similarity": 0.85,
+      "differentiation": 0.15
+    },
+    {
+      "page_a": "dubai-ultra/dubai-ultra-luxury-gcc-residents.html",
+      "page_a_slug": "dubai-ultra/dubai-ultra-luxury-gcc-residents",
+      "page_b": "dubai-ultra/dubai-ultra-luxury-uk-travellers.html",
+      "page_b_slug": "dubai-ultra/dubai-ultra-luxury-uk-travellers",
+      "similarity": 0.827,
+      "differentiation": 0.173
+    },
+    {
+      "page_a": "dubai-ultra/dubai-marina-rooftop-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "page_b": "dubai-ultra/dubai-palm-spa-hotels.html",
+      "page_b_slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "similarity": 0.743,
+      "differentiation": 0.257
+    },
+    {
+      "page_a": "dubai-ultra/dubai-downtown-rooftop-pool.html",
+      "page_a_slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "page_b": "dubai-ultra/dubai-palm-spa-hotels.html",
+      "page_b_slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "similarity": 0.742,
+      "differentiation": 0.258
+    },
+    {
+      "page_a": "luxstay/london-rooftop-bar-hotels.html",
+      "page_a_slug": "luxstay/london-rooftop-bar-hotels",
+      "page_b": "luxstay/london-spa-hotels-member-rates.html",
+      "page_b_slug": "luxstay/london-spa-hotels-member-rates",
+      "similarity": 0.735,
+      "differentiation": 0.265
+    },
+    {
+      "page_a": "dubai-ultra/dubai-downtown-rooftop-pool.html",
+      "page_a_slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "page_b": "dubai-ultra/dubai-marina-rooftop-hotels.html",
+      "page_b_slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "similarity": 0.73,
+      "differentiation": 0.27
+    },
+    {
+      "page_a": "luxstay/bangkok-rooftop-pool-hotels.html",
+      "page_a_slug": "luxstay/bangkok-rooftop-pool-hotels",
+      "page_b": "luxstay/london-rooftop-bar-hotels.html",
+      "page_b_slug": "luxstay/london-rooftop-bar-hotels",
+      "similarity": 0.729,
+      "differentiation": 0.271
+    },
+    {
+      "page_a": "luxstay/heathrow-luxury-hotels.html",
+      "page_a_slug": "luxstay/heathrow-luxury-hotels",
+      "page_b": "luxstay/london.html",
+      "page_b_slug": "luxstay/london",
+      "similarity": 0.727,
+      "differentiation": 0.273
+    },
+    {
+      "page_a": "dubai-ultra/dubai-marina-rooftop-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "page_b": "dubai-ultra/dubai-private-beach-ultra.html",
+      "page_b_slug": "dubai-ultra/dubai-private-beach-ultra",
+      "similarity": 0.726,
+      "differentiation": 0.274
+    },
+    {
+      "page_a": "luxstay/dubai-private-beach-hotels.html",
+      "page_a_slug": "luxstay/dubai-private-beach-hotels",
+      "page_b": "luxstay/dubai.html",
+      "page_b_slug": "luxstay/dubai",
+      "similarity": 0.724,
+      "differentiation": 0.276
+    },
+    {
+      "page_a": "luxstay/dubai-infinity-pool-hotels.html",
+      "page_a_slug": "luxstay/dubai-infinity-pool-hotels",
+      "page_b": "luxstay/dubai.html",
+      "page_b_slug": "luxstay/dubai",
+      "similarity": 0.723,
+      "differentiation": 0.277
+    },
+    {
+      "page_a": "luxstay/dubai-luxury-hotels-from-uk.html",
+      "page_a_slug": "luxstay/dubai-luxury-hotels-from-uk",
+      "page_b": "luxstay/dubai.html",
+      "page_b_slug": "luxstay/dubai",
+      "similarity": 0.723,
+      "differentiation": 0.277
+    },
+    {
+      "page_a": "dubai-ultra/dubai-marina.html",
+      "page_a_slug": "dubai-ultra/dubai-marina",
+      "page_b": "dubai-ultra/palm-jumeirah.html",
+      "page_b_slug": "dubai-ultra/palm-jumeirah",
+      "similarity": 0.72,
+      "differentiation": 0.28
+    },
+    {
+      "page_a": "luxstay/london.html",
+      "page_a_slug": "luxstay/london",
+      "page_b": "luxstay/manchester-london-luxury-hotels.html",
+      "page_b_slug": "luxstay/manchester-london-luxury-hotels",
+      "similarity": 0.72,
+      "differentiation": 0.28
+    },
+    {
+      "page_a": "dubai-ultra/dubai-downtown-rooftop-pool.html",
+      "page_a_slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "page_b": "dubai-ultra/dubai-private-beach-ultra.html",
+      "page_b_slug": "dubai-ultra/dubai-private-beach-ultra",
+      "similarity": 0.719,
+      "differentiation": 0.281
+    },
+    {
+      "page_a": "luxstay/gcc-visitors-london-luxury-hotels.html",
+      "page_a_slug": "luxstay/gcc-visitors-london-luxury-hotels",
+      "page_b": "luxstay/london.html",
+      "page_b_slug": "luxstay/london",
+      "similarity": 0.719,
+      "differentiation": 0.281
+    },
+    {
+      "page_a": "dubai-ultra/downtown-dubai.html",
+      "page_a_slug": "dubai-ultra/downtown-dubai",
+      "page_b": "dubai-ultra/dubai-marina.html",
+      "page_b_slug": "dubai-ultra/dubai-marina",
+      "similarity": 0.716,
+      "differentiation": 0.284
+    },
+    {
+      "page_a": "maldives-escape/north-male-atoll.html",
+      "page_a_slug": "maldives-escape/north-male-atoll",
+      "page_b": "maldives-escape/south-male-atoll.html",
+      "page_b_slug": "maldives-escape/south-male-atoll",
+      "similarity": 0.714,
+      "differentiation": 0.286
+    },
+    {
+      "page_a": "maldives-escape/maldives-honeymoon-resorts-uk.html",
+      "page_a_slug": "maldives-escape/maldives-honeymoon-resorts-uk",
+      "page_b": "maldives-escape/north-male-atoll.html",
+      "page_b_slug": "maldives-escape/north-male-atoll",
+      "similarity": 0.706,
+      "differentiation": 0.294
+    },
+    {
+      "page_a": "dubai-ultra/dubai-downtown-rooftop-pool.html",
+      "page_a_slug": "dubai-ultra/dubai-downtown-rooftop-pool",
+      "page_b": "luxstay/bangkok-rooftop-pool-hotels.html",
+      "page_b_slug": "luxstay/bangkok-rooftop-pool-hotels",
+      "similarity": 0.703,
+      "differentiation": 0.297
+    },
+    {
+      "page_a": "maldives-escape/maldives-overwater-villa-resorts.html",
+      "page_a_slug": "maldives-escape/maldives-overwater-villa-resorts",
+      "page_b": "maldives-escape/north-male-atoll.html",
+      "page_b_slug": "maldives-escape/north-male-atoll",
+      "similarity": 0.702,
+      "differentiation": 0.298
+    },
+    {
+      "page_a": "dubai-ultra/dubai-marina-rooftop-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-marina-rooftop-hotels",
+      "page_b": "dubai-ultra/dubai-marina.html",
+      "page_b_slug": "dubai-ultra/dubai-marina",
+      "similarity": 0.699,
+      "differentiation": 0.301
+    },
+    {
+      "page_a": "maldives-escape/maldives-overwater-villa-resorts.html",
+      "page_a_slug": "maldives-escape/maldives-overwater-villa-resorts",
+      "page_b": "maldives-escape/maldives-spa-resorts-member-rates.html",
+      "page_b_slug": "maldives-escape/maldives-spa-resorts-member-rates",
+      "similarity": 0.699,
+      "differentiation": 0.301
+    },
+    {
+      "page_a": "luxstay/bangkok-rooftop-pool-hotels.html",
+      "page_a_slug": "luxstay/bangkok-rooftop-pool-hotels",
+      "page_b": "luxstay/london-spa-hotels-member-rates.html",
+      "page_b_slug": "luxstay/london-spa-hotels-member-rates",
+      "similarity": 0.698,
+      "differentiation": 0.302
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/maldives-diving-resorts.html",
+      "page_b_slug": "maldives-escape/maldives-diving-resorts",
+      "similarity": 0.696,
+      "differentiation": 0.304
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/maldives-luxus-resorts-deutschland.html",
+      "page_b_slug": "maldives-escape/maldives-luxus-resorts-deutschland",
+      "similarity": 0.694,
+      "differentiation": 0.306
+    },
+    {
+      "page_a": "maldives-escape/maldives-spa-resorts-member-rates.html",
+      "page_a_slug": "maldives-escape/maldives-spa-resorts-member-rates",
+      "page_b": "maldives-escape/south-male-atoll.html",
+      "page_b_slug": "maldives-escape/south-male-atoll",
+      "similarity": 0.694,
+      "differentiation": 0.306
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/maldives-adults-only-resorts.html",
+      "page_b_slug": "maldives-escape/maldives-adults-only-resorts",
+      "similarity": 0.693,
+      "differentiation": 0.307
+    },
+    {
+      "page_a": "dubai-ultra/downtown-dubai.html",
+      "page_a_slug": "dubai-ultra/downtown-dubai",
+      "page_b": "dubai-ultra/palm-jumeirah.html",
+      "page_b_slug": "dubai-ultra/palm-jumeirah",
+      "similarity": 0.692,
+      "differentiation": 0.308
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/south-male-atoll.html",
+      "page_b_slug": "maldives-escape/south-male-atoll",
+      "similarity": 0.692,
+      "differentiation": 0.308
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/north-male-atoll.html",
+      "page_b_slug": "maldives-escape/north-male-atoll",
+      "similarity": 0.69,
+      "differentiation": 0.31
+    },
+    {
+      "page_a": "dubai-ultra/dubai-palm-spa-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "page_b": "luxstay/dubai-private-beach-hotels.html",
+      "page_b_slug": "luxstay/dubai-private-beach-hotels",
+      "similarity": 0.688,
+      "differentiation": 0.312
+    },
+    {
+      "page_a": "dubai-ultra/dubai-palm-spa-hotels.html",
+      "page_a_slug": "dubai-ultra/dubai-palm-spa-hotels",
+      "page_b": "luxstay/dubai-infinity-pool-hotels.html",
+      "page_b_slug": "luxstay/dubai-infinity-pool-hotels",
+      "similarity": 0.687,
+      "differentiation": 0.313
+    },
+    {
+      "page_a": "dubai-ultra/downtown-dubai.html",
+      "page_a_slug": "dubai-ultra/downtown-dubai",
+      "page_b": "dubai-ultra/dubai-ultra-luxury-australia.html",
+      "page_b_slug": "dubai-ultra/dubai-ultra-luxury-australia",
+      "similarity": 0.686,
+      "differentiation": 0.314
+    },
+    {
+      "page_a": "dubai-ultra/dubai-ultra-luxury-gcc-residents.html",
+      "page_a_slug": "dubai-ultra/dubai-ultra-luxury-gcc-residents",
+      "page_b": "dubai-ultra/palm-jumeirah.html",
+      "page_b_slug": "dubai-ultra/palm-jumeirah",
+      "similarity": 0.686,
+      "differentiation": 0.314
+    },
+    {
+      "page_a": "dubai-ultra/downtown-dubai.html",
+      "page_a_slug": "dubai-ultra/downtown-dubai",
+      "page_b": "dubai-ultra/dubai-luxury-hotels-india.html",
+      "page_b_slug": "dubai-ultra/dubai-luxury-hotels-india",
+      "similarity": 0.682,
+      "differentiation": 0.318
+    },
+    {
+      "page_a": "maldives-escape/baa-atoll.html",
+      "page_a_slug": "maldives-escape/baa-atoll",
+      "page_b": "maldives-escape/maldives-luxury-resorts-gcc.html",
+      "page_b_slug": "maldives-escape/maldives-luxury-resorts-gcc",
+      "similarity": 0.68,
+      "differentiation": 0.32
+    },
+    {
+      "page_a": "luxstay/dubai-infinity-pool-hotels.html",
+      "page_a_slug": "luxstay/dubai-infinity-pool-hotels",
+      "page_b": "luxstay/dubai-luxury-hotels-from-uk.html",
+      "page_b_slug": "luxstay/dubai-luxury-hotels-from-uk",
+      "similarity": 0.679,
+      "differentiation": 0.321
+    },
+    {
+      "page_a": "luxstay/dubai-luxury-hotels-from-uk.html",
+      "page_a_slug": "luxstay/dubai-luxury-hotels-from-uk",
+      "page_b": "luxstay/dubai-private-beach-hotels.html",
+      "page_b_slug": "luxstay/dubai-private-beach-hotels",
+      "similarity": 0.679,
+      "differentiation": 0.321
+    },
+    {
+      "page_a": "maldives-escape/maldives-diving-resorts.html",
+      "page_a_slug": "maldives-escape/maldives-diving-resorts",
+      "page_b": "maldives-escape/maldives-spa-resorts-member-rates.html",
+      "page_b_slug": "maldives-escape/maldives-spa-resorts-member-rates",
+      "similarity": 0.679,
+      "differentiation": 0.321
+    },
+    {
+      "page_a": "maldives-escape/maldives-diving-resorts.html",
+      "page_a_slug": "maldives-escape/maldives-diving-resorts",
+      "page_b": "maldives-escape/maldives-overwater-villa-resorts.html",
+      "page_b_slug": "maldives-escape/maldives-overwater-villa-resorts",
+      "similarity": 0.678,
+      "differentiation": 0.322
+    },
+    {
+      "page_a": "maldives-escape/maldives-luxury-resorts-usa.html",
+      "page_a_slug": "maldives-escape/maldives-luxury-resorts-usa",
+      "page_b": "maldives-escape/south-male-atoll.html",
+      "page_b_slug": "maldives-escape/south-male-atoll",
+      "similarity": 0.678,
+      "differentiation": 0.322
+    },
+    {
+      "page_a": "dubai-ultra/dubai-ultra-luxury-uk-travellers.html",
+      "page_a_slug": "dubai-ultra/dubai-ultra-luxury-uk-travellers",
+      "page_b": "dubai-ultra/palm-jumeirah.html",
+      "page_b_slug": "dubai-ultra/palm-jumeirah",
+      "similarity": 0.676,
+      "differentiation": 0.324
+    }
+  ]
+}

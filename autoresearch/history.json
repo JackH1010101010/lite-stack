@@ -1,0 +1,95 @@
+[
+  {
+    "type": "decision",
+    "timestamp": "2026-03-13T06:16:41.107Z",
+    "chosen": "copy_test",
+    "site": "dubai-ultra",
+    "reasoning": "Multi-agent scoring failed — defaulting to first available copy test.",
+    "strategy_alignment": "fallback",
+    "signal_coverage": "0/8",
+    "multi_agent": null,
+    "prediction": {
+      "expected_outcome": "Unknown — fallback decision",
+      "check_after": "2026-03-27T06:16:41.107Z"
+    }
+  },
+  {
+    "type": "decision",
+    "timestamp": "2026-03-13T06:21:42.542Z",
+    "chosen": "copy_test",
+    "site": "dubai-ultra",
+    "reasoning": "Multi-agent scoring failed — defaulting to first available copy test.",
+    "strategy_alignment": "fallback",
+    "signal_coverage": "0/8",
+    "multi_agent": null,
+    "prediction": {
+      "expected_outcome": "Unknown — fallback decision",
+      "check_after": "2026-03-27T06:21:42.542Z"
+    }
+  },
+  {
+    "type": "observation",
+    "timestamp": "2026-03-13T06:36:46.631Z",
+    "observation": "Content audit: 41 pages, 129 pairs below 40% differentiation threshold",
+    "source": "content-audit"
+  },
+  {
+    "type": "observation",
+    "timestamp": "2026-03-13T06:44:34.347Z",
+    "observation": "MicroFish swarm: 20 pages processed, 20 improved, 7 now pass 40% threshold. Avg lift: 24.2%",
+    "source": "microfish-swarm",
+    "mode": "simulate"
+  },
+  {
+    "type": "decision",
+    "timestamp": "2026-03-13T06:44:39.037Z",
+    "chosen": "copy_test",
+    "site": "dubai-ultra",
+    "reasoning": "Multi-agent scoring failed — defaulting to first available copy test.",
+    "strategy_alignment": "fallback",
+    "signal_coverage": "2/11",
+    "multi_agent": null,
+    "prediction": {
+      "expected_outcome": "Unknown — fallback decision",
+      "check_after": "2026-03-27T06:44:39.037Z"
+    }
+  },
+  {
+    "type": "observation",
+    "timestamp": "2026-03-13T06:59:55.650Z",
+    "observation": "Generated 3 comparison guide(s): dubai-downtown-vs-jbr, maldives-all-inclusive-vs-room-only, bali-seminyak-vs-ubud",
+    "source": "guide-builder"
+  },
+  {
+    "type": "workflow",
+    "timestamp": "2026-03-13T07:00:02.392Z",
+    "workflow_id": "microfish_full",
+    "workflow_name": "MicroFish Full Swarm",
+    "context": {},
+    "status": "complete",
+    "steps_completed": 0,
+    "steps_total": 3,
+    "duration_ms": 10,
+    "dry_run": true
+  },
+  {
+    "type": "observation",
+    "timestamp": "2026-03-13T07:00:08.941Z",
+    "observation": "Content audit: 44 pages, 129 pairs below 40% differentiation threshold",
+    "source": "content-audit"
+  },
+  {
+    "type": "decision",
+    "timestamp": "2026-03-13T07:00:14.759Z",
+    "chosen": "copy_test",
+    "site": "dubai-ultra",
+    "reasoning": "Multi-agent scoring failed — defaulting to first available copy test.",
+    "strategy_alignment": "fallback",
+    "signal_coverage": "3/11",
+    "multi_agent": null,
+    "prediction": {
+      "expected_outcome": "Unknown — fallback decision",
+      "check_after": "2026-03-27T07:00:14.759Z"
+    }
+  }
+]

@@ -131,8 +131,8 @@
     .hotel-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08)}
     .hotel-img{position:relative;background:linear-gradient(135deg,#e8e5e0,#d5d0c8);display:flex;align-items:center;justify-content:center;font-size:40px;aspect-ratio:3/2;overflow:hidden}
     .hotel-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s}
-    .hotel-img img.loaded{opacity:1}
-    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none}
+    .hotel-img img.loaded{opacity:1;z-index:2}
+    .hotel-img .img-fallback{position:relative;z-index:1;pointer-events:none;font-family:var(--font);font-weight:600;color:var(--grey-text);opacity:.4;font-size:32px;letter-spacing:.02em}
     .hotel-card.unavailable{opacity:.45;order:99}
     .hotel-badge{display:none}
     .hotel-body{padding:20px 24px;display:flex;flex-direction:column;gap:4px;flex:1}
@@ -273,7 +273,7 @@
 
 <!-- TEST MODE BANNER (hidden in production) -->
 <div id="test-banner" style="display:none;background:#b45309;color:#fff;text-align:center;font-size:12px;font-weight:600;padding:6px;letter-spacing:.05em">
-  ⚠ TEST MODE — No real bookings or charges will be made
+  TEST MODE — No real bookings or charges will be made
 </div>
 
 <!-- NAV -->
@@ -327,7 +327,7 @@
 
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
-    <span class="cug-icon">🔒</span>
+    <span class="cug-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
     <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
@@ -473,10 +473,10 @@
       <h2>Join LuxStay — it's free</h2>
       <p class="modal-sub">Unlock member-only hotel rates 10–30% below Booking.com. Takes 10 seconds.</p>
       <div class="modal-perks">
-        <div class="perk"><span class="perk-icon">🔓</span><span>Instant access to below-retail rates</span></div>
-        <div class="perk"><span class="perk-icon">💰</span><span>Save £20–£90 per night on 5-star hotels</span></div>
-        <div class="perk"><span class="perk-icon">🚫</span><span>No subscription, no booking fees</span></div>
-        <div class="perk"><span class="perk-icon">🌍</span><span>London, Dubai & Bangkok — more coming</span></div>
+        <div class="perk"><span class="perk-icon">✦</span><span>Instant access to below-retail rates</span></div>
+        <div class="perk"><span class="perk-icon">%</span><span>Save £20–£90 per night on 5-star hotels</span></div>
+        <div class="perk"><span class="perk-icon">✕</span><span>No subscription, no booking fees</span></div>
+        <div class="perk"><span class="perk-icon">★</span><span>London, Dubai & Bangkok — more coming</span></div>
       </div>
 
       <!-- Google One Tap sign-in -->
@@ -512,7 +512,7 @@
     </div>
 
     <div class="modal-success" id="modal-success">
-      <div class="tick">✅</div>
+      <div class="tick"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
       <h3>You're in!</h3>
       <p>Member rates are now unlocked. Refresh prices to see your savings vs Booking.com.</p>
     </div>
@@ -556,7 +556,7 @@
       </div>
       <!-- Step 4: Confirmation -->
       <div id="bk-p4" style="display:none">
-        <div class="bk-confirm-icon">🎉</div>
+        <div class="bk-confirm-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green, #22c55e)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3 style="text-align:center;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px">Booking confirmed!</h3>
         <p style="text-align:center;font-size:14px;color:var(--grey-text);margin-bottom:4px">Check your email for full details.</p>
         <div class="bk-ref-box">
@@ -624,28 +624,28 @@ function calcMemberPrice(netCost, ssp, markup) {
 // ── HOTEL DATA ────────────────────────────────────────────────
 const HOTELS = {
   London: [
-    {id:'lp19e0b', name:'Royal Lancaster London', emoji:'🏰', area:'Hyde Park, W2', dist:'5 min Paddington', desc:'416-room 5★ overlooking Hyde Park. Rooftop bar, two restaurants.', tags:["Hyde Park views","Rooftop bar","Couples"], badge:'Best value'},
-    {id:'lp6f715', name:'Shangri-La The Shard', emoji:'🌆', area:'London Bridge, SE1', dist:'2 min London Bridge', desc:'Floors 34–52 of The Shard. Panoramic city views. Infinity pool, CHI Spa.', tags:["Panoramic views","Pool","Spa"], badge:null},
-    {id:'lp73eb3', name:'Sea Containers London', emoji:'🌊', area:'South Bank, SE1', dist:'Thames-facing', desc:'Design-led 5★ on the South Bank. Thames views, Lyaness rooftop bar.', tags:["Thames views","Rooftop bar","Design hotel"], badge:null},
-    {id:'lp19e07', name:'Royal Garden Hotel', emoji:'🌿', area:'Kensington, W8', dist:'1 min Kensington Palace', desc:'396-room 5★ overlooking Kensington Gardens. Spa, two restaurants.', tags:["Kensington Gardens","Spa","Family"], badge:null},
-    {id:'lp2a32f', name:'The Savoy', emoji:'✨', area:'Strand, WC2', dist:'Covent Garden', desc:'Iconic 5★ on the Strand. River Suites, Thames Foyer afternoon tea, Kaspar\'s.', tags:["Iconic","River views","Historic"], badge:null},
-    {id:'lp20554', name:'Hyatt Regency Churchill', emoji:'🎩', area:'Marylebone, W1', dist:'2 min Baker St', desc:'5★ in the heart of the West End. 446 rooms, Montagu Kitchen & Bar.', tags:["West End","Business","Classic"], badge:null},
+    {id:'lp19e0b', name:'Royal Lancaster London', area:'Hyde Park, W2', dist:'5 min Paddington', desc:'416-room 5★ overlooking Hyde Park. Rooftop bar, two restaurants.', tags:["Hyde Park views","Rooftop bar","Couples"], badge:'Best value'},
+    {id:'lp6f715', name:'Shangri-La The Shard', area:'London Bridge, SE1', dist:'2 min London Bridge', desc:'Floors 34–52 of The Shard. Panoramic city views. Infinity pool, CHI Spa.', tags:["Panoramic views","Pool","Spa"], badge:null},
+    {id:'lp73eb3', name:'Sea Containers London', area:'South Bank, SE1', dist:'Thames-facing', desc:'Design-led 5★ on the South Bank. Thames views, Lyaness rooftop bar.', tags:["Thames views","Rooftop bar","Design hotel"], badge:null},
+    {id:'lp19e07', name:'Royal Garden Hotel', area:'Kensington, W8', dist:'1 min Kensington Palace', desc:'396-room 5★ overlooking Kensington Gardens. Spa, two restaurants.', tags:["Kensington Gardens","Spa","Family"], badge:null},
+    {id:'lp2a32f', name:'The Savoy', area:'Strand, WC2', dist:'Covent Garden', desc:'Iconic 5★ on the Strand. River Suites, Thames Foyer afternoon tea, Kaspar\'s.', tags:["Iconic","River views","Historic"], badge:null},
+    {id:'lp20554', name:'Hyatt Regency Churchill', area:'Marylebone, W1', dist:'2 min Baker St', desc:'5★ in the heart of the West End. 446 rooms, Montagu Kitchen & Bar.', tags:["West End","Business","Classic"], badge:null},
   ],
   Dubai: [
-    {id:'lp6557454e', name:'Hilton Dubai Palm Jumeirah', emoji:'🌴', area:'Palm Jumeirah', dist:'Private beach', desc:'5★ on the Palm with private beach access. Multiple pools and restaurants.', tags:["Private beach","Pool","Palm Jumeirah"], badge:'Best value'},
-    {id:'lp6ce87', name:'Sofitel Dubai Downtown', emoji:'🏙️', area:'Downtown Dubai', dist:'5 min Burj Khalifa', desc:'French-inspired luxury tower in Downtown. Rooftop pool, spa, city views.', tags:["Burj views","Pool","Spa"], badge:null},
-    {id:'lp32a09', name:'The Ritz-Carlton Dubai', emoji:'💎', area:'JBR Beach', dist:'Beachfront', desc:'Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.', tags:["Beachfront","Spa","Pool"], badge:null},
-    {id:'lp2a294', name:'Jumeirah Emirates Towers', emoji:'🗼', area:'Sheikh Zayed Rd', dist:'Business district', desc:'Twin-tower 5★ landmark. Dining, spa, direct mall access.', tags:["Iconic","Business","Spa"], badge:null},
-    {id:'lp374f5', name:'Bab Al Shams Desert Resort', emoji:'🌅', area:'Dubai Desert', dist:'45 min from city', desc:'Award-winning desert retreat. Traditional architecture, camel rides, infinity pool.', tags:["Desert","Infinity pool","Unique"], badge:null},
-    {id:'lp769d6', name:'InterContinental Dubai Marina', emoji:'⛵', area:'Dubai Marina', dist:'Marina Walk', desc:'5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.', tags:["Marina views","Pool","Rooftop"], badge:null},
+    {id:'lp6557454e', name:'Hilton Dubai Palm Jumeirah', area:'Palm Jumeirah', dist:'Private beach', desc:'5★ on the Palm with private beach access. Multiple pools and restaurants.', tags:["Private beach","Pool","Palm Jumeirah"], badge:'Best value'},
+    {id:'lp6ce87', name:'Sofitel Dubai Downtown', area:'Downtown Dubai', dist:'5 min Burj Khalifa', desc:'French-inspired luxury tower in Downtown. Rooftop pool, spa, city views.', tags:["Burj views","Pool","Spa"], badge:null},
+    {id:'lp32a09', name:'The Ritz-Carlton Dubai', area:'JBR Beach', dist:'Beachfront', desc:'Iconic beachfront 5★ on JBR. Full-service spa, 3 pools, fine dining.', tags:["Beachfront","Spa","Pool"], badge:null},
+    {id:'lp2a294', name:'Jumeirah Emirates Towers', area:'Sheikh Zayed Rd', dist:'Business district', desc:'Twin-tower 5★ landmark. Dining, spa, direct mall access.', tags:["Iconic","Business","Spa"], badge:null},
+    {id:'lp374f5', name:'Bab Al Shams Desert Resort', area:'Dubai Desert', dist:'45 min from city', desc:'Award-winning desert retreat. Traditional architecture, camel rides, infinity pool.', tags:["Desert","Infinity pool","Unique"], badge:null},
+    {id:'lp769d6', name:'InterContinental Dubai Marina', area:'Dubai Marina', dist:'Marina Walk', desc:'5★ in Dubai Marina. Floor-to-ceiling sea views, rooftop pool, spa.', tags:["Marina views","Pool","Rooftop"], badge:null},
   ],
   Bangkok: [
-    {id:'lp1c0bc', name:'Shangri-La Bangkok', emoji:'🛕', area:'Riverside, Sathorn', dist:'Chao Phraya views', desc:'Legendary 5★ on the Chao Phraya. Two towers, tropical gardens, river views.', tags:["River views","Pool","Gardens"], badge:'Best value'},
-    {id:'lp35d80', name:'lebua at State Tower', emoji:'🌃', area:'Silom, Bangkok', dist:'Sirocco Sky Bar', desc:'Iconic 5★ tower — home of the world\'s highest alfresco restaurant, Sirocco.', tags:["Sky bar","Views","Iconic"], badge:null},
-    {id:'lp6557c001', name:'Grand Hyatt Erawan Bangkok', emoji:'🌺', area:'Ratchaprasong', dist:'Erawan Shrine', desc:'Grand 5★ in the heart of Bangkok\'s luxury shopping district.', tags:["Central","Spa","Pool"], badge:null},
-    {id:'lp3964e', name:'Millennium Hilton Bangkok', emoji:'🌙', area:'Riverside, Charoennakorn', dist:'Chao Phraya ferry', desc:'Sleek 5★ tower with panoramic river views and rooftop pool.', tags:["River views","Rooftop pool","Modern"], badge:null},
-    {id:'lp96a62', name:'SKYVIEW Hotel Bangkok', emoji:'☁️', area:'Sukhumvit', dist:'BTS connected', desc:'Contemporary 5★ with Bangkok skyline views. Infinity pool, sky bar.', tags:["Skyline views","Pool","Modern"], badge:null},
-    {id:'lp6557c003', name:'Carlton Hotel Sukhumvit', emoji:'🏨', area:'Sukhumvit 16', dist:'BTS Asok 5 min', desc:'Modern 5★ in Sukhumvit. Rooftop pool, award-winning restaurant.', tags:["Sukhumvit","Pool","Rooftop"], badge:null},
+    {id:'lp1c0bc', name:'Shangri-La Bangkok', area:'Riverside, Sathorn', dist:'Chao Phraya views', desc:'Legendary 5★ on the Chao Phraya. Two towers, tropical gardens, river views.', tags:["River views","Pool","Gardens"], badge:'Best value'},
+    {id:'lp35d80', name:'lebua at State Tower', area:'Silom, Bangkok', dist:'Sirocco Sky Bar', desc:'Iconic 5★ tower — home of the world\'s highest alfresco restaurant, Sirocco.', tags:["Sky bar","Views","Iconic"], badge:null},
+    {id:'lp6557c001', name:'Grand Hyatt Erawan Bangkok', area:'Ratchaprasong', dist:'Erawan Shrine', desc:'Grand 5★ in the heart of Bangkok\'s luxury shopping district.', tags:["Central","Spa","Pool"], badge:null},
+    {id:'lp3964e', name:'Millennium Hilton Bangkok', area:'Riverside, Charoennakorn', dist:'Chao Phraya ferry', desc:'Sleek 5★ tower with panoramic river views and rooftop pool.', tags:["River views","Rooftop pool","Modern"], badge:null},
+    {id:'lp96a62', name:'SKYVIEW Hotel Bangkok', area:'Sukhumvit', dist:'BTS connected', desc:'Contemporary 5★ with Bangkok skyline views. Infinity pool, sky bar.', tags:["Skyline views","Pool","Modern"], badge:null},
+    {id:'lp6557c003', name:'Carlton Hotel Sukhumvit', area:'Sukhumvit 16', dist:'BTS Asok 5 min', desc:'Modern 5★ in Sukhumvit. Rooftop pool, award-winning restaurant.', tags:["Sukhumvit","Pool","Rooftop"], badge:null},
   ],
 };
 
@@ -738,7 +738,7 @@ function buildCard(h) {
   <article class="hotel-card" id="card-${h.id}">
     <div class="hotel-img">
       <img id="photo-${h.id}" alt="${h.name}" loading="lazy" decoding="async" />
-      <span class="img-fallback">${h.emoji}</span>
+      <span class="img-fallback">${h.name.charAt(0)}</span>
       ${h.badge ? `<span class="hotel-badge">${h.badge}</span>` : ''}
     </div>
     <div class="hotel-body">
@@ -782,7 +782,7 @@ async function loadHotelPhoto(hotelId) {
       imgEl.src = img.url;
       imgEl.onload = () => imgEl.classList.add('loaded');
     }
-  } catch { /* silently ignore — emoji fallback remains visible */ }
+  } catch { /* silently ignore — letter fallback remains visible */ }
 }
 
 // ── FETCH RATE ────────────────────────────────────────────────
@@ -989,7 +989,7 @@ function renderBkSummary() {
       <span class="bk-total-lbl">Member total</span>
       <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
     </div>
-    <div class="bk-policy">📋 <strong>Cancellation:</strong> ${cancelPolicy}</div>
+    <div class="bk-policy"><strong>Cancellation:</strong> ${cancelPolicy}</div>
     <button class="btn-bk" onclick="setBkStep(2)">Continue to guest details →</button>`;
 }
 
@@ -1023,7 +1023,7 @@ function loadPaymentSDK() {
     const amt = sym + parseFloat(bkSess.confirmedPrice).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});
     document.getElementById('bk-pay-container').innerHTML = `
       <div style="border:2px dashed var(--gold);border-radius:8px;padding:20px;background:var(--gold-lt);text-align:center;margin-bottom:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">⚠ TEST MODE — No real payment</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">TEST MODE — No real payment</div>
         <div style="font-size:13px;color:var(--grey-text);margin-bottom:16px">Simulating payment of <strong>${amt}</strong></div>
         <button class="btn-bk" id="mock-pay-btn" onclick="mockPayment()">Simulate Payment →</button>
       </div>`;

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{GUIDE_TITLE}}</title>
+  <meta name="description" content="{{GUIDE_META_DESCRIPTION}}" />
+  <link rel="canonical" href="{{CANONICAL_URL}}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{GUIDE_TITLE}}" />
+  <meta property="og:description" content="{{GUIDE_META_DESCRIPTION}}" />
+  <meta property="og:url" content="{{CANONICAL_URL}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:site_name" content="LuxStay" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{GUIDE_TITLE}}" />
+  <meta name="twitter:description" content="{{GUIDE_META_DESCRIPTION}}" />
+  <meta name="twitter:image" content="{{OG_IMAGE}}" />
+
+  <!-- DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://api.liteapi.travel" />
+  <link rel="dns-prefetch" href="https://us.i.posthog.com" />
+
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture alias identify people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
+  </script>
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "LuxStay", "item": "{{SITE_URL}}"},
+      {"@type": "ListItem", "position": 2, "name": "Guides", "item": "{{SITE_URL}}/guides/"},
+      {"@type": "ListItem", "position": 3, "name": "{{BREADCRUMB_TITLE}}"}
+    ]
+  }
+  </script>
+
+  <!-- Schema: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{{FAQ_SCHEMA_ITEMS}}]
+  }
+  </script>
+
+  <!-- Schema: ItemList (hotels) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "{{GUIDE_TITLE}}",
+    "description": "{{GUIDE_META_DESCRIPTION}}",
+    "numberOfItems": "{{HOTEL_COUNT}}",
+    "itemListElement": [{{HOTEL_SCHEMA_ITEMS}}]
+  }
+  </script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#1a2744;--gold:#c9a84c;--gold-lt:#f5e9c8;
+      --grey-bg:#f7f7f5;--grey-mid:#e5e3de;--grey-text:#6b6b6b;
+      --black:#1a1a1a;--white:#fff;
+      --green:#1a7a3c;--green-lt:#e8f5ee;
+    }
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--grey-bg);color:var(--black);line-height:1.7}
+
+    /* NAV */
+    nav{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .logo{font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.04em;text-decoration:none}
+    .nav-right{display:flex;align-items:center;gap:16px}
+    .nav-link{color:rgba(255,255,255,.7);font-size:14px;text-decoration:none}
+    .nav-link:hover{color:#fff}
+
+    /* BREADCRUMB */
+    .breadcrumb{max-width:800px;margin:16px auto 0;padding:0 20px;font-size:13px;color:var(--grey-text)}
+    .breadcrumb a{color:var(--grey-text);text-decoration:none}
+    .breadcrumb a:hover{color:var(--navy);text-decoration:underline}
+    .breadcrumb span{margin:0 6px}
+
+    /* ARTICLE */
+    article{max-width:800px;margin:0 auto;padding:0 20px 64px}
+
+    /* HERO */
+    .guide-hero{padding:32px 0 24px}
+    .guide-hero h1{font-size:clamp(24px,4vw,36px);font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:12px}
+    .guide-meta{font-size:14px;color:var(--grey-text);margin-bottom:8px}
+    .guide-meta time{font-weight:500}
+
+    /* SUMMARY — AI citation target */
+    .summary{font-size:16px;line-height:1.8;color:#333;padding:24px 0;border-bottom:1px solid var(--grey-mid)}
+    .summary p{margin-bottom:16px}
+    .summary p:last-child{margin-bottom:0}
+
+    /* SECTIONS */
+    h2{font-size:22px;font-weight:700;color:var(--navy);margin:36px 0 16px;line-height:1.3}
+    h3{font-size:17px;font-weight:600;color:var(--navy);margin:24px 0 12px}
+    p{margin-bottom:16px;font-size:15px;line-height:1.8}
+    ul,ol{margin:0 0 16px 24px;font-size:15px;line-height:1.8}
+    li{margin-bottom:6px}
+
+    /* COMPARISON TABLE */
+    .comparison-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+    .comparison-table th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+    .comparison-table td{padding:12px 16px;border-bottom:1px solid var(--grey-mid);vertical-align:top}
+    .comparison-table tr:nth-child(even){background:#fafaf8}
+    .comparison-table .loc-name{font-weight:700;color:var(--navy)}
+    .comparison-table .score{display:inline-block;background:var(--gold-lt);color:var(--navy);padding:2px 8px;border-radius:3px;font-weight:600;font-size:13px}
+    .comparison-table .price-range{font-weight:600;color:var(--green)}
+
+    /* HOTEL CARDS (mini) */
+    .hotel-picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:20px 0}
+    .pick-card{background:#fff;border:1px solid var(--grey-mid);border-radius:8px;padding:20px;transition:box-shadow .15s}
+    .pick-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+    .pick-name{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+    .pick-stars{font-size:12px;color:var(--gold);margin-bottom:8px}
+    .pick-score{font-size:13px;color:var(--grey-text);margin-bottom:8px}
+    .pick-score strong{color:var(--navy)}
+    .pick-price{font-size:14px;font-weight:600;color:var(--green);margin-bottom:12px}
+    .pick-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+    .pick-tag{font-size:11px;padding:2px 8px;border-radius:3px;background:var(--grey-bg);border:1px solid var(--grey-mid);color:var(--grey-text)}
+    .btn-rates{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:4px;text-decoration:none;border:none;cursor:pointer}
+    .btn-rates:hover{opacity:.88}
+
+    /* VERDICT */
+    .verdict-box{background:#fff;border:2px solid var(--gold);border-radius:8px;padding:24px;margin:24px 0}
+    .verdict-box h3{margin-top:0;color:var(--navy)}
+    .verdict-if{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+    .verdict-col h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+    .verdict-col ul{margin:0;padding-left:18px;font-size:14px}
+    .verdict-col li{margin-bottom:4px}
+
+    /* FAQ */
+    .faq-section{margin-top:40px}
+    .faq-item{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;overflow:hidden;margin-bottom:8px}
+    .faq-q{padding:16px 20px;font-size:15px;font-weight:600;color:var(--navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-q:hover{background:var(--grey-bg)}
+    .chevron{font-size:12px;color:var(--grey-text);transition:transform .2s}
+    .faq-a{padding:0 20px 16px;font-size:14px;color:var(--grey-text);line-height:1.7;display:none}
+    .faq-item.open .faq-a{display:block}
+    .faq-item.open .chevron{transform:rotate(180deg)}
+
+    /* CTA */
+    .cta-section{background:var(--navy);border-radius:8px;padding:32px;text-align:center;margin:40px 0}
+    .cta-section h2{color:var(--gold);margin:0 0 8px}
+    .cta-section p{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:20px}
+    .btn-cta{display:inline-block;background:var(--gold);color:var(--navy);font-size:15px;font-weight:700;padding:12px 28px;border-radius:6px;text-decoration:none;border:none;cursor:pointer}
+    .btn-cta:hover{opacity:.9}
+
+    /* METHODOLOGY */
+    .methodology{background:#fff;border:1px solid var(--grey-mid);border-radius:6px;padding:20px;margin:24px 0;font-size:13px;color:var(--grey-text);line-height:1.7}
+    .methodology h3{font-size:14px;color:var(--navy);margin:0 0 8px}
+
+    /* INTERNAL LINKS */
+    .related-guides{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+    .related-link{font-size:13px;padding:6px 14px;border-radius:4px;background:var(--grey-bg);border:1px solid var(--grey-mid);color:var(--navy);text-decoration:none;font-weight:500}
+    .related-link:hover{background:var(--gold-lt);border-color:var(--gold)}
+
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px}
+    footer a{color:var(--gold);text-decoration:none}
+    footer p+p{margin-top:6px}
+
+    /* RESPONSIVE */
+    @media(max-width:640px){
+      .verdict-if{grid-template-columns:1fr}
+      .comparison-table{font-size:12px}
+      .comparison-table th,.comparison-table td{padding:8px 10px}
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="{{SITE_URL}}" class="logo">LuxStay</a>
+  <div class="nav-right">
+    <a href="{{SITE_URL}}/guides/" class="nav-link">Guides</a>
+    <a href="{{SITE_URL}}" class="nav-link">Hotels</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="{{SITE_URL}}">LuxStay</a>
+  <span>›</span>
+  <a href="{{SITE_URL}}/guides/">Guides</a>
+  <span>›</span>
+  {{BREADCRUMB_TITLE}}
+</div>
+
+<article>
+
+  <!-- HERO -->
+  <div class="guide-hero">
+    <h1>{{GUIDE_H1}}</h1>
+    <div class="guide-meta">
+      By LuxStay Research · Updated <time datetime="{{PUBLISH_DATE}}">{{PUBLISH_DATE_DISPLAY}}</time> · {{READ_TIME}} min read
+    </div>
+  </div>
+
+  <!-- SUMMARY — First 200 words, AI citation extraction target -->
+  <div class="summary">
+{{SUMMARY_HTML}}
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <h2>{{LOCATION_A}} vs {{LOCATION_B}}: At a glance</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>{{LOCATION_A}}</th>
+        <th>{{LOCATION_B}}</th>
+      </tr>
+    </thead>
+    <tbody>
+{{COMPARISON_TABLE_ROWS}}
+    </tbody>
+  </table>
+
+  <!-- LOCATION A SECTION -->
+  <h2>{{LOCATION_A}}: What to expect</h2>
+{{LOCATION_A_CONTENT}}
+
+  <h3>Top hotel picks in {{LOCATION_A}}</h3>
+  <div class="hotel-picks">
+{{HOTELS_A_CARDS}}
+  </div>
+
+  <!-- LOCATION B SECTION -->
+  <h2>{{LOCATION_B}}: What to expect</h2>
+{{LOCATION_B_CONTENT}}
+
+  <h3>Top hotel picks in {{LOCATION_B}}</h3>
+  <div class="hotel-picks">
+{{HOTELS_B_CARDS}}
+  </div>
+
+  <!-- PRICE POSITIONING -->
+  <h2>Price comparison: Member rates vs OTA pricing</h2>
+{{PRICE_ANALYSIS_HTML}}
+
+  <!-- VERDICT -->
+  <div class="verdict-box">
+    <h3>The verdict</h3>
+{{VERDICT_HTML}}
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section editorial">
+    <h2>See exclusive member rates</h2>
+    <p>LuxStay members save 15-25% on luxury hotels in both {{LOCATION_A}} and {{LOCATION_B}}.</p>
+    <a href="{{SITE_URL}}" class="btn-cta" data-editorial-cta>Browse member rates</a>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h2>Frequently asked questions</h2>
+{{FAQ_HTML}}
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="methodology">
+    <h3>Methodology</h3>
+    <p>{{METHODOLOGY_TEXT}}</p>
+  </div>
+
+  <!-- RELATED GUIDES (internal links for SEO) -->
+  <h3>Related guides</h3>
+  <div class="related-guides">
+{{RELATED_LINKS_HTML}}
+  </div>
+
+</article>
+
+<footer>
+  <p>{{FOOTER_YEAR}} LuxStay · <a href="{{SITE_URL}}">Member-only luxury hotel rates</a></p>
+  <p>Data sourced from LiteAPI aggregated hotel rates. Prices and availability subject to change.</p>
+</footer>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+// PostHog page view
+function track(event, props) {
+  if (window.posthog && typeof posthog.capture === 'function') {
+    posthog.capture(event, props || {});
+  }
+}
+track('page_view', { page: 'guide', guide: '{{SLUG}}', site: 'LuxStay' });
+
+// Editorial CTA tracking
+document.addEventListener('click', function(e) {
+  var target = e.target.closest('[data-editorial-cta], .editorial a, .editorial button');
+  if (target) {
+    track('editorial_cta_clicked', {
+      cta_text: (target.textContent || '').trim().slice(0, 100),
+      cta_href: target.href || '',
+      guide: '{{SLUG}}'
+    });
+  }
+});
+</script>
+
+</body>
+</html>

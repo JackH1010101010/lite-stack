@@ -101,7 +101,7 @@
     .btn-search:disabled{background:#ccc;cursor:not-allowed}
 
     /* MAIN */
-    .main{max-width:860px;margin:0 auto;padding:0 16px 64px}
+    .main{max-width:960px;margin:0 auto;padding:0 16px 64px}
 
     /* MEMBER BANNER — hidden in redesign */
     .cug-banner{display:none}
@@ -192,15 +192,15 @@
     .modal-perks{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
     .perk{display:flex;align-items:center;gap:10px;font-size:14px}
     .perk-icon{font-size:16px;flex-shrink:0}
-    .modal input[type=email]{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:12px 14px;font-size:15px;outline:none;margin-bottom:12px}
-    .modal input[type=email]:focus{border-color:var(--navy)}
+    .modal input[type=email]{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:12px 14px;font-size:15px;outline:none;margin-bottom:12px;font-family:var(--font-sans)}
+    .modal input[type=email]:focus{border-color:var(--black)}
     .btn-join-modal{width:100%;background:var(--black);color:#fff;font-size:15px;font-weight:500;padding:13px;border-radius:6px;border:none;cursor:pointer;font-family:var(--font-sans);letter-spacing:.02em}
     .btn-join-modal:hover{opacity:.85}
     .modal-terms{font-size:11px;color:var(--grey-text);margin-top:10px;text-align:center}
     .modal-success{display:none;text-align:center;padding:16px 0}
     .modal-success .tick{font-size:48px;margin-bottom:12px}
-    .modal-success h3{font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px}
-    .modal-success p{font-size:14px;color:var(--grey-text);line-height:1.6}
+    .modal-success h3{font-size:20px;font-weight:500;color:var(--green);margin-bottom:8px}
+    .modal-success p{font-size:14px;color:#666;line-height:1.6}
 
     /* COOKIE BANNER */
     #cookie-banner{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:9999;flex-wrap:wrap;font-size:13px;box-shadow:0 -4px 16px rgba(0,0,0,.25)}
@@ -240,26 +240,26 @@
     .bk-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--grey-mid)}
     .bk-row:last-child{border-bottom:none}
     .bk-lbl{color:var(--grey-text)}
-    .bk-val{font-weight:600;text-align:right}
+    .bk-val{font-weight:500;text-align:right}
     .bk-total{display:flex;justify-content:space-between;align-items:center;background:var(--green-lt);border-radius:6px;padding:12px 16px;margin:16px 0}
-    .bk-total-lbl{font-size:14px;color:var(--green);font-weight:600}
-    .bk-total-amt{font-size:22px;font-weight:700;color:var(--green)}
+    .bk-total-lbl{font-size:14px;color:var(--green);font-weight:500}
+    .bk-total-amt{font-size:22px;font-weight:500;color:var(--green)}
     .bk-policy{background:#fffbf0;border:1px solid #fde68a;border-radius:6px;padding:12px;font-size:13px;color:#92400e;margin:12px 0;line-height:1.5}
     .bk-form-row{margin-bottom:14px}
-    .bk-form-row label{display:block;font-size:12px;font-weight:600;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
-    .bk-form-row input{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:11px 13px;font-size:14px;outline:none}
-    .bk-form-row input:focus{border-color:var(--navy)}
+    .bk-form-row label{display:block;font-size:12px;font-weight:500;color:var(--grey-text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+    .bk-form-row input{width:100%;border:1px solid var(--grey-mid);border-radius:6px;padding:11px 13px;font-size:14px;outline:none;font-family:var(--font-sans)}
+    .bk-form-row input:focus{border-color:var(--black)}
     .bk-cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .btn-bk{width:100%;background:var(--navy);color:#fff;font-size:15px;font-weight:600;padding:14px;border-radius:6px;border:none;cursor:pointer;margin-top:8px}
-    .btn-bk:hover{opacity:.88}
-    .btn-bk:disabled{background:#aaa;cursor:not-allowed}
+    .btn-bk{width:100%;background:var(--black);color:#fff;font-size:15px;font-weight:500;padding:14px;border-radius:6px;border:none;cursor:pointer;margin-top:8px;font-family:var(--font-sans);letter-spacing:.02em}
+    .btn-bk:hover{opacity:.85}
+    .btn-bk:disabled{background:#ccc;cursor:not-allowed}
     .btn-bk.green{background:var(--green)}
     .bk-spinner{text-align:center;padding:32px;color:var(--grey-text)}
     .bk-err{background:var(--red-lt);border:1px solid #fca5a5;border-radius:6px;padding:12px;font-size:13px;color:var(--red);margin:10px 0}
     #bk-pay-container{min-height:180px}
     .bk-confirm-icon{font-size:52px;text-align:center;margin-bottom:12px}
     .bk-ref-box{background:var(--green-lt);border:1px solid var(--green);border-radius:6px;padding:12px 16px;text-align:center;margin:16px 0}
-    .bk-ref-lbl{font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+    .bk-ref-lbl{font-size:11px;color:var(--green);font-weight:500;text-transform:uppercase;letter-spacing:.06em}
     .bk-ref-id{font-size:20px;font-weight:500;color:var(--black);font-family:monospace;margin-top:4px;word-break:break-all}
 
     @media(max-width:600px){
@@ -280,9 +280,9 @@
 <nav>
   <a href="/" class="logo">LuxStay</a>
   <div class="nav-right">
-    <a class="nav-link" href="/london.html">London</a>
-    <a class="nav-link" href="/dubai.html">Dubai</a>
-    <a class="nav-link" href="/bangkok.html">Bangkok</a>
+      <a class="nav-link" href="/london.html">London</a>
+      <a class="nav-link" href="/dubai.html">Dubai</a>
+      <a class="nav-link" href="/bangkok.html">Bangkok</a>
     <span id="member-nav">Member</span>
     <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Sign in</button>
   </div>
@@ -290,7 +290,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-eyebrow">5-Star Hotels · Members Save 10–30%</p>
+  <p class="hero-eyebrow"></p>
   <h1>Curated luxury hotels at member-only rates</h1>
   <p class="hero-sub">Five-star hotels in London, Dubai and Bangkok — at prices only members can see.</p>
   <div class="search-bar">
@@ -598,8 +598,7 @@ async function sendBookingConfirmation(bk) {
     console.log('Confirmation email sent to', bk.email);
   } catch (e) { console.warn('Email confirmation failed (non-fatal):', e?.text || e); }
 }
-// ── Referral attribution (disabled — programme paused) ──────────
-function getReferralCode() { return null; }
+
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = false;
 

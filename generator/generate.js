@@ -43,12 +43,18 @@ let html = fs.readFileSync(templatePath, 'utf8');
 
 // ── Build derived HTML/JS from structured fields ──────────────
 
-// CITIES_OPTIONS_HTML
+// CITIES_OPTIONS_HTML + CITY_NAV_LINKS
 if (cfg.cities) {
-  const opts = cfg.cities.map(c =>
+  cfg.CITIES_OPTIONS_HTML = cfg.cities.map(c =>
     `        <option value="${c.value}">${c.label}</option>`
   ).join('\n');
-  cfg.CITIES_OPTIONS_HTML = opts;
+
+  cfg.CITY_NAV_LINKS = cfg.cities.map(c =>
+    `<a class="nav-link" href="/${c.value.toLowerCase()}.html">${c.value}</a>`
+  ).join('\n      ');
+} else {
+  cfg.CITIES_OPTIONS_HTML = '';
+  cfg.CITY_NAV_LINKS = '';
 }
 
 // HOTELS_JS  (JS object literal, injected into <script>)
@@ -99,6 +105,105 @@ if (cfg.modal_perks) {
   ).join('\n');
 }
 
+// OG_IMAGE — default to a placeholder if not set in config
+if (!cfg.OG_IMAGE) cfg.OG_IMAGE = cfg.SCHEMA_URL
+  ? `${cfg.SCHEMA_URL}/og-image.jpg`
+  : '';
+
+// HOTEL_COUNT + HOTEL_SCHEMA_ITEMS — build Hotel schema from hotels data
+if (cfg.hotels) {
+  const allHotels = Object.values(cfg.hotels).flat();
+  cfg.HOTEL_COUNT = String(allHotels.length);
+  cfg.HOTEL_SCHEMA_ITEMS = allHotels.map((h, i) => JSON.stringify({
+    "@type": "ListItem",
+    "position": i + 1,
+    "item": {
+      "@type": "Hotel",
+      "name": h.name,
+      "identifier": h.id,
+      "description": h.desc || '',
+      "address": { "@type": "PostalAddress", "addressLocality": h.area || '' },
+      "starRating": { "@type": "Rating", "ratingValue": "5" },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": cfg.CURRENCY || "GBP",
+        "availability": "https://schema.org/InStock",
+        "offerCount": "1"
+      }
+    }
+  })).join(',');
+} else {
+  cfg.HOTEL_COUNT = '0';
+  cfg.HOTEL_SCHEMA_ITEMS = '';
+}
+
+// ── EMAILJS conditional blocks ────────────────────────────────
+if (cfg.EMAILJS_PUBLIC_KEY && cfg.EMAILJS_SERVICE_ID && cfg.EMAILJS_TEMPLATE_ID) {
+  cfg.EMAILJS_SCRIPT = `<!-- EmailJS — booking confirmation emails -->\n  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>`;
+  cfg.EMAILJS_CONFIG_JS = `// ── EmailJS — booking confirmation emails ─────────────────────
+const EMAILJS_PUBLIC_KEY  = '${cfg.EMAILJS_PUBLIC_KEY}';
+const EMAILJS_SERVICE_ID  = '${cfg.EMAILJS_SERVICE_ID}';
+const EMAILJS_TEMPLATE_ID = '${cfg.EMAILJS_TEMPLATE_ID}';
+if (EMAILJS_PUBLIC_KEY) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+async function sendBookingConfirmation(bk) {
+  if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID) return;
+  var nights = bk.checkin && bk.checkout
+    ? Math.max(1, Math.round((new Date(bk.checkout) - new Date(bk.checkin)) / 86400000))
+    : 1;
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_name: bk.firstName, to_email: bk.email, hotel_name: bk.hotelName,
+      checkin: bk.checkin, checkout: bk.checkout, nights: nights,
+      booking_ref: bk.ref, total_price: '\\u00a3' + parseFloat(bk.price).toLocaleString('en-GB', {minimumFractionDigits: 0}),
+      support_email: '${cfg.CONTACT_EMAIL || ''}'
+    });
+    console.log('Confirmation email sent to', bk.email);
+  } catch (e) { console.warn('Email confirmation failed (non-fatal):', e?.text || e); }
+}`;
+  cfg.EMAILJS_SEND_JS = `try {
+      sendBookingConfirmation({
+        firstName: bkSess.holder.firstName, email: bkSess.holder.email,
+        hotelName: bkSess.hotelName, checkin: bkSess.checkin, checkout: bkSess.checkout,
+        ref: bookingRef, price: bkSess.confirmedPrice
+      });
+    } catch(e) { console.warn('Email send failed:', e); }`;
+} else {
+  cfg.EMAILJS_SCRIPT = '';
+  cfg.EMAILJS_CONFIG_JS = '';
+  cfg.EMAILJS_SEND_JS = '';
+}
+
+// ── REFERRAL system conditional ──────────────────────────────
+if (cfg.ENABLE_REFERRALS === 'true') {
+  cfg.REFERRAL_JS = `// ── Referral attribution ────────────────────────────────────────
+(function captureReferral() {
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref');
+  if (ref) {
+    sessionStorage.setItem('ls_ref', ref);
+    var exp = new Date(Date.now() + 30 * 864e5).toUTCString();
+    document.cookie = 'ls_ref=' + encodeURIComponent(ref) + ';expires=' + exp + ';path=/;SameSite=Lax';
+    if (window.posthog) posthog.register({ referral_code: ref });
+  }
+})();
+function getReferralCode() {
+  var ss = sessionStorage.getItem('ls_ref');
+  if (ss) return ss;
+  var m = document.cookie.match(/(?:^|;\\s*)ls_ref=([^;]+)/);
+  return m ? decodeURIComponent(m[1]) : null;
+}`;
+} else {
+  cfg.REFERRAL_JS = '';
+}
+
+// ── AFFILIATE nav link conditional ───────────────────────────
+if (cfg.AFFILIATE_NAV_LINK && cfg.AFFILIATE_NAV_TEXT) {
+  cfg.AFFILIATE_NAV_HTML = `<a class="nav-link" href="${cfg.AFFILIATE_NAV_LINK}">${cfg.AFFILIATE_NAV_TEXT}</a>`;
+} else {
+  cfg.AFFILIATE_NAV_HTML = '';
+}
+
 // COOKIE_BANNER_BRAND (defaults to BRAND_NAME)
 if (!cfg.COOKIE_BANNER_BRAND) cfg.COOKIE_BANNER_BRAND = cfg.BRAND_NAME || 'this site';
 
@@ -107,6 +212,34 @@ if (!cfg.PRIVACY_OPERATOR) cfg.PRIVACY_OPERATOR = cfg.BRAND_NAME || 'this site';
 
 // FOOTER_YEAR
 if (!cfg.FOOTER_YEAR) cfg.FOOTER_YEAR = new Date().getFullYear().toString();
+
+// ── i18n / hreflang support ───────────────────────────────────
+// Config keys:
+//   "lang": "de"              — language code for this variant
+//   "hreflang_alternates": [  — array of {lang, url} for all language versions
+//     {"lang": "en", "url": "https://luxstay.netlify.app/"},
+//     {"lang": "de", "url": "https://luxstay.netlify.app/de/"}
+//   ]
+//   "currency": "EUR"         — currency for this locale (default: GBP)
+cfg.HTML_LANG = cfg.lang || 'en';
+
+if (cfg.hreflang_alternates && Array.isArray(cfg.hreflang_alternates)) {
+  const links = cfg.hreflang_alternates.map(alt =>
+    `  <link rel="alternate" hreflang="${alt.lang}" href="${alt.url}" />`
+  );
+  // Add x-default (first alternate, or the English one)
+  const defaultAlt = cfg.hreflang_alternates.find(a => a.lang === 'en') || cfg.hreflang_alternates[0];
+  if (defaultAlt) {
+    links.push(`  <link rel="alternate" hreflang="x-default" href="${defaultAlt.url}" />`);
+  }
+  cfg.HREFLANG_TAGS = links.join('\n');
+} else {
+  cfg.HREFLANG_TAGS = '';
+}
+
+// Currency symbol helper — used in template for price display
+const CURRENCY_SYMBOLS = { GBP: '£', EUR: '€', USD: '$', AED: 'د.إ', CHF: 'CHF' };
+cfg.CURRENCY_SYMBOL = CURRENCY_SYMBOLS[cfg.currency || 'GBP'] || cfg.currency || '£';
 
 // GSC_VERIFICATION_META — renders the meta tag only if a token is set in config
 cfg.GSC_VERIFICATION_META = cfg.GSC_VERIFICATION

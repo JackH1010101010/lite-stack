@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "description": "Workflow registry — composable multi-step pipelines the orchestrator can dispatch",
+  "workflows": {
+    "copy_test": {
+      "name": "Copy A/B Test",
+      "description": "Generate and deploy copy variants for a single site, measure after 7 days",
+      "trigger": "default — always available when a site has no active experiment",
+      "steps": [
+        { "script": "autoresearch/evolve.js", "args": "--site {{site}} --variants 3", "required": true }
+      ],
+      "signals_required": [],
+      "cooldown_days": 7
+    },
+    "seo_test": {
+      "name": "SEO Title/Meta Test",
+      "description": "Test SEO title and meta description variants on pages with high impressions but low CTR",
+      "trigger": "3 consecutive copy tests with zero lift on a site",
+      "steps": [
+        { "script": "autoresearch/seo-experiment.js", "args": "--site {{site}}", "required": true }
+      ],
+      "signals_required": [],
+      "cooldown_days": 21
+    },
+    "hotel_add": {
+      "name": "Hotel Addition",
+      "description": "Add new hotels to a site based on hotel-refresh recommendations",
+      "trigger": "hotel_refresh signal shows action_needed",
+      "steps": [
+        { "script": "autoresearch/hotel-add.js", "args": "--site {{site}}", "required": true }
+      ],
+      "signals_required": ["hotel_refresh"],
+      "cooldown_days": 14
+    },
+    "city_add": {
+      "name": "New City Launch",
+      "description": "Launch a new city/destination based on explore/opportunity signals",
+      "trigger": "explore signal shows opportunity score >= 70",
+      "steps": [
+        { "script": "autoresearch/city-add.js", "args": "--city {{city}}", "required": true }
+      ],
+      "signals_required": ["explore"],
+      "cooldown_days": 30
+    },
+    "hotel_visibility": {
+      "name": "Hotel Visibility Adjustment",
+      "description": "De-prioritise low-margin hotels and feature high-margin hotels based on rate data",
+      "trigger": "rate_snapshot shows low_margin hotels on a site",
+      "steps": [
+        { "script": "log", "args": "Hotel visibility adjustment for {{site}}: see rate-snapshot.json", "required": false }
+      ],
+      "signals_required": ["rate_snapshot"],
+      "cooldown_days": 7
+    },
+    "microfish": {
+      "name": "MicroFish Differentiation Fix",
+      "description": "Batch-inject unique data blocks into pages below the differentiation threshold to avoid Google's penalty",
+      "trigger": "content_audit shows violations > 0",
+      "steps": [
+        { "script": "autoresearch/content-audit.js", "args": "--dry-run", "required": false, "label": "Re-audit current state" },
+        { "script": "autoresearch/microfish-swarm.js", "args": "--site {{site}} --deploy", "required": true, "label": "Inject differentiation blocks" },
+        { "script": "autoresearch/content-audit.js", "args": "--site {{site}} --dry-run", "required": false, "label": "Verify post-injection scores" }
+      ],
+      "signals_required": ["content_audit"],
+      "cooldown_days": 14
+    },
+    "microfish_full": {
+      "name": "MicroFish Full Swarm",
+      "description": "Run content audit → MicroFish injection → re-audit → report across ALL sites. Multi-step pipeline.",
+      "trigger": "content_audit shows violations > 20 across multiple sites",
+      "steps": [
+        { "script": "autoresearch/content-audit.js", "args": "", "required": true, "label": "Full content audit" },
+        { "script": "autoresearch/microfish-swarm.js", "args": "--deploy", "required": true, "label": "Deploy fixes to all sites" },
+        { "script": "autoresearch/content-audit.js", "args": "--dry-run", "required": true, "label": "Verify results" }
+      ],
+      "signals_required": ["content_audit"],
+      "cooldown_days": 14
+    },
+    "comparison_guide": {
+      "name": "Comparison Guide Builder",
+      "description": "Generate a new data-driven comparison guide for high-authority SEO content",
+      "trigger": "manual or orchestrator recommendation when organic traffic growth stalls",
+      "steps": [
+        { "script": "autoresearch/guide-builder.js", "args": "--guide {{guide_id}}", "required": true, "label": "Generate guide" }
+      ],
+      "signals_required": [],
+      "cooldown_days": 7
+    },
+    "rate_check": {
+      "name": "Rate Monitor Check",
+      "description": "Run CUG vs retail rate comparison across all sites and create a snapshot + GitHub issue",
+      "trigger": "weekly schedule or manual — monitors margin health across all hotels",
+      "steps": [
+        { "script": "autoresearch/rate-monitor.js", "args": "--site {{site}}", "required": true, "label": "Check rates and margins" }
+      ],
+      "signals_required": [],
+      "cooldown_days": 7
+    },
+    "content_health": {
+      "name": "Content Health Check",
+      "description": "Run content audit across all sites, then MicroFish fix if violations found, then re-audit to verify",
+      "trigger": "weekly or after any SEO page regeneration",
+      "steps": [
+        { "script": "autoresearch/content-audit.js", "args": "", "required": true, "label": "Audit all pages" },
+        { "script": "autoresearch/microfish-swarm.js", "args": "--deploy", "required": false, "label": "Fix violations (if any)" },
+        { "script": "autoresearch/content-audit.js", "args": "--dry-run", "required": false, "label": "Verify fixes" }
+      ],
+      "signals_required": [],
+      "cooldown_days": 7
+    },
+    "reddit_distribute": {
+      "name": "Reddit Guide Distribution",
+      "description": "Draft and queue a Reddit post for a published guide that hasn't been distributed yet",
+      "trigger": "orchestrator detects published guides with no distribution log entry",
+      "steps": [
+        { "script": "autoresearch/distribute-reddit.js", "args": "--guide {{guide_id}}", "required": true, "label": "Generate Reddit post draft" }
+      ],
+      "signals_required": [],
+      "cooldown_days": 3
+    },
+    "ads_optimise": {
+      "name": "Google Ads Optimisation",
+      "description": "Check conversion data and suggest bid/keyword adjustments for active Google Ads campaigns",
+      "trigger": "weekly when Google Ads campaigns are active",
+      "steps": [
+        { "script": "autoresearch/ads-optimise.js", "args": "--site {{site}}", "required": true, "label": "Analyse ad performance and suggest changes" }
+      ],
+      "signals_required": [],
+      "cooldown_days": 7
+    }
+  }
+}

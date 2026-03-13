@@ -1095,12 +1095,6 @@ function handleGoogleSignIn(response) {
   const email = payload.email;
   const name  = payload.given_name || payload.name || '';
 
-  fetch('/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ 'form-name': 'maldives-escape-members', email, name, source: 'google' })
-  }).catch(() => {});
-
   activateMember(email, name);
 }
 

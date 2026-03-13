@@ -282,7 +282,7 @@
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
     <span class="cug-icon">🔒</span>
-    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock rates 10–30% below Booking.com.</span>
+    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
 
@@ -492,7 +492,7 @@
 // ── CONFIG ────────────────────────────────────────────────────
 const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
 const MARKUP      = {{MARKUP}};       // fallback static markup (used by calcMemberPrice default)
-const MIN_SAVING  = {{MIN_SAVING}};   // members always save at least this % vs Booking.com
+const MIN_SAVING  = {{MIN_SAVING}};   // members always save at least this % vs retail
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = false;
 
@@ -551,7 +551,7 @@ function updateMemberUI() {
   if (isMember) {
     banner.classList.add('is-member');
     bannerText.classList.add('is-member');
-    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing below-retail prices not visible on Booking.com.';
+    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing exclusive below-retail member pricing.';
     bannerBtn.textContent = '✓ Active';
     bannerBtn.style.background = 'var(--green)';
     bannerBtn.style.cursor = 'default';
@@ -731,9 +731,9 @@ function updateCardPrice(h, data) {
   if (isMember && memberPrice) {
     priceEl.innerHTML = `
       <div class="price-label">Member rate / night</div>
-      ${ssp ? `<div class="price-was">Booking.com: ${fmt(ssp)}</div>` : ''}
+      ${ssp ? `<div class="price-was">Retail: ${fmt(ssp)}</div>` : ''}
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
-      ${saving > 0 ? `<span class="saving-badge">Save ${saving}% vs Booking.com</span>` : ''}
+      ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
     btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
   } else {

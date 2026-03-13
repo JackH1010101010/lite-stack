@@ -243,7 +243,7 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Overwater Villas · Members Save 10–25%</p>
-  <h1>Private island resort rates you won't find on Booking.com</h1>
+  <h1>Private island resort Exclusive member rates on luxury hotels</h1>
   <p class="hero-sub">Member-only pricing on Maldives overwater villas and private island resorts. No minimum stay. Rates updated live.</p>
   <div class="search-bar">
     <div class="sf">
@@ -280,7 +280,7 @@
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
     <span class="cug-icon">🔒</span>
-    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock rates 10–30% below Booking.com.</span>
+    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
 
@@ -314,7 +314,7 @@
   <div class="editorial">
     <h2>About Maldives Escape member pricing</h2>
     <p>Maldives resorts sell a portion of their unsold overwater villas and beach villas at <strong>net rates</strong> — well below their public retail price — through Closed User Group (CUG) channels. These rates are legally protected: they can only be shown to verified members of private platforms.</p>
-    <p>Maldives Escape operates as a CUG platform. When you join, you access villa rates on top-rated Maldives resorts <strong>10–25% below Booking.com public prices</strong>. Same resort, same villa, same dates — just a better price because you're booking through a member channel.</p>
+    <p>Maldives Escape operates as a CUG platform. When you join, you access villa rates on top-rated Maldives resorts <strong>below the public retail price</strong>. Same resort, same villa, same dates — just a better price because you're booking through a member channel.</p>
     <p>The best availability windows are <strong>60–90 days out</strong> for peak season (November–April) and <strong>7–14 days out</strong> for last-minute green season deals. Green season (May–October) has the deepest discounts.</p>
   </div>
 
@@ -327,7 +327,7 @@
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
         How much do members actually save on Maldives resorts? <span class="chevron">▼</span>
       </div>
-      <div class="faq-a">Members typically save 10–25% compared to Booking.com or direct booking prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity.</div>
+      <div class="faq-a">Members typically save 10–25% compared to public retail prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -423,7 +423,7 @@
 
     <div id="modal-form-view">
       <h2>Join Maldives Escape — it's free</h2>
-      <p class="modal-sub">Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.</p>
+      <p class="modal-sub">Unlock member-only villa rates below retail. Takes 10 seconds.</p>
       <div class="modal-perks">
         <div class="perk"><span class="perk-icon">🏝️</span><span>Access overwater villa rates 10–25% below retail</span></div>
         <div class="perk"><span class="perk-icon">💎</span><span>Save $150–$400 per night on top resorts</span></div>
@@ -528,7 +528,7 @@
 // ── CONFIG ────────────────────────────────────────────────────
 const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
 const MARKUP      = 0.15;       // fallback static markup (used by calcMemberPrice default)
-const MIN_SAVING  = 0.08;   // members always save at least this % vs Booking.com
+const MIN_SAVING  = 0.08;   // members always save at least this % vs retail
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = true;
 
@@ -604,7 +604,7 @@ function updateMemberUI() {
   if (isMember) {
     banner.classList.add('is-member');
     bannerText.classList.add('is-member');
-    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing below-retail prices not visible on Booking.com.';
+    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing exclusive below-retail member pricing.';
     bannerBtn.textContent = '✓ Active';
     bannerBtn.style.background = 'var(--green)';
     bannerBtn.style.cursor = 'default';
@@ -745,9 +745,9 @@ function updateCardPrice(h, data) {
   if (isMember && memberPrice) {
     priceEl.innerHTML = `
       <div class="price-label">Member rate / night</div>
-      ${ssp ? `<div class="price-was">Booking.com: ${fmt(ssp)}</div>` : ''}
+      ${ssp ? `<div class="price-was">Retail: ${fmt(ssp)}</div>` : ''}
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
-      ${saving > 0 ? `<span class="saving-badge">Save ${saving}% vs Booking.com</span>` : ''}
+      ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
     btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
   } else {

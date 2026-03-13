@@ -280,7 +280,7 @@
   <!-- MEMBER BANNER -->
   <div class="cug-banner" id="cug-banner">
     <span class="cug-icon">🔒</span>
-    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock rates 10–30% below Booking.com.</span>
+    <span class="cug-text" id="cug-text"><strong>Member prices hidden.</strong> Join free to unlock exclusive below-retail rates.</span>
     <button class="cug-cta" id="cug-btn" onclick="openModal()">Join free →</button>
   </div>
 
@@ -314,7 +314,7 @@
   <div class="editorial">
     <h2>About Dubai Ultra member pricing</h2>
     <p>Dubai's ultra-luxury hotels — the Burj Al Arab, Atlantis The Royal, Four Seasons DIFC — release a share of their inventory at <strong>net rates</strong> through closed distribution channels. These rates are legally restricted from public display and are only accessible to verified members of gated platforms.</p>
-    <p>Dubai Ultra is a member-only platform. When you join (free, 30 seconds), you unlock net rates on Dubai's most exclusive hotels at <strong>10–30% below what Booking.com and direct booking sites publish</strong>. Same suite, same check-in date, same hotel — just a materially better price.</p>
+    <p>Dubai Ultra is a member-only platform. When you join (free, 30 seconds), you unlock net rates on Dubai's most exclusive hotels at <strong>below the public retail price</strong>. Same suite, same check-in date, same hotel — just a materially better price.</p>
     <p>Seasonal note: <strong>October to April</strong> is peak Dubai season when rates are highest but availability is also lowest. The best member rates appear <strong>7–14 days out</strong> as hotels fill gaps. Summer (June–August) has the deepest discounts — rates can drop 40–50% and hotels are significantly less crowded.</p>
   </div>
 
@@ -327,7 +327,7 @@
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
         Can I really get below-retail rates on the Burj Al Arab? <span class="chevron">▼</span>
       </div>
-      <div class="faq-a">Yes. The Burj Al Arab — like all major Dubai luxury hotels — distributes a portion of its inventory through closed user group (CUG) channels at net rates. These rates are 10–30% below what Booking.com and the hotel's own website publish. As a Dubai Ultra member you access those rates directly.</div>
+      <div class="faq-a">Yes. The Burj Al Arab — like all major Dubai luxury hotels — distributes a portion of its inventory through closed user group (CUG) channels at net rates. These rates are 10–30% below what Booking.com and public retail sites publish. As a Dubai Ultra member you access those rates directly.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -423,7 +423,7 @@
 
     <div id="modal-form-view">
       <h2>Join Dubai Ultra — it's free</h2>
-      <p class="modal-sub">Unlock member rates on Dubai's ultra-luxury hotels — 10–30% below Booking.com. Takes 10 seconds.</p>
+      <p class="modal-sub">Unlock member rates on Dubai's ultra-luxury hotels — below retail. Takes 10 seconds.</p>
       <div class="modal-perks">
         <div class="perk"><span class="perk-icon">🏙️</span><span>Access Dubai's finest hotels 10–30% below retail</span></div>
         <div class="perk"><span class="perk-icon">💰</span><span>Save AED 500–2,000 per night on suites</span></div>
@@ -528,7 +528,7 @@
 // ── CONFIG ────────────────────────────────────────────────────
 const API_BASE    = '/.netlify/functions/liteapi'; // server-side proxy — key never in browser
 const MARKUP      = 0.15;       // fallback static markup (used by calcMemberPrice default)
-const MIN_SAVING  = 0.08;   // members always save at least this % vs Booking.com
+const MIN_SAVING  = 0.08;   // members always save at least this % vs retail
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = true;
 
@@ -604,7 +604,7 @@ function updateMemberUI() {
   if (isMember) {
     banner.classList.add('is-member');
     bannerText.classList.add('is-member');
-    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing below-retail prices not visible on Booking.com.';
+    bannerText.innerHTML = '<strong>Member rates unlocked.</strong> You\'re seeing exclusive below-retail member pricing.';
     bannerBtn.textContent = '✓ Active';
     bannerBtn.style.background = 'var(--green)';
     bannerBtn.style.cursor = 'default';
@@ -745,9 +745,9 @@ function updateCardPrice(h, data) {
   if (isMember && memberPrice) {
     priceEl.innerHTML = `
       <div class="price-label">Member rate / night</div>
-      ${ssp ? `<div class="price-was">Booking.com: ${fmt(ssp)}</div>` : ''}
+      ${ssp ? `<div class="price-was">Retail: ${fmt(ssp)}</div>` : ''}
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
-      ${saving > 0 ? `<span class="saving-badge">Save ${saving}% vs Booking.com</span>` : ''}
+      ${saving > 0 ? `<span class="saving-badge">${saving}% off</span>` : ''}
     `;
     btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
   } else {

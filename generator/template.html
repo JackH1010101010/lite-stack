@@ -292,21 +292,21 @@
   <p class="hero-sub">{{HERO_SUB}}</p>
   <div class="search-bar">
     <div class="sf">
-      <label>Destination</label>
+      <label for="city-select">Destination</label>
       <select id="city-select">
 {{CITIES_OPTIONS_HTML}}
       </select>
     </div>
     <div class="sf">
-      <label>Check-in</label>
+      <label for="checkin">Check-in</label>
       <input type="date" id="checkin" />
     </div>
     <div class="sf">
-      <label>Check-out</label>
+      <label for="checkout">Check-out</label>
       <input type="date" id="checkout" />
     </div>
     <div class="sf" style="max-width:80px">
-      <label>Guests</label>
+      <label for="guests">Guests</label>
       <select id="guests">
         <option>1</option>
         <option selected>2</option>
@@ -387,7 +387,7 @@
 <!-- PRIVACY POLICY MODAL -->
 <div id="privacy-overlay" onclick="closePrivacyOutside(event)">
   <div class="privacy-box">
-    <button class="privacy-close" onclick="closePrivacy()">✕</button>
+    <button class="privacy-close" onclick="closePrivacy()" aria-label="Close">✕</button>
     <h2>Privacy &amp; Cookie Policy</h2>
     <p class="pp-date">Last updated: {{FOOTER_YEAR}}</p>
 
@@ -427,7 +427,7 @@
 <!-- JOIN MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
 
     <div id="modal-form-view">
       <h2>{{MODAL_HEADLINE}}</h2>
@@ -483,7 +483,7 @@
   <div class="bk-modal">
     <div class="bk-header">
       <h2 id="bk-title">Book Hotel</h2>
-      <button class="bk-close" onclick="closeBkModal()">✕</button>
+      <button class="bk-close" onclick="closeBkModal()" aria-label="Close">✕</button>
     </div>
     <div class="bk-steps" id="bk-steps">
       <span class="bk-step active" id="bk-s1">1. Summary</span>
@@ -499,11 +499,11 @@
       <div id="bk-p2" style="display:none">
         <form id="bk-guest-form" onsubmit="submitGuestDetails(event)">
           <div class="bk-cols">
-            <div class="bk-form-row"><label>First name *</label><input type="text" id="bk-first" required placeholder="First"/></div>
-            <div class="bk-form-row"><label>Last name *</label><input type="text" id="bk-last" required placeholder="Last"/></div>
+            <div class="bk-form-row"><label for="bk-first">First name *</label><input type="text" id="bk-first" required placeholder="First"/></div>
+            <div class="bk-form-row"><label for="bk-last">Last name *</label><input type="text" id="bk-last" required placeholder="Last"/></div>
           </div>
-          <div class="bk-form-row"><label>Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
-          <div class="bk-form-row"><label>Phone (with country code)</label><input type="tel" id="bk-phone" placeholder="+44 7700 900000"/></div>
+          <div class="bk-form-row"><label for="bk-email">Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
+          <div class="bk-form-row"><label for="bk-phone">Phone (with country code) *</label><input type="tel" id="bk-phone" required placeholder="+44 7700 900000"/></div>
           <div id="bk-guest-err"></div>
           <button type="submit" class="btn-bk">Continue to payment →</button>
         </form>
@@ -708,9 +708,12 @@ async function fetchRate(h, checkin, checkout) {
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     const resp = await fetch(`${API_BASE}?ep=hotels/rates`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         hotelIds: [h.id],
         occupancies: [{ adults: parseInt(document.getElementById('guests').value) }],
@@ -719,6 +722,7 @@ async function fetchRate(h, checkin, checkout) {
         checkin, checkout
       })
     });
+    clearTimeout(timeout);
 
     if (!resp.ok) throw new Error(`API ${resp.status}`);
     const data = await resp.json();
@@ -742,7 +746,7 @@ async function fetchRate(h, checkin, checkout) {
       member_price: calcMemberPrice(netCost, ssp, mu), markup_pct: Math.round(mu * 100) });
 
   } catch(e) {
-    updateCardPrice(h, { error: e.message });
+    updateCardPrice(h, { error: e.name === 'AbortError' ? 'Request timed out' : e.message });
   }
 }
 
@@ -753,7 +757,7 @@ function updateCardPrice(h, data) {
   if (!priceEl) return;
 
   if (!data || data.error) {
-    priceEl.innerHTML = `<span class="rate-loading">No availability for these dates</span>`;
+    priceEl.innerHTML = `<span style="color:var(--grey-text);font-size:13px">No availability for these dates</span>`;
     btnEl.innerHTML = '';
     // Sink unavailable cards to the bottom of the grid
     const card = document.getElementById(`card-${h.id}`);
@@ -883,7 +887,7 @@ async function doPrebook() {
 
 function renderBkSummary() {
   const { hotelName, checkin, checkout, confirmedPrice, currency, cancelPolicy, roomName } = bkSess;
-  const nights = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
+  const nights = Math.max(1, Math.round((new Date(checkout) - new Date(checkin)) / 86400000));
   const sym    = currency === 'GBP' ? '£' : currency === 'USD' ? '$' : '€';
   const fmt    = n => sym + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0,maximumFractionDigits:0});
 
@@ -911,7 +915,11 @@ function submitGuestDetails(e) {
   const firstName = document.getElementById('bk-first').value.trim();
   const lastName  = document.getElementById('bk-last').value.trim();
   const email     = document.getElementById('bk-email').value.trim();
-  const phone     = document.getElementById('bk-phone').value.trim() || '+440000000000';
+  const phone     = document.getElementById('bk-phone').value.trim();
+  if (!phone) {
+    errEl.innerHTML = '<div class="bk-err">Please enter your phone number with country code.</div>';
+    return;
+  }
 
   if (!firstName || !lastName || !email) {
     errEl.innerHTML = '<div class="bk-err">Please complete all required fields.</div>';
@@ -1134,7 +1142,12 @@ document.addEventListener('click', function(e) {
   }
 });
 
+var _searchLock = false;
 function doSearch() {
+  if (_searchLock) return;
+  _searchLock = true;
+  var btn = document.getElementById('search-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Searching...'; }
   track('hotel_search', {
     city: document.getElementById('city-select').value,
     checkin: document.getElementById('checkin').value,
@@ -1142,6 +1155,7 @@ function doSearch() {
     guests: document.getElementById('guests').value
   });
   _origDoSearch();
+  setTimeout(function(){ _searchLock = false; if (btn) { btn.disabled = false; btn.textContent = 'Search'; } }, 3000);
 }
 
 // ── INIT ──────────────────────────────────────────────────────

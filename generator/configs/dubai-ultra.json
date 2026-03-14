@@ -126,6 +126,18 @@
     {
       "q": "Which areas does Dubai Ultra cover?",
       "a": "Palm Jumeirah, Downtown Dubai, and Dubai Marina & JBR are live now. Business Bay, DIFC, and Jumeirah Beach are being added. If there's a specific property you want to see, let us know when you join."
+    },
+    {
+      "q": "Is Dubai Ultra a legitimate booking platform?",
+      "a": "Absolutely. Dubai Ultra is a verified Closed User Group platform using the same hotel distribution infrastructure as Booking.com and Expedia. Every booking is confirmed directly with the hotel — you receive a confirmation number, and the hotel has your reservation in their system. We are a direct distribution channel that hotels use to fill rooms through member-only pricing."
+    },
+    {
+      "q": "How can you offer rates below Booking.com?",
+      "a": "Dubai's luxury hotels release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join Dubai Ultra (free, 30 seconds), you become a verified CUG member and unlock net rates 10–30% below what public sites can legally show. Same hotel, same suite, same dates — just a different distribution channel."
+    },
+    {
+      "q": "Is it safe to enter my credit card?",
+      "a": "Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security."
     }
   ],
   "modal_perks": [

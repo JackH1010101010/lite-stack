@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://maldives-escape.netlify.app/</loc><lastmod>2026-03-12</lastmod><priority>1.0</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/north-male-atoll.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/south-male-atoll.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/baa-atoll.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-honeymoon-resorts-uk.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-luxury-resorts-gcc.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-luxury-resorts-usa.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-luxus-resorts-deutschland.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-overwater-villa-resorts.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-spa-resorts-member-rates.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-diving-resorts.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://maldives-escape.netlify.app/maldives-adults-only-resorts.html</loc><lastmod>2026-03-12</lastmod><priority>0.8</priority></url>
+  <url><loc>https://maldives.lux-stay-members.com/</loc><lastmod>2026-03-14</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://maldives.lux-stay-members.com/north-male-atoll.html</loc><lastmod>2026-03-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://maldives.lux-stay-members.com/south-male-atoll.html</loc><lastmod>2026-03-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://maldives.lux-stay-members.com/baa-atoll.html</loc><lastmod>2026-03-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

@@ -79,7 +79,7 @@ if (cfg.trust_items) {
   cfg.TRUST_ITEMS_HTML = items;
 }
 
-// FAQ_HTML
+// FAQ_HTML + FAQPage schema
 if (cfg.faq_items) {
   const faqs = cfg.faq_items.map((f, i) => {
     const open = i === 0 ? ' open' : '';
@@ -91,12 +91,35 @@ if (cfg.faq_items) {
     </div>`;
   }).join('\n');
   cfg.FAQ_HTML = faqs;
+
+  // FAQPage structured data
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: cfg.faq_items.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  };
+  cfg.FAQ_SCHEMA_JSON = JSON.stringify(faqSchema);
 }
+
+// Organization schema
+cfg.ORG_SCHEMA_JSON = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: cfg.BRAND_NAME || '',
+  url: cfg.SITE_URL || cfg.SCHEMA_URL || '',
+  description: cfg.SCHEMA_DESCRIPTION || '',
+  contactPoint: { '@type': 'ContactPoint', email: cfg.CONTACT_EMAIL || '', contactType: 'customer support' }
+});
 
 // EDITORIAL_HTML
 if (cfg.editorial) {
   const paras = (cfg.editorial.paragraphs || []).map(p => `    <p>${p}</p>`).join('\n');
-  cfg.EDITORIAL_HTML = `    <h2>${cfg.editorial.title}</h2>\n${paras}`;
+  const cta = `    <p style="margin-top:16px"><a href="#" onclick="event.preventDefault();openModal()" style="color:var(--gold);font-weight:600;text-decoration:underline">Join free and see member rates →</a></p>`;
+  cfg.EDITORIAL_HTML = `    <h2>${cfg.editorial.title}</h2>\n${paras}\n${cta}`;
 }
 
 // MODAL_PERKS_HTML
@@ -268,8 +291,56 @@ const outDir = path.join(__dirname, '..', 'sites', configName);
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 
+// ── Generate robots.txt ──────────────────────────────────────
+const siteUrl = cfg.SITE_URL || cfg.SCHEMA_URL || '';
+const robotsTxt = `# ${cfg.BRAND_NAME} — robots.txt
+User-agent: *
+Allow: /
+Sitemap: ${siteUrl}/sitemap.xml
+
+# Block AI training crawlers (protect CUG pricing data)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+`;
+fs.writeFileSync(path.join(outDir, 'robots.txt'), robotsTxt, 'utf8');
+
+// ── Generate sitemap.xml ─────────────────────────────────────
+const today = new Date().toISOString().slice(0, 10);
+let sitemapUrls = `  <url><loc>${siteUrl}/</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>`;
+
+// Add city pages if cities exist
+if (cfg.cities) {
+  cfg.cities.forEach(c => {
+    const slug = c.value.toLowerCase().replace(/\s+/g, '-');
+    sitemapUrls += `\n  <url><loc>${siteUrl}/${slug}.html</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`;
+  });
+}
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls}
+</urlset>
+`;
+fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemapXml, 'utf8');
+
 // Note: LiteAPI proxy is handled by worker.js (Cloudflare Workers).
 // No per-site function copying needed — deploy-all.js handles deployment.
 
 console.log(`✓  Generated: sites/${configName}/index.html`);
+console.log(`   + robots.txt, sitemap.xml`);
 console.log(`   Deploy:    node deploy-all.js  (or: npx wrangler deploy)`);

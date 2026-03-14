@@ -140,6 +140,18 @@
     {
       "q": "Is there a minimum stay?",
       "a": "No. All hotels on LuxStay accept single-night bookings, including Friday-only or Saturday-only check-ins. This is specifically designed for last-minute weekend travellers who want flexibility."
+    },
+    {
+      "q": "Is LuxStay a legitimate booking platform?",
+      "a": "Yes. LuxStay is a UK-operated Closed User Group platform that sources hotel inventory through LiteAPI, the same B2B distribution network that powers Booking.com, Expedia, and Hotels.com. Your booking is confirmed directly with the hotel — you receive a hotel confirmation number and the hotel has your reservation in their system, exactly as if you had booked through any major OTA."
+    },
+    {
+      "q": "How can you offer rates below Booking.com?",
+      "a": "Hotels release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join LuxStay (free, 30 seconds), you become a verified CUG member and unlock net rates 10–30% below what public sites can legally show. Same hotel, same room, same dates — just a different distribution channel."
+    },
+    {
+      "q": "Is it safe to enter my credit card?",
+      "a": "Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security."
     }
   ],
   "modal_perks": [

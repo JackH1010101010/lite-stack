@@ -63,6 +63,16 @@
   }
   </script>
 
+  <!-- Schema: FAQPage — enables FAQ rich snippets -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much do members actually save?","acceptedAnswer":{"@type":"Answer","text":"Members save between 10% and 30% compared to Booking.com public prices on the same hotels and dates. On a £300/night room that's £30–£90 back in your pocket. Savings vary by hotel, date, and availability — the best deals appear last-minute (Wednesday–Thursday for the weekend)."}},{"@type":"Question","name":"Why can't I see the member price without joining?","acceptedAnswer":{"@type":"Answer","text":"Hotel rate parity rules require that below-retail prices are only shown to verified members of closed platforms. Displaying them publicly would breach the hotel's distribution agreement. Joining LuxStay (free, takes 30 seconds) makes you a verified member and unlocks the below-retail rates."}},{"@type":"Question","name":"Is membership free? Are there any hidden fees?","acceptedAnswer":{"@type":"Answer","text":"Yes, membership is completely free. There are no subscription fees, no booking fees added on top of the rate, and no minimum spend. You pay the member rate for the room — that's it."}},{"@type":"Question","name":"Which cities are available?","acceptedAnswer":{"@type":"Answer","text":"London, Dubai and Bangkok are live now, with all three showing strong member savings. More cities are being added — if there's a destination you'd like to see, let us know when you join."}},{"@type":"Question","name":"Is there a minimum stay?","acceptedAnswer":{"@type":"Answer","text":"No. All hotels on LuxStay accept single-night bookings, including Friday-only or Saturday-only check-ins. This is specifically designed for last-minute weekend travellers who want flexibility."}},{"@type":"Question","name":"Is LuxStay a legitimate booking platform?","acceptedAnswer":{"@type":"Answer","text":"Yes. LuxStay is a UK-operated Closed User Group platform that sources hotel inventory through LiteAPI, the same B2B distribution network that powers Booking.com, Expedia, and Hotels.com. Your booking is confirmed directly with the hotel — you receive a hotel confirmation number and the hotel has your reservation in their system, exactly as if you had booked through any major OTA."}},{"@type":"Question","name":"How can you offer rates below Booking.com?","acceptedAnswer":{"@type":"Answer","text":"Hotels release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join LuxStay (free, 30 seconds), you become a verified CUG member and unlock net rates 10–30% below what public sites can legally show. Same hotel, same room, same dates — just a different distribution channel."}},{"@type":"Question","name":"Is it safe to enter my credit card?","acceptedAnswer":{"@type":"Answer","text":"Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security."}}]}
+  </script>
+
+  <!-- Schema: Organization — enables Knowledge Graph -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"LuxStay","url":"https://luxury.lux-stay-members.com","description":"Member-only luxury hotel rates. 5-star hotels at below-retail prices, gated behind a free membership.","contactPoint":{"@type":"ContactPoint","email":"jackthughes99@gmail.com","contactType":"customer support"}}
+  </script>
+
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -287,7 +297,7 @@
       <a class="nav-link" href="/dubai.html">Dubai</a>
       <a class="nav-link" href="/bangkok.html">Bangkok</a>
     <span id="member-nav">Member</span>
-    <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">Sign in</button>
+    <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">See member rates</button>
   </div>
 </nav>
 
@@ -343,6 +353,13 @@
     <div class="ti"><span>✓</span> 5-star only, hand-verified</div>
   </div>
 
+  <!-- CONFIDENCE GUARANTEES -->
+  <div class="confidence-strip" style="display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;padding:12px 0 16px;font-size:12px;color:var(--grey-text)">
+    <span style="display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> Confirmed directly with the hotel</span>
+    <span style="display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Stripe-secured payments</span>
+    <span style="display:flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No hidden fees</span>
+  </div>
+
   <!-- FILTER -->
   <div class="filter-row">
     <span class="filter-label">Filter:</span>
@@ -367,6 +384,7 @@
     <p>Hotels release a portion of their unsold inventory at <strong>net rates</strong> — below their public retail price — through Closed User Group (CUG) channels. These rates are legally restricted: they cannot be shown on public pages. They are only available to verified members of gated platforms.</p>
     <p>LuxStay operates as a CUG platform. When you join, you gain access to net rates on 5-star hotels that are <strong>10–30% below what Booking.com, Expedia, and Hotels.com show publicly</strong>. The same hotel, same room, same dates — just a better price because you're accessing it through a member channel.</p>
     <p>Last-minute availability is highest from <strong>Wednesday onwards</strong> as hotels release unsold rooms for the upcoming weekend. This is when the deepest discounts appear.</p>
+    <p style="margin-top:16px"><a href="#" onclick="event.preventDefault();openModal()" style="color:var(--gold);font-weight:600;text-decoration:underline">Join free and see member rates →</a></p>
   </div>
 
   <!-- FAQ -->
@@ -403,6 +421,24 @@
         Is there a minimum stay? <span class="chevron">▼</span>
       </div>
       <div class="faq-a">No. All hotels on LuxStay accept single-night bookings, including Friday-only or Saturday-only check-ins. This is specifically designed for last-minute weekend travellers who want flexibility.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Is LuxStay a legitimate booking platform? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Yes. LuxStay is a UK-operated Closed User Group platform that sources hotel inventory through LiteAPI, the same B2B distribution network that powers Booking.com, Expedia, and Hotels.com. Your booking is confirmed directly with the hotel — you receive a hotel confirmation number and the hotel has your reservation in their system, exactly as if you had booked through any major OTA.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        How can you offer rates below Booking.com? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Hotels release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join LuxStay (free, 30 seconds), you become a verified CUG member and unlock net rates 10–30% below what public sites can legally show. Same hotel, same room, same dates — just a different distribution channel.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        Is it safe to enter my credit card? <span class="chevron">▼</span>
+      </div>
+      <div class="faq-a">Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security.</div>
     </div>
   </div>
 
@@ -534,6 +570,10 @@
       <span class="bk-step" id="bk-s2">2. Guest details</span>
       <span class="bk-step" id="bk-s3">3. Payment</span>
     </div>
+    <div class="bk-price-bar" id="bk-price-bar" style="display:none;padding:8px 16px;background:var(--gold-lt);border-radius:6px;margin:0 24px 8px;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+      <span id="bk-price-bar-hotel" style="font-weight:500;color:var(--black)"></span>
+      <span id="bk-price-bar-amt" style="font-weight:700;color:var(--green)"></span>
+    </div>
     <div class="bk-body">
       <!-- Step 1: Summary + pre-book -->
       <div id="bk-p1">
@@ -549,13 +589,21 @@
           <div class="bk-form-row"><label for="bk-email">Email *</label><input type="email" id="bk-email" required placeholder="you@example.com"/></div>
           <div class="bk-form-row"><label for="bk-phone">Phone (with country code) *</label><input type="tel" id="bk-phone" required placeholder="+44 7700 900000"/></div>
           <div id="bk-guest-err"></div>
-          <button type="submit" class="btn-bk">Continue to payment →</button>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <button type="button" class="btn-bk" style="background:var(--grey-text);flex:0 0 auto" onclick="setBkStep(1)">← Back</button>
+            <button type="submit" class="btn-bk" style="flex:1">Continue to payment →</button>
+          </div>
         </form>
       </div>
       <!-- Step 3: Payment (LiteAPI Payment SDK) -->
       <div id="bk-p3" style="display:none">
         <div id="bk-pay-container"><div class="bk-spinner"><div class="spinner"></div><p>Loading secure payment form…</p></div></div>
         <div id="bk-pay-err"></div>
+        <div class="bk-trust-badges" style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;padding:12px;border-top:1px solid var(--grey-mid)">
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--grey-text)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 256-bit SSL</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--grey-text)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Stripe secured</span>
+          <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--grey-text)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> PCI Level 1</span>
+        </div>
       </div>
       <!-- Step 4: Confirmation -->
       <div id="bk-p4" style="display:none">
@@ -908,6 +956,33 @@ function setBkStep(n) {
     if (i < n)  s.classList.add('done');
     if (i === n) s.classList.add('active');
   });
+
+  // Persistent price bar on steps 2 & 3
+  const bar = document.getElementById('bk-price-bar');
+  if (bar && bkSess.confirmedPrice && (n === 2 || n === 3)) {
+    const sym = (bkSess.currency === 'GBP' ? '£' : bkSess.currency === 'USD' ? '$' : '€');
+    document.getElementById('bk-price-bar-hotel').textContent = bkSess.hotelName || '';
+    document.getElementById('bk-price-bar-amt').textContent = 'Total: ' + sym + parseFloat(bkSess.confirmedPrice).toLocaleString('en-GB',{minimumFractionDigits:0,maximumFractionDigits:0});
+    bar.style.display = 'flex';
+  } else if (bar) {
+    bar.style.display = 'none';
+  }
+
+  // Auto-fill guest details when entering step 2
+  if (n === 2) {
+    const prefix = 'luxstay';
+    const savedEmail = localStorage.getItem(prefix + '_email');
+    const savedName  = localStorage.getItem(prefix + '_name');
+    const emailField = document.getElementById('bk-email');
+    const firstField = document.getElementById('bk-first');
+    const lastField  = document.getElementById('bk-last');
+    if (savedEmail && emailField && !emailField.value) emailField.value = savedEmail;
+    if (savedName && firstField && !firstField.value) {
+      const parts = savedName.trim().split(/\s+/);
+      firstField.value = parts[0] || '';
+      if (parts.length > 1 && !lastField.value) lastField.value = parts.slice(1).join(' ');
+    }
+  }
 }
 
 async function bookHotel(id, name) {
@@ -969,7 +1044,7 @@ async function doPrebook() {
 
   } catch(e) {
     document.getElementById('bk-summary-content').innerHTML = `
-      <div class="bk-err">Could not confirm this rate: ${e.message}.<br>The offer may have expired — please go back and search again.</div>
+      <div class="bk-err">We couldn't confirm availability for this rate. This usually means the room has just been booked or the offer has expired. Please try again or choose a different hotel.</div>
       <button class="btn-bk" style="background:var(--grey-text)" onclick="closeBkModal()">← Back to hotels</button>`;
   }
 }
@@ -992,6 +1067,7 @@ function renderBkSummary() {
       <span class="bk-total-lbl">Member total</span>
       <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
     </div>
+    <div style="font-size:12px;color:var(--grey-text);margin-top:2px;text-align:right">${fmt(Math.round(confirmedPrice / nights))}/night</div>
     <div class="bk-policy"><strong>Cancellation:</strong> ${cancelPolicy}</div>
     <button class="btn-bk" onclick="setBkStep(2)">Continue to guest details →</button>`;
 }
@@ -1060,12 +1136,12 @@ function initPayWidget() {
       onSuccess: (res) => { bkSess.transactionId = res.transactionId; confirmBooking(); },
       onError:   (err) => {
         document.getElementById('bk-pay-err').innerHTML =
-          `<div class="bk-err">Payment failed: ${err.message || 'Unknown error'}. Please try again.</div>`;
+          `<div class="bk-err">Payment could not be processed. Please check your card details and try again, or use a different card.</div>`;
       }
     });
   } catch(err) {
     document.getElementById('bk-pay-container').innerHTML =
-      `<div class="bk-err">Payment widget error: ${err.message}</div>`;
+      `<div class="bk-err">The payment form encountered an issue. Please refresh the page and try again.</div>`;
   }
 }
 
@@ -1122,8 +1198,7 @@ async function confirmBooking() {
 
   } catch(err) {
     document.getElementById('bk-pay-err').innerHTML =
-      `<div class="bk-err">Booking confirmation failed: ${err.message}.<br>
-       Your payment may have been processed — email support with ref: <strong>${bkSess.prebookId}</strong></div>`;
+      `<div class="bk-err">We couldn't confirm your booking, but your payment may have been processed. Please contact us at <strong>jackthughes99@gmail.com</strong> with reference: <strong>${bkSess.prebookId}</strong> and we'll resolve this immediately.</div>`;
   }
 }
 

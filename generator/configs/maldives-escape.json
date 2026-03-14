@@ -126,6 +126,18 @@
     {
       "q": "What about seaplane transfers?",
       "a": "Seaplane transfers are typically booked separately directly with the resort or through their recommended partner. We show transfer information for each resort so you can plan your full budget before booking."
+    },
+    {
+      "q": "Is Maldives Escape a legitimate booking platform?",
+      "a": "Yes. Maldives Escape operates as a Closed User Group (CUG) booking platform. We source resort inventory through LiteAPI — the same B2B hotel distribution network that powers Booking.com, Expedia, and Hotels.com. When you book, the resort receives your reservation directly. You get a resort confirmation number and your booking appears in the resort's system, just as it would with any major OTA."
+    },
+    {
+      "q": "How can you offer rates below Booking.com?",
+      "a": "Maldives resorts release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join Maldives Escape (free, 30 seconds), you become a verified CUG member and unlock net rates 10–25% below what public sites can legally show. Same resort, same villa, same dates — just a different distribution channel."
+    },
+    {
+      "q": "Is it safe to enter my credit card?",
+      "a": "Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security."
     }
   ],
   "modal_perks": [

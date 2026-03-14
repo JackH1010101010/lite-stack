@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{HTML_LANG}}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UK Honeymoon & Couples | Maldives Escape — Member Hotel Rates 10–30% Below Booking.com</title>
-  <meta name="description" content="The Maldives is the world's top honeymoon destination, and UK couples represent one of the largest source markets. Maldives Escape members access overwater" />
-  <link rel="canonical" href="https://maldives.lux-stay-members.com/maldives-honeymoon-resorts-uk.html" />
+  <title>{{LP_META_TITLE}}</title>
+  <meta name="description" content="{{LP_META_DESC}}" />
+  <link rel="canonical" href="{{LP_CANONICAL}}" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="UK Honeymoon & Couples | Maldives Escape — Member Hotel Rates 10–30% Below Booking.com" />
-  <meta property="og:description" content="The Maldives is the world's top honeymoon destination, and UK couples represent one of the largest source markets. Maldives Escape members access overwater" />
-  <meta property="og:url" content="https://maldives.lux-stay-members.com/maldives-honeymoon-resorts-uk.html" />
-  <meta property="og:image" content="https://maldives.lux-stay-members.com/og-image.jpg" />
-  <meta property="og:site_name" content="Maldives Escape" />
+  <meta property="og:title" content="{{LP_META_TITLE}}" />
+  <meta property="og:description" content="{{LP_META_DESC}}" />
+  <meta property="og:url" content="{{LP_CANONICAL}}" />
+  <meta property="og:image" content="{{OG_IMAGE}}" />
+  <meta property="og:site_name" content="{{BRAND_NAME}}" />
 
   <!-- DNS Prefetch -->
   <link rel="dns-prefetch" href="https://api.liteapi.travel" />
@@ -27,7 +27,7 @@
   <!-- PostHog Analytics -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture alias identify people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_982ETUUhp7gvH24FCqne7qS0hNAmpIbT96R81bx9TXs', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
+    posthog.init('{{POSTHOG_KEY}}', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
   </script>
 
   <!-- Google Identity Services -->
@@ -35,13 +35,13 @@
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Maldives Escape","item":"https://maldives.lux-stay-members.com/"},{"@type":"ListItem","position":2,"name":"UK Honeymoon & Couples"}]}
+  {{LP_BREADCRUMB_SCHEMA}}
   </script>
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --navy:#0b4f6c;--gold:#00b4d8;--gold-lt:#caf0f8;
+      --navy:{{COLOR_PRIMARY}};--gold:{{COLOR_ACCENT}};--gold-lt:{{COLOR_ACCENT_LT}};
       --grey-bg:#f9f7f4;--grey-mid:#e8e5e0;--grey-text:#a39e8d;
       --black:#2a2a2a;--white:#fff;
       --green:#1a7a3c;--green-lt:#e8f5ee;--red:#b91c1c;--red-lt:#fef2f2;
@@ -186,7 +186,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="logo">Maldives Escape</a>
+  <a href="/" class="logo">{{BRAND_NAME}}</a>
   <div class="nav-right">
     <a class="nav-link" href="/">All hotels</a>
     <button class="btn-join-nav" id="nav-join-btn" onclick="openModal()">See member rates</button>
@@ -195,13 +195,13 @@
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <a href="/">Maldives Escape</a><span>›</span>UK Honeymoon & Couples
+  <a href="/">{{BRAND_NAME}}</a><span>›</span>{{LP_BREADCRUMB_TEXT}}
 </div>
 
 <!-- HERO -->
 <section class="lp-hero">
-  <h1>UK Honeymoon & Couples — Maldives Escape Member Rates</h1>
-  <p class="lp-intro">The Maldives is the world's top honeymoon destination, and UK couples represent one of the largest source markets. Maldives Escape members access overwater villa rates 10–25% below Booking.com — same resorts, dramatically better price.</p>
+  <h1>{{LP_H1}}</h1>
+  <p class="lp-intro">{{LP_INTRO}}</p>
 </section>
 
 <!-- CTA BAR -->
@@ -225,78 +225,22 @@
 
   <!-- EDITORIAL -->
   <div class="editorial">
-    <h2>Why Maldives Escape rates are lower</h2>
-<p>Maldives Escape operates as a Closed User Group (CUG) platform. Hotels release a portion of their inventory at <strong>net rates</strong> — below their public retail price — through private distribution channels. When you join Maldives Escape (free, 30 seconds), you become a verified CUG member and unlock these below-retail rates.</p><p>The hotels, room types, and dates are identical to what you'd find on Booking.com or Expedia. The only difference is the price — typically <strong>10–30% lower</strong>.</p>
-<p style="margin-top:16px"><a href="#" onclick="event.preventDefault();openModal()" style="color:var(--gold);font-weight:600;text-decoration:underline">Join free and see member rates →</a></p>
+    {{LP_EDITORIAL_HTML}}
   </div>
 
   <!-- FAQ -->
   <h2 class="section-heading">Frequently asked questions</h2>
   <div id="faq-list">
-    <div class="faq-item open">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        How much do members actually save on Maldives resorts? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Members typically save 10–25% compared to Booking.com or direct booking prices. On an overwater villa at $800/night, that's $80–$200 saved per night. Savings are highest during green season (May–October) when resorts discount heavily to fill capacity.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Do I need a minimum stay? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">No minimum stay is required for any resort listed on Maldives Escape. Many resorts do have their own policies — we show those clearly before you book — but we don't impose any additional minimum stay requirement.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Is membership free? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Yes, completely free. No subscription fees, no booking fees on top of the rate. You pay the member villa rate — that's it.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Which atolls are covered? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">North and South Malé Atolls (closest to the airport, best for short trips) and Baa Atoll (UNESCO Biosphere Reserve, world-class snorkelling) are live now. More atolls coming soon.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        What about seaplane transfers? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Seaplane transfers are typically booked separately directly with the resort or through their recommended partner. We show transfer information for each resort so you can plan your full budget before booking.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Is Maldives Escape a legitimate booking platform? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Yes. Maldives Escape operates as a Closed User Group (CUG) booking platform. We source resort inventory through LiteAPI — the same B2B hotel distribution network that powers Booking.com, Expedia, and Hotels.com. When you book, the resort receives your reservation directly. You get a resort confirmation number and your booking appears in the resort's system, just as it would with any major OTA.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        How can you offer rates below Booking.com? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Maldives resorts release a portion of their inventory at net rates through Closed User Group (CUG) channels. These rates are contractually restricted from public display. When you join Maldives Escape (free, 30 seconds), you become a verified CUG member and unlock net rates 10–25% below what public sites can legally show. Same resort, same villa, same dates — just a different distribution channel.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Is it safe to enter my credit card? <span class="chevron">▼</span>
-      </div>
-      <div class="faq-a">Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security.</div>
-    </div>
+{{FAQ_HTML}}
   </div>
 
   <!-- RELATED PAGES -->
-  <div style="margin:48px 0 0"><h2 style="font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--black);margin-bottom:12px">Explore more</h2><div class="il-grid">
-    <a class="il-card" href="/north-male-atoll.html"><div class="il-title">North Male Atoll Luxury Hotels</div><div class="il-desc">City guide</div></a>
-    <a class="il-card" href="/south-male-atoll.html"><div class="il-title">South Male Atoll Luxury Hotels</div><div class="il-desc">City guide</div></a>
-    <a class="il-card" href="/baa-atoll.html"><div class="il-title">Baa Atoll Luxury Hotels</div><div class="il-desc">City guide</div></a>
-    <a class="il-card" href="/maldives-luxury-resorts-gcc.html"><div class="il-title">GCC & Middle East Travellers</div><div class="il-desc">Regional guide</div></a>
-    <a class="il-card" href="/maldives-luxury-resorts-usa.html"><div class="il-title">US Travellers to the Maldives</div><div class="il-desc">Regional guide</div></a>
-    <a class="il-card" href="/maldives-luxus-resorts-deutschland.html"><div class="il-title">German & European Travellers</div><div class="il-desc">Regional guide</div></a>
-</div></div>
+  {{LP_RELATED_LINKS_HTML}}
 
 </main>
 
 <footer>
-  <p>© 2026 Maldives Escape · Member-only Maldives resort rates</p>
+  <p>© {{FOOTER_YEAR}} {{BRAND_NAME}} · {{FOOTER_TAGLINE}}</p>
   <p style="font-size:11px">Rates sourced via live hotel API · Member prices visible to logged-in members only</p>
   <p style="margin-top:10px">
     <a href="/" style="color:rgba(255,255,255,.45);font-size:12px;text-decoration:underline">← Back to all hotels</a>
@@ -308,15 +252,12 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
     <div id="modal-form-view">
-      <h2>Save 10–25% on Maldives overwater villas</h2>
-      <p class="modal-sub">Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.</p>
+      <h2>{{MODAL_HEADLINE}}</h2>
+      <p class="modal-sub">{{MODAL_SUB}}</p>
       <div class="modal-perks">
-        <div class="perk"><span class="perk-icon">✦</span><span>Access overwater villa rates 10–25% below retail</span></div>
-        <div class="perk"><span class="perk-icon">★</span><span>Save $150–$400 per night on top resorts</span></div>
-        <div class="perk"><span class="perk-icon">✕</span><span>No subscription, no booking fees</span></div>
-        <div class="perk"><span class="perk-icon">~</span><span>3 atolls covered — more coming</span></div>
+{{MODAL_PERKS_HTML}}
       </div>
-      <div id="g_id_onload" data-client_id="57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com" data-callback="handleGoogleSignIn" data-auto_prompt="false"></div>
+      <div id="g_id_onload" data-client_id="{{GOOGLE_CLIENT_ID}}" data-callback="handleGoogleSignIn" data-auto_prompt="false"></div>
       <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="continue_with" data-shape="rectangular" data-logo_alignment="left" data-width="380" style="margin-bottom:12px"></div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
         <div style="flex:1;height:1px;background:var(--grey-mid)"></div>
@@ -332,15 +273,15 @@
     <div class="modal-success" id="modal-success">
       <div class="tick"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
       <h3>You're in!</h3>
-      <p>Member rates unlocked — your savings are loading now.</p>
+      <p>{{MODAL_SUCCESS_TEXT}}</p>
     </div>
   </div>
 </div>
 
 <script>
 const API_BASE    = '/api/liteapi';
-const MARKUP      = 0.15;
-const MIN_SAVING  = 0.08;
+const MARKUP      = {{MARKUP}};
+const MIN_SAVING  = {{MIN_SAVING}};
 
 function getDynamicMarkup(checkinDateStr) {
   if (!checkinDateStr) return MARKUP;
@@ -361,13 +302,8 @@ function calcMemberPrice(netCost, ssp, markup) {
 }
 
 // Hotels for THIS page's city
-const HOTELS = [
-  {id:'lp655762c1', name:'Velassaru Maldives', area:'North Malé Atoll', dist:'25 min speedboat', desc:'Award-winning 5★ resort. Overwater villas with glass floors, lagoon pool, spa.', tags:["Overwater villa","Pool","Spa"], badge:'Best value'},
-  {id:'lp65574e0c', name:'Cocoon Maldives', area:'Ookolhufinolhu Island', dist:'35 min speedboat', desc:'Italian-designed boutique resort. Lagoon villas, snorkelling reef, beach bar.', tags:["Boutique","Snorkelling","Beach bar"], badge:null},
-  {id:'lp655769b2', name:'Meeru Maldives Resort', area:'Meerufenfushi Island', dist:'45 min speedboat', desc:'One of the Maldives\' largest resorts. Diverse marine life, water sports, spa.', tags:["Marine life","Water sports","Spa"], badge:null},
-  {id:'lp65574cc3', name:'Bandos Maldives', area:'Bandos Island', dist:'20 min speedboat', desc:'Classic Maldives resort. Dive centre, water sports, panoramic restaurant.', tags:["Diving","Water sports","Classic"], badge:null}
-];
-let isMember = localStorage.getItem('maldives_escape_member') === '1';
+const HOTELS = {{LP_HOTELS_JS}};
+let isMember = localStorage.getItem('{{STORAGE_PREFIX}}_member') === '1';
 let ratesCache = {};
 
 // Default dates: next Fri–Sat
@@ -493,7 +429,7 @@ function updateCardPrice(h, data) {
     const wasHtml = saving > 0 ? '<div class="price-was">Booking.com: ' + fmt(displaySsp) + '</div>' : '';
     const saveHtml = saving > 0 ? '<div class="saving-badge">Save ' + saving + '%</div>' : '';
     priceEl.innerHTML = '<div class="price-label">Member rate</div>' + wasHtml + '<div class="price-main member">' + fmt(memberPrice) + ' <span class="price-per">/ night</span></div>' + saveHtml + scarcityHtml + socialHtml;
-    btnEl.innerHTML = '<a class="btn-book" href="/">Book on Maldives Escape →</a>';
+    btnEl.innerHTML = '<a class="btn-book" href="/">Book on {{BRAND_NAME}} →</a>';
   } else {
     priceEl.innerHTML = '<div class="price-label">From</div><div class="price-main public">' + fmt(displaySsp) + ' <span class="price-per">/ night</span></div><div class="lock-badge">Join free to see member rate</div>' + scarcityHtml + socialHtml;
     btnEl.innerHTML = '<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>';
@@ -519,9 +455,9 @@ async function handleJoin(e) {
 }
 
 function activateMember(email, name) {
-  localStorage.setItem('maldives_escape_member', '1');
-  localStorage.setItem('maldives_escape_email', email);
-  if (name) localStorage.setItem('maldives_escape_name', name);
+  localStorage.setItem('{{STORAGE_PREFIX}}_member', '1');
+  localStorage.setItem('{{STORAGE_PREFIX}}_email', email);
+  if (name) localStorage.setItem('{{STORAGE_PREFIX}}_name', name);
   isMember = true;
   if (window.posthog) posthog.identify(email);
   try { fetch('/api/signup', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, source: name ? 'google' : 'email' }) }).catch(() => {}); } catch {}
@@ -534,7 +470,7 @@ function track(event, props) { if (window.posthog && typeof posthog.capture === 
 
 // INIT
 renderHotels();
-track('page_view', { page: 'maldives-honeymoon-resorts-uk', type: 'region', site: 'Maldives Escape' });
+track('page_view', { page: '{{LP_SLUG}}', type: '{{LP_TYPE}}', site: '{{BRAND_NAME}}' });
 </script>
 
 </body>

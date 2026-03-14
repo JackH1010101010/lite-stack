@@ -149,24 +149,36 @@ if (!cfg.OG_IMAGE) cfg.OG_IMAGE = cfg.SCHEMA_URL
 if (cfg.hotels) {
   const allHotels = Object.values(cfg.hotels).flat();
   cfg.HOTEL_COUNT = String(allHotels.length);
-  cfg.HOTEL_SCHEMA_ITEMS = allHotels.map((h, i) => JSON.stringify({
-    "@type": "ListItem",
-    "position": i + 1,
-    "item": {
+  const baseUrl = cfg.SITE_URL || cfg.SCHEMA_URL || '';
+  cfg.HOTEL_SCHEMA_ITEMS = allHotels.map((h, i) => {
+    const item = {
       "@type": "Hotel",
       "name": h.name,
       "identifier": h.id,
       "description": h.desc || '',
+      "url": baseUrl + '/',
       "address": { "@type": "PostalAddress", "addressLocality": h.area || '' },
       "starRating": { "@type": "Rating", "ratingValue": "5" },
+      "numberOfRooms": 1,
+      "checkinTime": "15:00",
+      "checkoutTime": "11:00",
       "offers": {
         "@type": "AggregateOffer",
-        "priceCurrency": cfg.CURRENCY || "GBP",
+        "priceCurrency": cfg.currency || "GBP",
         "availability": "https://schema.org/InStock",
         "offerCount": "1"
       }
+    };
+    // Add amenity features from tags
+    if (h.tags && h.tags.length) {
+      item.amenityFeature = h.tags.map(t => ({
+        "@type": "LocationFeatureSpecification",
+        "name": t,
+        "value": true
+      }));
     }
-  })).join(',');
+    return JSON.stringify({ "@type": "ListItem", "position": i + 1, "item": item });
+  }).join(',');
 } else {
   cfg.HOTEL_COUNT = '0';
   cfg.HOTEL_SCHEMA_ITEMS = '';
@@ -237,6 +249,38 @@ if (cfg.AFFILIATE_NAV_LINK && cfg.AFFILIATE_NAV_TEXT) {
   cfg.AFFILIATE_NAV_HTML = `<a class="nav-link" href="${cfg.AFFILIATE_NAV_LINK}">${cfg.AFFILIATE_NAV_TEXT}</a>`;
 } else {
   cfg.AFFILIATE_NAV_HTML = '';
+}
+
+// INTERNAL_LINKS_HTML — link grid to all landing pages + city pages
+{
+  const links = [];
+  // City pages
+  if (cfg.cities) {
+    cfg.cities.forEach(c => {
+      const slug = c.value.toLowerCase().replace(/\s+/g, '-');
+      links.push({ href: `/${slug}.html`, title: `${c.value} Hotels`, desc: `Member rates on 5-star ${c.value} hotels` });
+    });
+  }
+  // Region pages
+  if (cfg.seo_regions && Array.isArray(cfg.seo_regions)) {
+    cfg.seo_regions.forEach(r => {
+      links.push({ href: `/${r.slug}.html`, title: r.name, desc: (r.angle || '').slice(0, 80) + '…' });
+    });
+  }
+  // Amenity pages
+  if (cfg.seo_amenity_pages && Array.isArray(cfg.seo_amenity_pages)) {
+    cfg.seo_amenity_pages.forEach(ap => {
+      links.push({ href: `/${ap.slug}.html`, title: ap.displayName, desc: `Member rates on luxury ${ap.amenity} hotels` });
+    });
+  }
+  if (links.length) {
+    const cards = links.map(l =>
+      `      <a class="il-card" href="${l.href}"><div class="il-title">${l.title}</div><div class="il-desc">${l.desc}</div></a>`
+    ).join('\n');
+    cfg.INTERNAL_LINKS_HTML = `  <div class="internal-links">\n    <h2>Explore by destination</h2>\n    <div class="il-grid">\n${cards}\n    </div>\n  </div>`;
+  } else {
+    cfg.INTERNAL_LINKS_HTML = '';
+  }
 }
 
 // POSTHOG_KEY — inject from config or .env
@@ -379,6 +423,190 @@ if (cfg.OG_IMAGE && cfg.OG_IMAGE.endsWith('/og-image.jpg')) {
 // ── Write final HTML (after OG image path fix) ──────────────
 fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 
+// ── Generate SEO landing pages ────────────────────────────────
+const cityTemplatePath = path.join(__dirname, 'city-template.html');
+let landingPages = [];
+
+if (fs.existsSync(cityTemplatePath)) {
+  const cityTemplateRaw = fs.readFileSync(cityTemplatePath, 'utf8');
+
+  // Combine city pages, seo_regions, and seo_amenity_pages into a unified list
+  const allLandingPages = [];
+
+  // City index pages — one per city in the cities array
+  if (cfg.cities && cfg.hotels) {
+    cfg.cities.forEach(c => {
+      const cityName = c.value;
+      const slug = cityName.toLowerCase().replace(/\s+/g, '-');
+      const hotels = cfg.hotels[cityName] || [];
+      if (!hotels.length) return;
+
+      // Collect related landing page links for this city
+      const relatedLinks = [];
+      if (cfg.seo_regions) cfg.seo_regions.filter(r => r.city === cityName).forEach(r => relatedLinks.push({ href: `/${r.slug}.html`, title: r.name }));
+      if (cfg.seo_amenity_pages) cfg.seo_amenity_pages.filter(a => a.city === cityName).forEach(a => relatedLinks.push({ href: `/${a.slug}.html`, title: a.displayName }));
+      const relatedHtml = relatedLinks.length
+        ? `<p style="margin-top:16px;font-size:13px;color:var(--grey-text)">Related: ${relatedLinks.map(l => `<a href="${l.href}" style="color:var(--gold);text-decoration:underline">${l.title}</a>`).join(' · ')}</p>`
+        : '';
+
+      allLandingPages.push({
+        slug: slug,
+        type: 'city',
+        h1: `${cityName} Luxury Hotels — ${cfg.BRAND_NAME} Member Rates`,
+        metaTitle: `${cityName} Luxury Hotels | ${cfg.BRAND_NAME} — Save 10–30% vs Booking.com`,
+        metaDesc: `${cfg.BRAND_NAME} members save 10–30% on 5-star ${cityName} hotels vs Booking.com. Same hotels, lower prices. Free to join.`,
+        intro: `Browse ${hotels.length} hand-picked 5-star hotels in ${cityName} with live member rates. ${cfg.BRAND_NAME} members access below-retail pricing through our closed distribution channel — the same hotels you'd find on Booking.com, at 10–30% less.`,
+        keyword: `${cityName} luxury hotels member rates`,
+        city: cityName,
+        hotels: hotels,
+        editorialTitle: `${cityName} Hotels — Why Member Rates Are Lower`,
+        editorialBody: `<p>Hotels in ${cityName} release a portion of their inventory at <strong>net rates</strong> through Closed User Group channels. These rates are restricted from public display and can only be shown to verified members of gated platforms like ${cfg.BRAND_NAME}.</p><p>When you join (free, 30 seconds), you unlock these rates — typically <strong>10–30% below Booking.com</strong> — on every property below.</p>${relatedHtml}`,
+        breadcrumbText: cityName,
+      });
+    });
+  }
+
+  // Region pages — one per seo_region entry
+  if (cfg.seo_regions && Array.isArray(cfg.seo_regions)) {
+    cfg.seo_regions.forEach(region => {
+      const cityName = region.city || '';
+      const hotels = cfg.hotels?.[cityName] || [];
+      if (!hotels.length) return; // skip if no hotels for this city
+
+      allLandingPages.push({
+        slug: region.slug,
+        type: 'region',
+        h1: `${region.name} — ${cfg.BRAND_NAME || ''} Member Rates`,
+        metaTitle: `${region.name} | ${cfg.BRAND_NAME} — Member Hotel Rates 10–30% Below Booking.com`,
+        metaDesc: (region.angle || '').slice(0, 155),
+        intro: region.angle || '',
+        keyword: region.keyword || '',
+        city: cityName,
+        hotels: hotels,
+        editorialTitle: `Why ${cfg.BRAND_NAME} rates are lower`,
+        editorialBody: `<p>${cfg.BRAND_NAME} operates as a Closed User Group (CUG) platform. Hotels release a portion of their inventory at <strong>net rates</strong> — below their public retail price — through private distribution channels. When you join ${cfg.BRAND_NAME} (free, 30 seconds), you become a verified CUG member and unlock these below-retail rates.</p><p>The hotels, room types, and dates are identical to what you'd find on Booking.com or Expedia. The only difference is the price — typically <strong>10–30% lower</strong>.</p>`,
+        breadcrumbText: region.name,
+      });
+    });
+  }
+
+  // Amenity pages — one per seo_amenity_pages entry
+  if (cfg.seo_amenity_pages && Array.isArray(cfg.seo_amenity_pages)) {
+    cfg.seo_amenity_pages.forEach(ap => {
+      const cityName = ap.city || '';
+      const allHotels = cfg.hotels?.[cityName] || [];
+      // Filter to hotels with matching amenity tag
+      const amenityTag = (ap.amenity || '').toLowerCase();
+      const matchingHotels = allHotels.filter(h =>
+        (h.tags || []).some(t => t.toLowerCase().includes(amenityTag))
+      );
+      // Fall back to all city hotels if no tag matches
+      const hotels = matchingHotels.length ? matchingHotels : allHotels;
+      if (!hotels.length) return;
+
+      allLandingPages.push({
+        slug: ap.slug,
+        type: 'amenity',
+        h1: `${ap.displayName} — Member Rates on ${cfg.BRAND_NAME}`,
+        metaTitle: `${ap.displayName} | ${cfg.BRAND_NAME} — Save 10–30% vs Booking.com`,
+        metaDesc: `Unlock member rates on ${ap.displayName.toLowerCase()}. ${cfg.BRAND_NAME} members save 10–30% on 5-star ${amenityTag} hotels vs public booking sites. Free to join.`,
+        intro: `Looking for luxury ${amenityTag} hotels in ${cityName}? ${cfg.BRAND_NAME} members access the same 5-star properties you'd find on Booking.com — at rates 10–30% lower. No subscription, no catch. Just below-retail pricing through our closed member channel.`,
+        keyword: `${ap.displayName} member rates`,
+        city: cityName,
+        hotels: hotels,
+        editorialTitle: `About ${ap.displayName}`,
+        editorialBody: `<p>${cfg.BRAND_NAME} curates the finest ${amenityTag} hotels in ${cityName}, each hand-verified for quality. As a member, you access net rates on these properties — the same wholesale pricing that travel agents use — at <strong>10–30% below public booking platforms</strong>.</p><p>Join free to see your member rate on every property below.</p>`,
+        breadcrumbText: ap.displayName,
+      });
+    });
+  }
+
+  // Generate each landing page
+  allLandingPages.forEach(lp => {
+    let lpHtml = cityTemplateRaw;
+
+    // Build hotels JS array for this page
+    const hotelLines = lp.hotels.map(h => {
+      const tags = JSON.stringify(h.tags || []);
+      const badge = h.badge ? `'${h.badge}'` : 'null';
+      return `  {id:'${h.id}', name:'${h.name.replace(/'/g,"\\'")}', area:'${h.area.replace(/'/g,"\\'")}', dist:'${h.dist.replace(/'/g,"\\'")}', desc:'${h.desc.replace(/'/g,"\\'")}', tags:${tags}, badge:${badge}}`;
+    }).join(',\n');
+    const lpHotelsJs = `[\n${hotelLines}\n]`;
+
+    // Build breadcrumb schema
+    const breadcrumbSchema = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: cfg.BRAND_NAME || '', item: siteUrl + '/' },
+        { '@type': 'ListItem', position: 2, name: lp.breadcrumbText }
+      ]
+    });
+
+    // Build editorial HTML
+    const editorialHtml = `<h2>${lp.editorialTitle}</h2>\n${lp.editorialBody}\n<p style="margin-top:16px"><a href="#" onclick="event.preventDefault();openModal()" style="color:var(--gold);font-weight:600;text-decoration:underline">Join free and see member rates →</a></p>`;
+
+    // Build related links (other landing pages, excluding self)
+    const relatedPages = allLandingPages.filter(p => p.slug !== lp.slug).slice(0, 6);
+    let relatedLinksHtml = '';
+    if (relatedPages.length) {
+      const cards = relatedPages.map(p =>
+        `    <a class="il-card" href="/${p.slug}.html"><div class="il-title">${p.h1.split(' — ')[0]}</div><div class="il-desc">${p.type === 'city' ? 'City guide' : p.type === 'region' ? 'Regional guide' : 'Amenity guide'}</div></a>`
+      ).join('\n');
+      relatedLinksHtml = `<div style="margin:48px 0 0"><h2 style="font-family:var(--font-serif);font-size:22px;font-weight:400;color:var(--black);margin-bottom:12px">Explore more</h2><div class="il-grid">\n${cards}\n</div></div>`;
+    }
+
+    // Set LP-specific tokens
+    const lpTokens = {
+      LP_META_TITLE: lp.metaTitle,
+      LP_META_DESC: lp.metaDesc,
+      LP_CANONICAL: `${siteUrl}/${lp.slug}.html`,
+      LP_H1: lp.h1,
+      LP_INTRO: lp.intro,
+      LP_HOTELS_JS: lpHotelsJs,
+      LP_BREADCRUMB_SCHEMA: breadcrumbSchema,
+      LP_BREADCRUMB_TEXT: lp.breadcrumbText,
+      LP_EDITORIAL_HTML: editorialHtml,
+      LP_SLUG: lp.slug,
+      LP_TYPE: lp.type,
+      LP_RELATED_LINKS_HTML: relatedLinksHtml,
+    };
+
+    // Replace LP tokens first
+    for (const [key, value] of Object.entries(lpTokens)) {
+      lpHtml = lpHtml.split(`{{${key}}}`).join(value);
+    }
+
+    // Replace shared tokens (BRAND_NAME, colors, etc.)
+    for (const [key, value] of Object.entries(cfg)) {
+      if (typeof value === 'string') {
+        lpHtml = lpHtml.split(`{{${key}}}`).join(value);
+      }
+    }
+
+    // Write the file
+    fs.writeFileSync(path.join(outDir, `${lp.slug}.html`), lpHtml, 'utf8');
+    landingPages.push(lp.slug);
+  });
+}
+
+// ── Update sitemap with landing pages ────────────────────────
+if (landingPages.length) {
+  landingPages.forEach(slug => {
+    sitemapUrls += `\n  <url><loc>${siteUrl}/${slug}.html</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`;
+  });
+  // Rewrite sitemap with landing pages included
+  const updatedSitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls}
+</urlset>
+`;
+  fs.writeFileSync(path.join(outDir, 'sitemap.xml'), updatedSitemapXml, 'utf8');
+}
+
 console.log(`✓  Generated: sites/${configName}/index.html`);
+if (landingPages.length) {
+  console.log(`   + ${landingPages.length} SEO landing pages: ${landingPages.map(s => s + '.html').join(', ')}`);
+}
 console.log(`   + robots.txt, sitemap.xml, og-image.svg`);
 console.log(`   Deploy:    node deploy-all.js  (or: npx wrangler deploy)`);

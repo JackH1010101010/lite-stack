@@ -167,7 +167,7 @@ if (cfg.hotels) {
       "checkoutTime": "11:00",
       "offers": {
         "@type": "AggregateOffer",
-        "priceCurrency": cfg.currency || "GBP",
+        "priceCurrency": cfg.CURRENCY || "GBP",
         "availability": "https://schema.org/InStock",
         "offerCount": "1"
       }
@@ -247,13 +247,6 @@ function getReferralCode() {
   cfg.REFERRAL_JS = '';
 }
 
-// ── AFFILIATE nav link conditional ───────────────────────────
-if (cfg.AFFILIATE_NAV_LINK && cfg.AFFILIATE_NAV_TEXT) {
-  cfg.AFFILIATE_NAV_HTML = `<a class="nav-link" href="${cfg.AFFILIATE_NAV_LINK}">${cfg.AFFILIATE_NAV_TEXT}</a>`;
-} else {
-  cfg.AFFILIATE_NAV_HTML = '';
-}
-
 // INTERNAL_LINKS_HTML — link grid to all landing pages + city pages
 {
   const links = [];
@@ -306,6 +299,14 @@ if (!cfg.FOOTER_YEAR) cfg.FOOTER_YEAR = new Date().getFullYear().toString();
 // FAVICON_LETTER — first letter of brand name
 if (!cfg.FAVICON_LETTER) cfg.FAVICON_LETTER = (cfg.BRAND_NAME || 'L').charAt(0);
 
+// HOTEL_CACHE_JS — pre-fetched photo URLs + ratings (from prefetch-hotels.js)
+const hotelCachePath = path.join(__dirname, 'hotel-cache.json');
+let hotelCacheData = {};
+if (fs.existsSync(hotelCachePath)) {
+  try { hotelCacheData = JSON.parse(fs.readFileSync(hotelCachePath, 'utf8')); } catch {}
+}
+cfg.HOTEL_CACHE_JS = JSON.stringify(hotelCacheData);
+
 // ── i18n / hreflang support ───────────────────────────────────
 // Config keys:
 //   "lang": "de"              — language code for this variant
@@ -332,7 +333,7 @@ if (cfg.hreflang_alternates && Array.isArray(cfg.hreflang_alternates)) {
 
 // Currency symbol helper — used in template for price display
 const CURRENCY_SYMBOLS = { GBP: '£', EUR: '€', USD: '$', AED: 'د.إ', CHF: 'CHF' };
-cfg.CURRENCY_SYMBOL = CURRENCY_SYMBOLS[cfg.currency || 'GBP'] || cfg.currency || '£';
+if (!cfg.CURRENCY_SYMBOL) cfg.CURRENCY_SYMBOL = CURRENCY_SYMBOLS[cfg.CURRENCY || 'GBP'] || cfg.CURRENCY || '£';
 
 // GSC_VERIFICATION_META — renders the meta tag only if a token is set in config
 cfg.GSC_VERIFICATION_META = cfg.GSC_VERIFICATION

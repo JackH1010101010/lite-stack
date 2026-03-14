@@ -3,12 +3,17 @@
  *
  * - Requests to /api/liteapi are proxied server-side to LiteAPI v3
  *   so the API key is never exposed in the browser.
+ * - GET data/hotel responses are cached at the edge (Cloudflare Cache API)
+ *   for 7 days — photos and review scores rarely change.
  * - POST /api/signup captures member email signups (stored in KV if bound,
  *   otherwise logged to Workers console for retrieval via wrangler tail).
  * - All other requests are served from static assets (sites/luxstay/).
  */
 
 const LITEAPI_BASE = 'https://api.liteapi.travel/v3.0';
+
+// Cache TTL for GET endpoints (hotel data: photos, ratings — rarely changes)
+const CACHE_TTL = 7 * 24 * 60 * 60; // 7 days in seconds
 
 // Endpoints that accept POST (write operations)
 const POST_ENDPOINTS = new Set([
@@ -75,11 +80,33 @@ export default {
         let upstreamUrl, upstreamOpts;
 
         if (isGet && request.method === 'GET') {
-          // Forward GET requests with query params (minus 'ep')
+          // ── Edge-cached GET (hotel data: photos, ratings) ────────
+          // Use Cloudflare Cache API — no KV setup required
           const qs = new URLSearchParams(url.searchParams);
           qs.delete('ep');
           const queryStr = qs.toString();
           upstreamUrl = `${LITEAPI_BASE}/${ep}${queryStr ? '?' + queryStr : ''}`;
+
+          // Build a stable cache key from the full request URL
+          const cacheKey = new Request(url.toString(), { method: 'GET' });
+          const cache = caches.default;
+
+          // Check edge cache first
+          let cached = await cache.match(cacheKey);
+          if (cached) {
+            // Return cached response with CORS headers
+            const body = await cached.text();
+            return new Response(body, {
+              status: cached.status,
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Cache': 'HIT',
+                ...corsHeaders(),
+              },
+            });
+          }
+
+          // Cache miss — fetch from LiteAPI
           upstreamOpts = {
             method: 'GET',
             headers: {
@@ -87,8 +114,38 @@ export default {
               accept: 'application/json',
             },
           };
+
+          const upstream = await fetch(upstreamUrl, upstreamOpts);
+          const responseBody = await upstream.text();
+
+          const response = new Response(responseBody, {
+            status: upstream.status,
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': `public, max-age=${CACHE_TTL}`,
+              'X-Cache': 'MISS',
+              ...corsHeaders(),
+            },
+          });
+
+          // Store in edge cache (only cache successful responses)
+          if (upstream.status === 200) {
+            // Clone because the response body can only be read once
+            const toCache = new Response(responseBody, {
+              status: 200,
+              headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': `public, max-age=${CACHE_TTL}`,
+              },
+            });
+            // Non-blocking — don't await
+            cache.put(cacheKey, toCache).catch(() => {});
+          }
+
+          return response;
+
         } else {
-          // POST requests — forward body as JSON
+          // POST requests — forward body as JSON (never cached)
           upstreamUrl = `${LITEAPI_BASE}/${ep}`;
           const body = await request.text();
           upstreamOpts = {
@@ -100,14 +157,14 @@ export default {
             },
             body: body || '{}',
           };
-        }
 
-        const upstream = await fetch(upstreamUrl, upstreamOpts);
-        const responseBody = await upstream.text();
-        return new Response(responseBody, {
-          status: upstream.status,
-          headers: { 'Content-Type': 'application/json', ...corsHeaders() },
-        });
+          const upstream = await fetch(upstreamUrl, upstreamOpts);
+          const responseBody = await upstream.text();
+          return new Response(responseBody, {
+            status: upstream.status,
+            headers: { 'Content-Type': 'application/json', ...corsHeaders() },
+          });
+        }
       } catch (err) {
         return jsonResponse(502, {
           error: 'Upstream request failed',

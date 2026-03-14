@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2a2a2a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232a2a2a'/><text x='50' y='72' font-family='Georgia,serif' font-size='60' fill='white' text-anchor='middle'>L</text></svg>" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232a2a2a'/><text x='50' y='72' font-family='Georgia,serif' font-size='60' fill='white' text-anchor='middle'>L</text></svg>" />
   <title>London Luxury Spa Hotels | LuxStay — Save 10–30% vs Booking.com</title>
   <meta name="description" content="Unlock member rates on london luxury spa hotels. LuxStay members save 10–30% on 5-star spa hotels vs public booking sites. Free to join." />
   <link rel="canonical" href="https://luxury.lux-stay-members.com/london-spa-hotels-member-rates.html" />
@@ -311,9 +312,9 @@
   <p style="margin-top:10px">
     <a href="/" style="color:rgba(255,255,255,.45);font-size:12px;text-decoration:underline">← Back to all hotels</a>
     &nbsp;·&nbsp;
-    <a href="/" style="color:rgba(255,255,255,.35);font-size:11px;text-decoration:underline">Terms of Service</a>
+    <a href="/?legal=terms" style="color:rgba(255,255,255,.35);font-size:11px;text-decoration:underline">Terms of Service</a>
     &nbsp;·&nbsp;
-    <a href="/" style="color:rgba(255,255,255,.35);font-size:11px;text-decoration:underline">Privacy Policy</a>
+    <a href="/?legal=privacy" style="color:rgba(255,255,255,.35);font-size:11px;text-decoration:underline">Privacy Policy</a>
     &nbsp;·&nbsp;
     <a href="mailto:jackthughes99@gmail.com" style="color:rgba(255,255,255,.35);font-size:11px;text-decoration:underline">Contact</a>
   </p>
@@ -405,7 +406,8 @@ const [defaultIn, defaultOut] = nextFriSat();
 function renderHotels() {
   const grid = document.getElementById('hotel-grid');
   grid.innerHTML = HOTELS.map(h => buildCard(h)).join('');
-  HOTELS.forEach(h => { fetchRate(h, defaultIn, defaultOut); loadHotelPhoto(h.id); });
+  fetchRatesBatch(HOTELS, defaultIn, defaultOut);
+  HOTELS.forEach(h => loadHotelPhoto(h.id));
 }
 
 function buildCard(h) {
@@ -428,58 +430,84 @@ function buildCard(h) {
   </article>`;
 }
 
+// ── HOTEL PHOTO + RATING (with localStorage cache) ───────────
+const HOTEL_CACHE = {};
 const photoCache = {};
+const LS_PHOTO_KEY = 'luxstay_photos';
+(function() { try { var s = localStorage.getItem(LS_PHOTO_KEY); if (s) Object.assign(photoCache, JSON.parse(s)); } catch {} })();
+function savePhotoCache() { try { localStorage.setItem(LS_PHOTO_KEY, JSON.stringify(photoCache)); } catch {} }
+
+function applyRating(hotelId, rating, reviewCount) {
+  if (!rating) return;
+  var starsEl = document.querySelector('#card-' + hotelId + ' .hotel-stars');
+  if (!starsEl) return;
+  var score = parseFloat(rating);
+  var label = score >= 9 ? 'Exceptional' : score >= 8 ? 'Excellent' : score >= 7 ? 'Very Good' : 'Good';
+  starsEl.innerHTML = '<span style="background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;margin-right:4px">' + score.toFixed(1) + '</span><span style="font-size:12px;color:var(--grey-text)">' + label + (reviewCount ? ' · ' + parseInt(reviewCount).toLocaleString() + ' reviews' : '') + '</span>';
+}
+
 async function loadHotelPhoto(hotelId) {
-  const imgEl = document.getElementById('photo-' + hotelId);
+  var imgEl = document.getElementById('photo-' + hotelId);
   if (!imgEl) return;
-  if (photoCache[hotelId]) { imgEl.src = photoCache[hotelId]; imgEl.onload = () => imgEl.classList.add('loaded'); return; }
+  // 1. Build-time cache (from prefetch-hotels.js)
+  var baked = HOTEL_CACHE[hotelId];
+  if (baked && baked.photo) {
+    imgEl.src = baked.photo; imgEl.onload = function() { imgEl.classList.add('loaded'); };
+    photoCache[hotelId] = baked.photo;
+    applyRating(hotelId, baked.rating, baked.reviewCount);
+    return;
+  }
+  // 2. localStorage cache
+  if (photoCache[hotelId]) { imgEl.src = photoCache[hotelId]; imgEl.onload = function() { imgEl.classList.add('loaded'); }; return; }
+  // 3. Fetch from API
   try {
-    const resp = await fetch(API_BASE + '?ep=data/hotel&hotelId=' + hotelId, { headers: { accept: 'application/json' } });
+    var resp = await fetch(API_BASE + '?ep=data/hotel&hotelId=' + hotelId, { headers: { accept: 'application/json' } });
     if (!resp.ok) return;
-    const data = await resp.json();
-    const hd = data?.data;
-    const images = hd?.hotelImages;
-    const img = images?.find(i => /room|exterior|lobby|pool/i.test(i.caption || '')) || images?.[0];
-    if (img?.url) { photoCache[hotelId] = img.url; imgEl.src = img.url; imgEl.onload = () => imgEl.classList.add('loaded'); }
-    const rating = hd?.starRating || hd?.rating || hd?.reviewRating;
-    const reviewCount = hd?.reviewCount || hd?.numberOfReviews;
-    if (rating) {
-      const starsEl = document.querySelector('#card-' + hotelId + ' .hotel-stars');
-      if (starsEl) {
-        const score = parseFloat(rating);
-        const label = score >= 9 ? 'Exceptional' : score >= 8 ? 'Excellent' : score >= 7 ? 'Very Good' : 'Good';
-        starsEl.innerHTML = '<span style="background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;margin-right:4px">' + score.toFixed(1) + '</span><span style="font-size:12px;color:var(--grey-text)">' + label + (reviewCount ? ' · ' + parseInt(reviewCount).toLocaleString() + ' reviews' : '') + '</span>';
-      }
-    }
+    var data = await resp.json();
+    var hd = data?.data;
+    var images = hd?.hotelImages;
+    var img = images?.find(function(i) { return /room|exterior|lobby|pool/i.test(i.caption || ''); }) || images?.[0];
+    if (img?.url) { photoCache[hotelId] = img.url; imgEl.src = img.url; imgEl.onload = function() { imgEl.classList.add('loaded'); }; savePhotoCache(); }
+    applyRating(hotelId, hd?.starRating || hd?.rating || hd?.reviewRating, hd?.reviewCount || hd?.numberOfReviews);
   } catch {}
 }
 
-async function fetchRate(h, checkin, checkout) {
-  const cacheKey = h.id + '-' + checkin + '-' + checkout;
-  if (ratesCache[cacheKey]) { updateCardPrice(h, ratesCache[cacheKey]); return; }
+// ── BATCH FETCH RATES (single API call for all hotels) ────────
+async function fetchRatesBatch(hotels, checkin, checkout) {
+  var uncached = hotels.filter(function(h) { return !ratesCache[h.id + '-' + checkin + '-' + checkout]; });
+  var cached = hotels.filter(function(h) { return ratesCache[h.id + '-' + checkin + '-' + checkout]; });
+  cached.forEach(function(h) { updateCardPrice(h, ratesCache[h.id + '-' + checkin + '-' + checkout]); });
+  if (uncached.length === 0) return;
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
-    const resp = await fetch(API_BASE + '?ep=hotels/rates', {
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 20000);
+    var resp = await fetch(API_BASE + '?ep=hotels/rates', {
       method: 'POST', headers: { 'Content-Type': 'application/json', accept: 'application/json' }, signal: controller.signal,
-      body: JSON.stringify({ hotelIds: [h.id], occupancies: [{ adults: 2 }], currency: 'GBP', guestNationality: 'GB', checkin, checkout })
+      body: JSON.stringify({ hotelIds: uncached.map(function(h) { return h.id; }), occupancies: [{ adults: 2 }], currency: 'GBP', guestNationality: 'GB', checkin: checkin, checkout: checkout })
     });
     clearTimeout(timeout);
     if (!resp.ok) throw new Error('API ' + resp.status);
-    const data = await resp.json();
-    const hotel = data?.data?.[0];
-    const room = hotel?.roomTypes?.[0];
-    const rate = room?.rates?.[0]?.retailRate;
-    if (!rate) { updateCardPrice(h, null); return; }
-    const netCost = rate.total?.[0]?.amount;
-    const ssp = rate.suggestedSellingPrice?.[0]?.amount;
-    const mu = getDynamicMarkup(checkin, LP_CITY);
-    const roomTypeCount = hotel?.roomTypes?.length || 0;
-    const rateCount = hotel?.roomTypes?.reduce((sum, rt) => sum + (rt.rates?.length || 0), 0) || 0;
-    const result = { netCost, ssp, markup: mu, roomTypeCount, rateCount };
-    ratesCache[cacheKey] = result;
-    updateCardPrice(h, result);
-  } catch { updateCardPrice(h, { error: true }); }
+    var data = await resp.json();
+    var results = data?.data || [];
+    var byId = {};
+    results.forEach(function(hotel) { if (hotel?.hotelId) byId[hotel.hotelId] = hotel; });
+    var mu = getDynamicMarkup(checkin, LP_CITY);
+    uncached.forEach(function(h) {
+      var hotel = byId[h.id];
+      var room = hotel?.roomTypes?.[0];
+      var rate = room?.rates?.[0]?.retailRate;
+      if (!rate) { updateCardPrice(h, null); return; }
+      var netCost = rate.total?.[0]?.amount;
+      var ssp = rate.suggestedSellingPrice?.[0]?.amount;
+      var roomTypeCount = hotel?.roomTypes?.length || 0;
+      var rateCount = hotel?.roomTypes?.reduce(function(sum, rt) { return sum + (rt.rates?.length || 0); }, 0) || 0;
+      var result = { netCost: netCost, ssp: ssp, markup: mu, roomTypeCount: roomTypeCount, rateCount: rateCount };
+      ratesCache[h.id + '-' + checkin + '-' + checkout] = result;
+      updateCardPrice(h, result);
+    });
+  } catch(e) {
+    uncached.forEach(function(h) { updateCardPrice(h, { error: true }); });
+  }
 }
 
 function updateCardPrice(h, data) {

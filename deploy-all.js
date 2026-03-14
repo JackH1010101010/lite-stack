@@ -12,7 +12,6 @@
  * Required env vars:
  *   CLOUDFLARE_API_TOKEN   — Cloudflare API token with Workers write permission
  *   CLOUDFLARE_ACCOUNT_ID  — Cloudflare account ID
- *   POSTHOG_PROJECT_KEY    — PostHog project API key (injected into HTML)
  *   LITEAPI_KEY            — LiteAPI production key (set as Worker secret)
  *
  * The LITEAPI_KEY secret must be pre-set on each Worker via:
@@ -26,7 +25,6 @@ const path  = require('path');
 const { execSync } = require('child_process');
 
 const ACCOUNT_ID  = process.env.CLOUDFLARE_ACCOUNT_ID;
-const POSTHOG_KEY = process.env.POSTHOG_PROJECT_KEY || '';
 const CONFIGS_DIR = path.join(__dirname, 'generator', 'configs');
 const SITES_DIR   = path.join(__dirname, 'sites');
 const WORKER_FILE = path.join(__dirname, 'worker.js');
@@ -85,16 +83,7 @@ async function main() {
     console.log(`  Generating...`);
     execSync(`node generator/generate.js ${name}`, { stdio: 'inherit' });
 
-    // 2. Inject PostHog key
-    const htmlPath = path.join(SITES_DIR, name, 'index.html');
-    if (POSTHOG_KEY && fs.existsSync(htmlPath)) {
-      let html = fs.readFileSync(htmlPath, 'utf8');
-      html = html.split('YOUR_POSTHOG_KEY').join(POSTHOG_KEY);
-      fs.writeFileSync(htmlPath, html, 'utf8');
-      console.log(`  ✓ PostHog key injected`);
-    } else if (!POSTHOG_KEY) {
-      console.warn(`  ⚠  POSTHOG_PROJECT_KEY not set — skipping key injection`);
-    }
+    // 2. PostHog key is now injected at generate time via {{POSTHOG_KEY}} token in config
 
     // 3. Write wrangler.toml for this site
     writeTempWranglerToml(name);

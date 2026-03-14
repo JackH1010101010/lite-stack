@@ -726,7 +726,7 @@
       <span class="bk-step" id="bk-s2">2. Your details</span>
       <span class="bk-step" id="bk-s3">3. Secure payment</span>
     </div>
-    <div class="bk-price-bar" id="bk-price-bar" style="display:none;padding:8px 16px;background:var(--gold-lt);border-radius:6px;margin:0 24px 8px;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+    <div class="bk-price-bar" id="bk-price-bar" style="display:none;padding:8px 16px;background:var(--gold-lt);border-radius:6px;margin:0 24px 8px;font-size:13px;justify-content:space-between;align-items:center">
       <span id="bk-price-bar-hotel" style="font-weight:500;color:var(--black)"></span>
       <span id="bk-price-bar-amt" style="font-weight:700;color:var(--green)"></span>
     </div>
@@ -967,11 +967,9 @@ function renderHotels(city, checkin, checkout) {
   document.getElementById('result-count').textContent = `${hotels.length} hotel${hotels.length !== 1 ? 's' : ''}`;
 
   grid.innerHTML = hotels.map(h => buildCard(h)).join('');
-  // Fetch live rates and hotel photos in parallel
-  hotels.forEach(h => {
-    fetchRate(h, checkin, checkout);
-    loadHotelPhoto(h.id);
-  });
+  // Fetch live rates (batched — single API call) and hotel photos in parallel
+  fetchRatesBatch(hotels, checkin, checkout);
+  hotels.forEach(h => loadHotelPhoto(h.id));
 }
 
 // ── BUILD CARD ────────────────────────────────────────────────
@@ -1001,16 +999,58 @@ function buildCard(h) {
   </article>`;
 }
 
-// ── HOTEL PHOTO ───────────────────────────────────────────────
+// ── HOTEL PHOTO + RATING (with localStorage cache) ───────────
+// Build-time pre-baked data (populated by prefetch-hotels.js → generate.js)
+const HOTEL_CACHE = {};
 const photoCache = {};
+const LS_PHOTO_KEY = 'luxstay_photos';
+
+// Load localStorage photo cache on startup
+(function() {
+  try {
+    const stored = localStorage.getItem(LS_PHOTO_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      Object.assign(photoCache, parsed);
+    }
+  } catch {}
+})();
+
+function savePhotoCache() {
+  try { localStorage.setItem(LS_PHOTO_KEY, JSON.stringify(photoCache)); } catch {}
+}
+
+function applyRating(hotelId, rating, reviewCount) {
+  if (!rating) return;
+  const starsEl = document.querySelector(`#card-${hotelId} .hotel-stars`);
+  if (!starsEl) return;
+  const score = parseFloat(rating);
+  const label = score >= 9 ? 'Exceptional' : score >= 8 ? 'Excellent' : score >= 7 ? 'Very Good' : 'Good';
+  starsEl.innerHTML = `<span style="background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;margin-right:4px">${score.toFixed(1)}</span><span style="font-size:12px;color:var(--grey-text)">${label}${reviewCount ? ' · ' + parseInt(reviewCount).toLocaleString() + ' reviews' : ''}</span>`;
+}
+
 async function loadHotelPhoto(hotelId) {
   const imgEl = document.getElementById(`photo-${hotelId}`);
   if (!imgEl) return;
+
+  // 1. Check build-time cache (baked in by prefetch-hotels.js)
+  const baked = HOTEL_CACHE[hotelId];
+  if (baked?.photo) {
+    imgEl.src = baked.photo;
+    imgEl.onload = () => imgEl.classList.add('loaded');
+    photoCache[hotelId] = baked.photo;
+    applyRating(hotelId, baked.rating, baked.reviewCount);
+    return;
+  }
+
+  // 2. Check in-memory / localStorage cache
   if (photoCache[hotelId]) {
     imgEl.src = photoCache[hotelId];
     imgEl.onload = () => imgEl.classList.add('loaded');
     return;
   }
+
+  // 3. Fetch from API (first visit, no build cache)
   try {
     const resp = await fetch(`${API_BASE}?ep=data/hotel&hotelId=${hotelId}`, {
       headers: { 'accept': 'application/json' }
@@ -1024,22 +1064,77 @@ async function loadHotelPhoto(hotelId) {
       photoCache[hotelId] = img.url;
       imgEl.src = img.url;
       imgEl.onload = () => imgEl.classList.add('loaded');
+      savePhotoCache(); // persist for next visit
     }
-    // Inject review score if available
-    const rating = hd?.starRating || hd?.rating || hd?.reviewRating;
-    const reviewCount = hd?.reviewCount || hd?.numberOfReviews;
-    if (rating) {
-      const starsEl = document.querySelector(`#card-${hotelId} .hotel-stars`);
-      if (starsEl) {
-        const score = parseFloat(rating);
-        const label = score >= 9 ? 'Exceptional' : score >= 8 ? 'Excellent' : score >= 7 ? 'Very Good' : 'Good';
-        starsEl.innerHTML = `<span style="background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:2px 6px;border-radius:3px;margin-right:4px">${score.toFixed(1)}</span><span style="font-size:12px;color:var(--grey-text)">${label}${reviewCount ? ' · ' + parseInt(reviewCount).toLocaleString() + ' reviews' : ''}</span>`;
-      }
-    }
-  } catch { /* silently ignore — letter fallback remains visible */ }
+    applyRating(hotelId, hd?.starRating || hd?.rating || hd?.reviewRating, hd?.reviewCount || hd?.numberOfReviews);
+  } catch { /* letter fallback remains visible */ }
 }
 
-// ── FETCH RATE ────────────────────────────────────────────────
+// ── BATCH FETCH RATES (single API call for all hotels) ────────
+async function fetchRatesBatch(hotels, checkin, checkout) {
+  // Split into cached vs uncached
+  const uncached = hotels.filter(h => !ratesCache[`${h.id}-${checkin}-${checkout}`]);
+  const cached = hotels.filter(h => ratesCache[`${h.id}-${checkin}-${checkout}`]);
+
+  // Immediately render cached results
+  cached.forEach(h => updateCardPrice(h, ratesCache[`${h.id}-${checkin}-${checkout}`]));
+
+  if (uncached.length === 0) return;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    const resp = await fetch(`${API_BASE}?ep=hotels/rates`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'accept': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        hotelIds: uncached.map(h => h.id),
+        occupancies: [{ adults: parseInt(document.getElementById('guests').value) }],
+        currency: 'GBP',
+        guestNationality: 'GB',
+        checkin, checkout
+      })
+    });
+    clearTimeout(timeout);
+
+    if (!resp.ok) throw new Error(`API ${resp.status}`);
+    const data = await resp.json();
+    const results = data?.data || [];
+
+    // Index results by hotelId for fast lookup
+    const byId = {};
+    results.forEach(hotel => { if (hotel?.hotelId) byId[hotel.hotelId] = hotel; });
+
+    const mu = getDynamicMarkup(checkin, currentCity);
+
+    uncached.forEach(h => {
+      const hotel = byId[h.id];
+      const room = hotel?.roomTypes?.[0];
+      const rate = room?.rates?.[0]?.retailRate;
+
+      if (!rate) { updateCardPrice(h, null); return; }
+
+      const netCost  = rate.total?.[0]?.amount;
+      const ssp      = rate.suggestedSellingPrice?.[0]?.amount;
+      const rateId   = hotel?.roomTypes?.[0]?.rates?.[0]?.rateId;
+      const offerId  = hotel?.roomTypes?.[0]?.offerId;
+      const roomName = hotel?.roomTypes?.[0]?.name || 'Standard Room';
+      const roomTypeCount = hotel?.roomTypes?.length || 0;
+      const rateCount = hotel?.roomTypes?.reduce((sum, rt) => sum + (rt.rates?.length || 0), 0) || 0;
+      const result = { netCost, ssp, rateId, offerId, roomName, markup: mu, roomTypeCount, rateCount };
+      ratesCache[`${h.id}-${checkin}-${checkout}`] = result;
+      updateCardPrice(h, result);
+      track('hotel_viewed', { hotel_id: h.id, hotel_name: h.name, ssp,
+        member_price: calcMemberPrice(netCost, ssp, mu), markup_pct: Math.round(mu * 100) });
+    });
+  } catch(e) {
+    // Batch failed — fall back to individual requests
+    uncached.forEach(h => fetchRate(h, checkin, checkout));
+  }
+}
+
+// ── FETCH RATE (single hotel — used by deep-link + batch fallback) ──
 async function fetchRate(h, checkin, checkout) {
   const cacheKey = `${h.id}-${checkin}-${checkout}`;
   if (ratesCache[cacheKey]) {
@@ -1697,7 +1792,10 @@ function doSearch() {
 
 // ── INIT ──────────────────────────────────────────────────────
 updateMemberUI();
-renderHotels('London', defaultIn, defaultOut);
+// Skip initial render if deep-link params present (deep-link handler will render with correct city/dates)
+if (!new URLSearchParams(window.location.search).get('book')) {
+  renderHotels('London', defaultIn, defaultOut);
+}
 
 // ── DEEP-LINK BOOKING (from landing pages) ───────────────
 (function() {
@@ -1747,6 +1845,13 @@ renderHotels('London', defaultIn, defaultOut);
     }
     if (attempts > 30) clearInterval(interval); // give up after 30s
   }, 1000);
+})();
+
+// ── DEEP-LINK LEGAL PAGES (from landing page footers) ─────
+(function() {
+  const lp = new URLSearchParams(window.location.search).get('legal');
+  if (lp === 'terms') { openTerms(); history.replaceState({}, '', window.location.pathname); }
+  if (lp === 'privacy') { openPrivacy(); history.replaceState({}, '', window.location.pathname); }
 })();
 
 track('page_view', { page: 'home', site: 'LuxStay' });

@@ -19,9 +19,9 @@
   "MARKUP": "0.15",
   "MIN_SAVING": "0.08",
   "DEFAULT_CITY": "North Male Atoll",
-  "MODAL_HEADLINE": "Join Maldives Escape — it's free",
+  "MODAL_HEADLINE": "Save 10–25% on Maldives overwater villas",
   "MODAL_SUB": "Unlock member-only villa rates 10–25% below Booking.com. Takes 10 seconds.",
-  "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. Refresh prices to see your savings on Maldives resorts.",
+  "MODAL_SUCCESS_TEXT": "Member rates unlocked — your savings are loading now.",
   "cities": [
     {
       "value": "North Male Atoll",
@@ -93,7 +93,7 @@
     }
   ],
   "trust_items": [
-    "Live rates from resort API",
+    "Live rates, updated hourly",
     "No minimum stay",
     "Members save $150–$400/night on overwater villas",
     "Top-rated resorts, hand-verified"

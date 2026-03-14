@@ -19,9 +19,9 @@
   "MARKUP": "0.15",
   "MIN_SAVING": "0.08",
   "DEFAULT_CITY": "Palm Jumeirah",
-  "MODAL_HEADLINE": "Join Dubai Ultra — it's free",
+  "MODAL_HEADLINE": "Save 10–30% on ultra-luxury Dubai hotels",
   "MODAL_SUB": "Unlock member rates on Dubai's ultra-luxury hotels — 10–30% below Booking.com. Takes 10 seconds.",
-  "MODAL_SUCCESS_TEXT": "Member rates are now unlocked. You're seeing prices not available on any public booking site.",
+  "MODAL_SUCCESS_TEXT": "Member rates unlocked — your savings are loading now.",
   "cities": [
     {
       "value": "Palm Jumeirah",
@@ -93,7 +93,7 @@
     }
   ],
   "trust_items": [
-    "Live rates from hotel API",
+    "Live rates, updated hourly",
     "No minimum stay",
     "Members save AED 500–2,000/night on suites",
     "Ultra-luxury 5★ and 7★ only"

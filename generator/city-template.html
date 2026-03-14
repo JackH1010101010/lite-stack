@@ -385,7 +385,7 @@ async function fetchRate(h, checkin, checkout) {
     const timeout = setTimeout(() => controller.abort(), 15000);
     const resp = await fetch(API_BASE + '?ep=hotels/rates', {
       method: 'POST', headers: { 'Content-Type': 'application/json', accept: 'application/json' }, signal: controller.signal,
-      body: JSON.stringify({ hotelIds: [h.id], occupancies: [{ adults: 2 }], currency: 'GBP', guestNationality: 'GB', checkin, checkout })
+      body: JSON.stringify({ hotelIds: [h.id], occupancies: [{ adults: 2 }], currency: '{{CURRENCY}}', guestNationality: '{{GUEST_NATIONALITY}}', checkin, checkout })
     });
     clearTimeout(timeout);
     if (!resp.ok) throw new Error('API ' + resp.status);
@@ -424,7 +424,7 @@ function updateCardPrice(h, data) {
   const memberPrice = calcMemberPrice(netCost, ssp, data.markup);
   const saving = ssp && memberPrice ? Math.round((1 - memberPrice/ssp)*100) : 0;
   const charm = n => { const v = Math.round(parseFloat(n)); if (v < 20) return v; return Math.floor(v / 10) * 10 + 9; };
-  const fmt = n => '£' + charm(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
+  const fmt = n => '{{CURRENCY_SYMBOL}}' + charm(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
 
   let scarcityHtml = '';
   if (roomTypeCount <= 1 && rateCount <= 1) scarcityHtml = '<div class="scarcity-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Only 1 room type left</div>';

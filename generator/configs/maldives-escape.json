@@ -20,6 +20,9 @@
   "GOOGLE_CLIENT_ID": "57433376022-sq2cnut49hf5clokq9hbs4h6lij82b51.apps.googleusercontent.com",
   "MARKUP": "0.15",
   "MIN_SAVING": "0.08",
+  "CURRENCY": "GBP",
+  "CURRENCY_SYMBOL": "£",
+  "GUEST_NATIONALITY": "GB",
   "CITY_MARKUPS": {"North Male Atoll": 0.14, "South Male Atoll": 0.13, "Baa Atoll": 0.12},
   "DEFAULT_CITY": "North Male Atoll",
   "MODAL_HEADLINE": "Save 10–25% on Maldives overwater villas",
@@ -140,7 +143,7 @@
     },
     {
       "q": "Is it safe to enter my credit card?",
-      "a": "Yes. All payments are processed through Stripe, the world's most widely used payment platform — the same provider used by Amazon, Google, and Booking.com. Your card details are encrypted with 256-bit SSL and are never stored on our servers. Stripe is PCI DSS Level 1 certified, the highest level of payment security."
+      "a": "Yes. All payments are processed through a PCI DSS-compliant payment gateway — the same standard used by Booking.com and Expedia. Your card details are encrypted with 256-bit SSL and are never stored on our servers. The payment form is handled by our booking partner's secure infrastructure, so your card number never touches Maldives Escape's systems."
     }
   ],
   "modal_perks": [

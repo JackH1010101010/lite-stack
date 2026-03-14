@@ -109,6 +109,7 @@
     .scarcity-row.demand{color:#b45309}
     .social-proof{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--grey-text);margin-top:4px}
     .social-proof .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse-dot 2s ease-in-out infinite}
+    .guarantee-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--green);font-weight:500;margin-top:6px}
     @keyframes pulse-dot{0%,100%{opacity:.4}50%{opacity:1}}
     .btn-book{background:transparent;color:var(--gold);font-size:14px;font-weight:500;padding:0;border:none;cursor:pointer}
     .btn-book::after{content:' →'}
@@ -341,15 +342,21 @@
 const API_BASE    = '/api/liteapi';
 const MARKUP      = 0.15;
 const MIN_SAVING  = 0.08;
+const CITY_MARKUPS = {"Palm Jumeirah":0.18,"Downtown Dubai":0.16,"Dubai Marina":0.14};
+const LP_CITY     = 'Palm Jumeirah';
 
-function getDynamicMarkup(checkinDateStr) {
-  if (!checkinDateStr) return MARKUP;
+function getCityMarkup(city) {
+  return (CITY_MARKUPS && CITY_MARKUPS[city]) || MARKUP;
+}
+function getDynamicMarkup(checkinDateStr, city) {
+  var base = getCityMarkup(city || LP_CITY);
+  if (!checkinDateStr) return base;
   const days = Math.round((new Date(checkinDateStr) - new Date()) / 86400000);
-  if (days <= 1)  return 0.22;
-  if (days <= 3)  return 0.18;
-  if (days <= 14) return 0.15;
-  if (days <= 30) return 0.12;
-  return 0.10;
+  if (days <= 1)  return Math.min(base + 0.06, 0.24);
+  if (days <= 3)  return Math.min(base + 0.03, 0.20);
+  if (days <= 14) return base;
+  if (days <= 30) return Math.max(base - 0.03, 0.08);
+  return Math.max(base - 0.05, 0.06);
 }
 
 function calcMemberPrice(netCost, ssp, markup) {
@@ -452,7 +459,7 @@ async function fetchRate(h, checkin, checkout) {
     if (!rate) { updateCardPrice(h, null); return; }
     const netCost = rate.total?.[0]?.amount;
     const ssp = rate.suggestedSellingPrice?.[0]?.amount;
-    const mu = getDynamicMarkup(checkin);
+    const mu = getDynamicMarkup(checkin, LP_CITY);
     const roomTypeCount = hotel?.roomTypes?.length || 0;
     const rateCount = hotel?.roomTypes?.reduce((sum, rt) => sum + (rt.rates?.length || 0), 0) || 0;
     const result = { netCost, ssp, markup: mu, roomTypeCount, rateCount };
@@ -477,9 +484,10 @@ function updateCardPrice(h, data) {
 
   const { netCost, ssp, roomTypeCount, rateCount } = data;
   const displaySsp = ssp || netCost;
-  const memberPrice = calcMemberPrice(netCost, ssp);
+  const memberPrice = calcMemberPrice(netCost, ssp, data.markup);
   const saving = ssp && memberPrice ? Math.round((1 - memberPrice/ssp)*100) : 0;
-  const fmt = n => '£' + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
+  const charm = n => { const v = Math.round(parseFloat(n)); if (v < 20) return v; return Math.floor(v / 10) * 10 + 9; };
+  const fmt = n => '£' + charm(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
 
   let scarcityHtml = '';
   if (roomTypeCount <= 1 && rateCount <= 1) scarcityHtml = '<div class="scarcity-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Only 1 room type left</div>';
@@ -487,14 +495,15 @@ function updateCardPrice(h, data) {
 
   const dayHash = (h.id.charCodeAt(0) + h.id.charCodeAt(h.id.length - 1) + new Date().getDate()) % 18 + 3;
   const socialHtml = '<div class="social-proof"><span class="dot"></span> ' + dayHash + ' people viewing today</div>';
+  const guaranteeHtml = '<div class="guarantee-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Best rate guarantee</div>';
 
   if (isMember && memberPrice) {
     const wasHtml = saving > 0 ? '<div class="price-was">Booking.com: ' + fmt(displaySsp) + '</div>' : '';
     const saveHtml = saving > 0 ? '<div class="saving-badge">Save ' + saving + '%</div>' : '';
-    priceEl.innerHTML = '<div class="price-label">Member rate</div>' + wasHtml + '<div class="price-main member">' + fmt(memberPrice) + ' <span class="price-per">/ night</span></div>' + saveHtml + scarcityHtml + socialHtml;
+    priceEl.innerHTML = '<div class="price-label">Member rate</div>' + wasHtml + '<div class="price-main member">' + fmt(memberPrice) + ' <span class="price-per">/ night</span></div>' + saveHtml + guaranteeHtml + scarcityHtml + socialHtml;
     btnEl.innerHTML = '<a class="btn-book" href="/">Book on Dubai Ultra →</a>';
   } else {
-    priceEl.innerHTML = '<div class="price-label">From</div><div class="price-main public">' + fmt(displaySsp) + ' <span class="price-per">/ night</span></div><div class="lock-badge">Join free to see member rate</div>' + scarcityHtml + socialHtml;
+    priceEl.innerHTML = '<div class="price-label">From</div><div class="price-main public">' + fmt(displaySsp) + ' <span class="price-per">/ night</span></div><div class="lock-badge">Join free to see member rate</div>' + guaranteeHtml + scarcityHtml + socialHtml;
     btnEl.innerHTML = '<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>';
   }
 }

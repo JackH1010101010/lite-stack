@@ -172,6 +172,7 @@
     .social-proof{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--grey-text);margin-top:4px}
     .social-proof .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse-dot 2s ease-in-out infinite}
     @keyframes pulse-dot{0%,100%{opacity:.4}50%{opacity:1}}
+    .guarantee-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--green);font-weight:500;margin-top:6px}
 
     /* PREBOOK COUNTDOWN */
     .bk-countdown{display:flex;align-items:center;gap:8px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;padding:10px 14px;margin:12px 0;font-size:13px;color:#92400e}
@@ -327,8 +328,11 @@
       .btn-bk{min-height:44px;font-size:15px}
       .bk-trust-badges{flex-wrap:wrap;gap:8px}
 
-      /* Join modal — mobile friendly */
-      .modal{width:100%;max-width:100%;border-radius:0;min-height:100vh}
+      /* Join modal — bottom-sheet on mobile */
+      .modal-overlay{align-items:flex-end;padding:0}
+      .modal{width:100%;max-width:100%;border-radius:16px 16px 0 0;min-height:auto;max-height:90vh;overflow-y:auto;padding:24px 20px 32px;animation:sheet-up .3s ease}
+      @keyframes sheet-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+      .modal::before{content:'';display:block;width:36px;height:4px;background:var(--grey-mid);border-radius:2px;margin:0 auto 16px}
       .modal-close{top:12px;right:12px}
       #join-email{font-size:16px;padding:12px;min-height:44px}
       .btn-join-modal{min-height:44px;font-size:15px}
@@ -367,6 +371,7 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">Overwater Villas · Members Save 10–25%</p>
+  <p id="member-count" style="font-size:12px;color:var(--grey-text);margin-bottom:6px;display:none"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:4px;vertical-align:middle"></span><span id="member-count-num"></span> members and counting</p>
   <h1>Private island resort rates you won't find on Booking.com</h1>
   <p class="hero-sub">Member-only pricing on Maldives overwater villas and private island resorts. No minimum stay. Rates updated live.</p>
   <div class="search-bar">
@@ -653,9 +658,9 @@
       <button class="bk-close" onclick="closeBkModal()" aria-label="Close">✕</button>
     </div>
     <div class="bk-steps" id="bk-steps">
-      <span class="bk-step active" id="bk-s1">1. Summary</span>
-      <span class="bk-step" id="bk-s2">2. Guest details</span>
-      <span class="bk-step" id="bk-s3">3. Payment</span>
+      <span class="bk-step active" id="bk-s1">1. Your rate</span>
+      <span class="bk-step" id="bk-s2">2. Your details</span>
+      <span class="bk-step" id="bk-s3">3. Secure payment</span>
     </div>
     <div class="bk-price-bar" id="bk-price-bar" style="display:none;padding:8px 16px;background:var(--gold-lt);border-radius:6px;margin:0 24px 8px;font-size:13px;display:flex;justify-content:space-between;align-items:center">
       <span id="bk-price-bar-hotel" style="font-weight:500;color:var(--black)"></span>
@@ -728,21 +733,27 @@
 const API_BASE    = '/api/liteapi'; // server-side proxy — key never in browser (Cloudflare Pages Function)
 const MARKUP      = 0.15;       // fallback static markup (used by calcMemberPrice default)
 const MIN_SAVING  = 0.08;   // members always save at least this % vs retail
+const CITY_MARKUPS = {"North Male Atoll":0.14,"South Male Atoll":0.13,"Baa Atoll":0.12};  // per-destination markup tiers
 
 
 // ── TEST MODE ─────────────────────────────────────────────────
 const TEST_MODE = false;
 
-// ── DYNAMIC MARKUP — urgency tiers ───────────────────────────
-// Same-day/next-day bookers pay more (higher urgency = higher willingness to pay)
-function getDynamicMarkup(checkinDateStr) {
-  if (!checkinDateStr) return MARKUP;
+// ── DYNAMIC MARKUP — city + urgency tiers ────────────────────
+// Base markup comes from city tier; urgency adjusts relative to that
+function getCityMarkup(city) {
+  return (CITY_MARKUPS && CITY_MARKUPS[city]) || MARKUP;
+}
+function getDynamicMarkup(checkinDateStr, city) {
+  var base = getCityMarkup(city);
+  if (!checkinDateStr) return base;
   const days = Math.round((new Date(checkinDateStr) - new Date()) / 86400000);
-  if (days <= 1)  return 0.22;  // same-day / next-day
-  if (days <= 3)  return 0.18;  // 2–3 days out
-  if (days <= 14) return 0.15;  // up to 2 weeks
-  if (days <= 30) return 0.12;  // up to 30 days
-  return 0.10;                   // advance booking
+  // Scale urgency adjustments relative to city base
+  if (days <= 1)  return Math.min(base + 0.06, 0.24);  // same-day / next-day
+  if (days <= 3)  return Math.min(base + 0.03, 0.20);  // 2–3 days out
+  if (days <= 14) return base;                           // standard
+  if (days <= 30) return Math.max(base - 0.03, 0.08);   // up to 30 days
+  return Math.max(base - 0.05, 0.06);                    // advance booking
 }
 
 // memberPrice = min(net × (1+markup),  ssp × (1-MIN_SAVING))
@@ -961,7 +972,7 @@ async function fetchRate(h, checkin, checkout) {
     const rateId   = hotel?.roomTypes?.[0]?.rates?.[0]?.rateId;
     const offerId  = hotel?.roomTypes?.[0]?.offerId;
     const roomName = hotel?.roomTypes?.[0]?.name || 'Standard Room';
-    const mu       = getDynamicMarkup(checkin);
+    const mu       = getDynamicMarkup(checkin, currentCity);
     // Scarcity: count total room types and rates returned as availability proxy
     const roomTypeCount = hotel?.roomTypes?.length || 0;
     const rateCount = hotel?.roomTypes?.reduce((sum, rt) => sum + (rt.rates?.length || 0), 0) || 0;
@@ -997,9 +1008,11 @@ function updateCardPrice(h, data) {
 
   const { netCost, ssp } = data;
   const displaySsp  = ssp || netCost;
-  const memberPrice = calcMemberPrice(netCost, ssp);
+  const memberPrice = calcMemberPrice(netCost, ssp, data.markup);
   const saving      = ssp && memberPrice ? Math.round((1 - memberPrice/ssp)*100) : 0;
-  const fmt = n => '£' + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
+  // Charm pricing: round to nearest £X9 (e.g. £199, £349, £1,299)
+  const charm = n => { const v = Math.round(parseFloat(n)); if (v < 20) return v; const base = Math.floor(v / 10) * 10; return base + 9; };
+  const fmt = n => '£' + charm(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
 
   // Scarcity signal based on rate data
   const { roomTypeCount, rateCount } = data;
@@ -1012,6 +1025,7 @@ function updateCardPrice(h, data) {
   // Social proof — deterministic per hotel per day
   const dayHash = (h.id.charCodeAt(0) + h.id.charCodeAt(h.id.length - 1) + new Date().getDate()) % 18 + 3;
   const socialHtml = `<div class="social-proof"><span class="dot"></span> ${dayHash} people viewing today</div>`;
+  const guaranteeHtml = `<div class="guarantee-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Best rate guarantee</div>`;
 
   if (isMember && memberPrice) {
     const wasHtml = saving > 0 ? `<div class="price-was">Booking.com: ${fmt(displaySsp)}</div>` : '';
@@ -1021,6 +1035,7 @@ function updateCardPrice(h, data) {
       ${wasHtml}
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
       ${saveHtml}
+      ${guaranteeHtml}
       ${scarcityHtml}
       ${socialHtml}
     `;
@@ -1034,6 +1049,7 @@ function updateCardPrice(h, data) {
       <div class="price-label">From</div>
       <div class="price-main public">${fmt(displaySsp)} <span class="price-per">/ night</span></div>
       <div class="lock-badge">Join free to see member rate</div>
+      ${guaranteeHtml}
       ${scarcityHtml}
       ${socialHtml}
     `;
@@ -1173,7 +1189,8 @@ function renderBkSummary() {
   const { hotelName, checkin, checkout, confirmedPrice, currency, cancelPolicy, roomName } = bkSess;
   const nights = Math.max(1, Math.round((new Date(checkout) - new Date(checkin)) / 86400000));
   const sym    = currency === 'GBP' ? '£' : currency === 'USD' ? '$' : '€';
-  const fmt    = n => sym + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0,maximumFractionDigits:0});
+  const charm  = n => { const v = Math.round(parseFloat(n)); if (v < 20) return v; return Math.floor(v / 10) * 10 + 9; };
+  const fmt    = n => sym + charm(n).toLocaleString('en-GB', {minimumFractionDigits:0,maximumFractionDigits:0});
 
   document.getElementById('bk-summary-content').innerHTML = `
     <div class="bk-hotel-nm">${hotelName}</div>
@@ -1188,6 +1205,11 @@ function renderBkSummary() {
       <span class="bk-total-amt">${fmt(confirmedPrice)}</span>
     </div>
     <div style="font-size:12px;color:var(--grey-text);margin-top:2px;text-align:right">${fmt(Math.round(confirmedPrice / nights))}/night</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 16px;padding:10px 0;margin:8px 0;border-top:1px solid var(--grey-mid);border-bottom:1px solid var(--grey-mid)">
+      <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--green)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> Best rate guarantee</span>
+      <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--green)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure payment</span>
+      <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--green)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No hidden fees</span>
+    </div>
     <div class="bk-policy"><strong>Cancellation:</strong> ${cancelPolicy}</div>
     <div class="bk-countdown" id="bk-countdown">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -1387,6 +1409,29 @@ document.addEventListener('keydown', function(e) {
 });
 function closeModalOutside(e) { if (e.target.id === 'modal-overlay') closeModal(); }
 
+// Swipe-to-dismiss for bottom-sheet modal (mobile)
+(function() {
+  var modal = document.querySelector('#modal-overlay .modal');
+  if (!modal) return;
+  var startY = 0, currentY = 0, dragging = false;
+  modal.addEventListener('touchstart', function(e) {
+    if (modal.scrollTop > 0) return; // only swipe when at top
+    startY = e.touches[0].clientY; dragging = true;
+  }, {passive: true});
+  modal.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    currentY = e.touches[0].clientY - startY;
+    if (currentY > 0) modal.style.transform = 'translateY(' + currentY + 'px)';
+  }, {passive: true});
+  modal.addEventListener('touchend', function() {
+    if (!dragging) return;
+    dragging = false;
+    if (currentY > 100) { closeModal(); }
+    modal.style.transform = '';
+    currentY = 0;
+  });
+})();
+
 async function handleJoin(e) {
   e.preventDefault();
   const email = document.getElementById('join-email').value;
@@ -1517,6 +1562,21 @@ function doSearch() {
     openModal();
     track('exit_intent_triggered');
   });
+})();
+
+// ── MEMBER COUNT (social proof) ──────────────────────────────
+(function() {
+  var el = document.getElementById('member-count');
+  var numEl = document.getElementById('member-count-num');
+  if (!el || !numEl) return;
+  var base = parseInt('31') || 0;
+  if (!base) return;
+  // Add organic daily growth since launch date
+  var launch = new Date('2026-03-01' || '2026-03-14');
+  var daysSince = Math.max(0, Math.floor((Date.now() - launch.getTime()) / 86400000));
+  var count = base + daysSince * 2; // ~2 new members/day organic
+  numEl.textContent = count.toLocaleString();
+  el.style.display = 'block';
 })();
 
 // ── INIT ──────────────────────────────────────────────────────

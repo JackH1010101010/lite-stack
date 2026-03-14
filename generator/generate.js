@@ -82,6 +82,9 @@ if (cfg.hotels) {
   cfg.HOTELS_JS = `{\n${entries},\n}`;
 }
 
+// CITY_MARKUPS_JS  (JS object literal for per-city markup tiers)
+cfg.CITY_MARKUPS_JS = cfg.CITY_MARKUPS ? JSON.stringify(cfg.CITY_MARKUPS) : '{}';
+
 // TRUST_ITEMS_HTML
 if (cfg.trust_items) {
   const items = cfg.trust_items.map(t =>
@@ -357,20 +360,24 @@ User-agent: *
 Allow: /
 Sitemap: ${siteUrl}/sitemap.xml
 
-# Block AI training crawlers (protect CUG pricing data)
-User-agent: GPTBot
-Disallow: /
-
+# Allow AI search bots (for citations in ChatGPT, Perplexity, Google AI)
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Block AI training crawlers (protect CUG pricing data from model training)
+User-agent: GPTBot
 Disallow: /
 
 User-agent: CCBot
 Disallow: /
 
 User-agent: anthropic-ai
-Disallow: /
-
-User-agent: Google-Extended
 Disallow: /
 
 User-agent: FacebookBot
@@ -569,6 +576,7 @@ if (fs.existsSync(cityTemplatePath)) {
       LP_EDITORIAL_HTML: editorialHtml,
       LP_SLUG: lp.slug,
       LP_TYPE: lp.type,
+      LP_CITY: lp.city || '',
       LP_RELATED_LINKS_HTML: relatedLinksHtml,
     };
 

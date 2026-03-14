@@ -514,7 +514,7 @@ function updateCardPrice(h, data) {
     const wasHtml = saving > 0 ? '<div class="price-was">Booking.com: ' + fmt(displaySsp) + '</div>' : '';
     const saveHtml = saving > 0 ? '<div class="saving-badge">Save ' + saving + '%</div>' : '';
     priceEl.innerHTML = '<div class="price-label">Member rate</div>' + wasHtml + '<div class="price-main member">' + fmt(memberPrice) + ' <span class="price-per">/ night</span></div>' + saveHtml + memberBadgeHtml + scarcityHtml + socialHtml;
-    btnEl.innerHTML = '<a class="btn-book" href="/">Book on Dubai Ultra →</a>';
+    btnEl.innerHTML = '<a class="btn-book" href="/?book=' + encodeURIComponent(h.id) + '&name=' + encodeURIComponent(h.name) + '&in=' + defaultIn + '&out=' + defaultOut + '">Book on Dubai Ultra →</a>';
   } else {
     priceEl.innerHTML = '<div class="price-label">From</div><div class="price-main public">' + fmt(displaySsp) + ' <span class="price-per">/ night</span></div><div class="lock-badge">Join free to see member rate</div>' + memberBadgeHtml + scarcityHtml + socialHtml;
     btnEl.innerHTML = '<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>';

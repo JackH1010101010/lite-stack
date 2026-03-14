@@ -1569,6 +1569,57 @@ function doSearch() {
 // ── INIT ──────────────────────────────────────────────────────
 updateMemberUI();
 renderHotels('{{DEFAULT_CITY}}', defaultIn, defaultOut);
+
+// ── DEEP-LINK BOOKING (from landing pages) ───────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const bookId = params.get('book');
+  if (!bookId) return;
+  const bookName = params.get('name') || '';
+  const bookIn = params.get('in');
+  const bookOut = params.get('out');
+
+  // Set dates if provided
+  if (bookIn) document.getElementById('checkin').value = bookIn;
+  if (bookOut) document.getElementById('checkout').value = bookOut;
+
+  // Find the right city for this hotel
+  let targetCity = null;
+  for (const [city, hotels] of Object.entries(HOTELS)) {
+    if (hotels.some(h => h.id === bookId)) { targetCity = city; break; }
+  }
+  if (targetCity) {
+    document.getElementById('city-select').value = targetCity;
+    currentCity = targetCity;
+  }
+
+  // Wait for rates to load, then auto-open booking
+  // First render hotels so rate fetches start
+  renderHotels(currentCity, bookIn || defaultIn, bookOut || defaultOut);
+
+  // Poll for the rate to be cached, then trigger booking
+  let attempts = 0;
+  const interval = setInterval(function() {
+    attempts++;
+    const ci = bookIn || defaultIn;
+    const co = bookOut || defaultOut;
+    const cacheKey = bookId + '-' + ci + '-' + co;
+    if (ratesCache[cacheKey] && ratesCache[cacheKey].offerId) {
+      clearInterval(interval);
+      // If not a member, show join modal first
+      if (!isMember) {
+        openModal();
+        // After they join, the rates will re-render and they can click Book
+      } else {
+        bookHotel(bookId, bookName.replace(/'/g, "\\'"));
+      }
+      // Clean URL without reload
+      history.replaceState({}, '', window.location.pathname);
+    }
+    if (attempts > 30) clearInterval(interval); // give up after 30s
+  }, 1000);
+})();
+
 track('page_view', { page: 'home', site: '{{BRAND_NAME}}' });
 </script>
 

@@ -19,6 +19,17 @@
 const fs   = require('fs');
 const path = require('path');
 
+// ── Load .env if present ─────────────────────────────────────
+const envPath = path.join(__dirname, '..', '.env');
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, 'utf8').split('\n').forEach(line => {
+    line = line.trim();
+    if (!line || line.startsWith('#')) return;
+    const eq = line.indexOf('=');
+    if (eq > 0) process.env[line.slice(0, eq)] = line.slice(eq + 1);
+  });
+}
+
 // ── Args ──────────────────────────────────────────────────────
 const configName = process.argv[2];
 if (!configName) {
@@ -228,6 +239,11 @@ if (cfg.AFFILIATE_NAV_LINK && cfg.AFFILIATE_NAV_TEXT) {
   cfg.AFFILIATE_NAV_HTML = '';
 }
 
+// POSTHOG_KEY — inject from config or .env
+if (!cfg.POSTHOG_KEY) {
+  cfg.POSTHOG_KEY = process.env.POSTHOG_PROJECT_KEY || '';
+}
+
 // STORAGE_PREFIX — brand-specific localStorage key prefix
 if (!cfg.STORAGE_PREFIX) cfg.STORAGE_PREFIX = (cfg.BRAND_NAME || 'site').toLowerCase().replace(/[^a-z0-9]+/g, '_');
 
@@ -286,10 +302,9 @@ if (remaining.length) {
   console.warn('⚠  Unreplaced tokens:', remaining.join(', '));
 }
 
-// ── Write output ──────────────────────────────────────────────
+// ── Output directory ──────────────────────────────────────────
 const outDir = path.join(__dirname, '..', 'sites', configName);
 fs.mkdirSync(outDir, { recursive: true });
-fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 
 // ── Generate robots.txt ──────────────────────────────────────
 const siteUrl = cfg.SITE_URL || cfg.SCHEMA_URL || '';
@@ -338,9 +353,32 @@ ${sitemapUrls}
 `;
 fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemapXml, 'utf8');
 
+// ── Generate OG image (SVG) ───────────────────────────────────
+const brandName = cfg.BRAND_NAME || 'LuxStay';
+const accentColor = cfg.COLOR_ACCENT || '#8c7851';
+const primaryColor = cfg.COLOR_PRIMARY || '#2a2a2a';
+const tagline = cfg.FOOTER_TAGLINE || cfg.HERO_EYEBROW || 'Member-only luxury hotel rates';
+const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="${primaryColor}"/>
+  <rect y="580" width="1200" height="50" fill="${accentColor}"/>
+  <text x="600" y="260" text-anchor="middle" font-family="Georgia,serif" font-size="64" font-weight="400" fill="#ffffff">${brandName}</text>
+  <text x="600" y="330" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="24" font-weight="400" fill="${accentColor}">${tagline}</text>
+  <text x="600" y="400" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="20" font-weight="400" fill="rgba(255,255,255,0.6)">5-star hotels at member-only rates — join free</text>
+</svg>`;
+fs.writeFileSync(path.join(outDir, 'og-image.svg'), ogSvg, 'utf8');
+
+// Update OG_IMAGE to point to SVG if still using default jpg path
+if (cfg.OG_IMAGE && cfg.OG_IMAGE.endsWith('/og-image.jpg')) {
+  // Re-replace the jpg reference with svg in the output HTML
+  html = html.split('/og-image.jpg').join('/og-image.svg');
+}
+
 // Note: LiteAPI proxy is handled by worker.js (Cloudflare Workers).
 // No per-site function copying needed — deploy-all.js handles deployment.
 
+// ── Write final HTML (after OG image path fix) ──────────────
+fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
+
 console.log(`✓  Generated: sites/${configName}/index.html`);
-console.log(`   + robots.txt, sitemap.xml`);
+console.log(`   + robots.txt, sitemap.xml, og-image.svg`);
 console.log(`   Deploy:    node deploy-all.js  (or: npx wrangler deploy)`);

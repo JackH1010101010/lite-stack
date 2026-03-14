@@ -13,14 +13,14 @@
   <meta property="og:title" content="LuxStay — Member-Only Luxury Hotel Rates" />
   <meta property="og:description" content="5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing." />
   <meta property="og:url" content="https://luxury.lux-stay-members.com" />
-  <meta property="og:image" content="https://luxury.lux-stay-members.com/og-image.jpg" />
+  <meta property="og:image" content="https://luxury.lux-stay-members.com/og-image.svg" />
   <meta property="og:site_name" content="LuxStay" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="LuxStay — Member-Only Luxury Hotel Rates" />
   <meta name="twitter:description" content="5-star hotels at member-only rates. Save 10–30% on London, Dubai and Bangkok luxury hotels. No minimum stay. Live pricing." />
-  <meta name="twitter:image" content="https://luxury.lux-stay-members.com/og-image.jpg" />
+  <meta name="twitter:image" content="https://luxury.lux-stay-members.com/og-image.svg" />
 
   <!-- DNS Prefetch — resolve external domains early -->
   <link rel="dns-prefetch" href="https://api.liteapi.travel" />
@@ -36,7 +36,7 @@
   <!-- PostHog Analytics — key injected at build time via POSTHOG_PROJECT_KEY env var -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init capture alias identify people.set people.set_once set register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonPropertiesForFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('YOUR_POSTHOG_KEY', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
+    posthog.init('phc_982ETUUhp7gvH24FCqne7qS0hNAmpIbT96R81bx9TXs', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only'});
   </script>
 
   <!-- EmailJS — booking confirmation emails -->
@@ -278,7 +278,41 @@
     @media(max-width:600px){
       .hotel-grid{grid-template-columns:1fr;gap:24px}
       .search-bar{flex-direction:column}
+      .hero{padding:48px 16px 32px}
       .hero h1{font-size:28px}
+      .hero-eyebrow{font-size:11px}
+      nav{padding:12px 16px}
+      .nav-link{display:none}
+      .btn-join-nav{font-size:12px;padding:7px 14px}
+      .cug-banner{flex-direction:column;text-align:center;gap:8px;padding:12px 16px}
+      .trust-strip{gap:8px 16px;padding:12px 0}
+      .ti{font-size:12px}
+      .confidence-strip{gap:8px 16px;font-size:11px}
+      .filter-row{gap:6px;padding:12px 0}
+      .chip{padding:5px 12px;font-size:12px}
+      .hotel-body{padding:16px}
+      .hotel-name{font-size:16px}
+      .hotel-desc{font-size:12px}
+
+      /* Booking modal — full screen on mobile */
+      .bk-overlay{padding:0;align-items:stretch}
+      .bk-modal{border-radius:0;max-height:100vh;min-height:100vh;max-width:100%}
+      .bk-header{padding:16px}
+      .bk-body{padding:16px}
+      .bk-cols{flex-direction:column}
+      .bk-form-row label{font-size:13px}
+      .bk-form-row input{font-size:16px;padding:12px;min-height:44px}
+      .btn-bk{min-height:44px;font-size:15px}
+      .bk-trust-badges{flex-wrap:wrap;gap:8px}
+
+      /* Join modal — mobile friendly */
+      .modal{width:100%;max-width:100%;border-radius:0;min-height:100vh}
+      .modal-close{top:12px;right:12px}
+      #join-email{font-size:16px;padding:12px;min-height:44px}
+      .btn-join-modal{min-height:44px;font-size:15px}
+
+      /* Cookie banner */
+      #cookie-banner{flex-direction:column;text-align:center;gap:8px}
     }
   </style>
 </head>
@@ -504,7 +538,7 @@
 </div>
 
 <!-- JOIN MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-label="Join as member" tabindex="-1" onclick="closeModalOutside(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
 
@@ -559,7 +593,7 @@
 </div>
 
 <!-- BOOKING MODAL -->
-<div id="bk-overlay" class="bk-overlay" onclick="closeBkOutside(event)">
+<div id="bk-overlay" class="bk-overlay" role="dialog" aria-modal="true" aria-label="Book hotel" tabindex="-1" onclick="closeBkOutside(event)">
   <div class="bk-modal">
     <div class="bk-header">
       <h2 id="bk-title">Book Hotel</h2>
@@ -913,14 +947,16 @@ function updateCardPrice(h, data) {
   const fmt = n => '£' + parseFloat(n).toLocaleString('en-GB', {minimumFractionDigits:0, maximumFractionDigits:0});
 
   if (isMember && memberPrice) {
+    const wasHtml = saving > 0 ? `<div class="price-was">Booking.com: ${fmt(displaySsp)}</div>` : '';
+    const saveHtml = saving > 0 ? `<div class="saving-badge">Save ${saving}%</div>` : '';
     priceEl.innerHTML = `
-      <div class="price-label">From</div>
+      <div class="price-label">Member rate</div>
+      ${wasHtml}
       <div class="price-main member">${fmt(memberPrice)} <span class="price-per">/ night</span></div>
+      ${saveHtml}
     `;
-    btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">View details</button>`;
-    // Track: member sees their exclusive rate
+    btnEl.innerHTML = `<button class="btn-book" onclick="bookHotel('${h.id}','${h.name.replace(/'/g,"\\'")}')">Book now</button>`;
     track('rate_revealed', { hotel_id: h.id, hotel_name: h.name, member_price: memberPrice, ssp: displaySsp });
-    // Track: savings comparison displayed
     if (saving > 0) {
       track('price_comparison_viewed', { hotel_id: h.id, hotel_name: h.name, saving_pct: saving, member_price: memberPrice, ota_price: displaySsp });
     }
@@ -928,16 +964,25 @@ function updateCardPrice(h, data) {
     priceEl.innerHTML = `
       <div class="price-label">From</div>
       <div class="price-main public">${fmt(displaySsp)} <span class="price-per">/ night</span></div>
+      <div class="lock-badge">Join free to see member rate</div>
     `;
-    btnEl.innerHTML = `<button class="btn-unlock" onclick="openModal()">Sign in for member rate</button>`;
+    btnEl.innerHTML = `<button class="btn-unlock" onclick="openModal()">Unlock member rate</button>`;
   }
 }
 
 // ── BOOKING FLOW ──────────────────────────────────────────────
 let bkSess = {};
 
-function openBkModal()  { document.getElementById('bk-overlay').classList.add('open'); }
-function closeBkModal() { document.getElementById('bk-overlay').classList.remove('open'); bkSess = {}; }
+function openBkModal()  { const el = document.getElementById('bk-overlay'); el.classList.add('open'); el.focus(); document.body.style.overflow = 'hidden'; }
+function closeBkModal() {
+  // If user is mid-booking (step 2 or 3), confirm before closing
+  const step2 = document.getElementById('bk-p2');
+  const step3 = document.getElementById('bk-p3');
+  if ((step2 && step2.style.display === 'block') || (step3 && step3.style.display === 'block')) {
+    if (!confirm('Your booking is in progress. Are you sure you want to leave?')) return;
+  }
+  document.getElementById('bk-overlay').classList.remove('open'); bkSess = {}; document.body.style.overflow = '';
+}
 function closeBkOutside(e) { if (e.target.id === 'bk-overlay') closeBkModal(); }
 
 function setBkStep(n) {
@@ -1212,8 +1257,17 @@ function handleGoogleSignIn(response) {
 }
 
 // ── JOIN MODAL ────────────────────────────────────────────────
-function openModal()  { document.getElementById('modal-overlay').classList.add('open'); }
-function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function openModal()  { const el = document.getElementById('modal-overlay'); el.classList.add('open'); el.focus(); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+// Escape key closes modals
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (document.getElementById('bk-overlay').classList.contains('open')) closeBkModal();
+    else if (document.getElementById('modal-overlay').classList.contains('open')) closeModal();
+    else if (document.getElementById('privacy-overlay').classList.contains('open')) closePrivacy();
+  }
+});
 function closeModalOutside(e) { if (e.target.id === 'modal-overlay') closeModal(); }
 
 async function handleJoin(e) {
@@ -1316,6 +1370,20 @@ function doSearch() {
   _origDoSearch();
   setTimeout(function(){ _searchLock = false; if (btn) { btn.disabled = false; btn.textContent = 'Search'; } }, 3000);
 }
+
+// ── EXIT-INTENT (desktop) — show join modal for non-members ──
+(function() {
+  var exitShown = false;
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY > 10 || exitShown || isMember) return;
+    // Don't trigger if any modal is already open
+    if (document.getElementById('bk-overlay').classList.contains('open')) return;
+    if (document.getElementById('modal-overlay').classList.contains('open')) return;
+    exitShown = true;
+    openModal();
+    track('exit_intent_triggered');
+  });
+})();
 
 // ── INIT ──────────────────────────────────────────────────────
 updateMemberUI();
